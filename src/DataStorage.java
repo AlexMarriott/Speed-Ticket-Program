@@ -5,13 +5,13 @@ import java.util.Scanner;
  * Created by Alex on 09/02/2017.
  */
 public class DataStorage {
-    EmployeeHandler dataToEmployee = new EmployeeHandler();
+
 
     public Scanner userInput(){
         Scanner userInput = new Scanner(System.in);
         return userInput;
     }
-    public void saveEmployee() throws IOException {
+    public void saveEmployee(EmployeeHandler dataToEmployee) throws IOException {
         PrintWriter outfile = new PrintWriter (new BufferedWriter(new FileWriter("Employee.txt", true)));
         outfile.println("Employee First name: " + dataToEmployee.getFirstName());
         outfile.println("Employee Last name:  " + dataToEmployee.getlastName());

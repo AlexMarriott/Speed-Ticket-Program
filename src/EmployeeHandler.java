@@ -6,7 +6,6 @@ import java.util.Scanner;
  * Created by Alex on 08/02/2017.
  */
 public class EmployeeHandler {
-    DataStorage empHanToData = new DataStorage();
     private String firstName;
     private String lastName;
     private int Age;
@@ -21,64 +20,64 @@ public class EmployeeHandler {
     //Method Scanner
 
 
-    public void setFirstName (){
+    public void setFirstName (DataStorage employeeToData){
         System.out.println("Please enter the employees first name. ");
-        this.firstName = empHanToData.userInput().nextLine();
+        this.firstName = employeeToData.userInput().nextLine();
     }
     public String getFirstName(){
         return this.firstName;
     }
-    public void setAge () {
+    public void setAge (DataStorage employeeToData) {
         System.out.println("Please enter the employees Age. ");
-        this.Age = empHanToData.userInput().nextInt();
+        this.Age = employeeToData.userInput().nextInt();
     }
     public int getAge() {
         return this.Age;
     }
 
-    public void setlastName (){
+    public void setlastName (DataStorage employeeToData){
         System.out.println("Please enter the employees Last name. ");
-        this.lastName = empHanToData.userInput().nextLine();
+        this.lastName = employeeToData.userInput().nextLine();
     }
     public String getlastName(){
         return this.lastName;
     }
 
-    public void setfirstAddressLine (){
+    public void setfirstAddressLine (DataStorage employeeToData){
         System.out.println("Please enter the employees First Line of Address. ");
-        this.firstAddressLine = empHanToData.userInput().nextLine();
+        this.firstAddressLine = employeeToData.userInput().nextLine();
     }
     public String getfirstAddressLine() {
         return this.firstAddressLine;
     }
 
-    public void setsecondAddressLine(){
+    public void setsecondAddressLine(DataStorage employeeToData){
         System.out.println("Please enter the employees Second Line of Address. ");
-        this.secondAddressLine = empHanToData.userInput().nextLine();
+        this.secondAddressLine = employeeToData.userInput().nextLine();
     }
     public String getsecondAddressLine() {
         return this.secondAddressLine;
     }
 
-    public void setjobTitle(){
+    public void setjobTitle(DataStorage employeeToData){
         System.out.println("Please enter the employees JobTitle. ");
-        this.jobTitle = empHanToData.userInput().nextLine();
+        this.jobTitle = employeeToData.userInput().nextLine();
     }
     public String getjobTitle() {
         return this.jobTitle;
     }
 
-    public void setSalary(){
+    public void setSalary(DataStorage employeeToData){
         System.out.println("Please enter the employees Salary. ");
-        this.Salary = empHanToData.userInput().nextDouble();
+        this.Salary = employeeToData.userInput().nextDouble();
     }
     public double getSalary() {
         return this.Salary;
     }
 
-    public void setSSN(){
+    public void setSSN(DataStorage employeeToData){
         System.out.println("Please enter the employees SSN. ");
-        this.SSN = empHanToData.userInput().nextLine();
+        this.SSN = employeeToData.userInput().nextLine();
     }
     public String getSSN() {
         return this.SSN;

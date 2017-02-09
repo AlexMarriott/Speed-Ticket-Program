@@ -6,26 +6,26 @@ import java.io.IOException;
 public class EmployeeManager {
 
     public static void main(String[] args) throws IOException {
-        EmployeeHandler empManToEmpHan = new EmployeeHandler();
-        DataStorage empManToData = new DataStorage();
+        EmployeeHandler employee = new EmployeeHandler();
+        DataStorage saveData = new DataStorage();
 
         //This get the firstName of the employee
-        empManToEmpHan.setFirstName();
+        employee.setFirstName(saveData);
         //This get the lastName of the employee
-        empManToEmpHan.setlastName();
+        employee.setlastName(saveData);
         //This get the age of the employee
-        empManToEmpHan.setAge();
+        employee.setAge(saveData);
         //This get the firstAddressLine of the employee
-        empManToEmpHan.setfirstAddressLine();
+        employee.setfirstAddressLine(saveData);
         //This get the secondAddressLine of the employee
-        empManToEmpHan.setsecondAddressLine();
+        employee.setsecondAddressLine(saveData);
         //This get the jobTitle of the employee
-        empManToEmpHan.setjobTitle();
+        employee.setjobTitle(saveData);
         //This get the salary of the employee
-        empManToEmpHan.setSalary();
+        employee.setSalary(saveData);
         //This get the ssn of the employee
-        empManToEmpHan.setSSN();
-        empManToData.saveEmployee();
+        employee.setSSN(saveData);
+        saveData.saveEmployee(employee);
 
        // management.readArray();
     }
