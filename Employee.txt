@@ -1,0 +1,8 @@
+Employee First name: alex
+Employee Last name:  marriott
+Employee First Line Of Address:  17 Cecil Road
+Employee Second Line Of Address:  enfiled
+Employees Salary:  0.0
+Employee SSN:  somethng
+[NEW EMPLOYEE] 
+
