@@ -6,3 +6,11 @@ Employees Salary:  0.0
 Employee SSN:  somethng
 [NEW EMPLOYEE] 
 
+Employee First name: dsa
+Employee Last name:  das
+Employee First Line Of Address:  sfd
+Employee Second Line Of Address:  sfd
+Employees Salary:  324.0
+Employee SSN:  234
+[NEW EMPLOYEE] 
+
