@@ -1,8 +1,6 @@
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Created by Alex on 08/02/2017.
@@ -16,19 +14,12 @@ public class AlexEmployeeFile {
     private String jobTitle;
     private double Salary;
     private String SSN;
+    private ArrayList emp_array = new ArrayList();
 
     public AlexEmployeeFile(){};
     //Method Scanner
-    public Scanner userInput(){
-        Scanner userInput = new Scanner(System.in);
-        return userInput;
-    }
-    public PrintWriter createFile() throws IOException {
-        PrintWriter outfile = new PrintWriter
-                (new BufferedWriter
-                        (new FileWriter("Employee.txt")));
-        return outfile;
-    }
+
+
     public void setFirstName (){
         System.out.println("Please enter the employees first name. ");
         this.firstName = userInput().nextLine();
@@ -36,13 +27,11 @@ public class AlexEmployeeFile {
     public String getFirstName(){
         return this.firstName;
     }
-    public void setAge () throws IOException {
+    public void setAge () {
         System.out.println("Please enter the employees Age. ");
         this.Age = userInput().nextInt();
-        createFile().write(this.Age);
     }
-    public int getAge() throws IOException {
-        createFile().println(this.Age);
+    public int getAge() {
         return this.Age;
     }
 
