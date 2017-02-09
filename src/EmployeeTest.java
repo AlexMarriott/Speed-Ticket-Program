@@ -1,9 +1,9 @@
 public class EmployeeTest {
 
     public static void main(String[] args) {
-        Employee emp1 = new Employee();
-        Employee emp2 = new Employee("Anne", 33000);
-        Employee emp3 = new Employee("Bob");
+        OldTestEmployee emp1 = new OldTestEmployee();
+        OldTestEmployee emp2 = new OldTestEmployee("Anne", 33000);
+        OldTestEmployee emp3 = new OldTestEmployee("Bob");
         String swag = "alex";
         System.out.println(emp1.getFirstName());
         System.out.println(emp2.getFirstName()+" "+

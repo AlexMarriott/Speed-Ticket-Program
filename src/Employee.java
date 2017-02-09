@@ -1,58 +1,84 @@
-import java.util.Scanner;
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
+/**
+ * Created by Alex on 08/02/2017.
+ */
 public class Employee {
     private String firstName;
-    private double salary;
+    private String lastName;
+    private int Age;
+    private String firstAddressLine;
+    private String secondAddressLine;
     private String jobTitle;
-    private String department;
-    private String firstLineAddress;
-    private String secondLineAddress;
-    private String ssn;
+    private double Salary;
+    private String SSN;
+
+    public Employee(){};
 
 
-    public Employee(){ }
-
-    public Employee(String firstName, double salary){
-        this.firstName=firstName;
-        this.salary=salary;
+    public void setFirstName (DataStorage employeeToData){
+        System.out.println("Please enter the employees first name. ");
+        this.firstName = employeeToData.userInput().nextLine();
     }
-
-    public Employee(String firstName){
-        this.firstName=firstName;
-        this.salary=0;
-    }
-
     public String getFirstName(){
-        return firstName;
+        return this.firstName;
     }
-    public void setFirstName(String firstName ){
-        this.firstName=firstName;
+    public void setAge (DataStorage employeeToData) {
+        System.out.println("Please enter the employees Age. ");
+        this.Age = employeeToData.userInput().nextInt();
     }
-    public void setSalary(double salary){
-        this.salary=salary;
+    public int getAge() {
+        return this.Age;
     }
-    public void setJobTitle(String jobTitle){
-        this.jobTitle=jobTitle;
+    public void setlastName (DataStorage employeeToData){
+        System.out.println("Please enter the employees Last name. ");
+        this.lastName = employeeToData.userInput().nextLine();
     }
-    public void setDepartment(String department){
-        this.department=department;
-    }
-    public void setFirstLineAddress(String firstLineAddress){
-        this.firstLineAddress=firstLineAddress;
-    }
-    public void setSecondLineAddress(String secondLineAddress){
-        this.secondLineAddress=secondLineAddress;
-    }
-    public void setSSN(String ssn){
-        this.ssn=ssn;
-    }
-    public Scanner getUserInput(){
-        Scanner userInput = new Scanner(System.in);
-        return userInput;
+    public String getlastName(){
+        return this.lastName;
     }
 
-    public double getMonthlyPay(){
-        return salary/12;
+    public void setfirstAddressLine (DataStorage employeeToData){
+        System.out.println("Please enter the employees First Line of Address. ");
+        this.firstAddressLine = employeeToData.userInput().nextLine();
     }
+    public String getfirstAddressLine() {
+        return this.firstAddressLine;
+    }
+
+    public void setsecondAddressLine(DataStorage employeeToData){
+        System.out.println("Please enter the employees Second Line of Address. ");
+        this.secondAddressLine = employeeToData.userInput().nextLine();
+    }
+    public String getsecondAddressLine() {
+        return this.secondAddressLine;
+    }
+
+    public void setjobTitle(DataStorage employeeToData){
+        System.out.println("Please enter the employees JobTitle. ");
+        this.jobTitle = employeeToData.userInput().nextLine();
+    }
+    public String getjobTitle() {
+        return this.jobTitle;
+    }
+
+    public void setSalary(DataStorage employeeToData){
+        System.out.println("Please enter the employees Salary. ");
+        this.Salary = employeeToData.userInput().nextDouble();
+    }
+    public double getSalary() {
+        return this.Salary;
+    }
+
+    public void setSSN(DataStorage employeeToData){
+        System.out.println("Please enter the employees SSN. ");
+        this.SSN = employeeToData.userInput().nextLine();
+    }
+    public String getSSN() {
+        return this.SSN;
+    }
+
+
 }
-
