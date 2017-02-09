@@ -5,7 +5,8 @@ import java.util.Scanner;
 /**
  * Created by Alex on 08/02/2017.
  */
-public class AlexEmployeeFile {
+public class EmployeeHandler {
+    DataStorage empHanToData = new DataStorage();
     private String firstName;
     private String lastName;
     private int Age;
@@ -16,20 +17,20 @@ public class AlexEmployeeFile {
     private String SSN;
     private ArrayList emp_array = new ArrayList();
 
-    public AlexEmployeeFile(){};
+    public EmployeeHandler(){};
     //Method Scanner
 
 
     public void setFirstName (){
         System.out.println("Please enter the employees first name. ");
-        this.firstName = userInput().nextLine();
+        this.firstName = empHanToData.userInput().nextLine();
     }
     public String getFirstName(){
         return this.firstName;
     }
     public void setAge () {
         System.out.println("Please enter the employees Age. ");
-        this.Age = userInput().nextInt();
+        this.Age = empHanToData.userInput().nextInt();
     }
     public int getAge() {
         return this.Age;
@@ -37,7 +38,7 @@ public class AlexEmployeeFile {
 
     public void setlastName (){
         System.out.println("Please enter the employees Last name. ");
-        this.lastName = userInput().nextLine();
+        this.lastName = empHanToData.userInput().nextLine();
     }
     public String getlastName(){
         return this.lastName;
@@ -45,7 +46,7 @@ public class AlexEmployeeFile {
 
     public void setfirstAddressLine (){
         System.out.println("Please enter the employees First Line of Address. ");
-        this.firstAddressLine = userInput().nextLine();
+        this.firstAddressLine = empHanToData.userInput().nextLine();
     }
     public String getfirstAddressLine() {
         return this.firstAddressLine;
@@ -53,7 +54,7 @@ public class AlexEmployeeFile {
 
     public void setsecondAddressLine(){
         System.out.println("Please enter the employees Second Line of Address. ");
-        this.secondAddressLine = userInput().nextLine();
+        this.secondAddressLine = empHanToData.userInput().nextLine();
     }
     public String getsecondAddressLine() {
         return this.secondAddressLine;
@@ -61,7 +62,7 @@ public class AlexEmployeeFile {
 
     public void setjobTitle(){
         System.out.println("Please enter the employees JobTitle. ");
-        this.jobTitle = userInput().nextLine();
+        this.jobTitle = empHanToData.userInput().nextLine();
     }
     public String getjobTitle() {
         return this.jobTitle;
@@ -69,7 +70,7 @@ public class AlexEmployeeFile {
 
     public void setSalary(){
         System.out.println("Please enter the employees Salary. ");
-        this.Salary = userInput().nextDouble();
+        this.Salary = empHanToData.userInput().nextDouble();
     }
     public double getSalary() {
         return this.Salary;
@@ -77,7 +78,7 @@ public class AlexEmployeeFile {
 
     public void setSSN(){
         System.out.println("Please enter the employees SSN. ");
-        this.SSN = userInput().nextLine();
+        this.SSN = empHanToData.userInput().nextLine();
     }
     public String getSSN() {
         return this.SSN;
