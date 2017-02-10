@@ -4,9 +4,10 @@
 public class SpeedingTicketMain {
     public static void main(String[] args) {
         SpeedingTicket speedCheck = new SpeedingTicket();
-        //speedCheck.setCapturedSpeed();
-       // speedCheck.CheckDriversSpeed();
+        speedCheck.setCapturedSpeed();
+        speedCheck.getCapturedSpeed();
         speedCheck.setRoad();
         speedCheck.getRoad();
+        speedCheck.CheckSpeedMainroad();
     }
 }

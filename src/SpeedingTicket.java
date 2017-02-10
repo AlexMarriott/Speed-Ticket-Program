@@ -59,19 +59,27 @@ public class SpeedingTicket {
                     roadCheck = roadType[Road];
                     break;
         }
-
     }
-
     public String getRoad(){
         System.out.println(this.roadCheck);
         return this.roadCheck;
     }
-    public void CheckDriversSpeed(){
-        if(getCapturedSpeed() < speedCheck[0]){
-            System.out.println("this worked?");
+    public void CheckSpeedMainroad() {
+        if (getCapturedSpeed() <= speedCheck[0] && roadCheck == roadType[Road]) {
+            System.out.println("The Road Type is " + roadType[Road] + " and their speed was1 " + getCapturedSpeed() + " .");
+        } else if (getCapturedSpeed() <= speedCheck[1] && roadCheck == roadType[Road]) {
+            System.out.println("The Road Type is " + roadType[Road] + " and their speed was2 " + getCapturedSpeed() + " .");
+        } else if (getCapturedSpeed() <= speedCheck[2] && roadCheck == roadType[Road]) {
+            System.out.println("The Road Type is " + roadType[Road] + " and their speed was3 " + getCapturedSpeed() + " .");
+        } else if (getCapturedSpeed() <= speedCheck[3] && roadCheck == roadType[Road]) {
+            System.out.println("The Road Type is " + roadType[Road] + " and their speed was4 " + getCapturedSpeed() + " .");
+        }else if (getCapturedSpeed() <= speedCheck[4] && roadCheck == roadType[Road]) {
+                System.out.println("The Road Type is " + roadType[Road] + " and their speed was5 " + getCapturedSpeed() + " .");
+        }else if (getCapturedSpeed() >= speedCheck[7] && roadCheck == roadType[Road]) {
+            System.out.println("The Road Type is " + roadType[Road] + " and their speed was6 " + getCapturedSpeed() + " .");
+            //else if(getCapturedSpeed() < speedCheck[])
         }
-        //else if(getCapturedSpeed() < speedCheck[])
-    }
+}
 
 
 
