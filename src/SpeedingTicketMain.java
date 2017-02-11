@@ -8,6 +8,10 @@ public class SpeedingTicketMain {
         speedCheck.getCapturedSpeed();
         speedCheck.setRoad();
         speedCheck.getRoad();
-        speedCheck.CheckSpeedMainroad();
+        speedCheck.CheckSpeedMainRoad();
+        speedCheck.CheckSpeedResidentialRoad();
+        speedCheck.CheckSpeedSchoolZone();
+        speedCheck.CheckSpeedSingleCarriageway();
+        speedCheck.CheckSpeedDualCarriageway();
     }
 }
