@@ -18,7 +18,7 @@ public class IssueTicket {
         System.out.println("What was the Drivers Speed");
         driversSpeed = scanSpeed.nextInt();
     }
-
+//
     public int getCapturedSpeed() {
         return this.driversSpeed;
     }

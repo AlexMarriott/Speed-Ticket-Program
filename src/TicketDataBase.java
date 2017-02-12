@@ -30,7 +30,7 @@ import java.util.Scanner;
     public ArrayList setArray() throws FileNotFoundException {
         File empFile = new File("Employee.txt");
         Scanner fileScan = new Scanner(empFile);
-        int i = 0;
+        int i = 0;/
         while (fileScan.hasNext()) {
             empArray.add(fileScan.nextLine());
         }

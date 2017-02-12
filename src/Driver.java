@@ -17,7 +17,7 @@ public class Driver {
     private double yearlyIncome;
     private String drivingLicence;
     private Scanner driverDetails = new Scanner(System.in);
-
+//
     public void setFullName (IssueTicket driverData){
         System.out.println("Please enter the Drivers first name. ");
         this.firstName = driverDetails.nextLine();

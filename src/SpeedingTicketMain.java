@@ -16,5 +16,6 @@ public class SpeedingTicketMain {
         speedCheck.CheckSpeedSingleCarriageway();
         speedCheck.CheckSpeedDualCarriageway();*/
        // runGUI.GUI();
+        //
     }
 }
