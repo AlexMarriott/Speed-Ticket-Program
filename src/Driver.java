@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Created by alex on 11/02/2017.
  */
 public class Driver {
-    SpeedingTicket driverWrite = new SpeedingTicket();
+    IssueTicket driverWrite = new IssueTicket();
     private String fullName;
     private String firstName;
     private String lastName;
@@ -18,18 +18,18 @@ public class Driver {
     private String drivingLicence;
     private Scanner driverDetails = new Scanner(System.in);
 
-    public void setFullName (SpeedingTicket driverData){
+    public void setFullName (IssueTicket driverData){
         System.out.println("Please enter the Drivers first name. ");
         this.firstName = driverDetails.nextLine();
         System.out.println("Please enter the Drivers last name. ");
         this.lastName = driverDetails.nextLine();
         this.fullName = this.firstName + this.firstName;
     }
-    public void setDriversAge (SpeedingTicket driverData){
+    public void setDriversAge (IssueTicket driverData){
         System.out.println("Please enter the Drivers Age ");
         this.Age = driverDetails.nextInt();
     }
-    public void setAddress (SpeedingTicket driverData){
+    public void setAddress (IssueTicket driverData){
         System.out.println("Please enter the Drivers first line of Address. ");
         this.firstAddress = driverDetails.nextLine();
         System.out.println("Please enter Drivers second line of Address. ");
@@ -38,16 +38,16 @@ public class Driver {
         this.postCode = driverDetails.nextLine();
         this.fullAddressAndPostcode = this.firstAddress + this.secondAddress + this.postCode;
     }
-    public void setJobTitle (SpeedingTicket driverData){
+    public void setJobTitle (IssueTicket driverData){
         System.out.println("Please enter the Drivers job title. ");
         this.jobTitle = driverDetails.nextLine();
     }
-    public void setyearlyIncome (SpeedingTicket driverData){
+    public void setyearlyIncome (IssueTicket driverData){
         System.out.println("Please enter the Drivers yearly income. ");
         this.yearlyIncome = driverDetails.nextDouble();
 
     }
-    public void setDrivingLicence (SpeedingTicket driverData){
+    public void setDrivingLicence (IssueTicket driverData){
         System.out.println("Please enter the Drivers driving licence number. ");
         this.drivingLicence = driverDetails.nextLine();
 
