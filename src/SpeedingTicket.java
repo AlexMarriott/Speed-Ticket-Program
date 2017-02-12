@@ -10,22 +10,15 @@ import java.util.Scanner;
  */
 public class SpeedingTicket {
     public SpeedingTicket() {
+
     }
-
-    ;
-
     private Scanner scanSpeed = new Scanner(System.in);
     private int driversSpeed;
     private String roadCheck;
     private int Road;
     private int[] speedCheck = {10, 20, 30, 40, 50, 60, 70, 80};
     private String[] roadType = {"ResidentialRoad", "MainRoad", "SchoolZone", "SingleCarriageway", "DualCarriageway"};
-    private String fullName;
-    private int Age;
-    private String fullAddressAndPostcode;
-    private String jobTitle;
-    private double yearlyIncome;
-    private String NI;
+
 
     public void setCapturedSpeed() {
         System.out.println("What was the Drivers Speed");
@@ -110,7 +103,7 @@ public class SpeedingTicket {
         }
     }
     public void CheckSpeedSchoolZone() {
-        if (!(roadCheck == roadType[3])) {
+        if (!(roadCheck == roadType[2])) {
             System.out.println("The RoadType has not be chosen");
         } else {
             if (getCapturedSpeed() <= speedCheck[0] && roadCheck == roadType[Road]) {

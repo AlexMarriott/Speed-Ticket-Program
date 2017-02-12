@@ -4,6 +4,7 @@
 public class SpeedingTicketMain {
     public static void main(String[] args) {
         SpeedingTicket speedCheck = new SpeedingTicket();
+        Driver DriverWrite = new Driver();
         speedCheck.setCapturedSpeed();
         speedCheck.getCapturedSpeed();
         speedCheck.setRoad();
