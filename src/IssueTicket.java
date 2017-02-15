@@ -11,8 +11,8 @@ public class IssueTicket {
     private int driversSpeed;
     private String roadCheck;
     private int road;
-    private int[] speedCheck = {10, 20, 30, 40, 50, 60, 70, 80};
-    private String[] roadType = {"ResidentialRoad", "MainRoad", "SchoolZone", "SingleCarriageway", "DualCarriageway"};
+    //private int[] speedCheck = {10, 20, 30, 40, 50, 60, 70, 80};
+    //private String[] roadType = {"ResidentialRoad", "MainRoad", "SchoolZone", "SingleCarriageway", "DualCarriageway"};
 
     public void setCapturedSpeed() {
         System.out.println("What was the Drivers Speed");
@@ -23,7 +23,7 @@ public class IssueTicket {
         return this.driversSpeed;
     }
 
-    public void setRoad() {
+    /*public void setRoad() {
         System.out.println("What type of road was it?");
         System.out.println("0.Residential road \n 1.Main road \n 2.School Zone \n 3.Single Carriageway \n 4.Dual Carriageway");
         road = scanSpeed.nextInt();
@@ -49,116 +49,27 @@ public class IssueTicket {
                 roadCheck = roadType[road];
                 break;
         }
-    }
+    }*/
 
-    public String getRoad() {
+  /*  public String getRoad() {
         System.out.println(this.roadCheck);
         return this.roadCheck;
-    }
-    public void checkSpeedResidentialRoad() {
-        if (!(roadCheck == roadType[0])) {
-            System.out.println("The RoadType has not be chosen");
-        } else {
-            if (getCapturedSpeed() <= speedCheck[0] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was1 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[1] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was2 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[2] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was3 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[3] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was4 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[4] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was5 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() >= speedCheck[7] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was6 " + getCapturedSpeed() + " .");
-                //else if(getCapturedSpeed() < speedCheck[])
-            }
-        }
-    }
+    }*/
 
-    public void checkSpeedMainRoad() {
-        if (!(roadCheck == roadType[1])) {
-            System.out.println("The RoadType has not be chosen");
-        } else {
-            if (getCapturedSpeed() <= speedCheck[0] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was1 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[1] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was2 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[2] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was3 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[3] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was4 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[4] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was5 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() >= speedCheck[7] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was6 " + getCapturedSpeed() + " .");
-                //else if(getCapturedSpeed() < speedCheck[])
-            }
+    public void speedCheck(int driversSpeed, int roadSpeed ) {
+        int ticketThershold = roadSpeed + (roadSpeed * 10 / 100 + 2);
+        int countDateThershold = ticketThershold + (ticketThershold  *46 / 100);
+        System.out.println(driversSpeed + " "+" "+ roadSpeed);
+        System.out.println(ticketThershold);
+        System.out.println(countDateThershold);
+        if (driversSpeed > roadSpeed && driversSpeed < ticketThershold){
+            System.out.println("Ayyy your going a little fast be careful " + driversSpeed);
+            }else if(driversSpeed >= ticketThershold && driversSpeed < countDateThershold){
+            System.out.println("Issuing Ticket for the speed of:  " + driversSpeed) ;
+        }else if (driversSpeed >= countDateThershold ){
+            System.out.println("Driver exceeded the Speed limt by: " + (driversSpeed - roadSpeed) + " \nDriver will be issued a ticket and count date \nDrivers speed was: " + driversSpeed) ;
         }
     }
-    public void checkSpeedSchoolZone() {
-        if (!(roadCheck == roadType[2])) {
-            System.out.println("The RoadType has not be chosen");
-        } else {
-            if (getCapturedSpeed() <= speedCheck[0] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was1 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[1] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was2 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[2] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was3 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[3] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was4 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[4] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was5 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() >= speedCheck[7] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was6 " + getCapturedSpeed() + " .");
-                //else if(getCapturedSpeed() < speedCheck[])
-            }
-        }
-    }
-    public void checkSpeedSingleCarriageway() {
-        if (!(roadCheck == roadType[3])) {
-            System.out.println("The RoadType has not be chosen");
-        } else {
-            if (getCapturedSpeed() <= speedCheck[0] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was1 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[1] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was2 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[2] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was3 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[3] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was4 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[4] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was5 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() >= speedCheck[7] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was6 " + getCapturedSpeed() + " .");
-                //else if(getCapturedSpeed() < speedCheck[])
-            }
-        }
-    }
-    public void checkSpeedDualCarriageway() {
-        if (!(roadCheck == roadType[4])) {
-            System.out.println("The RoadType has not be chosen");
-        } else {
-            if (getCapturedSpeed() <= speedCheck[0] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was1 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[1] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was2 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[2] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was3 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[3] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was4 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() <= speedCheck[4] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was5 " + getCapturedSpeed() + " .");
-            } else if (getCapturedSpeed() >= speedCheck[7] && roadCheck == roadType[road]) {
-                System.out.println("The road Type is " + roadType[road] + " and their speed was6 " + getCapturedSpeed() + " .");
-                //else if(getCapturedSpeed() < speedCheck[])
-            }
-        }
-    }
-
-
-
 }
 
 

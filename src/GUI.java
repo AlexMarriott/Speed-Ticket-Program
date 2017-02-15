@@ -1,19 +1,19 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by alex on 11/02/2017.
  */
 public class GUI {
-    private JLabel lblSpeed, lblRoadType, lblDriversName;
+    private JLabel lblSpeed, lblRoadType, lblDriversName,lblPicture;
     private JTextField txtSpeed, txtDriversName;
     private JButton btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
     private JPanel panel;
     private JFrame frame;
     private int roadSpeed;
-//
+    IssueTicket CheckingSpeed = new  IssueTicket();
+
     public GUI(){
         createForm();
         addFields();
@@ -22,6 +22,7 @@ public class GUI {
         frame.add(panel);
         frame.setVisible(true);
     }
+
 
     public void createForm(){
         frame = new JFrame();
@@ -40,7 +41,7 @@ public class GUI {
         lblDriversName.setBounds(20, 380, 100, 20);
         panel.add(lblDriversName);
 
-        txtDriversName = new JTextField("i.e  " + "Alex Marriott");
+        txtDriversName = new JTextField(null);
         txtDriversName.setBounds(120, 380, 150, 20);
         panel.add(txtDriversName);
 
@@ -52,10 +53,15 @@ public class GUI {
         lblSpeed.setBounds(20, 405, 100, 20);
         panel.add(lblSpeed);
 
-        txtSpeed = new JTextField("i.e  " + "50");
+        txtSpeed = new JTextField(null);
         txtSpeed.setBounds(120, 405, 150, 20);
         panel.add(txtSpeed);
-    }
+
+        ImageIcon image = new ImageIcon("DVLA.jpg");
+        lblPicture = new JLabel(image);
+        lblPicture.setBounds(200, 100, 400, 200);
+        panel.add(lblPicture);
+        }
 
     public void addButtons(){
         btnSchoolZone = new JButton("SchoolZone");
@@ -93,6 +99,9 @@ public class GUI {
         btnExit.addActionListener(new ExitHandler());
         panel.add(btnExit);
     }
+
+
+
 
     class SchoolZoneHandler implements ActionListener {
         @Override
@@ -132,6 +141,17 @@ public class GUI {
         public void actionPerformed(ActionEvent event) {
             String driverName = txtDriversName.getText();
             String driversSpeed = txtSpeed.getText();
+            int driversSpeedInt = 0;
+            if (driverName.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }else if (driversSpeed.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (roadSpeed == 0){
+                JOptionPane.showMessageDialog(frame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }else
+                driversSpeedInt = Integer.parseInt(driversSpeed);
+                CheckingSpeed.speedCheck(driversSpeedInt,roadSpeed );
             JOptionPane.showMessageDialog(frame, " Drivers Name is: " + driverName + "\n DriversSpeed is : " + driversSpeed + "\n Road Speed limit is: " + roadSpeed);
         }
     }
