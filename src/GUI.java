@@ -1,18 +1,24 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.*;
 
 /**
  * Created by alex on 11/02/2017.
  */
 public class GUI {
-    private JLabel lblSpeed, lblRoadType, lblDriversName,lblPicture;
-    private JTextField txtSpeed, txtDriversName;
+    private JLabel lblSpeed, lblRoadType, lblDriversFirstName,lblDriversLastName, lblPicture;
+    private JTextField txtSpeed, txtDriversFirstName;
     private JButton btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
     private JPanel panel;
     private JFrame frame;
     private int roadSpeed;
+    private String driverName;
+    private String driversSpeed;
+    private String roadType;
+
     IssueTicket CheckingSpeed = new  IssueTicket();
+    TicketDataBase writingToFile = new  TicketDataBase();
 
     public GUI(){
         createForm();
@@ -22,7 +28,6 @@ public class GUI {
         frame.add(panel);
         frame.setVisible(true);
     }
-
 
     public void createForm(){
         frame = new JFrame();
@@ -36,14 +41,24 @@ public class GUI {
         panel.setLayout(null);
     }
 
-    public void addFields(){
-        lblDriversName = new JLabel("Drivers Name");
-        lblDriversName.setBounds(20, 380, 100, 20);
-        panel.add(lblDriversName);
 
-        txtDriversName = new JTextField(null);
-        txtDriversName.setBounds(120, 380, 150, 20);
-        panel.add(txtDriversName);
+    public void addFields(){
+        lblDriversFirstName = new JLabel("Drivers First Name");
+        lblDriversFirstName.setBounds(20, 380, 100, 20);
+        panel.add(lblDriversFirstName);
+
+        txtDriversFirstName = new JTextField(null);
+        txtDriversFirstName.setBounds(120, 380, 150, 20);
+        panel.add(txtDriversFirstName);
+
+        lblDriversLastName = new JLabel("Drivers Last Name");
+        lblDriversLastName.setBounds(20, 380, 100, 20);
+
+        panel.add(lblDriversLastName);
+
+        txtDriversFirstName = new JTextField(null);
+        txtDriversFirstName.setBounds(120, 380, 150, 20);
+        panel.add(txtDriversFirstName);
 
         lblRoadType = new JLabel("Road Type");
         lblRoadType.setBounds(20, 430, 100, 20);
@@ -107,6 +122,7 @@ public class GUI {
         @Override
         public void actionPerformed(ActionEvent event ) {
             roadSpeed = 20;
+            roadType = "School Zone";
         }
     }
 
@@ -114,12 +130,14 @@ public class GUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 20;
+            roadType = "Residential Road";
         }
     }
     class MainRoadHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 30;
+            roadType = "Main Road";
         }
     }
     class SingleCarriagewayHandler implements ActionListener {
@@ -127,6 +145,7 @@ public class GUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 60;
+            roadType = "Single Carriageway";
         }
     }
     class DualCarriagewayHandler implements ActionListener {
@@ -134,13 +153,15 @@ public class GUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 70;
+            roadType = "Dual Carriageway";
+
         }
     }
     class SubmitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            String driverName = txtDriversName.getText();
-            String driversSpeed = txtSpeed.getText();
+            driverName = txtDriversFirstName.getText();
+            driversSpeed = txtSpeed.getText();
             int driversSpeedInt = 0;
             if (driverName.isEmpty()){
                 JOptionPane.showMessageDialog(frame, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -151,18 +172,22 @@ public class GUI {
                 JOptionPane.showMessageDialog(frame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else
                 driversSpeedInt = Integer.parseInt(driversSpeed);
-                CheckingSpeed.speedCheck(driversSpeedInt,roadSpeed );
-            JOptionPane.showMessageDialog(frame, " Drivers Name is: " + driverName + "\n DriversSpeed is : " + driversSpeed + "\n Road Speed limit is: " + roadSpeed);
+                CheckingSpeed.speedCheck(driversSpeedInt,roadSpeed,driverName,roadType );
+            CheckingSpeed.setDriverInfo();
+            JOptionPane.showMessageDialog(frame, CheckingSpeed.getDriverInfo());
+            try {
+                writingToFile.saveDrivers();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-
     class ExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             System.exit(0);
         }
     }
-
     public static void main(String[] args){
         new GUI();
     }

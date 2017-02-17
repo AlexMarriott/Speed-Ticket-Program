@@ -5,20 +5,19 @@ import java.util.Scanner;
 /**
  * Created by alex on 12/02/2017.
  */
-/*public class TicketDataBase {
-    public void saveEmployee(Driver DriverData) throws IOException {
-        PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Employee.txt", true)));
-        outfile.println("Drivers First name: " + DriverData.getFirstName());
-        outfile.println("Employee Last name:  " + DriverData.getlastName());
-        outfile.println("Employee First Line Of Address:  " + dataToEmployee.getfirstAddressLine());
-        outfile.println("Employee Second Line Of Address:  " + dataToEmployee.getsecondAddressLine());
-        outfile.println("Employees Salary:  " + dataToEmployee.getSalary());
-        outfile.println("Employee SSN:  " + dataToEmployee.getSSN() + "\n[NEW EMPLOYEE] \n");
-
+public class TicketDataBase {
+    IssueTicket driverWriteInformation = new  IssueTicket();
+    public void saveDrivers() throws IOException {
+        PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
+        System.out.println(driverWriteInformation.getDriverInfo());
+        outfile.println(driverWriteInformation.getDriverInfo() + "\n[NEXT DRIVER] \n");
         outfile.flush();
         outfile.close();
     }
-    public void readFile() throws FileNotFoundException {
+
+
+
+    /*public void readFile() throws FileNotFoundException {
         File empFile = new File("Employee.txt");
         Scanner fileScan = new Scanner(empFile);
         while (fileScan.hasNext()) {
@@ -46,8 +45,6 @@ import java.util.Scanner;
             i++;
         }
 
-    }
+    }*/
 
 }
-
-*/

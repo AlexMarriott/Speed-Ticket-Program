@@ -19,36 +19,27 @@ public class Driver {
     private Scanner driverDetails = new Scanner(System.in);
 //
     public void setFullName (IssueTicket driverData){
-        System.out.println("Please enter the Drivers first name. ");
         this.firstName = driverDetails.nextLine();
-        System.out.println("Please enter the Drivers last name. ");
         this.lastName = driverDetails.nextLine();
         this.fullName = this.firstName + this.firstName;
     }
     public void setDriversAge (IssueTicket driverData){
-        System.out.println("Please enter the Drivers Age ");
         this.Age = driverDetails.nextInt();
     }
     public void setAddress (IssueTicket driverData){
-        System.out.println("Please enter the Drivers first line of Address. ");
         this.firstAddress = driverDetails.nextLine();
-        System.out.println("Please enter Drivers second line of Address. ");
         this.secondAddress = driverDetails.nextLine();
-        System.out.println("Please enter Drivers postCode. ");
         this.postCode = driverDetails.nextLine();
         this.fullAddressAndPostcode = this.firstAddress + this.secondAddress + this.postCode;
     }
     public void setJobTitle (IssueTicket driverData){
-        System.out.println("Please enter the Drivers job title. ");
         this.jobTitle = driverDetails.nextLine();
     }
     public void setyearlyIncome (IssueTicket driverData){
-        System.out.println("Please enter the Drivers yearly income. ");
         this.yearlyIncome = driverDetails.nextDouble();
 
     }
     public void setDrivingLicence (IssueTicket driverData){
-        System.out.println("Please enter the Drivers driving licence number. ");
         this.drivingLicence = driverDetails.nextLine();
 
         /*It consists of the first 5 letters of your surname, followed by your date of birth in coded form,
