@@ -8,10 +8,10 @@ import javax.swing.*;
  */
 public class GUI {
     private JLabel lblSpeed, lblRoadType, lblDriversName,lblDriversLastName, lblPicture;
-    private JTextField txtSpeed, txtDriverName;
-    private JButton btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
-    private JPanel panel;
-    private JFrame driverAddFrame;
+    private JTextField txtSpeed, txtDriverName,txtsearchDriver;
+    private JButton btnAddDriver, btnSearchDriver, btnRemoveDriver, btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
+    private JPanel driverAddPanel,splashPagePanel;
+    private JFrame driverAddFrame,splashPageFrame;
     private int roadSpeed;
     private String driverName;
     private String driversSpeed;
@@ -21,14 +21,33 @@ public class GUI {
     TicketDataBase writingToFile = new  TicketDataBase();
 
     public GUI(){
+
+        createSplashPage();
+        addSplashPageFields();
+        addSplashPageButtons();
+
+        splashPageFrame.add(splashPagePanel);
+        splashPageFrame.setVisible(true);
+
         createDriverForm();
         addDriverFields();
         addDriverButtons();
 
-        driverAddFrame.add(panel);
-        driverAddFrame.setVisible(true);
-    }
+        driverAddFrame.add(driverAddPanel);
+        driverAddFrame.setVisible(false);
 
+    }
+    public void createSplashPage() {
+        splashPageFrame = new JFrame();
+        splashPageFrame.setTitle("DVLA Ticket Program");
+        splashPageFrame.setSize(420, 350);
+        splashPageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        splashPageFrame.setVisible(true);
+        splashPageFrame.setLocationRelativeTo(null);
+
+        splashPagePanel = new JPanel();
+        splashPagePanel.setLayout(null);
+    }
     public void createDriverForm(){
         driverAddFrame = new JFrame();
         driverAddFrame.setTitle("DVLA Ticket Program");
@@ -37,99 +56,134 @@ public class GUI {
         driverAddFrame.setVisible(false);
         driverAddFrame.setLocationRelativeTo(null);
 
-        panel = new JPanel();
-        panel.setLayout(null);
+        driverAddPanel = new JPanel();
+        driverAddPanel.setLayout(null);
     }
-   /* public void addSplashPage(){
-        driverAddFrame = new JFrame();
-        driverAddFrame.setTitle("DVLA Ticket Program");
-        driverAddFrame.setSize(800,600);
-        driverAddFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        driverAddFrame.setVisible(true);
-        driverAddFrame.setLocationRelativeTo(null);
+    public void addSplashPageFields() {
 
-        panel = new JPanel();
-        panel.setLayout(null);
-    }*/
-
-
+        ImageIcon image = new ImageIcon("DVLA.jpg");
+        lblPicture = new JLabel(image);
+        lblPicture.setBounds(0, 0, 400, 200);
+        splashPagePanel.add(lblPicture);
+    }
     public void addDriverFields(){
         lblDriversName = new JLabel("Drivers First Name");
         lblDriversName.setBounds(20, 380, 100, 20);
-        panel.add(lblDriversName);
+        driverAddPanel.add(lblDriversName);
 
         txtDriverName = new JTextField(null);
         txtDriverName.setBounds(120, 380, 150, 20);
-        panel.add(txtDriverName);
+        driverAddPanel.add(txtDriverName);
 
         lblDriversLastName = new JLabel("Drivers Last Name");
         lblDriversLastName.setBounds(20, 380, 100, 20);
 
-        panel.add(lblDriversLastName);
+        driverAddPanel.add(lblDriversLastName);
 
         txtDriverName = new JTextField(null);
         txtDriverName.setBounds(120, 380, 150, 20);
-        panel.add(txtDriverName);
+        driverAddPanel.add(txtDriverName);
 
         lblRoadType = new JLabel("Road Type");
         lblRoadType.setBounds(20, 430, 100, 20);
-        panel.add(lblRoadType);
+        driverAddPanel.add(lblRoadType);
 
         lblSpeed = new JLabel("Drivers Speed");
         lblSpeed.setBounds(20, 405, 100, 20);
-        panel.add(lblSpeed);
+        driverAddPanel.add(lblSpeed);
 
         txtSpeed = new JTextField(null);
         txtSpeed.setBounds(120, 405, 150, 20);
-        panel.add(txtSpeed);
+        driverAddPanel.add(txtSpeed);
 
         ImageIcon image = new ImageIcon("DVLA.jpg");
         lblPicture = new JLabel(image);
         lblPicture.setBounds(200, 100, 400, 200);
-        panel.add(lblPicture);
+        driverAddPanel.add(lblPicture);
         }
+    public void addSplashPageButtons() {
+        btnAddDriver = new JButton("Add Driver");
+        btnAddDriver.setBounds(10, 240, 100, 40);
+        btnAddDriver.addActionListener(new AddDriverHandler());
+        splashPagePanel.add(btnAddDriver);
 
+        btnSearchDriver = new JButton("Search For Driver");
+        btnSearchDriver.setBounds(120, 240, 140, 40);
+        btnSearchDriver.addActionListener(new AddDriverHandler());
+        splashPagePanel.add(btnSearchDriver);
+
+        btnRemoveDriver = new JButton("Remove Driver");
+        btnRemoveDriver.setBounds(270, 240, 120, 40);
+        btnRemoveDriver.addActionListener(new AddDriverHandler());
+        splashPagePanel.add(btnRemoveDriver);
+
+        btnExit = new JButton("Exit");
+        btnExit.setBounds(140, 290, 100, 20);
+        btnExit.addActionListener(new ExitHandler());
+        splashPagePanel.add(btnExit);
+    }
     public void addDriverButtons(){
         btnSchoolZone = new JButton("SchoolZone");
         btnSchoolZone.setBounds(120, 430, 120, 20);
-        btnSchoolZone.addActionListener(new SchoolZoneHandler());
-        panel.add(btnSchoolZone);
+        btnSchoolZone.addActionListener(new DriverAddSchoolZoneHandler());
+        driverAddPanel.add(btnSchoolZone);
 
         btnResidentialRoad = new JButton("Residential");
         btnResidentialRoad.setBounds(240, 430, 100, 20);
-        btnResidentialRoad.addActionListener(new ResidentialRoadHandler());
-        panel.add(btnResidentialRoad);
+        btnResidentialRoad.addActionListener(new DriverAddResidentialRoadHandler());
+        driverAddPanel.add(btnResidentialRoad);
 
         btnMainRoad = new JButton("MainRoad");
         btnMainRoad.setBounds(340, 430, 100, 20);
-        btnMainRoad.addActionListener(new MainRoadHandler());
-        panel.add(btnMainRoad);
+        btnMainRoad.addActionListener(new DriverAddMainRoadHandler());
+        driverAddPanel.add(btnMainRoad);
 
         btnSingleCarriageway = new JButton("SingleCarriageway");
         btnSingleCarriageway.setBounds(440, 430, 160, 20);
-        btnSingleCarriageway.addActionListener(new SingleCarriagewayHandler());
-        panel.add(btnSingleCarriageway);
+        btnSingleCarriageway.addActionListener(new DriverAddSingleCarriagewayHandler());
+        driverAddPanel.add(btnSingleCarriageway);
 
         btnDualCarriageway = new JButton("DualCarriageway");
         btnDualCarriageway.setBounds(600, 430, 160, 20);
-        btnDualCarriageway.addActionListener(new DualCarriagewayHandler());
-        panel.add(btnDualCarriageway);
+        btnDualCarriageway.addActionListener(new DriverAddDualCarriagewayHandler());
+        driverAddPanel.add(btnDualCarriageway);
 
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(22, 525, 100, 20);
-        btnSubmit.addActionListener(new SubmitHandler());
-        panel.add(btnSubmit);
+        btnSubmit.addActionListener(new DriverAddSubmitHandler());
+        driverAddPanel.add(btnSubmit);
 
         btnExit = new JButton("Exit");
         btnExit.setBounds(650, 525, 100, 20);
-        btnExit.addActionListener(new ExitHandler());
-        panel.add(btnExit);
+        btnExit.addActionListener(new DriverAddExitHandler());
+        driverAddPanel.add(btnExit);
+    }
+    class AddDriverHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            driverAddFrame.setVisible(true);
+        }
     }
 
+    class SearchAddDriverHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            txtsearchDriver = new JTextField(null);
+            txtsearchDriver.setBounds(120, 380, 150, 20);
+            splashPagePanel.add(txtsearchDriver);
+        }
+    }
+    class ExitHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            int n = JOptionPane.showConfirmDialog(splashPageFrame, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
+            if (n == 0) {
+                System.exit(0);
+            }
+        }
+    }
 
-
-
-    class SchoolZoneHandler implements ActionListener {
+    class DriverAddSchoolZoneHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
             roadSpeed = 20;
@@ -137,21 +191,21 @@ public class GUI {
         }
     }
 
-    class ResidentialRoadHandler implements ActionListener {
+    class DriverAddResidentialRoadHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 20;
             roadType = "Residential Road";
         }
     }
-    class MainRoadHandler implements ActionListener {
+    class DriverAddMainRoadHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 30;
             roadType = "Main Road";
         }
     }
-    class SingleCarriagewayHandler implements ActionListener {
+    class DriverAddSingleCarriagewayHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -159,7 +213,7 @@ public class GUI {
             roadType = "Single Carriageway";
         }
     }
-    class DualCarriagewayHandler implements ActionListener {
+    class DriverAddDualCarriagewayHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -168,7 +222,7 @@ public class GUI {
 
         }
     }
-    class SubmitHandler implements ActionListener {
+    class DriverAddSubmitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             driverName = txtDriverName.getText();
@@ -193,10 +247,10 @@ public class GUI {
             }
         }
     }
-    class ExitHandler implements ActionListener {
+    class DriverAddExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            System.exit(0);
+            driverAddFrame.setVisible(false);
         }
     }
     public static void main(String[] args){
