@@ -7,11 +7,11 @@ import javax.swing.*;
  * Created by alex on 11/02/2017.
  */
 public class GUI {
-    private JLabel lblSpeed, lblRoadType, lblDriversFirstName,lblDriversLastName, lblPicture;
-    private JTextField txtSpeed, txtDriversFirstName;
+    private JLabel lblSpeed, lblRoadType, lblDriversName,lblDriversLastName, lblPicture;
+    private JTextField txtSpeed, txtDriverName;
     private JButton btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
     private JPanel panel;
-    private JFrame frame;
+    private JFrame driverAddFrame;
     private int roadSpeed;
     private String driverName;
     private String driversSpeed;
@@ -21,44 +21,55 @@ public class GUI {
     TicketDataBase writingToFile = new  TicketDataBase();
 
     public GUI(){
-        createForm();
-        addFields();
-        addButtons();
+        createDriverForm();
+        addDriverFields();
+        addDriverButtons();
 
-        frame.add(panel);
-        frame.setVisible(true);
+        driverAddFrame.add(panel);
+        driverAddFrame.setVisible(true);
     }
 
-    public void createForm(){
-        frame = new JFrame();
-        frame.setTitle("DVLA Ticket Program");
-        frame.setSize(800,600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+    public void createDriverForm(){
+        driverAddFrame = new JFrame();
+        driverAddFrame.setTitle("DVLA Ticket Program");
+        driverAddFrame.setSize(800,600);
+        driverAddFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        driverAddFrame.setVisible(false);
+        driverAddFrame.setLocationRelativeTo(null);
 
         panel = new JPanel();
         panel.setLayout(null);
     }
+   /* public void addSplashPage(){
+        driverAddFrame = new JFrame();
+        driverAddFrame.setTitle("DVLA Ticket Program");
+        driverAddFrame.setSize(800,600);
+        driverAddFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        driverAddFrame.setVisible(true);
+        driverAddFrame.setLocationRelativeTo(null);
+
+        panel = new JPanel();
+        panel.setLayout(null);
+    }*/
 
 
-    public void addFields(){
-        lblDriversFirstName = new JLabel("Drivers First Name");
-        lblDriversFirstName.setBounds(20, 380, 100, 20);
-        panel.add(lblDriversFirstName);
+    public void addDriverFields(){
+        lblDriversName = new JLabel("Drivers First Name");
+        lblDriversName.setBounds(20, 380, 100, 20);
+        panel.add(lblDriversName);
 
-        txtDriversFirstName = new JTextField(null);
-        txtDriversFirstName.setBounds(120, 380, 150, 20);
-        panel.add(txtDriversFirstName);
+        txtDriverName = new JTextField(null);
+        txtDriverName.setBounds(120, 380, 150, 20);
+        panel.add(txtDriverName);
 
         lblDriversLastName = new JLabel("Drivers Last Name");
         lblDriversLastName.setBounds(20, 380, 100, 20);
 
         panel.add(lblDriversLastName);
 
-        txtDriversFirstName = new JTextField(null);
-        txtDriversFirstName.setBounds(120, 380, 150, 20);
-        panel.add(txtDriversFirstName);
+        txtDriverName = new JTextField(null);
+        txtDriverName.setBounds(120, 380, 150, 20);
+        panel.add(txtDriverName);
 
         lblRoadType = new JLabel("Road Type");
         lblRoadType.setBounds(20, 430, 100, 20);
@@ -78,7 +89,7 @@ public class GUI {
         panel.add(lblPicture);
         }
 
-    public void addButtons(){
+    public void addDriverButtons(){
         btnSchoolZone = new JButton("SchoolZone");
         btnSchoolZone.setBounds(120, 430, 120, 20);
         btnSchoolZone.addActionListener(new SchoolZoneHandler());
@@ -160,21 +171,21 @@ public class GUI {
     class SubmitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            driverName = txtDriversFirstName.getText();
+            driverName = txtDriverName.getText();
             driversSpeed = txtSpeed.getText();
             int driversSpeedInt = 0;
             if (driverName.isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else if (driversSpeed.isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
             else if (roadSpeed == 0){
-                JOptionPane.showMessageDialog(frame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else
                 driversSpeedInt = Integer.parseInt(driversSpeed);
                 CheckingSpeed.speedCheck(driversSpeedInt,roadSpeed,driverName,roadType );
             CheckingSpeed.setDriverInfo();
-            JOptionPane.showMessageDialog(frame, CheckingSpeed.getDriverInfo());
+            JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
             try {
                 writingToFile.saveDrivers();
             } catch (IOException e) {
