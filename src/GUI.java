@@ -52,7 +52,7 @@ public class GUI {
         driverAddFrame = new JFrame();
         driverAddFrame.setTitle("DVLA Ticket Program");
         driverAddFrame.setSize(800,600);
-        driverAddFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        driverAddFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         driverAddFrame.setVisible(false);
         driverAddFrame.setLocationRelativeTo(null);
 
@@ -75,14 +75,14 @@ public class GUI {
         txtDriverName.setBounds(120, 380, 150, 20);
         driverAddPanel.add(txtDriverName);
 
-        lblDriversLastName = new JLabel("Drivers Last Name");
+        /*lblDriversLastName = new JLabel("Drivers Last Name");
         lblDriversLastName.setBounds(20, 380, 100, 20);
 
         driverAddPanel.add(lblDriversLastName);
 
         txtDriverName = new JTextField(null);
         txtDriverName.setBounds(120, 380, 150, 20);
-        driverAddPanel.add(txtDriverName);
+        driverAddPanel.add(txtDriverName);*/
 
         lblRoadType = new JLabel("Road Type");
         lblRoadType.setBounds(20, 430, 100, 20);
