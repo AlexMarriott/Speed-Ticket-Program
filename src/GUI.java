@@ -1,24 +1,29 @@
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  * Created by alex on 11/02/2017.
  */
 public class GUI {
-    private JLabel lblSpeed, lblRoadType, lblDriversName,lblDriversLastName, lblPicture;
-    private JTextField txtSpeed, txtDriverName,txtsearchDriver;
+    private JLabel lblSpeed, lblRoadType, lblFirstName,lblDriversLastName,lblDateOBirth,lblDrivingLicenceNum,lblFirstAddress,lblSecondAddress,lblPostCode, lblPicture, lblDriverInformation;
+    private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum,txtFirstAddress,txtSecondAddress,txtPostCode,txtsearchDriver;
     private JButton btnAddDriver, btnSearchDriver, btnRemoveDriver, btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
-    private JPanel driverAddPanel,splashPagePanel;
-    private JFrame driverAddFrame,splashPageFrame;
-    private int roadSpeed;
-    private String driverName;
-    private String driversSpeed;
-    private String roadType;
+    private JPanel driverAddPanel, splashPagePanel;
+    private Border lblDriverInformationBorder;
+    private JFrame driverAddFrame, splashPageFrame;
 
-    IssueTicket CheckingSpeed = new  IssueTicket();
-    TicketDataBase writingToFile = new  TicketDataBase();
+    protected int roadSpeed;
+    protected int driversSpeed;
+    protected String roadType;
+    protected String driverName;
+
+    private Driver DriverInfo;
+    private IssueTicket CheckingSpeed;
+    private TicketDataBase writingToFile;
 
     public GUI(){
 
@@ -50,7 +55,7 @@ public class GUI {
     }
     public void createDriverForm(){
         driverAddFrame = new JFrame();
-        driverAddFrame.setTitle("DVLA Ticket Program");
+        driverAddFrame.setTitle("Add A Driver");
         driverAddFrame.setSize(800,600);
         driverAddFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         driverAddFrame.setVisible(false);
@@ -67,22 +72,70 @@ public class GUI {
         splashPagePanel.add(lblPicture);
     }
     public void addDriverFields(){
-        lblDriversName = new JLabel("Drivers First Name");
-        lblDriversName.setBounds(20, 380, 100, 20);
-        driverAddPanel.add(lblDriversName);
+        Font arial = new Font("Arial", Font.BOLD + Font.ITALIC, 10);
 
-        txtDriverName = new JTextField(null);
-        txtDriverName.setBounds(120, 380, 150, 20);
-        driverAddPanel.add(txtDriverName);
+        lblDriverInformationBorder = BorderFactory.createLoweredBevelBorder();
+        lblDriverInformation = new JLabel("Driver Information");
+        lblDriverInformation.setBounds(10, 10, 120, 20);
+        lblDriverInformation.setFont(arial);
+        driverAddPanel.add(lblDriverInformation);
+        lblDriverInformation.setBorder(lblDriverInformationBorder);
 
-        /*lblDriversLastName = new JLabel("Drivers Last Name");
-        lblDriversLastName.setBounds(20, 380, 100, 20);
+        lblFirstName = new JLabel("First Name");
+        lblFirstName.setBounds(20, 40, 100, 20);
+        driverAddPanel.add(lblFirstName);
 
+        txtFirstName = new JTextField(null);
+        txtFirstName.setBounds(140, 40, 100, 20);
+        driverAddPanel.add(txtFirstName);
+
+        lblDriversLastName = new JLabel("Last Name");
+        lblDriversLastName.setBounds(20, 70, 100, 20);
         driverAddPanel.add(lblDriversLastName);
 
-        txtDriverName = new JTextField(null);
-        txtDriverName.setBounds(120, 380, 150, 20);
-        driverAddPanel.add(txtDriverName);*/
+        txtLastName = new JTextField(null);
+        txtLastName.setBounds(140, 70, 100, 20);
+        driverAddPanel.add(txtLastName);
+
+        lblDateOBirth = new JLabel("Date of Birth");
+        lblDateOBirth.setBounds(20, 100, 100, 20);
+        driverAddPanel.add(lblDateOBirth);
+
+        txtDateOBirth = new JTextField("DD/MM/YYYY");
+        txtDateOBirth.setBounds(140, 100, 100, 20);
+        driverAddPanel.add(txtDateOBirth);
+
+        lblDrivingLicenceNum = new JLabel("Driving Licence Number");
+        lblDrivingLicenceNum.setBounds(20, 130, 120, 20);
+        driverAddPanel.add(lblDrivingLicenceNum);
+
+        txtDrivingLicenceNum = new JTextField(null);
+        txtDrivingLicenceNum.setBounds(140, 130, 100, 20);
+        driverAddPanel.add(txtDrivingLicenceNum);
+
+        lblFirstAddress = new JLabel("First Line Of Address");
+        lblFirstAddress.setBounds(20, 160, 100, 20);
+        driverAddPanel.add(lblFirstAddress);
+
+        txtFirstAddress = new JTextField(null);
+        txtFirstAddress.setBounds(140, 160, 100, 20);
+        driverAddPanel.add(txtFirstAddress);
+
+        lblSecondAddress = new JLabel("Second Line Of Address");
+        lblSecondAddress.setBounds(20, 190, 120, 20);
+        driverAddPanel.add(lblSecondAddress);
+
+        txtSecondAddress = new JTextField(null);
+        txtSecondAddress.setBounds(140, 190, 100, 20);
+        driverAddPanel.add(txtSecondAddress);
+
+        lblPostCode = new JLabel("Post Code");
+        lblPostCode.setBounds(20, 220, 100, 20);
+        driverAddPanel.add(lblPostCode);
+
+        txtPostCode = new JTextField(null);
+        txtPostCode.setBounds(140, 220, 100, 20);
+        driverAddPanel.add(txtPostCode);
 
         lblRoadType = new JLabel("Road Type");
         lblRoadType.setBounds(20, 430, 100, 20);
@@ -96,9 +149,9 @@ public class GUI {
         txtSpeed.setBounds(120, 405, 150, 20);
         driverAddPanel.add(txtSpeed);
 
-        ImageIcon image = new ImageIcon("DVLA.jpg");
+        ImageIcon image = new ImageIcon("dvlasmall.jpg");
         lblPicture = new JLabel(image);
-        lblPicture.setBounds(200, 100, 400, 200);
+        lblPicture.setBounds(580, 5, 200, 100);
         driverAddPanel.add(lblPicture);
         }
     public void addSplashPageButtons() {
@@ -223,21 +276,25 @@ public class GUI {
         }
     }
     class DriverAddSubmitHandler implements ActionListener {
-        @Override
+        IssueTicket CheckingSpeed = new IssueTicket();
         public void actionPerformed(ActionEvent event) {
-            driverName = txtDriverName.getText();
-            driversSpeed = txtSpeed.getText();
-            int driversSpeedInt = 0;
-            if (driverName.isEmpty()){
+            driverName = txtFirstName.getText();
+            driversSpeed = Integer.parseInt(txtSpeed.getText());
+            if ( txtFirstName.getText().isEmpty()){
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }else if (driversSpeed.isEmpty()){
+            }else if (txtSpeed.getText().isEmpty()){
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
             else if (roadSpeed == 0){
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else
-                driversSpeedInt = Integer.parseInt(driversSpeed);
-                CheckingSpeed.speedCheck(driversSpeedInt,roadSpeed,driverName,roadType );
+                System.out.println(driversSpeed);
+                System.out.println(roadSpeed);
+                System.out.println(driverName + roadType);
+            CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
+
+            DriverInfo= new Driver(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
+
             CheckingSpeed.setDriverInfo();
             JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
             try {
@@ -254,6 +311,17 @@ public class GUI {
         }
     }
     public static void main(String[] args){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         new GUI();
     }
 }
