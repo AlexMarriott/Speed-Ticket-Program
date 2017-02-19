@@ -206,7 +206,7 @@ public class GUI {
         btnSubmit.addActionListener(new DriverAddSubmitHandler());
         driverAddPanel.add(btnSubmit);
 
-        btnExit = new JButton("Exit");
+        btnExit = new JButton("Back");
         btnExit.setBounds(650, 525, 100, 20);
         btnExit.addActionListener(new DriverAddExitHandler());
         driverAddPanel.add(btnExit);
