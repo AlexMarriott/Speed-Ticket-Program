@@ -20,8 +20,9 @@ public class SpeedingTicketGUI {
     protected int driversSpeed;
     protected String roadType;
     protected String driverName;
+    protected int driverID;
 
-    private Driver DriverInfo;
+    private DriverAndVehicle DriverInfo;
     private IssueTicket CheckingSpeed;
     private TicketDataBase writingToFile;
 
@@ -291,11 +292,12 @@ public class SpeedingTicketGUI {
                 System.out.println(driversSpeed);
                 System.out.println(roadSpeed);
                 System.out.println(driverName + roadType);
-            CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
+            CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType,driverID);
 
-            DriverInfo= new Driver(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
+            DriverInfo= new DriverAndVehicle(driverID,txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText(),txtDrivingLicenceNum.getText());
 
-            CheckingSpeed.setDriverInfo();
+
+                CheckingSpeed.setDriverInfo();
             JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
             try {
                 writingToFile.saveDrivers();
