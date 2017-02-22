@@ -1,16 +1,14 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by alex on 12/02/2017.
  */
 public class TicketDataBase {
-    IssueTicket driverWriteInformation = new  IssueTicket();
+    IssueTicket driverWriteInfo = new  IssueTicket();
     public void saveDrivers() throws IOException {
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-        System.out.println(driverWriteInformation.getDriverInfo());
-        outfile.println(driverWriteInformation.getDriverInfo() + "\n[NEXT DRIVER] \n");
+        System.out.println(driverWriteInfo.getDriverInfo());
+        outfile.println(driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
         outfile.flush();
         outfile.close();
     }

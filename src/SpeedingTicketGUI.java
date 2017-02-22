@@ -13,7 +13,7 @@ public class SpeedingTicketGUI {
     private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum,txtFirstAddress,txtSecondAddress,txtPostCode,txtsearchDriver;
     private JButton btnAddDriver, btnSearchDriver, btnRemoveDriver, btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
     private JPanel driverAddPanel, splashPagePanel;
-    private Border lblDriverInformationBorder;
+    private Border driverInfoBorder;
     private JFrame driverAddFrame, splashPageFrame;
 
     protected int roadSpeed;
@@ -74,12 +74,12 @@ public class SpeedingTicketGUI {
     public void addDriverFields(){
         Font arial = new Font("Arial", Font.BOLD + Font.ITALIC, 10);
 
-        lblDriverInformationBorder = BorderFactory.createLoweredBevelBorder();
+        driverInfoBorder = BorderFactory.createLoweredBevelBorder();
         lblDriverInformation = new JLabel("Driver Information");
         lblDriverInformation.setBounds(10, 10, 120, 20);
         lblDriverInformation.setFont(arial);
         driverAddPanel.add(lblDriverInformation);
-        lblDriverInformation.setBorder(lblDriverInformationBorder);
+        lblDriverInformation.setBorder(driverInfoBorder);
 
         lblFirstName = new JLabel("First Name");
         lblFirstName.setBounds(20, 40, 100, 20);
