@@ -49,17 +49,17 @@
             }
 
             public void addSplashPageButtons() {
-                btnAddDriver = new JButton("Add Driver");
+                btnAddDriver = new JButton("Add DriverAndVehicle");
                 btnAddDriver.setBounds(10, 240, 100, 40);
                 btnAddDriver.addActionListener(new AddDriverHandler());
                 splashPagePanel.add(btnAddDriver);
 
-                btnSearchDriver = new JButton("Search For Driver");
+                btnSearchDriver = new JButton("Search For DriverAndVehicle");
                 btnSearchDriver.setBounds(120, 240, 140, 40);
                 btnSearchDriver.addActionListener(new AddDriverHandler());
                 splashPagePanel.add(btnSearchDriver);
 
-                btnRemoveDriver = new JButton("Remove Driver");
+                btnRemoveDriver = new JButton("Remove DriverAndVehicle");
                 btnRemoveDriver.setBounds(270, 240, 120, 40);
                 btnRemoveDriver.addActionListener(new AddDriverHandler());
                 splashPagePanel.add(btnRemoveDriver);
