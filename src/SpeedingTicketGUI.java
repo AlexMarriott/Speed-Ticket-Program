@@ -8,7 +8,7 @@ import javax.swing.border.Border;
 /**
  * Created by alex on 11/02/2017.
  */
-public class GUI {
+public class SpeedingTicketGUI {
     private JLabel lblSpeed, lblRoadType, lblFirstName,lblDriversLastName,lblDateOBirth,lblDrivingLicenceNum,lblFirstAddress,lblSecondAddress,lblPostCode, lblPicture, lblDriverInformation;
     private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum,txtFirstAddress,txtSecondAddress,txtPostCode,txtsearchDriver;
     private JButton btnAddDriver, btnSearchDriver, btnRemoveDriver, btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway, btnSubmit, btnExit;
@@ -25,7 +25,7 @@ public class GUI {
     private IssueTicket CheckingSpeed;
     private TicketDataBase writingToFile;
 
-    public GUI(){
+    public SpeedingTicketGUI(){
 
         createSplashPage();
         addSplashPageFields();
@@ -322,7 +322,7 @@ public class GUI {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        new GUI();
+        new SpeedingTicketGUI();
     }
 }
 

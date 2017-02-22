@@ -4,7 +4,7 @@
 public class SpeedingTicketMain {
     public static void main(String[] args) {
         IssueTicket speedCheck = new IssueTicket();
-        GUI runGUI = new GUI();
+        SpeedingTicketGUI runSpeedingTicketGUI = new SpeedingTicketGUI();
         /*Driver DriverWrite = new Driver();
         speedCheck.setCapturedSpeed();
         speedCheck.getCapturedSpeed();
@@ -15,7 +15,7 @@ public class SpeedingTicketMain {
         speedCheck.CheckSpeedSchoolZone();
         speedCheck.CheckSpeedSingleCarriageway();
         speedCheck.CheckSpeedDualCarriageway();*/
-       // runGUI.GUI();
+       // runSpeedingTicketGUI.SpeedingTicketGUI();
         //
     }
 }
