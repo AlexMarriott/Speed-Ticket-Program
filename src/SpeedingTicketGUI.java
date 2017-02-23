@@ -76,9 +76,14 @@ public class SpeedingTicketGUI {
     class SearchDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            txtsearchDriver = new JTextField(null);
-            txtsearchDriver.setBounds(120, 380, 150, 20);
-            splashPagePanel.add(txtsearchDriver);
+            new SearchDriver();
+        }
+    }
+
+    class RemoveDriverHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            new RemoveDriver();
         }
     }
     class ExitSplashHandler implements ActionListener {
