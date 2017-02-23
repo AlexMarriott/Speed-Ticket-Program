@@ -226,9 +226,11 @@ public class AddDriver {
 
             CheckingSpeed.setDriverInfo();
             //System.out.println(CheckingSpeed.getDriverInfo());
-            try {
+            try  {
+                writingToFile = new TicketDataBase();
                 writingToFile.saveDrivers();
-            } catch (IOException | NullPointerException e) {
+            }
+            catch (IOException | NullPointerException e) {
                 e.printStackTrace();
             }
             JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());

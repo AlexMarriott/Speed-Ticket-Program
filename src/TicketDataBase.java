@@ -4,18 +4,22 @@ import java.io.*;
  * Created by alex on 12/02/2017.
  */
 public class TicketDataBase {
-    TicketDataBase(){
 
-    }
     private  IssueTicket driverWriteInfo;
-    public void saveDrivers() throws IOException {
+
+    TicketDataBase()  throws IOException {
+    }
+
+    public void saveDrivers() throws IOException
+    {
+        driverWriteInfo = new IssueTicket();
         driverWriteInfo.setDriverInfo();
         System.out.println(driverWriteInfo.getDriverInfo());
-      /*  PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
+      PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         //System.out.println(driverWriteInfo.getDriverInfo());
         outfile.println(driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
         outfile.flush();
-        outfile.close();*/
+        outfile.close();
     }
 
 
