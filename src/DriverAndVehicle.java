@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Created by alex on 11/02/2017.
  */
-public class Driver {
+public class DriverAndVehicle {
     private final String dateOBirth;
     private String fullName;
     private String firstName;
@@ -14,9 +14,18 @@ public class Driver {
     private String fullAddressAndPostcode;
     private String jobTitle;
     private String drivingLicence;
-    private Scanner driverDetails = new Scanner(System.in);
     private double yearlyIncome;
-    Driver(String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String jobTitle, String drivingLicenceNum, double yearlyIncome){
+    private int driverID;
+
+    //private Scanner driverDetails = new Scanner(System.in);
+    //Vehicle
+    private String vehicleModel;
+    private String vehicleMake;
+    private String vehicleNumPlate;
+    private String vehicleYear;
+    private String vehicleID;
+
+    DriverAndVehicle(String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String jobTitle, String drivingLicenceNum, double yearlyIncome){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOBirth = dateOBirth;
@@ -27,7 +36,7 @@ public class Driver {
         this.secondAddress = secondAddress;
         this.postCode = postCode;
     }
-    Driver(String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum){
+    DriverAndVehicle(int driverID, String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOBirth = dateOBirth;
@@ -36,6 +45,7 @@ public class Driver {
         this.secondAddress = secondAddress;
         this.postCode = postCode;
     }
+
 
 }
 
