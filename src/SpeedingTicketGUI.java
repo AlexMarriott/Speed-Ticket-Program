@@ -178,27 +178,27 @@ public class SpeedingTicketGUI {
     public void addDriverButtons(){
         btnSchoolZone = new JButton("SchoolZone");
         btnSchoolZone.setBounds(120, 430, 120, 20);
-        btnSchoolZone.addActionListener(new DriverAddSchoolZoneHandler());
+        btnSchoolZone.addActionListener(new SchoolZoneHandler());
         driverAddPanel.add(btnSchoolZone);
 
         btnResidentialRoad = new JButton("Residential");
         btnResidentialRoad.setBounds(240, 430, 100, 20);
-        btnResidentialRoad.addActionListener(new DriverAddResidentialRoadHandler());
+        btnResidentialRoad.addActionListener(new ResidentialRoadHandler());
         driverAddPanel.add(btnResidentialRoad);
 
         btnMainRoad = new JButton("MainRoad");
         btnMainRoad.setBounds(340, 430, 100, 20);
-        btnMainRoad.addActionListener(new DriverAddMainRoadHandler());
+        btnMainRoad.addActionListener(new MainRoadHandler());
         driverAddPanel.add(btnMainRoad);
 
         btnSingleCarriageway = new JButton("SingleCarriageway");
         btnSingleCarriageway.setBounds(440, 430, 160, 20);
-        btnSingleCarriageway.addActionListener(new DriverAddSingleCarriagewayHandler());
+        btnSingleCarriageway.addActionListener(new SingleCarriagewayHandler());
         driverAddPanel.add(btnSingleCarriageway);
 
         btnDualCarriageway = new JButton("DualCarriageway");
         btnDualCarriageway.setBounds(600, 430, 160, 20);
-        btnDualCarriageway.addActionListener(new DriverAddDualCarriagewayHandler());
+        btnDualCarriageway.addActionListener(new DualCarriagewayHandler());
         driverAddPanel.add(btnDualCarriageway);
 
         btnSubmit = new JButton("Submit");
@@ -229,14 +229,14 @@ public class SpeedingTicketGUI {
     class ExitSplashHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            int n = JOptionPane.showConfirmDialog(splashPageFrame, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
-            if (n == 0) {
+            int exit = JOptionPane.showConfirmDialog(splashPageFrame, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
+            if (exit == 0) {
                 System.exit(0);
             }
         }
     }
 
-    class DriverAddSchoolZoneHandler implements ActionListener {
+    class SchoolZoneHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
             roadSpeed = 20;
@@ -244,21 +244,21 @@ public class SpeedingTicketGUI {
         }
     }
 
-    class DriverAddResidentialRoadHandler implements ActionListener {
+    class ResidentialRoadHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 20;
             roadType = "Residential Road";
         }
     }
-    class DriverAddMainRoadHandler implements ActionListener {
+    class MainRoadHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             roadSpeed = 30;
             roadType = "Main Road";
         }
     }
-    class DriverAddSingleCarriagewayHandler implements ActionListener {
+    class SingleCarriagewayHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -266,7 +266,7 @@ public class SpeedingTicketGUI {
             roadType = "Single Carriageway";
         }
     }
-    class DriverAddDualCarriagewayHandler implements ActionListener {
+    class DualCarriagewayHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent event) {
