@@ -294,7 +294,7 @@ public class SpeedingTicketGUI {
                 System.out.println(driverName + roadType);
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType,driverId);
 
-            DriverInfo= new DriverAndVehicle(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
+            DriverInfo= new DriverAndVehicle(driverId,txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
 
             CheckingSpeed.setDriverInfo();
             JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());

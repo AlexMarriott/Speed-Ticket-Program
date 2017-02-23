@@ -37,6 +37,7 @@ public class DriverAndVehicle {
         this.postCode = postCode;
     }
     DriverAndVehicle(int driverID, String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum){
+        this.driverID = driverID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOBirth = dateOBirth;
