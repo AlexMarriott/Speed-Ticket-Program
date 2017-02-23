@@ -66,7 +66,7 @@
 
                 btnExit = new JButton("Exit");
                 btnExit.setBounds(140, 290, 100, 20);
-                btnExit.addActionListener(new ExitHandler());
+                btnExit.addActionListener(new ExitSplashHandler());
                 splashPagePanel.add(btnExit);
             }
 
@@ -78,7 +78,7 @@
                 }
             }
 
-            class SearchAddDriverHandler implements ActionListener {
+            class SearchDriverHandler implements ActionListener {
                 @Override
                 public void actionPerformed(ActionEvent event) {
                     txtsearchDriver = new JTextField(null);
@@ -86,7 +86,7 @@
                     splashPagePanel.add(txtsearchDriver);
                 }
             }
-            class ExitHandler implements ActionListener {
+            class ExitSplashHandler implements ActionListener {
                 @Override
                 public void actionPerformed(ActionEvent event) {
                     int n = JOptionPane.showConfirmDialog(splashPageFrame, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
