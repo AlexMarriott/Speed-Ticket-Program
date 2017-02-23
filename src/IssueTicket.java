@@ -7,11 +7,11 @@ public class IssueTicket {
     public IssueTicket() {
     }
     private String message;
-    private String driverFileWite;
+    private String driverFileWrite;
     private static String driverInfo;
 
     public void setDriverInfo() {
-        this.driverInfo = driverFileWite;
+        this.driverInfo = driverFileWrite;
     }
     public String getDriverInfo() {
         return IssueTicket.driverInfo ;
@@ -30,7 +30,7 @@ public class IssueTicket {
         }else{
             message = "DriverAndVehicle is under the Speed limit. \nNo action will be taken";
         }
-        driverFileWite = "Name: "+ driverName + "\nSpeed logged: " + driversSpeed + "\nType of Road: " + roadType + "\nAction Required: " + message;
+        driverFileWrite = "ID: " + driverID +"Name: "+ driverName + "\nSpeed logged: " + driversSpeed + "\nType of Road: " + roadType + "\nAction Required: " + message;
     }
 }
 

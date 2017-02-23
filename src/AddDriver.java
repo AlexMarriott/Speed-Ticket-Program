@@ -20,10 +20,11 @@ public class AddDriver {
     protected int driversSpeed;
     protected String roadType;
     protected String driverName;
-    protected  int driverId;
+    protected  int driverId = 1;
 
     private TicketDataBase writingToFile;
     private DriverAndVehicle DriverInfo;
+    private IssueTicket blah;
 
     public AddDriver(){
 
@@ -219,20 +220,18 @@ public class AddDriver {
             else if (roadSpeed == 0){
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else
-                System.out.println(driversSpeed);
-            System.out.println(roadSpeed);
-            System.out.println(driverName + roadType);
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType,driverId);
 
             DriverInfo= new DriverAndVehicle(driverId,txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
 
             CheckingSpeed.setDriverInfo();
-            JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
+            //System.out.println(CheckingSpeed.getDriverInfo());
             try {
                 writingToFile.saveDrivers();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
             }
+            JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
         }
     }
     class DriverAddExitHandler implements ActionListener {
