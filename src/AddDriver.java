@@ -23,7 +23,7 @@ public class AddDriver {
     protected  int driverId = 1;
 
     private TicketDataBase writingToFile;
-    private DriverAndVehicle DriverInfo;
+    private Driver DriverInfo;
     private IssueTicket blah;
 
     public AddDriver(){
@@ -222,7 +222,7 @@ public class AddDriver {
             }else
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType,driverId);
 
-            DriverInfo= new DriverAndVehicle(driverId,txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
+            DriverInfo= new Driver(driverId,txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
 
             CheckingSpeed.setDriverInfo();
             //System.out.println(CheckingSpeed.getDriverInfo());
