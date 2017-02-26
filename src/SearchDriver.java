@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,6 +12,7 @@ public class SearchDriver {
         private JButton btnSearch,btnRemove, btnExit;
         private JPanel driverViewPanel;
         private JFrame driverViewFrame;
+
 
         protected  int driverId = 1;
 
@@ -83,6 +85,47 @@ public class SearchDriver {
             btnExit.addActionListener(new DriverSearchExitHandler());
             driverViewPanel.add(btnExit);
         }
+
+    public void driverInformationTable(){
+        String[] columnNames = {"Driver ID",
+                "First Name",
+                "Last Name",
+                "Date Of Birth",
+                "Driving Licence",
+                "First Address",
+                "Second Address",
+                "Post Code",};
+        Object[][] data = {
+                {"Kathy", "Smith",
+                        "May 1992",
+                        "fdsfdsfds",
+                        "fdsfdsf",
+                        "fdsdsfds",
+                        "fdsfds"},
+                {"Kathy", "Smith",
+                        "May 1992",
+                        "fdsfdsfds",
+                        "fdsfdsf",
+                        "fdsdsfds",
+                        "fdsfds"},
+                {"Kathy", "Smith",
+                        "May 1992",
+                        "fdsfdsfds",
+                        "fdsfdsf",
+                        "fdsdsfds",
+                        "fdsfds"},
+                {"Kathy", "Smith",
+                        "May 1992",
+                        "fdsfdsfds",
+                        "fdsfdsf",
+                        "fdsdsfds",
+                        "fdsfds"},
+        };
+        final JTable table = new JTable(data, columnNames);
+        table.setPreferredScrollableViewportSize(new Dimension(50, 70));
+        table.setFillsViewportHeight(true);
+    }
+
     class DriverSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
