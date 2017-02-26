@@ -1,5 +1,4 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -7,18 +6,17 @@ import javax.swing.*;
  */
 public class SpeedingTicketGUI {
     private JLabel  lblPicture;
-    private JTextField txtsearchDriver;
-    private JButton btnAddDriver, btnSearchDriver, btnRemoveDriver, btnExit;
+    private JButton btnAddDriver, btnViewDriver, btnIssueTicket, btnExit;
     private JPanel splashPagePanel;
     private JFrame splashPageFrame;
 
-    private IssueTicket CheckingSpeed;
+    private Ticket CheckingSpeed;
     private AddDriver AddDriverWindow;
 
     public SpeedingTicketGUI(){
 
         createSplashPage();
-        addSplashPageFields();
+        addSplashPageImage();
         addSplashPageButtons();
 
         splashPageFrame.add(splashPagePanel);
@@ -28,18 +26,21 @@ public class SpeedingTicketGUI {
         splashPageFrame = new JFrame();
         splashPageFrame.setTitle("DVLA Ticket Program");
         splashPageFrame.setSize(420, 350);
-        splashPageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        splashPageFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         splashPageFrame.setVisible(true);
         splashPageFrame.setLocationRelativeTo(null);
+        splashPageFrame.addWindowListener(exitListener);
+        splashPageFrame.setResizable(false);
+
 
         splashPagePanel = new JPanel();
         splashPagePanel.setLayout(null);
     }
 
-    public void addSplashPageFields() {
+    public void addSplashPageImage() {
 
-        ImageIcon image = new ImageIcon("DVLA.jpg");
-        lblPicture = new JLabel(image);
+        ImageIcon largeDVLAImage = new ImageIcon("DVLA.jpg");
+        lblPicture = new JLabel(largeDVLAImage);
         lblPicture.setBounds(0, 0, 400, 200);
         splashPagePanel.add(lblPicture);
     }
@@ -50,15 +51,15 @@ public class SpeedingTicketGUI {
         btnAddDriver.addActionListener(new AddDriverHandler());
         splashPagePanel.add(btnAddDriver);
 
-        btnSearchDriver = new JButton("Search For Driver");
-        btnSearchDriver.setBounds(120, 240, 140, 40);
-        btnSearchDriver.addActionListener(new AddDriverHandler());
-        splashPagePanel.add(btnSearchDriver);
+        btnViewDriver = new JButton("View Driver");
+        btnViewDriver.setBounds(120, 240, 140, 40);
+        btnViewDriver.addActionListener(new AddDriverHandler());
+        splashPagePanel.add(btnViewDriver);
 
-        btnRemoveDriver = new JButton("Remove Driver");
-        btnRemoveDriver.setBounds(270, 240, 120, 40);
-        btnRemoveDriver.addActionListener(new AddDriverHandler());
-        splashPagePanel.add(btnRemoveDriver);
+        btnIssueTicket = new JButton("Issue Ticket");
+        btnIssueTicket.setBounds(270, 240, 120, 40);
+        btnIssueTicket.addActionListener(new AddDriverHandler());
+        splashPagePanel.add(btnIssueTicket);
 
         btnExit = new JButton("Exit");
         btnExit.setBounds(140, 290, 100, 20);
@@ -73,19 +74,35 @@ public class SpeedingTicketGUI {
         }
     }
 
-    class SearchDriverHandler implements ActionListener {
+    class ViewDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            new SearchDriver();
+            new ViewDriverHandler();
         }
     }
 
-    class RemoveDriverHandler implements ActionListener {
+    class IssueTicketHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             new RemoveDriver();
         }
     }
+
+    //This needs to be reviewed by someone in P201.
+    private WindowListener exitListener = new WindowAdapter() {
+
+        @Override
+        public void windowClosing(WindowEvent event) {
+            int confirm = JOptionPane.showOptionDialog(
+                    null, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (confirm == 0) {
+                System.exit(0);
+            }
+        }
+    };
+    //
+
     class ExitSplashHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -94,6 +111,7 @@ public class SpeedingTicketGUI {
                 System.exit(0);
             }
         }
+
     }
     public static void main(String[] args){
         try {

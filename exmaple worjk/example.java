@@ -16,12 +16,12 @@
             private JPanel splashPagePanel;
             private JFrame splashPageFrame;
 
-            IssueTicket test = new IssueTicket();
+            Ticket test = new Ticket();
             TicketDataBase writingToFile = new TicketDataBase();
 
             public example() {
                 createSplashPage();
-                addSplashPageFields();
+                addSplashPageImage();
                 addSplashPageButtons();
 
                 splashPageFrame.add(splashPagePanel);
@@ -40,7 +40,7 @@
                 splashPagePanel.setLayout(null);
             }
 
-            public void addSplashPageFields() {
+            public void addSplashPageImage() {
 
                 ImageIcon image = new ImageIcon("DVLA.jpg");
                 lblPicture = new JLabel(image);

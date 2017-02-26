@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
  * Created by Alex on 23/02/2017.
  */
 public class SearchDriver {
-        private JLabel lblDriverID, lblFirstName, lblLastName;
-        private JTextField txtDriverID, txtFirstName, txtLastName;
-        private JButton btnSearch, btnExit;
+        private JLabel lblDriverID, lblFirstName, lblDrivingLicenceNum;
+        private JTextField txtDriverID, txtFirstName, txtDrivingLicenceNum;
+        private JButton btnSearch,btnRemove, btnExit;
         private JPanel driverViewPanel;
         private JFrame driverViewFrame;
 
@@ -18,66 +18,68 @@ public class SearchDriver {
         private Driver DriverInfo;
         public SearchDriver(){
 
-            createDriverForm();
-            addDriverFields();
-            addDriverButtons();
+            createDriverViewForm();
+            addDriverViewFields();
+            addDriverViewButtons();
 
             driverViewFrame.add(driverViewPanel);
             driverViewFrame.setVisible(true);
         }
 
-        public void createDriverForm(){
+        public void createDriverViewForm(){
             driverViewFrame = new JFrame();
             driverViewFrame.setTitle("View Driver");
             driverViewFrame.setSize(500,400);
             driverViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             driverViewFrame.setVisible(false);
             driverViewFrame.setLocationRelativeTo(null);
+            driverViewFrame.setResizable(false);
+
 
             driverViewPanel = new JPanel();
             driverViewPanel.setLayout(null);
         }
 
-        public void addDriverFields(){
+        public void addDriverViewFields(){
 
             lblDriverID = new JLabel("Driver ID");
-            lblDriverID.setBounds(20, 250, 100, 20);
+            lblDriverID.setBounds(10, 210, 100, 20);
             driverViewPanel.add(lblDriverID);
 
             txtDriverID = new JTextField(null);
-            txtDriverID.setBounds(140, 250, 100, 20);
+            txtDriverID.setBounds(160, 210, 100, 20);
             driverViewPanel.add(txtDriverID);
 
             lblFirstName = new JLabel("First Name");
-            lblFirstName.setBounds(20, 270, 100, 20);
+            lblFirstName.setBounds(10, 230, 100, 20);
             driverViewPanel.add(lblFirstName);
 
             txtFirstName = new JTextField(null);
-            txtFirstName.setBounds(140, 270, 100, 20);
+            txtFirstName.setBounds(160, 230, 100, 20);
             driverViewPanel.add(txtFirstName);
 
-            lblLastName = new JLabel("Last Name");
-            lblLastName.setBounds(20, 290, 100, 20);
-            driverViewPanel.add(lblLastName);
+            lblDrivingLicenceNum = new JLabel("Driving Licence Number");
+            lblDrivingLicenceNum.setBounds(10, 250, 140, 20);
+            driverViewPanel.add(lblDrivingLicenceNum);
 
-            txtLastName = new JTextField(null);
-            txtLastName.setBounds(140, 290, 100, 20);
-            driverViewPanel.add(txtLastName);
+            txtDrivingLicenceNum = new JTextField(null);
+            txtDrivingLicenceNum.setBounds(160, 250, 100, 20);
+            driverViewPanel.add(txtDrivingLicenceNum);
         }
 
-        public void addDriverButtons(){
+        public void addDriverViewButtons(){
             btnSearch = new JButton("Search ");
-            btnSearch.setBounds(10, 325, 100, 20);
+            btnSearch.setBounds(10, 295, 100, 30);
             btnSearch.addActionListener(new DriverSearchHandler());
             driverViewPanel.add(btnSearch);
 
-            btnExit = new JButton("Remove");
-            btnExit.setBounds(370, 325, 100, 20);
-            btnExit.addActionListener(new DriverRemoveHandler());
-            driverViewPanel.add(btnExit);
+            btnRemove = new JButton("Remove");
+            btnRemove.setBounds(10, 335, 100, 30);
+            btnRemove.addActionListener(new DriverRemoveHandler());
+            driverViewPanel.add(btnRemove);
 
             btnExit = new JButton("Back");
-            btnExit.setBounds(140, 350, 100, 30);
+            btnExit.setBounds(180, 340, 100, 20);
             btnExit.addActionListener(new DriverSearchExitHandler());
             driverViewPanel.add(btnExit);
         }

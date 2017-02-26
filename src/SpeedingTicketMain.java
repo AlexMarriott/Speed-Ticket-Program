@@ -3,7 +3,7 @@
  */
 public class SpeedingTicketMain {
     public static void main(String[] args) {
-        IssueTicket speedCheck = new IssueTicket();
+        Ticket speedCheck = new Ticket();
         SpeedingTicketGUI runSpeedingTicketGUI = new SpeedingTicketGUI();
         /*Driver DriverWrite = new Driver();
         speedCheck.setCapturedSpeed();

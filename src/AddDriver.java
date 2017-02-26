@@ -9,9 +9,9 @@ import java.io.IOException;
  * Created by Alex on 23/02/2017.
  */
 public class AddDriver {
-    private JLabel lblSpeed, lblRoadType, lblFirstName,lblDriversLastName,lblDateOBirth,lblDrivingLicenceNum,lblFirstAddress,lblSecondAddress,lblPostCode,lblDriverInformation,lblPicture;
-    private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum,txtFirstAddress,txtSecondAddress,txtPostCode;
-    private JButton  btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway,btnSubmit, btnExit;
+    private JLabel lblSpeed, lblRoadType, lblFirstName, lblLastName,lblDateOBirth,lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine,lblPostCode,lblDriverInformation,lblPicture;
+    private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine,txtPostCode;
+    private JButton  btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway,btnSubmit, btnBack;
     private JPanel driverAddPanel;
     private Border driverInfoBorder;
     private JFrame driverAddFrame;
@@ -24,7 +24,7 @@ public class AddDriver {
 
     private TicketDataBase writingToFile;
     private Driver DriverInfo;
-    private IssueTicket blah;
+    private Ticket blah;
 
     public AddDriver(){
 
@@ -66,9 +66,9 @@ public class AddDriver {
         txtFirstName.setBounds(140, 40, 100, 20);
         driverAddPanel.add(txtFirstName);
 
-        lblDriversLastName = new JLabel("Last Name");
-        lblDriversLastName.setBounds(20, 70, 100, 20);
-        driverAddPanel.add(lblDriversLastName);
+        lblLastName = new JLabel("Last Name");
+        lblLastName.setBounds(20, 70, 100, 20);
+        driverAddPanel.add(lblLastName);
 
         txtLastName = new JTextField(null);
         txtLastName.setBounds(140, 70, 100, 20);
@@ -90,21 +90,21 @@ public class AddDriver {
         txtDrivingLicenceNum.setBounds(140, 130, 100, 20);
         driverAddPanel.add(txtDrivingLicenceNum);
 
-        lblFirstAddress = new JLabel("First Line Of Address");
-        lblFirstAddress.setBounds(20, 160, 100, 20);
-        driverAddPanel.add(lblFirstAddress);
+        lblFirstAddressLine = new JLabel("First Line Of Address");
+        lblFirstAddressLine.setBounds(20, 160, 100, 20);
+        driverAddPanel.add(lblFirstAddressLine);
 
-        txtFirstAddress = new JTextField(null);
-        txtFirstAddress.setBounds(140, 160, 100, 20);
-        driverAddPanel.add(txtFirstAddress);
+        txtFirstAddressLine = new JTextField(null);
+        txtFirstAddressLine.setBounds(140, 160, 100, 20);
+        driverAddPanel.add(txtFirstAddressLine);
 
-        lblSecondAddress = new JLabel("Second Line Of Address");
-        lblSecondAddress.setBounds(20, 190, 120, 20);
-        driverAddPanel.add(lblSecondAddress);
+        lblSecondAddressLine = new JLabel("Second Line Of Address");
+        lblSecondAddressLine.setBounds(20, 190, 120, 20);
+        driverAddPanel.add(lblSecondAddressLine);
 
-        txtSecondAddress = new JTextField(null);
-        txtSecondAddress.setBounds(140, 190, 100, 20);
-        driverAddPanel.add(txtSecondAddress);
+        txtSecondAddressLine = new JTextField(null);
+        txtSecondAddressLine.setBounds(140, 190, 100, 20);
+        driverAddPanel.add(txtSecondAddressLine);
 
         lblPostCode = new JLabel("Post Code");
         lblPostCode.setBounds(20, 220, 100, 20);
@@ -126,8 +126,8 @@ public class AddDriver {
         txtSpeed.setBounds(120, 405, 150, 20);
         driverAddPanel.add(txtSpeed);
 
-        ImageIcon image = new ImageIcon("dvlasmall.jpg");
-        lblPicture = new JLabel(image);
+        ImageIcon smallDVLAImage = new ImageIcon("dvla.jpg");
+        lblPicture = new JLabel(smallDVLAImage);
         lblPicture.setBounds(580, 5, 200, 100);
         driverAddPanel.add(lblPicture);
     }
@@ -163,10 +163,10 @@ public class AddDriver {
         btnSubmit.addActionListener(new DriverAddSubmitHandler());
         driverAddPanel.add(btnSubmit);
 
-        btnExit = new JButton("Back");
-        btnExit.setBounds(650, 525, 100, 20);
-        btnExit.addActionListener(new DriverAddExitHandler());
-        driverAddPanel.add(btnExit);
+        btnBack = new JButton("Back");
+        btnBack.setBounds(650, 525, 100, 20);
+        btnBack.addActionListener(new DriverAddExitHandler());
+        driverAddPanel.add(btnBack);
     }
     class SchoolZoneHandler implements ActionListener {
         @Override
@@ -208,7 +208,7 @@ public class AddDriver {
         }
     }
     class DriverAddSubmitHandler implements ActionListener {
-        IssueTicket CheckingSpeed = new IssueTicket();
+        Ticket CheckingSpeed = new Ticket();
         public void actionPerformed(ActionEvent event) {
             driverName = txtFirstName.getText();
             driversSpeed = Integer.parseInt(txtSpeed.getText());
@@ -222,7 +222,7 @@ public class AddDriver {
             }else
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType,driverId);
 
-            DriverInfo= new Driver(driverId,txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(),txtFirstAddress.getText(),txtSecondAddress.getText(),txtPostCode.getText());
+            DriverInfo= new Driver(driverId,txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(),txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText());
 
             CheckingSpeed.setDriverInfo();
             //System.out.println(CheckingSpeed.getDriverInfo());

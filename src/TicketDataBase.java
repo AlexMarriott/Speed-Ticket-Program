@@ -5,14 +5,14 @@ import java.io.*;
  */
 public class TicketDataBase {
 
-    private  IssueTicket driverWriteInfo;
+    private Ticket driverWriteInfo;
 
     TicketDataBase()  throws IOException {
     }
 
     public void saveDrivers() throws IOException
     {
-        driverWriteInfo = new IssueTicket();
+        driverWriteInfo = new Ticket();
         driverWriteInfo.setDriverInfo();
         System.out.println(driverWriteInfo.getDriverInfo());
       PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));

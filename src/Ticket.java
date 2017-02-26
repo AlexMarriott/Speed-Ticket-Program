@@ -1,10 +1,8 @@
-import java.util.Scanner;
-
 /**
  * Created by Alex on 08/02/2017.
  */
-public class IssueTicket {
-    public IssueTicket() {
+public class Ticket {
+    public Ticket() {
     }
     private String message;
     private String driverFileWrite;
@@ -14,7 +12,7 @@ public class IssueTicket {
         this.driverInfo = driverFileWrite;
     }
     public String getDriverInfo() {
-        return IssueTicket.driverInfo ;
+        return Ticket.driverInfo ;
     }
 
 
