@@ -1,3 +1,5 @@
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -11,32 +13,46 @@ public class Driver {
     private String secondAddress;
     private String postCode;
     private String drivingLicence;
-    private static int nextID =0;
-    private int driverID;
+    private Scanner driverfile;
+    private String strDriverID;
+    public static int intDriverID;
+    ArrayList<String> driverDetails;
+    String[] splitUserID;
 
-    Driver(String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOBirth = dateOBirth;
-        this.drivingLicence = drivingLicenceNum;
-        this.firstAddress = firstAddress;
-        this.secondAddress = secondAddress;
-        this.postCode = postCode;
-        driverID = nextID;
-        nextID++;
+    Driver(String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum) {
+        try {
+            getDriverID();
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.dateOBirth = dateOBirth;
+            this.drivingLicence = drivingLicenceNum;
+            this.firstAddress = firstAddress;
+            this.secondAddress = secondAddress;
+            this.postCode = postCode;
+            intDriverID++;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
+    public int getDriverID() throws FileNotFoundException {
+        driverDetails = new ArrayList<>();
+        intDriverID = 0;
+        strDriverID = "";
 
+        File file = new File("Drivers.txt");
+        Scanner readIn = new Scanner(file);
 
-    public void setNextDriverID(){
-        this.driverID = Driver.nextID;
+        while (readIn.hasNext()) {
+            driverDetails.add(readIn.nextLine());
+        }
+
+        strDriverID = driverDetails.get(driverDetails.size() - 7);
+        splitUserID = strDriverID.split(" ");
+        intDriverID = Integer.parseInt(splitUserID[2]);
+        return intDriverID;
     }
-
-    public static int getNextDriverID(){
-        return driverID;
-    }
-
-
 }
 
 

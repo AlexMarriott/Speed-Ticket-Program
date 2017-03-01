@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import java.io.IOException;
 import javax.swing.*;
 
 /**
@@ -12,6 +13,7 @@ public class SpeedingTicketGUI {
 
     private Ticket CheckingSpeed;
     private AddDriver AddDriverWindow;
+    private static Driver test;
 
     public SpeedingTicketGUI(){
 
@@ -113,7 +115,7 @@ public class SpeedingTicketGUI {
         }
 
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
