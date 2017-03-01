@@ -12,11 +12,11 @@ public class Ticket {
         this.driverInfo = driverFileWrite;
     }
     public String getDriverInfo() {
-        return Ticket.driverInfo ;
+        return driverInfo ;
     }
 
 
-    public void speedCheck(int driversSpeed, int roadSpeed, String driverName, String roadType, int driverID) {
+    public void speedCheck(int driversSpeed, int roadSpeed, String driverName, String roadType) {
         int ticketThershold = roadSpeed + (roadSpeed * 10 / 100 + 2);
         int countDateThershold = ticketThershold + (ticketThershold  *46 / 100);
         if (driversSpeed > roadSpeed && driversSpeed < ticketThershold){
@@ -28,7 +28,7 @@ public class Ticket {
         }else{
             message = "Driver is under the Speed limit. \nNo action will be taken";
         }
-        driverFileWrite = "ID: " + driverID +"Name: "+ driverName + "\nSpeed logged: " + driversSpeed + "\nType of Road: " + roadType + "\nAction Required: " + message;
+        driverFileWrite = "Name: "+ driverName + "\nSpeed logged: " + driversSpeed + "\nType of Road: " + roadType + "\nAction Required: " + message;
     }
 }
 

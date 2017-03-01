@@ -11,10 +11,10 @@ public class Driver {
     private String secondAddress;
     private String postCode;
     private String drivingLicence;
+    private static int nextID =0;
     private int driverID;
 
-    Driver(int driverID, String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum){
-        this.driverID = driverID;
+    Driver(String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOBirth = dateOBirth;
@@ -22,6 +22,18 @@ public class Driver {
         this.firstAddress = firstAddress;
         this.secondAddress = secondAddress;
         this.postCode = postCode;
+        driverID = nextID;
+        nextID++;
+    }
+
+
+
+    public void setNextDriverID(){
+        this.driverID = Driver.nextID;
+    }
+
+    public static int getNextDriverID(){
+        return driverID;
     }
 
 

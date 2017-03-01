@@ -6,6 +6,7 @@ import java.io.*;
 public class TicketDataBase {
 
     private Ticket driverWriteInfo;
+    private int driverInfo;
 
     TicketDataBase()  throws IOException {
     }
@@ -13,11 +14,9 @@ public class TicketDataBase {
     public void saveDrivers() throws IOException
     {
         driverWriteInfo = new Ticket();
-        driverWriteInfo.setDriverInfo();
-        System.out.println(driverWriteInfo.getDriverInfo());
-      PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-        //System.out.println(driverWriteInfo.getDriverInfo());
-        outfile.println(driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
+        driverInfo = Driver.getNextDriverID();
+        PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
+        outfile.println("Driver ID: " + driverInfo  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
         outfile.flush();
         outfile.close();
     }
