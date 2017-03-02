@@ -15,10 +15,18 @@ public class TicketDataBase {
     public void saveDrivers() throws IOException
     {
         driverID = Driver.intDriverID;
-        PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-        outfile.println("Driver ID: " + driverID + "\n"  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
-        outfile.flush();
-        outfile.close();
+        PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
+        PrintWriter driverDB = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
+
+
+        driverDB.println(driverID + "\n"  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
+        driverDB.flush();
+        driverDB.close();
+
+
+        driverFile.println("Driver ID: " + driverID + "\n"  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
+        driverFile.flush();
+        driverFile.close();
     }
 
 

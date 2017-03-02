@@ -46,12 +46,16 @@ public class Driver {
 
         while (readIn.hasNext()) {
             driverDetails.add(readIn.nextLine());
-        }
 
-        strDriverID = driverDetails.get(driverDetails.size() - 7);
-        splitUserID = strDriverID.split(" ");
-        intDriverID = Integer.parseInt(splitUserID[2]);
+        }
+        if(readIn.hasNextLine()){
+
+            strDriverID = driverDetails.get(driverDetails.size() - 7);
+            splitUserID = strDriverID.split(" ");
+            intDriverID = Integer.parseInt(splitUserID[2]);
+    }
         return intDriverID;
+
     }
 }
 
