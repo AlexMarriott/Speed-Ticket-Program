@@ -208,32 +208,53 @@ public class AddDriver {
     }
     class DriverAddSubmitHandler implements ActionListener {
         Ticket CheckingSpeed = new Ticket();
+        Boolean isValid = true;
+
         public void actionPerformed(ActionEvent event) {
             driverName = txtFirstName.getText();
             driversSpeed = Integer.parseInt(txtSpeed.getText());
-            if ( txtFirstName.getText().isEmpty()){
+            if(txtFirstName.getText().isEmpty()){
+                isValid = false;
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }else if (txtSpeed.getText().isEmpty()){
-                JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            else if (roadSpeed == 0){
-                JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }else
-
-            DriverInfo= new Driver(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText());
-
-            CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
-
-            CheckingSpeed.setDriverInfo();
-            //System.out.println(CheckingSpeed.getDriverInfo());
-            try  {
-                writingToFile = new TicketDataBase();
-                writingToFile.saveDrivers();
+            else {
+                isValid = true;
             }
-            catch (IOException | NullPointerException e) {
-                e.printStackTrace();
+            //todo add validation for last name field, data of birth (regex check)
+            // driver license number (add regex), add validation for address fields too and finally post code field
+           if(txtSpeed.getText().isEmpty()) {
+               isValid = false;
+               JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
+           }
+           else {
+             isValid = true;
+           }
+
+           if (roadSpeed == 0){
+               isValid = false;
+                JOptionPane.showMessageDialog(driverAddFrame, "Please select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
+            else {
+               isValid = true;
+            }
+
+            while(isValid)
+            {
+                DriverInfo = new Driver(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText());
+
+                CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
+
+                CheckingSpeed.setDriverInfo();
+                //System.out.println(CheckingSpeed.getDriverInfo());
+                try  {
+                    writingToFile = new TicketDataBase();
+                    writingToFile.saveDrivers();
+                }
+                catch (IOException | NullPointerException e) {
+                    e.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
+            }
         }
     }
     class DriverAddExitHandler implements ActionListener {
