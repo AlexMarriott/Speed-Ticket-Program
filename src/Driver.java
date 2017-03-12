@@ -40,13 +40,13 @@ public class Driver {
         driverDetails = new ArrayList<>();
         intDriverID = 0;
         strDriverID = "";
+        //Can just write a file which will have numbers within the file which it reads from.
 
         File file = new File("Drivers.txt");
         Scanner readIn = new Scanner(file);
 
         while (readIn.hasNext()) {
             driverDetails.add(readIn.nextLine());
-
         }
         if(readIn.hasNextLine()){
 
