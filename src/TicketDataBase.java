@@ -16,14 +16,6 @@ public class TicketDataBase {
     {
         driverID = Driver.intDriverID;
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-        PrintWriter driverDB = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-
-
-        driverDB.println(driverID + "\n"  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
-        driverDB.flush();
-        driverDB.close();
-
-
         driverFile.println("Driver ID: " + driverID + "\n"  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
         driverFile.flush();
         driverFile.close();

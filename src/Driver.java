@@ -14,7 +14,6 @@ public class Driver {
     private String postCode;
     private String drivingLicence;
     private Scanner driverfile;
-    private String strDriverID;
     public static int intDriverID;
     ArrayList<String> driverDetails;
     private static int incermentDriverID;
@@ -39,31 +38,24 @@ public class Driver {
     public int getDriverID() throws FileNotFoundException {
         driverDetails = new ArrayList<>();
         intDriverID = 0;
-        strDriverID = "";
+        boolean line;
 
         File file = new File("DriversID.txt");
         Scanner readIn = new Scanner(file);
         System.out.println("incermentDriverID" + incermentDriverID);
-        while (readIn.hasNext()) {
-            driverDetails.add(readIn.nextLine());
-            }
-        try {
-            strDriverID = driverDetails.get(driverDetails.lastIndexOf(driverDetails));
-            intDriverID = Integer.parseInt(strDriverID);
-        }
-        catch (java.lang.ArrayIndexOutOfBoundsException driveIDExecption){
-            System.out.println("NO ID Number Found.... Starting at 1");
-            intDriverID = 1;
+        while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
+            intDriverID++;
+            System.out.println("out");
         }
         return intDriverID;
 
     }
     public void setDriverID() throws IOException {
-        System.out.println("set driver ID" + incermentDriverID);
+        incermentDriverID = intDriverID;
         incermentDriverID++;
         System.out.println("after adding one" + incermentDriverID);
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
-        outfile.println(incermentDriverID );
+        outfile.println("ID " + incermentDriverID );
         outfile.flush();
         outfile.close();
     }
