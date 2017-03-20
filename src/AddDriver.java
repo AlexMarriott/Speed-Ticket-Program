@@ -228,6 +228,7 @@ public class AddDriver {
             //System.out.println(CheckingSpeed.getDriverInfo());
             try  {
                 writingToFile = new TicketDataBase();
+
                 writingToFile.saveDrivers();
             }
             catch (IOException | NullPointerException e) {
