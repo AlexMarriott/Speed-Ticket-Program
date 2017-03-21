@@ -9,9 +9,8 @@ public class TicketDataBase {
 
     private Ticket driverWriteInfo;
     private Driver getDriverInfo;
-    private int driverID;
     private Scanner driverfile;
-    public static int intDriverID;
+    private  int intDriverID;
     ArrayList<String> driverDetails;
     private static int incermentDriverID;
 
@@ -21,11 +20,10 @@ public class TicketDataBase {
     }
 
     public void saveDrivers() throws IOException {
-        driverID = intDriverID;
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
-        driverFile.println("Driver ID: " + driverID + "\n" + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
+        driverFile.println("Driver ID: " + intDriverID + "\n" + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
         driverFile.flush();
         driverFile.close();
     }
@@ -35,20 +33,26 @@ public class TicketDataBase {
         boolean line;
         File file = new File("DriversID.txt");
         Scanner readIn = new Scanner(file);
-        System.out.println("incermentDriverID" + incermentDriverID);
+        System.out.println("driverId"+ intDriverID);
+        if (intDriverID < 0){
+            System.out.println("goona add one");
+            intDriverID++;
+            System.out.println(" add one" + intDriverID);
+
+        }
             while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
                 intDriverID++;
-                System.out.println("out");
+                System.out.println(intDriverID);
             }
         return intDriverID;
 
     }
     public void setDriverID() throws IOException {
-        incermentDriverID = intDriverID;
+        //incermentDriverID = intDriverID;
         //incermentDriverID++;
-        System.out.println("after adding one" + incermentDriverID);
+        System.out.println("after adding one" + intDriverID);
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
-        outfile.println("ID " + incermentDriverID );
+        outfile.println("ID " + intDriverID );
         outfile.flush();
         outfile.close();
     }
