@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by alex on 12/02/2017.
@@ -6,27 +8,49 @@ import java.io.*;
 public class TicketDataBase {
 
     private Ticket driverWriteInfo;
+    private Driver getDriverInfo;
     private int driverID;
+    private Scanner driverfile;
+    public static int intDriverID;
+    ArrayList<String> driverDetails;
+    private static int incermentDriverID;
 
-    TicketDataBase()  throws IOException {
+    TicketDataBase() throws IOException {
         driverWriteInfo = new Ticket();
+
     }
 
-    public void saveDrivers() throws IOException
-    {
-        driverID = Driver.intDriverID;
+    public void saveDrivers() throws IOException {
+        driverID = intDriverID;
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-        PrintWriter driverDB = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-
-
-        driverDB.println(driverID + "\n"  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
-        driverDB.flush();
-        driverDB.close();
-
-
-        driverFile.println("Driver ID: " + driverID + "\n"  + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
+        getDriverID();
+        setDriverID();
+        driverFile.println("Driver ID: " + driverID + "\n" + driverWriteInfo.getDriverInfo() + "\n[NEXT DRIVER] \n");
         driverFile.flush();
         driverFile.close();
+    }
+
+    public int getDriverID() throws FileNotFoundException {
+        driverDetails = new ArrayList<>();
+        boolean line;
+        File file = new File("DriversID.txt");
+        Scanner readIn = new Scanner(file);
+        System.out.println("incermentDriverID" + incermentDriverID);
+            while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
+                intDriverID++;
+                System.out.println("out");
+            }
+        return intDriverID;
+
+    }
+    public void setDriverID() throws IOException {
+        incermentDriverID = intDriverID;
+        //incermentDriverID++;
+        System.out.println("after adding one" + incermentDriverID);
+        PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
+        outfile.println("ID " + incermentDriverID );
+        outfile.flush();
+        outfile.close();
     }
 
 
