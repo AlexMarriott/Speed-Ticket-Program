@@ -34,7 +34,6 @@ public class AddDriver {
         driverAddFrame.add(driverAddPanel);
         driverAddFrame.setVisible(true);
     }
-
     public void createDriverForm(){
         driverAddFrame = new JFrame();
         driverAddFrame.setTitle("Add A Driver");
@@ -46,7 +45,6 @@ public class AddDriver {
         driverAddPanel = new JPanel();
         driverAddPanel.setLayout(null);
     }
-
     public void addDriverFields(){
         Font arial = new Font("Arial", Font.BOLD + Font.ITALIC, 10);
 
@@ -130,7 +128,6 @@ public class AddDriver {
         lblPicture.setBounds(580, 5, 200, 100);
         driverAddPanel.add(lblPicture);
     }
-
     public void addDriverButtons(){
         btnSchoolZone = new JButton("SchoolZone");
         btnSchoolZone.setBounds(120, 430, 120, 20);
@@ -225,7 +222,6 @@ public class AddDriver {
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
 
             CheckingSpeed.setDriverInfo();
-            //System.out.println(CheckingSpeed.getDriverInfo());
             try  {
                 writingToFile = new TicketDataBase();
 
