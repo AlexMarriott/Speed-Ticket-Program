@@ -9,21 +9,26 @@ import java.io.IOException;
  * Created by Alex on 23/02/2017.
  */
 public class AddDriver {
-    private JLabel lblSpeed, lblRoadType, lblFirstName, lblLastName,lblDateOBirth,lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine,lblPostCode,lblDriverInformation,lblPicture;
+    private JLabel lblSpeed, lblRoadType,lblPicture;
+    private JLabel lblFirstName, lblLastName,lblDateOBirth,lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine,lblPostCode,lblDriverInformation;
+    private JLabel lblvehicleModel, lblvehicleMake, lblvehicleNumPlate, lblvehicleYear;
     private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine,txtPostCode;
+    private JTextField txtvehicleModel, txtvehicleMake, txtvehicleNumPlate, txtvehicleYear;
     private JButton  btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway,btnSubmit, btnBack;
     private JPanel driverAddPanel;
-    private Border driverInfoBorder;
+    private Border driverInfoBorder,vehicleInfoBorder;
     private JFrame driverAddFrame;
 
     protected int roadSpeed;
     protected int driversSpeed;
     protected String roadType;
     protected String driverName;
-
+    protected String[] roadTypeList = {"School Zone", "Residential Road","Main Road","Single Carriageway","Dual Carriageway"};
+    protected int[] roadSpeedList = {20,20,30,60,70};
     private TicketDataBase writingToFile;
     private Driver DriverInfo;
-    private Ticket blah;
+    private Ticket CheckingSpeed = new Ticket();
+
 
     public AddDriver(){
 
@@ -34,7 +39,6 @@ public class AddDriver {
         driverAddFrame.add(driverAddPanel);
         driverAddFrame.setVisible(true);
     }
-
     public void createDriverForm(){
         driverAddFrame = new JFrame();
         driverAddFrame.setTitle("Add A Driver");
@@ -46,7 +50,6 @@ public class AddDriver {
         driverAddPanel = new JPanel();
         driverAddPanel.setLayout(null);
     }
-
     public void addDriverFields(){
         Font arial = new Font("Arial", Font.BOLD + Font.ITALIC, 10);
 
@@ -118,56 +121,111 @@ public class AddDriver {
         driverAddPanel.add(lblRoadType);
 
         lblSpeed = new JLabel("Drivers Speed");
-        lblSpeed.setBounds(20, 405, 100, 20);
+        lblSpeed.setBounds(20, 450, 100, 20);
         driverAddPanel.add(lblSpeed);
 
         txtSpeed = new JTextField(null);
-        txtSpeed.setBounds(120, 405, 150, 20);
+        txtSpeed.setBounds(120, 450, 150, 20);
         driverAddPanel.add(txtSpeed);
+
+        vehicleInfoBorder = BorderFactory.createLoweredBevelBorder();
+        lblDriverInformation = new JLabel("Vehicle Information");
+        lblDriverInformation.setBounds(10, 260, 120, 20);
+        lblDriverInformation.setFont(arial);
+        driverAddPanel.add(lblDriverInformation);
+        lblDriverInformation.setBorder(driverInfoBorder);
+
+
+        lblvehicleModel = new JLabel("Vehicle Model");
+        lblvehicleModel.setBounds(20, 290, 100, 20);
+        driverAddPanel.add(lblvehicleModel);
+
+        txtvehicleModel = new JTextField(null);
+        txtvehicleModel.setBounds(140, 290, 100, 20);
+        driverAddPanel.add(txtvehicleModel);
+
+        lblvehicleMake = new JLabel("Vehicle Make");
+        lblvehicleMake.setBounds(20, 320, 100, 20);
+        driverAddPanel.add(lblvehicleMake);
+
+        txtvehicleMake = new JTextField(null);
+        txtvehicleMake.setBounds(140, 320, 100, 20);
+        driverAddPanel.add(txtvehicleMake);
+
+        lblvehicleNumPlate = new JLabel("Vehicle number Plate");
+        lblvehicleNumPlate.setBounds(20, 350, 120, 20);
+        driverAddPanel.add(lblvehicleNumPlate);
+
+        txtvehicleNumPlate = new JTextField(null);
+        txtvehicleNumPlate.setBounds(140, 350, 100, 20);
+        driverAddPanel.add(txtvehicleNumPlate);
+
+        lblvehicleYear = new JLabel("Year Vehicle Was Made");
+        lblvehicleYear.setBounds(20, 380, 120, 20);
+        driverAddPanel.add(lblvehicleYear);
+
+        txtvehicleYear = new JTextField("DD/MM/YYYY");
+        txtvehicleYear.setBounds(140, 380, 100, 20);
+        driverAddPanel.add(txtvehicleYear);
 
         ImageIcon smallDVLAImage = new ImageIcon("dvla.jpg");
         lblPicture = new JLabel(smallDVLAImage);
         lblPicture.setBounds(580, 5, 200, 100);
         driverAddPanel.add(lblPicture);
     }
-
     public void addDriverButtons(){
-        btnSchoolZone = new JButton("SchoolZone");
-        btnSchoolZone.setBounds(120, 430, 120, 20);
+
+        JComboBox roadList = new JComboBox(roadTypeList);
+        roadList.setSelectedIndex(0);
+        roadList.setBounds(120, 450, 120, 20);
+        roadList.addActionListener(new  RoadTypeHandler());
+        driverAddPanel.add(roadList);
+
+       /* btnSchoolZone = new JButton("SchoolZone");
+        btnSchoolZone.setBounds(120, 480, 120, 20);
         btnSchoolZone.addActionListener(new SchoolZoneHandler());
         driverAddPanel.add(btnSchoolZone);
 
         btnResidentialRoad = new JButton("Residential");
-        btnResidentialRoad.setBounds(240, 430, 100, 20);
+        btnResidentialRoad.setBounds(240, 480, 100, 20);
         btnResidentialRoad.addActionListener(new ResidentialRoadHandler());
         driverAddPanel.add(btnResidentialRoad);
 
         btnMainRoad = new JButton("MainRoad");
-        btnMainRoad.setBounds(340, 430, 100, 20);
+        btnMainRoad.setBounds(340, 480, 100, 20);
         btnMainRoad.addActionListener(new MainRoadHandler());
         driverAddPanel.add(btnMainRoad);
 
         btnSingleCarriageway = new JButton("SingleCarriageway");
-        btnSingleCarriageway.setBounds(440, 430, 160, 20);
+        btnSingleCarriageway.setBounds(440, 480, 160, 20);
         btnSingleCarriageway.addActionListener(new SingleCarriagewayHandler());
         driverAddPanel.add(btnSingleCarriageway);
 
         btnDualCarriageway = new JButton("DualCarriageway");
-        btnDualCarriageway.setBounds(600, 430, 160, 20);
+        btnDualCarriageway.setBounds(600, 480, 160, 20);
         btnDualCarriageway.addActionListener(new DualCarriagewayHandler());
-        driverAddPanel.add(btnDualCarriageway);
+        driverAddPanel.add(btnDualCarriageway);*/
 
         btnSubmit = new JButton("Submit");
-        btnSubmit.setBounds(22, 525, 100, 20);
+        btnSubmit.setBounds(22, 520, 100, 20);
         btnSubmit.addActionListener(new DriverAddSubmitHandler());
         driverAddPanel.add(btnSubmit);
 
         btnBack = new JButton("Back");
-        btnBack.setBounds(650, 525, 100, 20);
+        btnBack.setBounds(650, 520, 100, 20);
         btnBack.addActionListener(new DriverAddExitHandler());
         driverAddPanel.add(btnBack);
     }
-    class SchoolZoneHandler implements ActionListener {
+    class RoadTypeHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event ) {
+            JComboBox cb = (JComboBox)event.getSource();
+            roadType = (String)cb.getSelectedItem();
+
+
+        }
+    }
+    /*class SchoolZoneHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
             roadSpeed = 20;
@@ -205,9 +263,9 @@ public class AddDriver {
             roadType = "Dual Carriageway";
 
         }
-    }
+    }*/
+
     class DriverAddSubmitHandler implements ActionListener {
-        Ticket CheckingSpeed = new Ticket();
         public void actionPerformed(ActionEvent event) {
             driverName = txtFirstName.getText();
             driversSpeed = Integer.parseInt(txtSpeed.getText());
@@ -220,12 +278,11 @@ public class AddDriver {
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else
 
-            DriverInfo= new Driver(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText());
+            DriverInfo = new Driver(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText());
 
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
 
             CheckingSpeed.setDriverInfo();
-            //System.out.println(CheckingSpeed.getDriverInfo());
             try  {
                 writingToFile = new TicketDataBase();
 

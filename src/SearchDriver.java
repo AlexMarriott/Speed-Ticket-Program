@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class SearchDriver {
         private JLabel lblDriverID, lblFirstName, lblDrivingLicenceNum;
         private JTextField txtDriverID, txtFirstName, txtDrivingLicenceNum;
-        private JButton btnSearch,btnRemove, btnExit;
+        private JButton btnSearch,btnRemove,btnIssueTicket, btnExit;
         private JPanel driverViewPanel;
         private JFrame driverViewFrame;
 
@@ -70,18 +70,33 @@ public class SearchDriver {
         }
 
         public void addDriverViewButtons(){
-            btnSearch = new JButton("Search ");
-            btnSearch.setBounds(10, 295, 100, 30);
+            btnSearch = new JButton("Search");
+            btnSearch.setBounds(20, 295, 140, 30);
             btnSearch.addActionListener(new DriverSearchHandler());
             driverViewPanel.add(btnSearch);
 
             btnRemove = new JButton("Remove");
-            btnRemove.setBounds(10, 335, 100, 30);
+            btnRemove.setBounds(20, 335, 140, 30);
             btnRemove.addActionListener(new DriverRemoveHandler());
             driverViewPanel.add(btnRemove);
 
+            btnSearch = new JButton("Issue Ticket");
+            btnSearch.setBounds(180, 295, 140, 30);
+            btnSearch.addActionListener(new IssueTicketHandler());
+            driverViewPanel.add(btnSearch);
+
+            btnRemove = new JButton("Issue New License");
+            btnRemove.setBounds(180, 335, 140, 30);
+            btnRemove.addActionListener(new IssueNewLicenseHandler());
+            driverViewPanel.add(btnRemove);
+
+            btnRemove = new JButton("Remove Fine ");
+            btnRemove.setBounds(350, 295, 140, 30);
+            btnRemove.addActionListener(new RemoveFineHandler());
+            driverViewPanel.add(btnRemove);
+
             btnExit = new JButton("Back");
-            btnExit.setBounds(180, 340, 100, 20);
+            btnExit.setBounds(350, 335, 140, 30);
             btnExit.addActionListener(new DriverSearchExitHandler());
             driverViewPanel.add(btnExit);
         }
@@ -133,6 +148,24 @@ public class SearchDriver {
         }
     }
     class DriverRemoveHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            driverViewFrame.setVisible(false);
+        }
+    }
+    class IssueTicketHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            driverViewFrame.setVisible(false);
+        }
+    }
+    class IssueNewLicenseHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            driverViewFrame.setVisible(false);
+        }
+    }
+    class RemoveFineHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             driverViewFrame.setVisible(false);
