@@ -55,12 +55,12 @@ public class SpeedingTicketGUI {
 
         btnViewDriver = new JButton("View Driver");
         btnViewDriver.setBounds(120, 240, 140, 40);
-        btnViewDriver.addActionListener(new AddDriverHandler());
+        btnViewDriver.addActionListener(new ViewDriverHandler());
         splashPagePanel.add(btnViewDriver);
 
-        btnIssueTicket = new JButton("Issue Ticket");
+        btnIssueTicket = new JButton("Remove Driver");
         btnIssueTicket.setBounds(270, 240, 120, 40);
-        btnIssueTicket.addActionListener(new AddDriverHandler());
+        btnIssueTicket.addActionListener(new RemoveDriverHandler());
         splashPagePanel.add(btnIssueTicket);
 
         btnExit = new JButton("Exit");
@@ -79,11 +79,11 @@ public class SpeedingTicketGUI {
     class ViewDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            new ViewDriverHandler();
+            new SearchDriver();
         }
     }
 
-    class IssueTicketHandler implements ActionListener {
+    class RemoveDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             new RemoveDriver();
