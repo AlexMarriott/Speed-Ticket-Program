@@ -14,7 +14,7 @@ public class AddDriver {
     private JLabel lblvehicleModel, lblvehicleMake, lblvehicleNumPlate, lblvehicleYear;
     private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine,txtPostCode;
     private JTextField txtvehicleModel, txtvehicleMake, txtvehicleNumPlate, txtvehicleYear;
-    private JButton  btnResidentialRoad, btnMainRoad, btnSchoolZone, btnSingleCarriageway, btnDualCarriageway,btnSubmit, btnBack;
+    private JButton  btnSubmit, btnBack;
     private JPanel driverAddPanel;
     private Border driverInfoBorder,vehicleInfoBorder;
     private JFrame driverAddFrame;
@@ -23,7 +23,9 @@ public class AddDriver {
     protected int driversSpeed;
     protected String roadType;
     protected String driverName;
-    protected String[] roadTypeList = {"School Zone", "Residential Road","Main Road","Single Carriageway","Dual Carriageway"};
+    protected String[] roadTypeList = {"School Zone", "Residential Road",
+            "Main Road","Single Carriageway","Dual Carriageway"};
+
     protected int[] roadSpeedList = {20,20,30,60,70};
     private TicketDataBase writingToFile;
     private Driver DriverInfo;
@@ -46,6 +48,8 @@ public class AddDriver {
         driverAddFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         driverAddFrame.setVisible(false);
         driverAddFrame.setLocationRelativeTo(null);
+
+
 
         driverAddPanel = new JPanel();
         driverAddPanel.setLayout(null);
@@ -116,18 +120,6 @@ public class AddDriver {
         txtPostCode.setBounds(140, 220, 100, 20);
         driverAddPanel.add(txtPostCode);
 
-        lblRoadType = new JLabel("Road Type");
-        lblRoadType.setBounds(20, 430, 100, 20);
-        driverAddPanel.add(lblRoadType);
-
-        lblSpeed = new JLabel("Drivers Speed");
-        lblSpeed.setBounds(20, 450, 100, 20);
-        driverAddPanel.add(lblSpeed);
-
-        txtSpeed = new JTextField(null);
-        txtSpeed.setBounds(120, 450, 150, 20);
-        driverAddPanel.add(txtSpeed);
-
         vehicleInfoBorder = BorderFactory.createLoweredBevelBorder();
         lblDriverInformation = new JLabel("Vehicle Information");
         lblDriverInformation.setBounds(10, 260, 120, 20);
@@ -168,43 +160,32 @@ public class AddDriver {
         txtvehicleYear.setBounds(140, 380, 100, 20);
         driverAddPanel.add(txtvehicleYear);
 
+        lblRoadType = new JLabel("Road Type");
+        lblRoadType.setBounds(20, 470, 100, 20);
+        driverAddPanel.add(lblRoadType);
+
+        lblSpeed = new JLabel("Drivers Speed");
+        lblSpeed.setBounds(20, 430,100, 20);
+        driverAddPanel.add(lblSpeed);
+
+        txtSpeed = new JTextField(null);
+        txtSpeed.setBounds(140, 430, 100, 20);
+        driverAddPanel.add(txtSpeed);
+
+        JComboBox roadList = new JComboBox(roadTypeList);
+        roadList.setSelectedIndex(0);
+        roadList.setBounds(140, 470, 120, 20);
+        roadList.addActionListener(new  RoadTypeHandler());
+        driverAddPanel.add(roadList);
+
         ImageIcon smallDVLAImage = new ImageIcon("dvla.jpg");
         lblPicture = new JLabel(smallDVLAImage);
         lblPicture.setBounds(580, 5, 200, 100);
         driverAddPanel.add(lblPicture);
+
+
     }
     public void addDriverButtons(){
-
-        JComboBox roadList = new JComboBox(roadTypeList);
-        roadList.setSelectedIndex(0);
-        roadList.setBounds(120, 450, 120, 20);
-        roadList.addActionListener(new  RoadTypeHandler());
-        driverAddPanel.add(roadList);
-
-       /* btnSchoolZone = new JButton("SchoolZone");
-        btnSchoolZone.setBounds(120, 480, 120, 20);
-        btnSchoolZone.addActionListener(new SchoolZoneHandler());
-        driverAddPanel.add(btnSchoolZone);
-
-        btnResidentialRoad = new JButton("Residential");
-        btnResidentialRoad.setBounds(240, 480, 100, 20);
-        btnResidentialRoad.addActionListener(new ResidentialRoadHandler());
-        driverAddPanel.add(btnResidentialRoad);
-
-        btnMainRoad = new JButton("MainRoad");
-        btnMainRoad.setBounds(340, 480, 100, 20);
-        btnMainRoad.addActionListener(new MainRoadHandler());
-        driverAddPanel.add(btnMainRoad);
-
-        btnSingleCarriageway = new JButton("SingleCarriageway");
-        btnSingleCarriageway.setBounds(440, 480, 160, 20);
-        btnSingleCarriageway.addActionListener(new SingleCarriagewayHandler());
-        driverAddPanel.add(btnSingleCarriageway);
-
-        btnDualCarriageway = new JButton("DualCarriageway");
-        btnDualCarriageway.setBounds(600, 480, 160, 20);
-        btnDualCarriageway.addActionListener(new DualCarriagewayHandler());
-        driverAddPanel.add(btnDualCarriageway);*/
 
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(22, 520, 100, 20);
@@ -220,50 +201,12 @@ public class AddDriver {
         @Override
         public void actionPerformed(ActionEvent event ) {
             JComboBox cb = (JComboBox)event.getSource();
-            roadType = (String)cb.getSelectedItem();
+            roadType = String.valueOf(cb.getSelectedItem());
+            roadSpeed = roadSpeedList[Integer.parseInt(String.valueOf(cb.getSelectedIndex()))];
 
-
+            System.out.println(roadType);
         }
     }
-    /*class SchoolZoneHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event ) {
-            roadSpeed = 20;
-            roadType = "School Zone";
-        }
-    }
-
-    class ResidentialRoadHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            roadSpeed = 20;
-            roadType = "Residential Road";
-        }
-    }
-    class MainRoadHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            roadSpeed = 30;
-            roadType = "Main Road";
-        }
-    }
-    class SingleCarriagewayHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            roadSpeed = 60;
-            roadType = "Single Carriageway";
-        }
-    }
-    class DualCarriagewayHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            roadSpeed = 70;
-            roadType = "Dual Carriageway";
-
-        }
-    }*/
 
     class DriverAddSubmitHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {

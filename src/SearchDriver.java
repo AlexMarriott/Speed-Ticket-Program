@@ -45,37 +45,21 @@ public class SearchDriver {
         public void addDriverViewFields(){
 
             lblDriverID = new JLabel("Driver ID");
-            lblDriverID.setBounds(10, 210, 100, 20);
+            lblDriverID.setBounds(10, 250, 100, 20);
             driverViewPanel.add(lblDriverID);
 
             txtDriverID = new JTextField(null);
-            txtDriverID.setBounds(160, 210, 100, 20);
+            txtDriverID.setBounds(160, 250, 100, 20);
             driverViewPanel.add(txtDriverID);
-
-            lblFirstName = new JLabel("First Name");
-            lblFirstName.setBounds(10, 230, 100, 20);
-            driverViewPanel.add(lblFirstName);
-
-            txtFirstName = new JTextField(null);
-            txtFirstName.setBounds(160, 230, 100, 20);
-            driverViewPanel.add(txtFirstName);
-
-            lblDrivingLicenceNum = new JLabel("Driving Licence Number");
-            lblDrivingLicenceNum.setBounds(10, 250, 140, 20);
-            driverViewPanel.add(lblDrivingLicenceNum);
-
-            txtDrivingLicenceNum = new JTextField(null);
-            txtDrivingLicenceNum.setBounds(160, 250, 100, 20);
-            driverViewPanel.add(txtDrivingLicenceNum);
         }
 
         public void addDriverViewButtons(){
-            btnSearch = new JButton("Search");
+            btnSearch = new JButton("Search Driver");
             btnSearch.setBounds(20, 295, 140, 30);
             btnSearch.addActionListener(new DriverSearchHandler());
             driverViewPanel.add(btnSearch);
 
-            btnRemove = new JButton("Remove");
+            btnRemove = new JButton("Remove Driver");
             btnRemove.setBounds(20, 335, 140, 30);
             btnRemove.addActionListener(new DriverRemoveHandler());
             driverViewPanel.add(btnRemove);
