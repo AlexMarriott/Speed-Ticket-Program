@@ -11,26 +11,18 @@ public class Driver {
     private String secondAddress;
     private String postCode;
     private String drivingLicence;
-    private String[] driverData;
+    private String[] driverData = new String[7];
 
-    Driver(String firstName, String lastName, String dateOBirth, String firstAddress, String secondAddress, String postCode, String drivingLicenceNum) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOBirth = dateOBirth;
-        this.drivingLicence = drivingLicenceNum;
-        this.firstAddress = firstAddress;
-        this.secondAddress = secondAddress;
-        this.postCode = postCode;
+    Driver() {
     }
 
-    public Driver()
+    public void setDriver(String[] driverArray)
     {
-        driverData = new String[]{firstName, lastName, dateOBirth, firstAddress, secondAddress, postCode, drivingLicence};
-        System.out.println(Arrays.asList(driverData));
+        driverData = driverArray;
 
-    };
+    }
 
-    public String[] getDriverObject()
+    public String[] getDriver()
     {
         return driverData;
     }

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -22,7 +23,7 @@ public class TicketDataBase {
         getDriverID();
         setDriverID();
         driverWriteInfo.setDriverJudgment();
-        driverFile.println("Driver ID: " + intDriverID + "\n" + driverDetails.getDriverObject().toString() + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
+        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(driverDetails.getDriver()) + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
         driverFile.flush();
         driverFile.close();
     }

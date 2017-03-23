@@ -30,6 +30,7 @@ public class AddDriver {
     private TicketDataBase writingToFile;
     private Driver DriverInfo;
     private Ticket CheckingSpeed = new Ticket();
+    private String[] driverData;
 
 
     public AddDriver(){
@@ -220,8 +221,10 @@ public class AddDriver {
             else if (roadSpeed == 0){
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else
+                driverData = new String[]{txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText()};
 
-            DriverInfo = new Driver(txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText());
+            DriverInfo = new Driver();
+            DriverInfo.setDriver(driverData);
 
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
 
