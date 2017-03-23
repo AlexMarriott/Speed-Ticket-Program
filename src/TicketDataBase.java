@@ -10,19 +10,19 @@ public class TicketDataBase {
     private Driver DriverInfo;
     private Scanner driverfile;
     private int intDriverID;
-    private Object driverDetails;
+    private Driver driverDetails;
 
     TicketDataBase() throws IOException {
         driverWriteInfo = new Ticket();
-        driverDetails = new Driver();
-
     }
+
     public void saveDrivers() throws IOException {
+        driverDetails = new Driver();
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
         driverWriteInfo.setDriverJudgment();
-        driverFile.println("Driver ID: " + intDriverID + "\n" + String.valueOf(driverDetails) + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
+        driverFile.println("Driver ID: " + intDriverID + "\n" + driverDetails.getDriverObject().toString() + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
         driverFile.flush();
         driverFile.close();
     }
