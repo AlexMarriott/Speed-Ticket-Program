@@ -37,6 +37,7 @@ public class Ticket {
             message = "Driver is under the Speed limit. \nNo action will be taken";
         }
         ticketReturnMessage = "Name: "+ driverName + "\nSpeed logged: " + driversSpeed + "\nType of Road: " + roadType + "\nAction Required: " + message;
+        driversJudgment = message;
     }
 }
 

@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TicketDataBase {
 
     private Ticket driverWriteInfo;
-    private Driver getDriverInfo;
+    private Driver DriverInfo;
     private Scanner driverfile;
     private int intDriverID;
     private Object driverDetails;
@@ -22,7 +22,7 @@ public class TicketDataBase {
         getDriverID();
         setDriverID();
         driverWriteInfo.setDriverJudgment();
-        driverFile.println("Driver ID: " + intDriverID + "\n" + driverDetails.toString() +  driverWriteInfo.getDriverJudgment() + " \n");
+        driverFile.println("Driver ID: " + intDriverID + "\n" + String.valueOf(driverDetails) + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
         driverFile.flush();
         driverFile.close();
     }
@@ -46,4 +46,4 @@ public class TicketDataBase {
         outfile.close();
     }
 
-}
+    }
