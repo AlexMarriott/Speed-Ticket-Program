@@ -9,12 +9,12 @@ import java.io.IOException;
  * Created by Alex on 23/02/2017.
  */
 public class AddDriver {
-    private JLabel lblSpeed, lblRoadType,lblPicture;
-    private JLabel lblFirstName, lblLastName,lblDateOBirth,lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine,lblPostCode,lblDriverInformation;
+    private JLabel lblSpeed, lblRoadType, lblPicture;
+    private JLabel lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation;
     private JLabel lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear;
-    private JTextField txtSpeed, txtFirstName, txtLastName,txtDateOBirth,txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine,txtPostCode;
+    private JTextField txtSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode;
     private JTextField txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear;
-    private JButton  btnSubmit, btnBack;
+    private JButton btnSubmit, btnBack;
     private JPanel driverAddPanel;
     private Border driverInfoBorder;
     private JFrame driverAddFrame;
@@ -23,12 +23,11 @@ public class AddDriver {
     private String roadType;
     private String driverName;
     private String[] roadTypeList;
-    private TicketDataBase writingToFile;
+    private TicketDataBase saveDriverData;
     private String[] driverData;
     private JComboBox roadList;
-    protected static Driver DriverInfo;
 
-    public AddDriver(){
+    public AddDriver() {
         pnlAddDriver();
         lblDriverButtons();
         txtDriverButtons();
@@ -120,7 +119,7 @@ public class AddDriver {
         driverAddPanel.add(lblRoadType);
 
         lblSpeed = new JLabel("Drivers Speed");
-        lblSpeed.setBounds(20, 430,100, 20);
+        lblSpeed.setBounds(20, 430, 100, 20);
         driverAddPanel.add(lblSpeed);
     }
 
@@ -182,15 +181,15 @@ public class AddDriver {
     }
 
     private void addDriverJCombobox() {
-        roadTypeList = new String[]{"School Zone", "Residential Road", "Main Road","Single Carriageway","Dual Carriageway"};
+        roadTypeList = new String[]{"School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
         roadList = new JComboBox(roadTypeList);
         roadList.setSelectedIndex(0);
         roadList.setBounds(140, 470, 120, 20);
-        roadList.addActionListener(new  RoadTypeHandler());
+        roadList.addActionListener(new RoadTypeHandler());
         driverAddPanel.add(roadList);
     }
 
-    public void addDriverButtons(){
+    public void addDriverButtons() {
 
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(22, 520, 100, 20);
@@ -205,49 +204,50 @@ public class AddDriver {
 
     class RoadTypeHandler implements ActionListener {
         private JComboBox comboBox;
-        private int[] roadSpeedList = new int[]{20,20,30,60,70};
-        public void actionPerformed(ActionEvent event ) {
-            comboBox = (JComboBox)event.getSource();
+        private int[] roadSpeedList = new int[]{20, 20, 30, 60, 70};
+
+        public void actionPerformed(ActionEvent event) {
+            comboBox = (JComboBox) event.getSource();
             roadType = String.valueOf(comboBox.getSelectedItem());
             roadSpeed = roadSpeedList[Integer.parseInt(String.valueOf(comboBox.getSelectedIndex()))];
         }
     }
 
     class DriverAddSubmitHandler implements ActionListener {
-        private Driver DriverInfo = new Driver();
-        private Ticket CheckingSpeed = new Ticket();
+        private Ticket checkingSpeed = new Ticket();
 
         @Override
         public void actionPerformed(ActionEvent event) {
             driverName = txtFirstName.getText();
             driversSpeed = Integer.parseInt(txtSpeed.getText());
 
-            if ( txtFirstName.getText().isEmpty()){
+            if (txtFirstName.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-            else if (txtSpeed.getText().isEmpty()){
+            } else if (txtSpeed.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-            else if (roadSpeed == 0){
+            } else if (roadSpeed == 0) {
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-            else
-            driverData = new String[]{txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText()};
-            DriverInfo.setDriver(driverData);
-            CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);
+            } else {
+                driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText()};
+                checkingSpeed.speedCheck(driversSpeed, roadSpeed, driverName, roadType);
 
-            CheckingSpeed.setDriverInfo();
 
-            try  {
-                writingToFile = new TicketDataBase();
+                try {
+                    saveDriverData = new TicketDataBase();
+                    saveDriverData.saveDrivers(driverData, checkingSpeed.getDriverJudgment());
 
-                writingToFile.saveDrivers();
+                } catch (IOException | NullPointerException e) {
+                    e.printStackTrace();
+                }
+                checkingSpeed.setDriverInfo();
+
+                JOptionPane.showMessageDialog(driverAddFrame, checkingSpeed.getDriverInfo());
             }
-            catch (IOException | NullPointerException e) {
-                e.printStackTrace();
-            }
-            JOptionPane.showMessageDialog(driverAddFrame, CheckingSpeed.getDriverInfo());
         }
+    }
+
+    public String[] getDriverData() {
+        return driverData;
     }
 
     class DriverAddExitHandler implements ActionListener {

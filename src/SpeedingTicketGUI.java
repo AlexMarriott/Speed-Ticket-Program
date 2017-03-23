@@ -6,12 +6,12 @@ import java.io.IOException;
  * Created by alex on 11/02/2017.
  */
 public class SpeedingTicketGUI {
-    private JLabel  lblPicture;
+    private JLabel lblPicture;
     private JButton btnAddDriver, btnViewDriver, btnIssueTicket, btnExit;
     private JPanel pnlMainMenu;
     private JFrame frmMainMenu;
 
-    public SpeedingTicketGUI(){
+    public SpeedingTicketGUI() {
         loadPanel();
         loadImages();
         loadButtons();
@@ -110,9 +110,9 @@ public class SpeedingTicketGUI {
         }
 
     }
+
     public static void main(String[] args) throws IOException {
-        try
-        {
+        try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();

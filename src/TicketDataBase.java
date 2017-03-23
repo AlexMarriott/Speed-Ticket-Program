@@ -7,41 +7,37 @@ import java.util.Scanner;
  */
 public class TicketDataBase {
 
-    private Ticket driverWriteInfo;
+    private Ticket ticketResult;
     private int intDriverID;
-    private Driver driverInfo;
 
-    TicketDataBase() throws IOException {
-        driverWriteInfo = new Ticket();
-    }
-
-    public void saveDrivers() throws IOException {
+    public void saveDrivers(String[] driverData, String ticketResult) throws IOException {
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
-        driverWriteInfo.setDriverJudgment();
-        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(AddDriver.DriverInfo.getDriver()) + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
+        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(driverData) + "\n" + ticketResult +  " \n");
         driverFile.close();
         driverFile.flush();
     }
+
     public int getDriverID() throws FileNotFoundException {
         boolean line;
         File file = new File("DriversID.txt");
         Scanner readIn = new Scanner(file);
-        if (intDriverID <= 0){
+        if (intDriverID <= 0) {
             intDriverID++;
         }
-            while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
-                intDriverID++;
-                System.out.println(intDriverID);
-            }
+        while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
+            intDriverID++;
+            System.out.println(intDriverID);
+        }
         return intDriverID;
     }
+
     public void setDriverID() throws IOException {
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
-        outfile.println("ID " + intDriverID );
+        outfile.println("ID " + intDriverID);
         outfile.flush();
         outfile.close();
     }
 
-    }
+}

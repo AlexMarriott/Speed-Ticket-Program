@@ -15,7 +15,6 @@ public class RemoveDriver {
     protected  int driverId = 1;
 
     private TicketDataBase writingToFile;
-    private Driver DriverInfo;
     public RemoveDriver(){
 
         createDriverForm();
