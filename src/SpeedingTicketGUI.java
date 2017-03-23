@@ -1,6 +1,6 @@
+import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
-import javax.swing.*;
 
 /**
  * Created by alex on 11/02/2017.
@@ -8,65 +8,62 @@ import javax.swing.*;
 public class SpeedingTicketGUI {
     private JLabel  lblPicture;
     private JButton btnAddDriver, btnViewDriver, btnIssueTicket, btnExit;
-    private JPanel splashPagePanel;
-    private JFrame splashPageFrame;
-
-    private Ticket CheckingSpeed;
-    private AddDriver AddDriverWindow;
-    private static Driver test;
+    private JPanel pnlMainMenu;
+    private JFrame frmMainMenu;
 
     public SpeedingTicketGUI(){
-
-        createSplashPage();
-        addSplashPageImage();
-        addSplashPageButtons();
-
-        splashPageFrame.add(splashPagePanel);
-        splashPageFrame.setVisible(true);
-    }
-    public void createSplashPage() {
-        splashPageFrame = new JFrame();
-        splashPageFrame.setTitle("DVLA Ticket Program");
-        splashPageFrame.setSize(420, 350);
-        splashPageFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        splashPageFrame.setVisible(true);
-        splashPageFrame.setLocationRelativeTo(null);
-        splashPageFrame.addWindowListener(exitListener);
-        splashPageFrame.setResizable(false);
-
-
-        splashPagePanel = new JPanel();
-        splashPagePanel.setLayout(null);
+        loadPanel();
+        loadImages();
+        loadButtons();
+        loadMenu();
     }
 
-    public void addSplashPageImage() {
+    private void loadPanel() {
+        pnlMainMenu = new JPanel();
+        pnlMainMenu.setLayout(null);
+    }
+
+    public void loadMenu() {
+        frmMainMenu = new JFrame();
+        frmMainMenu.setTitle("DVLA Ticket Program");
+        frmMainMenu.setSize(420, 350);
+        frmMainMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frmMainMenu.setVisible(true);
+        frmMainMenu.setLocationRelativeTo(null);
+        frmMainMenu.addWindowListener(exitListener);
+        frmMainMenu.setResizable(false);
+        frmMainMenu.add(pnlMainMenu);
+        frmMainMenu.setVisible(true);
+    }
+
+    public void loadImages() {
 
         ImageIcon largeDVLAImage = new ImageIcon("DVLA.jpg");
         lblPicture = new JLabel(largeDVLAImage);
         lblPicture.setBounds(0, 0, 400, 200);
-        splashPagePanel.add(lblPicture);
+        pnlMainMenu.add(lblPicture);
     }
 
-    public void addSplashPageButtons() {
+    public void loadButtons() {
         btnAddDriver = new JButton("Add Driver");
         btnAddDriver.setBounds(10, 240, 100, 40);
         btnAddDriver.addActionListener(new AddDriverHandler());
-        splashPagePanel.add(btnAddDriver);
+        pnlMainMenu.add(btnAddDriver);
 
         btnViewDriver = new JButton("View Driver");
         btnViewDriver.setBounds(120, 240, 140, 40);
         btnViewDriver.addActionListener(new ViewDriverHandler());
-        splashPagePanel.add(btnViewDriver);
+        pnlMainMenu.add(btnViewDriver);
 
         btnIssueTicket = new JButton("Remove Driver");
         btnIssueTicket.setBounds(270, 240, 120, 40);
         btnIssueTicket.addActionListener(new RemoveDriverHandler());
-        splashPagePanel.add(btnIssueTicket);
+        pnlMainMenu.add(btnIssueTicket);
 
         btnExit = new JButton("Exit");
         btnExit.setBounds(140, 290, 100, 20);
         btnExit.addActionListener(new ExitSplashHandler());
-        splashPagePanel.add(btnExit);
+        pnlMainMenu.add(btnExit);
     }
 
     class AddDriverHandler implements ActionListener {
@@ -90,7 +87,6 @@ public class SpeedingTicketGUI {
         }
     }
 
-    //This needs to be reviewed by someone in P201.
     private WindowListener exitListener = new WindowAdapter() {
 
         @Override
@@ -103,12 +99,11 @@ public class SpeedingTicketGUI {
             }
         }
     };
-    //
 
     class ExitSplashHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            int exit = JOptionPane.showConfirmDialog(splashPageFrame, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
+            int exit = JOptionPane.showConfirmDialog(frmMainMenu, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
             if (exit == 0) {
                 System.exit(0);
             }
@@ -116,15 +111,10 @@ public class SpeedingTicketGUI {
 
     }
     public static void main(String[] args) throws IOException {
-        try {
+        try
+        {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
         new SpeedingTicketGUI();

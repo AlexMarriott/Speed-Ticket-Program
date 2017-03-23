@@ -16,7 +16,6 @@ public class TicketDataBase {
     }
 
     public void saveDrivers() throws IOException {
-        driverInfo = new Driver();
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
