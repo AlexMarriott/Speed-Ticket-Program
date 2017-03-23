@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by Alex on 23/02/2017.
@@ -28,7 +29,7 @@ public class AddDriver {
 
     protected int[] roadSpeedList = {20,20,30,60,70};
     private TicketDataBase writingToFile;
-    private Driver DriverInfo;
+    protected static Driver DriverInfo = new Driver();
     private Ticket CheckingSpeed = new Ticket();
     private String[] driverData;
 
@@ -221,9 +222,7 @@ public class AddDriver {
             else if (roadSpeed == 0){
                 JOptionPane.showMessageDialog(driverAddFrame, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else
-                driverData = new String[]{txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText()};
-
-            DriverInfo = new Driver();
+            driverData = new String[]{txtFirstName.getText(),txtLastName.getText(),txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(),txtPostCode.getText()};
             DriverInfo.setDriver(driverData);
 
             CheckingSpeed.speedCheck(driversSpeed,roadSpeed,driverName,roadType);

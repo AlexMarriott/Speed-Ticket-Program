@@ -8,24 +8,22 @@ import java.util.Scanner;
 public class TicketDataBase {
 
     private Ticket driverWriteInfo;
-    private Driver DriverInfo;
-    private Scanner driverfile;
     private int intDriverID;
-    private Driver driverDetails;
+    private Driver driverInfo;
 
     TicketDataBase() throws IOException {
         driverWriteInfo = new Ticket();
     }
 
     public void saveDrivers() throws IOException {
-        driverDetails = new Driver();
+        driverInfo = new Driver();
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
         driverWriteInfo.setDriverJudgment();
-        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(driverDetails.getDriver()) + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
-        driverFile.flush();
+        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(AddDriver.DriverInfo.getDriver()) + "\n" + driverWriteInfo.getDriverJudgment() + " \n");
         driverFile.close();
+        driverFile.flush();
     }
     public int getDriverID() throws FileNotFoundException {
         boolean line;
