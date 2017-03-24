@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Created by alex on 12/02/2017.
  */
 public class TicketDataBase {
-
+    //might remove this since the ticket result  is passed through from ticket.
     private Ticket ticketResult;
     private int intDriverID;
 
