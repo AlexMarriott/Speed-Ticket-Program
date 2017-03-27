@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
  * Created by Alex on 24/03/2017.
  */
 public class AddDriverGUI {
-    private JLabel lblSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear;
-    private JTextField txtSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear;
+    private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear;
+    private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear;
     private JButton btnSubmit, btnBack;
     private JPanel pnlDriverGUI;
     private Border driverInfoBorder;
@@ -35,6 +35,7 @@ public class AddDriverGUI {
         addDriverButtons();
         frmAddDriver();
     }
+
 
 
     private void pnlAddDriver() {
@@ -118,9 +119,9 @@ public class AddDriverGUI {
         lblRoadType.setBounds(20, 470, 100, 20);
         pnlDriverGUI.add(lblRoadType);
 
-        lblSpeed = new JLabel("Drivers Speed");
-        lblSpeed.setBounds(20, 430, 100, 20);
-        pnlDriverGUI.add(lblSpeed);
+        lblDriversSpeed = new JLabel("Drivers Speed");
+        lblDriversSpeed.setBounds(20, 430, 100, 20);
+        pnlDriverGUI.add(lblDriversSpeed);
     }
 
     private void txtDriverButtons() {
@@ -168,9 +169,9 @@ public class AddDriverGUI {
         txtVehicleYear.setBounds(140, 380, 100, 20);
         pnlDriverGUI.add(txtVehicleYear);
 
-        txtSpeed = new JTextField(null);
-        txtSpeed.setBounds(140, 430, 100, 20);
-        pnlDriverGUI.add(txtSpeed);
+        txtDriverSpeed = new JTextField(null);
+        txtDriverSpeed.setBounds(140, 430, 100, 20);
+        pnlDriverGUI.add(txtDriverSpeed);
     }
 
     private void addDriverImage() {
@@ -203,6 +204,10 @@ public class AddDriverGUI {
         pnlDriverGUI.add(btnBack);
     }
 
+    public String[] getDriverData() {
+        return driverData;
+    }
+
     static class RoadTypeHandler implements ActionListener {
         private JComboBox comboBox;
         private int[] roadSpeedList = new int[]{20, 20, 30, 60, 70};
@@ -221,10 +226,9 @@ public class AddDriverGUI {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-            AddDriverGUI driverGUI = new AddDriverGUI();
             driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText()};
             driverName = driverData[0];
-            driversSpeed = Integer.parseInt(driverData[6]);
+            driversSpeed = Integer.parseInt(txtDriverSpeed.getText());
 
 
             if (driverData[0].isEmpty()) {
@@ -235,6 +239,7 @@ public class AddDriverGUI {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 checkingSpeed.speedCheck(driversSpeed, roadSpeed, driverName, roadType);
+                checkingSpeed.setDriverInfo();
                 addDriver.setDriverData(driverData);
                 JOptionPane.showMessageDialog(frmDriverGUI, checkingSpeed.getDriverInfo());
             }
@@ -242,6 +247,7 @@ public class AddDriverGUI {
 
 
     }
+
     class DriverAddExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -250,3 +256,4 @@ public class AddDriverGUI {
 
     }
 }
+

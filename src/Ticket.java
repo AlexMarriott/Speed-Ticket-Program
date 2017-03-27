@@ -4,8 +4,7 @@
 public class Ticket {
     private String message;
     private String ticketReturnMessage;
-    private static String driveInfoPrompt;
-    private String driversJudgment;
+    private  String driveInfoPrompt;
     private int ticketThershold;
     private int countDateThershold;
 
@@ -23,6 +22,7 @@ public class Ticket {
 
     public void speedCheck(int driversSpeed, int roadSpeed, String driverName, String roadType) {
         ticketThershold = roadSpeed + (roadSpeed * 10 / 100 + 2);
+        System.out.println("i was able to get into the Ticket Method");
         countDateThershold = ticketThershold + (ticketThershold * 46 / 100);
 
         if (driversSpeed > roadSpeed && driversSpeed < ticketThershold) {
@@ -36,6 +36,8 @@ public class Ticket {
         }
 
         ticketReturnMessage = "Name: " + driverName + "\nSpeed logged: " + driversSpeed + "\nType of Road: " + roadType + "\nAction Required: " + message;
+        System.out.println(ticketReturnMessage);
+
     }
 }
 

@@ -1,8 +1,3 @@
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
@@ -12,7 +7,6 @@ public class DriverInterfaceLogic {
 
 
     private TicketDataBase saveDriverData;
-    private String[] driverData;
 
 
     public void setDriverData(String[] driverData) {
@@ -26,8 +20,4 @@ public class DriverInterfaceLogic {
             }
             checkingSpeed.setDriverInfo();
         }
-
-    public String[] getDriverData() {
-        return driverData;
-    }
 }

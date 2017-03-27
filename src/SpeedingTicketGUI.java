@@ -69,7 +69,7 @@ public class SpeedingTicketGUI {
     class AddDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            new DriverInterfaceLogic();
+            new AddDriverGUI();
         }
     }
 
