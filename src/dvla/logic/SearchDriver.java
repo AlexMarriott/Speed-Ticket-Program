@@ -1,3 +1,5 @@
+package dvla.logic;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,7 +66,7 @@ public class SearchDriver {
             btnRemove.addActionListener(new DriverRemoveHandler());
             driverViewPanel.add(btnRemove);
 
-            btnSearch = new JButton("Issue Ticket");
+            btnSearch = new JButton("Issue CheckDriverSpeed");
             btnSearch.setBounds(180, 295, 140, 30);
             btnSearch.addActionListener(new IssueTicketHandler());
             driverViewPanel.add(btnSearch);

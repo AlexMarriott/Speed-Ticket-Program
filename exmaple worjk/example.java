@@ -16,7 +16,7 @@
             private JPanel splashPagePanel;
             private JFrame splashPageFrame;
 
-            Ticket test = new Ticket();
+            CheckDriverSpeed test = new CheckDriverSpeed();
             TicketDataBase writingToFile = new TicketDataBase();
 
             public example() {
@@ -30,7 +30,7 @@
 
             public void createSplashPage() {
                 splashPageFrame = new JFrame();
-                splashPageFrame.setTitle("DVLA Ticket Program");
+                splashPageFrame.setTitle("DVLA CheckDriverSpeed Program");
                 splashPageFrame.setSize(420, 350);
                 splashPageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 splashPageFrame.setVisible(true);

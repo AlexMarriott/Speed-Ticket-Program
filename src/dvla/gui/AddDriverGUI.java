@@ -1,3 +1,5 @@
+package dvla.gui;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -17,14 +19,11 @@ public class AddDriverGUI {
     private String[] roadTypeList;
     private String[] driverData;
     private JComboBox roadList;
-
-
     private static String roadType;
     private static int roadSpeed;
-
     private int driversSpeed;
     private String driverName;
-
+    private String driverJudge;
 
     public AddDriverGUI() {
         pnlAddDriver();
@@ -35,8 +34,6 @@ public class AddDriverGUI {
         addDriverButtons();
         frmAddDriver();
     }
-
-
 
     private void pnlAddDriver() {
         pnlDriverGUI = new JPanel();
@@ -125,11 +122,11 @@ public class AddDriverGUI {
     }
 
     private void txtDriverButtons() {
-        txtFirstName = new JTextField(null);
+        txtFirstName = new JTextField("das");
         txtFirstName.setBounds(140, 40, 100, 20);
         pnlDriverGUI.add(txtFirstName);
 
-        txtLastName = new JTextField(null);
+        txtLastName = new JTextField("das");
         txtLastName.setBounds(140, 70, 100, 20);
         pnlDriverGUI.add(txtLastName);
 
@@ -137,31 +134,31 @@ public class AddDriverGUI {
         txtDateOBirth.setBounds(140, 100, 100, 20);
         pnlDriverGUI.add(txtDateOBirth);
 
-        txtDrivingLicenceNum = new JTextField(null);
+        txtDrivingLicenceNum = new JTextField("das");
         txtDrivingLicenceNum.setBounds(140, 130, 100, 20);
         pnlDriverGUI.add(txtDrivingLicenceNum);
 
-        txtFirstAddressLine = new JTextField(null);
+        txtFirstAddressLine = new JTextField("das");
         txtFirstAddressLine.setBounds(140, 160, 100, 20);
         pnlDriverGUI.add(txtFirstAddressLine);
 
-        txtSecondAddressLine = new JTextField(null);
+        txtSecondAddressLine = new JTextField("das");
         txtSecondAddressLine.setBounds(140, 190, 100, 20);
         pnlDriverGUI.add(txtSecondAddressLine);
 
-        txtPostCode = new JTextField(null);
+        txtPostCode = new JTextField("das");
         txtPostCode.setBounds(140, 220, 100, 20);
         pnlDriverGUI.add(txtPostCode);
 
-        txtVehicleModel = new JTextField(null);
+        txtVehicleModel = new JTextField("das");
         txtVehicleModel.setBounds(140, 290, 100, 20);
         pnlDriverGUI.add(txtVehicleModel);
 
-        txtVehicleMake = new JTextField(null);
+        txtVehicleMake = new JTextField("das");
         txtVehicleMake.setBounds(140, 320, 100, 20);
         pnlDriverGUI.add(txtVehicleMake);
 
-        txtVehicleNumPlate = new JTextField(null);
+        txtVehicleNumPlate = new JTextField("das");
         txtVehicleNumPlate.setBounds(140, 350, 100, 20);
         pnlDriverGUI.add(txtVehicleNumPlate);
 
@@ -169,7 +166,7 @@ public class AddDriverGUI {
         txtVehicleYear.setBounds(140, 380, 100, 20);
         pnlDriverGUI.add(txtVehicleYear);
 
-        txtDriverSpeed = new JTextField(null);
+        txtDriverSpeed = new JTextField("32");
         txtDriverSpeed.setBounds(140, 430, 100, 20);
         pnlDriverGUI.add(txtDriverSpeed);
     }
@@ -219,17 +216,14 @@ public class AddDriverGUI {
         }
     }
 
-
     class CheckDriverData implements ActionListener {
-        private Ticket checkingSpeed = new Ticket();
-        private DriverInterfaceLogic addDriver = new DriverInterfaceLogic();
+        private CheckDriverSpeed submitDriverData = new CheckDriverSpeed();
 
         @Override
         public void actionPerformed(ActionEvent event) {
             driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText()};
             driverName = driverData[0];
             driversSpeed = Integer.parseInt(txtDriverSpeed.getText());
-
 
             if (driverData[0].isEmpty()) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -238,14 +232,12 @@ public class AddDriverGUI {
             } else if (roadSpeed == 0) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
-                checkingSpeed.speedCheck(driversSpeed, roadSpeed, driverName, roadType);
-                checkingSpeed.setDriverInfo();
-                addDriver.setDriverData(driverData);
-                JOptionPane.showMessageDialog(frmDriverGUI, checkingSpeed.getDriverInfo());
+                submitDriverData.speedCheck(driversSpeed, roadSpeed, driverName, roadType);
+                submitDriverData.setDriverInfo();
+                submitDriverData.setDriverData(driverData);
+                JOptionPane.showMessageDialog(frmDriverGUI, submitDriverData.getDriverInfo());
             }
         }
-
-
     }
 
     class DriverAddExitHandler implements ActionListener {
@@ -253,7 +245,6 @@ public class AddDriverGUI {
         public void actionPerformed(ActionEvent event) {
             frmDriverGUI.setVisible(false);
         }
-
     }
 }
 

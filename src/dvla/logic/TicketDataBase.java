@@ -1,3 +1,5 @@
+package dvla.logic;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -6,14 +8,14 @@ import java.util.Scanner;
  * Created by alex on 12/02/2017.
  */
 public class TicketDataBase {
-    private Ticket ticketResult;
     private int intDriverID;
 
-    public void saveDrivers(String[] driverData, String ticketResult) throws IOException {
+    public void saveDrivers(String[] driverData, String driverJudge) throws IOException {
         PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
-        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(driverData) + "\n" + ticketResult +  " \n");
+        System.out.println(driverJudge);
+        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(driverData) + "\n" + driverJudge +  " \n");
         driverFile.close();
         driverFile.flush();
     }

@@ -1,3 +1,5 @@
+package dvla.gui;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -25,7 +27,7 @@ public class SpeedingTicketGUI {
 
     public void loadMenu() {
         frmMainMenu = new JFrame();
-        frmMainMenu.setTitle("DVLA Ticket Program");
+        frmMainMenu.setTitle("DVLA CheckDriverSpeed Program");
         frmMainMenu.setSize(420, 350);
         frmMainMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frmMainMenu.setVisible(true);

@@ -1,3 +1,5 @@
+package dvla.logic;
+
 /**
  * Created by Alex on 25/02/2017.
  */
