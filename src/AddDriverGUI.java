@@ -229,7 +229,7 @@ public class AddDriverGUI {
 
             if (driverData[0].isEmpty()) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else if (txtSpeed.getText().isEmpty()) {
+            } else if (driverData[6].isEmpty()) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else if (roadSpeed == 0) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
