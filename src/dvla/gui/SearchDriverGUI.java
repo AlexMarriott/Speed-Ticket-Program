@@ -13,8 +13,8 @@ public class SearchDriverGUI {
     private JButton btnSearch,btnRemove, btnExit;
     private JPanel pnlSearchDriver;
     private JFrame frmSearchDriver;
-    private JTable table;
-    private JScrollPane scrollPane;
+    private JTable driverTable;
+    private JScrollPane driverScrollPane;
 
     public SearchDriverGUI(){
 
@@ -83,12 +83,11 @@ public class SearchDriverGUI {
 
     public void createDriverTable(){
         String[] columnNames = {"Driver ID", "First Name",  "Last Name",  "Date Of Birth",  "Driving Licence",  "First Address",  "Second Address",  "Post Code",};
-        Object[][] data = {{"1", "Kathy", "Smith", "May 1992", "fdsfdsfds", "fdsfdsf", "fdsdsfds", "fdsfds",}
-        };
-        table = new JTable(data, columnNames);
-        scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 0, 695,200);
-        pnlSearchDriver.add(scrollPane);
+        String[] data = {"1", "Kathy", "Smith", "May 1992", "fdsfdsfds", "fdsfdsf", "fdsdsfds", "fdsfds"};
+        driverTable = new JTable(data, columnNames);
+        driverScrollPane = new JScrollPane(driverTable);
+        driverScrollPane.setBounds(0, 0, 695,200);
+        pnlSearchDriver.add(driverScrollPane);
     }
 
     class DriverSearchHandler implements ActionListener {
