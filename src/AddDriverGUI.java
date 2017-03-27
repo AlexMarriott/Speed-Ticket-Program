@@ -181,7 +181,7 @@ public class AddDriverGUI {
     }
 
     private void addDriverJCombobox() {
-        AddDriver driverLogic = new AddDriver();
+        DriverInterfaceLogic driverLogic = new DriverInterfaceLogic();
         roadTypeList = new String[]{"School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
         roadList = new JComboBox(roadTypeList);
         roadList.setSelectedIndex(0);
@@ -217,7 +217,7 @@ public class AddDriverGUI {
 
     class CheckDriverData implements ActionListener {
         private Ticket checkingSpeed = new Ticket();
-        private AddDriver addDriver = new AddDriver();
+        private DriverInterfaceLogic addDriver = new DriverInterfaceLogic();
 
         @Override
         public void actionPerformed(ActionEvent event) {

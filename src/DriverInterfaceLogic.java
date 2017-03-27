@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by Alex on 23/02/2017.
  */
-public class AddDriver {
+public class DriverInterfaceLogic {
 
 
     private TicketDataBase saveDriverData;
@@ -18,12 +18,6 @@ public class AddDriver {
 //Add ticketr logic here
 
     //Does Driver Adding to database logic.
-
-
-    //Rename to Driverinterfacelogic.
-
-
-    //swaggingff
 
 
     public void setDriverData(String[] driverData) {
