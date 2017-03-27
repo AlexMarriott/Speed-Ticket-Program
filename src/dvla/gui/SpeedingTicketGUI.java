@@ -1,5 +1,8 @@
 package dvla.gui;
 
+import dvla.logic.RemoveDriver;
+import dvla.logic.SearchDriver;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;

@@ -1,12 +1,7 @@
 /**
  * Created by Alex on 17/02/2017.
  */
-    import javax.swing.*;
-    import java.awt.event.ActionEvent;
-    import java.awt.event.ActionListener;
-
-
-/**
+    /**
          * Created by alex on 11/02/2017.
 
         public class example {
