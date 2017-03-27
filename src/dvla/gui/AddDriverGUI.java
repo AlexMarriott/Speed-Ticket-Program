@@ -1,7 +1,6 @@
 package dvla.gui;
 
 import dvla.logic.CheckDriverSpeed;
-import dvla.logic.DriverInterfaceLogic;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,7 +11,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Alex on 24/03/2017.
  */
-public class AddDriverGUI {
+class AddDriverGUI {
     private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear;
     private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear;
     private JButton btnSubmit, btnBack;
@@ -26,9 +25,8 @@ public class AddDriverGUI {
     private static int roadSpeed;
     private int driversSpeed;
     private String driverName;
-    private String driverJudge;
 
-    public AddDriverGUI() {
+    protected AddDriverGUI() {
         pnlAddDriver();
         lblDriverButtons();
         txtDriverButtons();
@@ -43,7 +41,7 @@ public class AddDriverGUI {
         pnlDriverGUI.setLayout(null);
     }
 
-    public void frmAddDriver() {
+    private void frmAddDriver() {
         frmDriverGUI = new JFrame();
         frmDriverGUI.setTitle("Add A Driver");
         frmDriverGUI.setSize(800, 600);
@@ -182,7 +180,6 @@ public class AddDriverGUI {
     }
 
     private void addDriverJCombobox() {
-        DriverInterfaceLogic driverLogic = new DriverInterfaceLogic();
         roadTypeList = new String[]{"School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
         roadList = new JComboBox(roadTypeList);
         roadList.setSelectedIndex(0);
@@ -191,7 +188,7 @@ public class AddDriverGUI {
         pnlDriverGUI.add(roadList);
     }
 
-    public void addDriverButtons() {
+    private void addDriverButtons() {
 
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(22, 520, 100, 20);
@@ -208,7 +205,7 @@ public class AddDriverGUI {
         return driverData;
     }
 
-    static class RoadTypeHandler implements ActionListener {
+    private class RoadTypeHandler implements ActionListener {
         private JComboBox comboBox;
         private int[] roadSpeedList = new int[]{20, 20, 30, 60, 70};
 
@@ -219,7 +216,7 @@ public class AddDriverGUI {
         }
     }
 
-    class CheckDriverData implements ActionListener {
+    private class CheckDriverData implements ActionListener {
         private CheckDriverSpeed submitDriverData = new CheckDriverSpeed();
 
         @Override
@@ -243,7 +240,7 @@ public class AddDriverGUI {
         }
     }
 
-    class DriverAddExitHandler implements ActionListener {
+    private class DriverAddExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmDriverGUI.setVisible(false);

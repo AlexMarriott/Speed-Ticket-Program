@@ -1,7 +1,6 @@
 package dvla.gui;
 
 import dvla.logic.RemoveDriver;
-import dvla.logic.SearchDriver;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -81,7 +80,7 @@ public class SpeedingTicketGUI {
     class ViewDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            new SearchDriver();
+            new SearchDriverGUI();
         }
     }
 
