@@ -83,11 +83,11 @@ public class SearchDriverGUI {
 
     public void createDriverTable(){
         String[] columnNames = {"Driver ID", "First Name",  "Last Name",  "Date Of Birth",  "Driving Licence",  "First Address",  "Second Address",  "Post Code",};
-        String[] data = {"1", "Kathy", "Smith", "May 1992", "fdsfdsfds", "fdsfdsf", "fdsdsfds", "fdsfds"};
-        driverTable = new JTable(data, columnNames);
+        driverTable = new JTable();
         driverScrollPane = new JScrollPane(driverTable);
         driverScrollPane.setBounds(0, 0, 695,200);
         pnlSearchDriver.add(driverScrollPane);
+        //http://stackoverflow.com/questions/16010776/read-text-file-and-display-it-in-jtable
     }
 
     class DriverSearchHandler implements ActionListener {
