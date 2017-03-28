@@ -1,8 +1,6 @@
 package dvla.logic;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -39,8 +37,6 @@ public class TicketDataBase {
         }
         return intDriverID;
     }
-
-
 
     public void setDriverID() throws IOException {
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));

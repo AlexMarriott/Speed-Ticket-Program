@@ -1,13 +1,13 @@
 package dvla.gui;
 
 import dvla.logic.TicketDataBase;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -30,7 +30,7 @@ public class SearchDriverGUI {
         try
         {
             setTableData();
-            createDriverTable();
+            //createDriverTable();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +100,7 @@ public class SearchDriverGUI {
             String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "desc"};
             //we have 9 columns
             for (int i = 0; i < driverData.size(); i++) {
-                String[][] rowData = {{driverData.get(0).toString(), driverData.get(0).toString()
+                String[][] rowData = {{driverData.get(0).toString(), driverData.get(1).toString()
                 , driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString()
                 , driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString()}};
                 JTable driverTable = new JTable(rowData, columnNames);
@@ -117,21 +117,19 @@ public class SearchDriverGUI {
 
     public void setTableData() throws FileNotFoundException {
         driverData = new ArrayList();
-        String[] driverDataSplit = new String[1];
+        String[] aryDriverData = new String[18];
+        String[] aryDriverDataSplit = new String[18];
 
         File file = new File("Drivers.txt");
         Scanner readIn = new Scanner(file);
-        while (readIn.hasNextLine()) {
-            driverDataSplit = readIn.nextLine().split(", ");
-            System.out.println(driverDataSplit[0]);
+        String data = "";
+        int count = 0;
+        while (readIn.hasNext()) {
+            aryDriverData[count] = readIn.nextLine();//.split(",|\\r?\\n");
+            count++;
         }
-        driverData.add(driverDataSplit[0]);
-        for(int i = 0; i < driverData.size(); i++) {
-            System.out.println("Element " + i + ": " + driverData.get(i));
-        }
-        //System.out.println(driverData.get(1));
-        //System.out.println(driverDataSplit[8]);
-        //System.out.println(Arrays.asList(driverData));
+        aryDriverDataSplit = aryDriverData[0].split(", ");
+        System.out.println(aryDriverDataSplit);
     }
 
     class DriverSearchHandler implements ActionListener {
