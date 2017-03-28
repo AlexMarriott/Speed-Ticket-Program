@@ -1,6 +1,8 @@
 package dvla.logic;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -9,13 +11,17 @@ import java.util.Scanner;
  */
 public class TicketDataBase {
     private int intDriverID;
+    public String formattedDriverData;
+    private PrintWriter driverFile;
+
 
     public void saveDrivers(String[] driverData, String driverJudge) throws IOException {
-        PrintWriter driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
+        driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
         System.out.println(driverJudge);
-        driverFile.println("Driver ID: " + intDriverID + "\n" + Arrays.asList(driverData) + "\n" + driverJudge +  " \n");
+        formattedDriverData = Arrays.toString(driverData).replace("[", "").replace("]","").replace("{", "").replace("}","");
+        driverFile.println(intDriverID + ", " + formattedDriverData + ", " + driverJudge);
         driverFile.close();
         driverFile.flush();
     }
@@ -33,6 +39,8 @@ public class TicketDataBase {
         }
         return intDriverID;
     }
+
+
 
     public void setDriverID() throws IOException {
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));

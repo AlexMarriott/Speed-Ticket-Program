@@ -28,7 +28,7 @@ public class CheckDriverSpeed {
         if (driversSpeed > roadSpeed && driversSpeed < ticketThershold) {
             message = "Driver was over the speed limit but within reason, issue a warning. " + driversSpeed;
         } else if (driversSpeed >= ticketThershold && driversSpeed < countDateThershold) {
-            message = "Issuing CheckDriverSpeed for the speed of:  " + driversSpeed;
+            message = "Issuing speeding fine for the speed of:  " + driversSpeed;
         } else if (driversSpeed >= countDateThershold) {
             message = "Driver exceeded the Speed limit by: " + (driversSpeed - roadSpeed) + " \nDriver will be issued a ticket and count date.";
         } else {

@@ -1,8 +1,14 @@
 package dvla.gui;
 
+import dvla.logic.TicketDataBase;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Created by Alex on 23/02/2017.
@@ -15,25 +21,31 @@ public class SearchDriverGUI {
     private JFrame frmSearchDriver;
     private JTable driverTable;
     private JScrollPane driverScrollPane;
+    private ArrayList driverData;
 
-    public SearchDriverGUI(){
-
+    public SearchDriverGUI() {
         pnlAddSearchDrive();
         addDriverViewFields();
         addDriverViewButtons();
-        createDriverTable();
+        try
+        {
+            setTableData();
+            createDriverTable();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         frmAddSearchDriver();
     }
 
     public void frmAddSearchDriver(){
         frmSearchDriver = new JFrame();
         frmSearchDriver.setTitle("View Driver");
-        frmSearchDriver.setSize(700,400);
+        frmSearchDriver.setSize(800,400);
         frmSearchDriver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmSearchDriver.setVisible(false);
         frmSearchDriver.setLocationRelativeTo(null);
         frmSearchDriver.setResizable(false);
-
         frmSearchDriver.add(pnlSearchDriver);
         frmSearchDriver.setVisible(true);
     }
@@ -81,33 +93,72 @@ public class SearchDriverGUI {
         pnlSearchDriver.add(btnExit);
     }
 
-    public void createDriverTable(){
-        String[] columnNames = {"Driver ID", "First Name",  "Last Name",  "Date Of Birth",  "Driving Licence",  "First Address",  "Second Address",  "Post Code",};
-        driverTable = new JTable();
-        driverScrollPane = new JScrollPane(driverTable);
-        driverScrollPane.setBounds(0, 0, 695,200);
-        pnlSearchDriver.add(driverScrollPane);
-        //http://stackoverflow.com/questions/16010776/read-text-file-and-display-it-in-jtable
+    public void createDriverTable() {
+        TicketDataBase getRowData = new TicketDataBase();
+        try {
+            //setTableData();
+            String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "desc"};
+            //we have 9 columns
+            for (int i = 0; i < driverData.size(); i++) {
+                String[][] rowData = {{driverData.get(0).toString(), driverData.get(0).toString()
+                , driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString()
+                , driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString()}};
+                JTable driverTable = new JTable(rowData, columnNames);
+                driverScrollPane = new JScrollPane(driverTable);
+                driverScrollPane.setBounds(0, 0, 795, 200);
+                pnlSearchDriver.add(driverScrollPane);
+                //http://stackoverflow.com/questions/16010776/read-text-file-and-display-it-in-jtable
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setTableData() throws FileNotFoundException {
+        driverData = new ArrayList();
+        String[] driverDataSplit = new String[1];
+
+        File file = new File("Drivers.txt");
+        Scanner readIn = new Scanner(file);
+        while (readIn.hasNextLine()) {
+            driverDataSplit = readIn.nextLine().split(", ");
+            System.out.println(driverDataSplit[0]);
+        }
+        driverData.add(driverDataSplit[0]);
+        for(int i = 0; i < driverData.size(); i++) {
+            System.out.println("Element " + i + ": " + driverData.get(i));
+        }
+        //System.out.println(driverData.get(1));
+        //System.out.println(driverDataSplit[8]);
+        //System.out.println(Arrays.asList(driverData));
     }
 
     class DriverSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmSearchDriver.setVisible(false);
+            try {
+                setTableData();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
+
     class DriverRemoveHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchDriver.setVisible(false);
         }
     }
+
     class IssueTicketHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchDriver.setVisible(false);
         }
     }
+
     class IssueNewLicenseHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
