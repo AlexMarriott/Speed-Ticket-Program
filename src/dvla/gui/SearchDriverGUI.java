@@ -1,13 +1,13 @@
 package dvla.gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -22,11 +22,14 @@ public class SearchDriverGUI {
     private JTable driverTable;
     private JScrollPane driverScrollPane;
     private ArrayList driverData;
-
     private ArrayList<String> arrList;
     private int tableRowAmount;
     private String[] columnNames;
     private String[][] rowData;
+    private String searchDriverID;
+    DefaultTableModel model = new DefaultTableModel();
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+
 
 
     public SearchDriverGUI() {
@@ -84,7 +87,7 @@ public class SearchDriverGUI {
 
         btnSearch = new JButton("Edit Driver");
         btnSearch.setBounds(180, 295, 140, 30);
-        btnSearch.addActionListener(new IssueTicketHandler());
+        btnSearch.addActionListener(new IssueNewLicenseHandler());
         pnlSearchDriver.add(btnSearch);
 
         btnRemove = new JButton("Issue New License");
@@ -97,6 +100,7 @@ public class SearchDriverGUI {
         btnExit.addActionListener(new DriverSearchExitHandler());
         pnlSearchDriver.add(btnExit);
     }
+
 
     public double getTableRows() {
         return tableRowAmount = arrList.size() / 12;
@@ -116,6 +120,10 @@ public class SearchDriverGUI {
     }
 
 
+
+
+
+
     public void createDriverTable() {
         try {
             columnNames = new String[]{"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £"};
@@ -125,7 +133,6 @@ public class SearchDriverGUI {
             int count = 1;
             for (int i = 0; i < arrList.size(); i++) {
                 if (i == (count * 12)) {
-                    System.out.println("Row size: " + row + "Column size: " + column);
                     column = 0;
                     row++;
                     count++;
@@ -144,35 +151,24 @@ public class SearchDriverGUI {
         }
     }
 
-    public void setTableData() throws FileNotFoundException {
-        driverData = new ArrayList();
-        String[] aryDriverData = new String[18];
-        String[] aryDriverDataSplit = new String[18];
 
-        File file = new File("Drivers.txt");
-        Scanner readIn = new Scanner(file);
-        String data = "";
-        int count = 0;
-        while (readIn.hasNext()) {
-            aryDriverData[count] = readIn.nextLine();//.split(",|\\r?\\n");
-            count++;
-        }
-        aryDriverDataSplit = aryDriverData[0].split(", ");
-        System.out.println(Arrays.toString(aryDriverDataSplit));
 
-    }
 
 
     class DriverSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            try {
-                setTableData();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            String text = txtDriverID.getText();
+            if (text.length() == 0) {
+                sorter.setRowFilter(null);
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter(text, 0));
             }
         }
-    }
+
+
+        }
+
 
     class DriverRemoveHandler implements ActionListener {
         @Override
@@ -181,19 +177,18 @@ public class SearchDriverGUI {
         }
     }
 
-    class IssueTicketHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            frmSearchDriver.setVisible(false);
-        }
-    }
+
 
     class IssueNewLicenseHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchDriver.setVisible(false);
+
+
         }
     }
+
+
     class RemoveFineHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -208,8 +203,10 @@ public class SearchDriverGUI {
         }
     }
 
+
+
     public static void main(String[] args) {
         new SearchDriverGUI();
     }
-}
+    }
 
