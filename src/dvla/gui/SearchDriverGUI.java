@@ -112,41 +112,12 @@ public class SearchDriverGUI {
                 arrList.add(readIn.nextLine());
             }
         } catch (IOException e) {
-
         }
     }
 
-    /*public void submitDriver() {
-        FileWriter file = null;
-        try {
-            ArrayList<String> arrList = new ArrayList<>();
-            arrList.add("1");
-            arrList.add("Connor");
-            arrList.add("Phillips");
-            arrList.add("12/10/1996");
-            arrList.add("1010101");
-            arrList.add("105");
-            arrList.add("Mansel Road East");
-            arrList.add("SO16 9DY");
-            arrList.add("15");
-            arrList.add("35");
-            arrList.add("20");
-            arrList.add("£20");
-
-            file = new FileWriter("Drivers.txt", true);
-            for (int i = 0; i < arrList.size(); i++) {
-                file.write(arrList.get(i) + "\n");
-            }
-            file.flush();
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public void createDriverTable() {
         try {
-            System.out.println(tableRowAmount);
             columnNames = new String[]{"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £"};
             rowData = new String[tableRowAmount][12];
             int row = 0;
@@ -165,10 +136,11 @@ public class SearchDriverGUI {
             JTable driverTable = new JTable(rowData, columnNames);
             driverScrollPane = new JScrollPane(driverTable);
             driverScrollPane.setBounds(0, 0, 1005, 200);
+
             pnlSearchDriver.add(driverScrollPane);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the dataStore");
+            JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
         }
     }
 
@@ -187,7 +159,9 @@ public class SearchDriverGUI {
         }
         aryDriverDataSplit = aryDriverData[0].split(", ");
         System.out.println(Arrays.toString(aryDriverDataSplit));
+
     }
+
 
     class DriverSearchHandler implements ActionListener {
         @Override
