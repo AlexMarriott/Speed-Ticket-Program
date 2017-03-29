@@ -18,13 +18,17 @@ class AddDriverGUI {
     private JPanel pnlDriverGUI;
     private Border driverInfoBorder;
     private JFrame frmDriverGUI;
+    private JComboBox roadList;
     private String[] roadTypeList;
     private String[] driverData;
-    private JComboBox roadList;
-    private static String roadType;
+
     private static int roadSpeed;
     private int driversSpeed;
+    private int speedDifference;
+
     private String driverName;
+    private static String roadType;
+
 
     protected AddDriverGUI() {
         pnlAddDriver();
@@ -123,47 +127,47 @@ class AddDriverGUI {
     }
 
     private void txtDriverButtons() {
-        txtFirstName = new JTextField("das");
+        txtFirstName = new JTextField("ALEX");
         txtFirstName.setBounds(140, 40, 100, 20);
         pnlDriverGUI.add(txtFirstName);
 
-        txtLastName = new JTextField("das");
+        txtLastName = new JTextField("MARRIOTT");
         txtLastName.setBounds(140, 70, 100, 20);
         pnlDriverGUI.add(txtLastName);
 
-        txtDateOBirth = new JTextField("DD/MM/YYYY");
+        txtDateOBirth = new JTextField("29/05/1992");
         txtDateOBirth.setBounds(140, 100, 100, 20);
         pnlDriverGUI.add(txtDateOBirth);
 
-        txtDrivingLicenceNum = new JTextField("das");
+        txtDrivingLicenceNum = new JTextField("IRCAR");
         txtDrivingLicenceNum.setBounds(140, 130, 100, 20);
         pnlDriverGUI.add(txtDrivingLicenceNum);
 
-        txtFirstAddressLine = new JTextField("das");
+        txtFirstAddressLine = new JTextField("ROAD1");
         txtFirstAddressLine.setBounds(140, 160, 100, 20);
         pnlDriverGUI.add(txtFirstAddressLine);
 
-        txtSecondAddressLine = new JTextField("das");
+        txtSecondAddressLine = new JTextField("ROAD 2");
         txtSecondAddressLine.setBounds(140, 190, 100, 20);
         pnlDriverGUI.add(txtSecondAddressLine);
 
-        txtPostCode = new JTextField("das");
+        txtPostCode = new JTextField("EN2 ROAD");
         txtPostCode.setBounds(140, 220, 100, 20);
         pnlDriverGUI.add(txtPostCode);
 
-        txtVehicleModel = new JTextField("das");
+        txtVehicleModel = new JTextField("CILO");
         txtVehicleModel.setBounds(140, 290, 100, 20);
         pnlDriverGUI.add(txtVehicleModel);
 
-        txtVehicleMake = new JTextField("das");
+        txtVehicleMake = new JTextField("FAST");
         txtVehicleMake.setBounds(140, 320, 100, 20);
         pnlDriverGUI.add(txtVehicleMake);
 
-        txtVehicleNumPlate = new JTextField("das");
+        txtVehicleNumPlate = new JTextField("1234");
         txtVehicleNumPlate.setBounds(140, 350, 100, 20);
         pnlDriverGUI.add(txtVehicleNumPlate);
 
-        txtVehicleYear = new JTextField("DD/MM/YYYY");
+        txtVehicleYear = new JTextField("29/05/1992");
         txtVehicleYear.setBounds(140, 380, 100, 20);
         pnlDriverGUI.add(txtVehicleYear);
 
@@ -221,9 +225,11 @@ class AddDriverGUI {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-            driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText()};
-            driverName = driverData[0];
             driversSpeed = Integer.parseInt(txtDriverSpeed.getText());
+            speedDifference = driversSpeed - roadSpeed ;
+
+            driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), String.valueOf(roadSpeed), String.valueOf(driversSpeed ), String.valueOf(speedDifference)};
+            driverName = driverData[0];
 
             if (driverData[0].isEmpty()) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -234,7 +240,9 @@ class AddDriverGUI {
             } else {
                 submitDriverData.speedCheck(driversSpeed, roadSpeed, driverName, roadType);
                 submitDriverData.setDriverInfo();
+                submitDriverData.setDriversFine();
                 submitDriverData.setDriverData(driverData);
+
                 JOptionPane.showMessageDialog(frmDriverGUI, submitDriverData.getDriverInfo());
             }
         }

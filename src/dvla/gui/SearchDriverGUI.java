@@ -1,13 +1,13 @@
 package dvla.gui;
 
-import dvla.logic.TicketDataBase;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -23,16 +23,21 @@ public class SearchDriverGUI {
     private JScrollPane driverScrollPane;
     private ArrayList driverData;
 
+    private ArrayList<String> arrList;
+    private int tableRowAmount;
+    private String[] columnNames;
+    private String[][] rowData;
+
+
     public SearchDriverGUI() {
         pnlAddSearchDrive();
         addDriverViewFields();
         addDriverViewButtons();
-        try
-        {
-            setTableData();
-            //createDriverTable();
-        }
-        catch (Exception e) {
+        try {
+            getDriver();
+            getTableRows();
+            createDriverTable();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         frmAddSearchDriver();
@@ -41,7 +46,7 @@ public class SearchDriverGUI {
     public void frmAddSearchDriver(){
         frmSearchDriver = new JFrame();
         frmSearchDriver.setTitle("View Driver");
-        frmSearchDriver.setSize(800,400);
+        frmSearchDriver.setSize(1010,400);
         frmSearchDriver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmSearchDriver.setVisible(false);
         frmSearchDriver.setLocationRelativeTo(null);
@@ -93,25 +98,77 @@ public class SearchDriverGUI {
         pnlSearchDriver.add(btnExit);
     }
 
-    public void createDriverTable() {
-        TicketDataBase getRowData = new TicketDataBase();
+    public double getTableRows() {
+        return tableRowAmount = arrList.size() / 12;
+    }
+
+    public void getDriver() {
+        arrList = new ArrayList<>();
+
+        File file = new File("Drivers.txt");
         try {
-            //setTableData();
-            String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "desc"};
-            //we have 9 columns
-            for (int i = 0; i < driverData.size(); i++) {
-                String[][] rowData = {{driverData.get(0).toString(), driverData.get(1).toString()
-                , driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString()
-                , driverData.get(0).toString(), driverData.get(0).toString(), driverData.get(0).toString()}};
-                JTable driverTable = new JTable(rowData, columnNames);
-                driverScrollPane = new JScrollPane(driverTable);
-                driverScrollPane.setBounds(0, 0, 795, 200);
-                pnlSearchDriver.add(driverScrollPane);
-                //http://stackoverflow.com/questions/16010776/read-text-file-and-display-it-in-jtable
+            Scanner readIn = new Scanner(file);
+            while (readIn.hasNext()) {
+                arrList.add(readIn.nextLine());
             }
+        } catch (IOException e) {
+
         }
-        catch (Exception e) {
+    }
+
+    /*public void submitDriver() {
+        FileWriter file = null;
+        try {
+            ArrayList<String> arrList = new ArrayList<>();
+            arrList.add("1");
+            arrList.add("Connor");
+            arrList.add("Phillips");
+            arrList.add("12/10/1996");
+            arrList.add("1010101");
+            arrList.add("105");
+            arrList.add("Mansel Road East");
+            arrList.add("SO16 9DY");
+            arrList.add("15");
+            arrList.add("35");
+            arrList.add("20");
+            arrList.add("£20");
+
+            file = new FileWriter("Drivers.txt", true);
+            for (int i = 0; i < arrList.size(); i++) {
+                file.write(arrList.get(i) + "\n");
+            }
+            file.flush();
+            file.close();
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+    }*/
+
+    public void createDriverTable() {
+        try {
+            System.out.println(tableRowAmount);
+            columnNames = new String[]{"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £"};
+            rowData = new String[tableRowAmount][12];
+            int row = 0;
+            int column = 0;
+            int count = 1;
+            for (int i = 0; i < arrList.size(); i++) {
+                if (i == (count * 12)) {
+                    System.out.println("Row size: " + row + "Column size: " + column);
+                    column = 0;
+                    row++;
+                    count++;
+                }
+                rowData[row][column] = arrList.get(i);
+                column++;
+            }
+            JTable driverTable = new JTable(rowData, columnNames);
+            driverScrollPane = new JScrollPane(driverTable);
+            driverScrollPane.setBounds(0, 0, 1005, 200);
+            pnlSearchDriver.add(driverScrollPane);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the dataStore");
         }
     }
 
@@ -129,7 +186,7 @@ public class SearchDriverGUI {
             count++;
         }
         aryDriverDataSplit = aryDriverData[0].split(", ");
-        System.out.println(aryDriverDataSplit);
+        System.out.println(Arrays.toString(aryDriverDataSplit));
     }
 
     class DriverSearchHandler implements ActionListener {

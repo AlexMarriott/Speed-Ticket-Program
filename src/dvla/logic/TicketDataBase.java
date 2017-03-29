@@ -13,13 +13,21 @@ public class TicketDataBase {
     private PrintWriter driverFile;
 
 
-    public void saveDrivers(String[] driverData, String driverJudge) throws IOException {
+    public void saveDrivers(String[] driverData, String driverJudge, String driverFine) throws IOException {
         driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
         System.out.println(driverJudge);
         formattedDriverData = Arrays.toString(driverData).replace("[", "").replace("]","").replace("{", "").replace("}","");
-        driverFile.println(intDriverID + ", " + formattedDriverData + ", " + driverJudge);
+        driverFile.println(intDriverID);
+        int i;
+        for (i=0; i<driverData.length; i++){
+            driverFile.println(driverData[i]);
+        }
+        driverFile.println(driverFine);
+
+        //Driver Judge may or may not be included within this.
+        //driverFile.println(intDriverID + ", " + formattedDriverData + ", " + driverJudge);
         driverFile.close();
         driverFile.flush();
     }
