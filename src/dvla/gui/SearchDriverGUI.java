@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -19,17 +20,14 @@ import java.util.Scanner;
 public class SearchDriverGUI {
     private JLabel lblDriverID, lblStatus;
     private JTextField txtDriverID, txtStatus;
-    private JButton btnSearch, btnRemove, btnTopFiveOccurrences,btnTopFiveFines, btnExit;
+    private JButton btnSearch, btnRemove, btnTopFiveOccurrences, btnTopFiveFines, btnExit;
     private JPanel pnlSearchDriver;
     private JFrame frmSearchDriver;
     private JTable driverTable;
     private JScrollPane driverScrollPane;
-
     private ArrayList driverData;
     private ArrayList<String> arrList;
-
     private int tableRowAmount;
-
     private String[] columnNames;
     private String[][] rowData;
 
@@ -114,7 +112,6 @@ public class SearchDriverGUI {
         pnlSearchDriver.add(btnExit);
     }
 
-
     public double getTableRows() {
         return tableRowAmount = arrList.size() / 12;
     }
@@ -130,6 +127,16 @@ public class SearchDriverGUI {
             }
         } catch (IOException e) {
         }
+    }
+
+    public void saveDriverData()
+    {
+        ArrayList<ArrayList<String>> arrSave = new ArrayList<ArrayList<>>();
+        for(int i = 0; i < driverTable.getRowCount(); i++)
+        {
+            arrSave.add(driverTable.getValueAt(i, 0).toString());
+        }
+        System.out.println(Arrays.asList(arrSave));
     }
 
     public void createDriverTable() {
@@ -150,11 +157,9 @@ public class SearchDriverGUI {
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     System.out.println("postion " + arrList.get(i) + "is an Int");
                     column++;
-
                 } else {
                     rowData[row][column] = arrList.get(i);
                     column++;
-
                 }
             }
 
@@ -163,8 +168,6 @@ public class SearchDriverGUI {
             driverTable.setAutoCreateRowSorter(true);
             sorter = new TableRowSorter<>(driverTable.getModel());
             driverTable.setRowSorter(sorter);
-            //?????s
-            //sorter.getStringConverter();
 
             driverTable.getSelectionModel().addListSelectionListener(
                     new ListSelectionListener() {
@@ -183,7 +186,8 @@ public class SearchDriverGUI {
                         }
                     }
             );
-
+            driverTable.putClientProperty("terminateEditOnFocusLost", true);
+            saveDriverData();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
@@ -200,9 +204,9 @@ public class SearchDriverGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
 
-            driverTable.setRowSelectionInterval(Integer.parseInt(txtDriverID.getText())-1,
-                    Integer.parseInt(txtDriverID.getText())-1);
-            driverScrollPane.getVerticalScrollBar().setValue(Integer.parseInt(txtDriverID.getText())*16);
+            driverTable.setRowSelectionInterval(Integer.parseInt(txtDriverID.getText()) - 1,
+                    Integer.parseInt(txtDriverID.getText()) - 1);
+            driverScrollPane.getVerticalScrollBar().setValue(Integer.parseInt(txtDriverID.getText()) * 16);
             //Throw execption if the ID does not exist.
 
         }
@@ -220,14 +224,11 @@ public class SearchDriverGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             ArrayList list = new ArrayList();
-            list.add( new RowSorter.SortKey(2, SortOrder.ASCENDING) );
+            list.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
             sorter.setSortKeys(list);
             sorter.sort();
-
-
         }
     }
-
 
     class TopFiveFinesHandler implements ActionListener {
         @Override
@@ -243,11 +244,9 @@ public class SearchDriverGUI {
         }
     }
 
-
     public static void main(String[] args) {
         new SearchDriverGUI();
     }
-
 }
 
 
