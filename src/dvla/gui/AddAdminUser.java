@@ -1,31 +1,25 @@
 package dvla.gui;
 
-import dvla.logic.TicketDataBase;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
 
 /**
  * Created by Alex on 23/02/2017.
  */
 public class AddAdminUser {
     private JLabel lblUserName, lblPassword;
-    private JTextField txtUserName, txtPassword;
+    private JTextField txtUserName;
+    private JPasswordField txtPassword;
     private JButton btnLogin, btnExit;
-    private JPanel pnlDriverLogin;
-    private JFrame frmDriverLogin;
-    private String userLogin;
-    private String userPassword;
-    private String loginAndPassword;
-    private ArrayList loginArray;
+    private JPanel pnlAddAdmin;
+    private JFrame frmAddAdmin;
+    private String newAdminUser;
+    private String newAdminPassword;
+    private String newLoginAndPassword;
+    private PrintWriter adminLoginFile;
 
-
-    private TicketDataBase writingToFile;
     public AddAdminUser(){
 
         createLoginPanel();
@@ -41,104 +35,94 @@ public class AddAdminUser {
     }
 
     public void createLoginFrame(){
-        frmDriverLogin = new JFrame();
-        frmDriverLogin.setTitle("Login");
-        frmDriverLogin.setSize(400,175);
-        frmDriverLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmDriverLogin.setVisible(false);
-        frmDriverLogin.setLocationRelativeTo(null);
+        frmAddAdmin = new JFrame();
+        frmAddAdmin.setTitle("Login");
+        frmAddAdmin.setSize(400,175);
+        frmAddAdmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frmAddAdmin.setVisible(false);
+        frmAddAdmin.setLocationRelativeTo(null);
 
-        frmDriverLogin.add(pnlDriverLogin);
-        frmDriverLogin.setVisible(true);
+        frmAddAdmin.add(pnlAddAdmin);
+        frmAddAdmin.setVisible(true);
     }
     public void createLoginPanel(){
-        pnlDriverLogin = new JPanel();
-        pnlDriverLogin.setLayout(null);
+        pnlAddAdmin = new JPanel();
+        pnlAddAdmin.setLayout(null);
     }
 
     public void addLoginFields(){
 
-        lblUserName = new JLabel("UserName");
+        lblUserName = new JLabel("New UserName");
         lblUserName.setBounds(20, 20, 100, 20);
-        pnlDriverLogin.add(lblUserName);
+        pnlAddAdmin.add(lblUserName);
 
         txtUserName = new JTextField(null);
         txtUserName.setBounds(140, 20, 100, 20);
-        pnlDriverLogin.add(txtUserName);
+        pnlAddAdmin.add(txtUserName);
 
-        lblPassword = new JLabel("Password");
+        lblPassword = new JLabel("New Password");
         lblPassword.setBounds(20, 50, 100, 20);
-        pnlDriverLogin.add(lblPassword);
+        pnlAddAdmin.add(lblPassword);
 
-        txtPassword = new JTextField(null);
+        txtPassword = new JPasswordField(null);
         txtPassword.setBounds(140, 50, 100, 20);
-        pnlDriverLogin.add(txtPassword);
+        txtPassword.setEchoChar('*');
+        pnlAddAdmin.add(txtPassword);
 
     }
 
     public void addLoginButtons(){
-        btnLogin = new JButton("Login");
+        btnLogin = new JButton("Add");
         btnLogin.setBounds(10, 100, 100, 30);
-        btnLogin.addActionListener(new Login());
-        pnlDriverLogin.add(btnLogin);
+        btnLogin.addActionListener(new AddHandler());
+        pnlAddAdmin.add(btnLogin);
 
         btnExit = new JButton("Exit");
         btnExit.setBounds(275, 100, 100, 30);
-        btnExit.addActionListener(new LoginExitHandler());
-        pnlDriverLogin.add(btnExit);
+        btnExit.addActionListener(new ExitHandler());
+        pnlAddAdmin.add(btnExit);
     }
 
 
-    public void  setLoginDetails (){
-        userLogin = txtUserName.getText();
-        userPassword = txtPassword.getText();
-        loginAndPassword = userLogin +":"+ userPassword;
-    }
-    public String getLoginDetails(){
-        return loginAndPassword;
+    public void  setNewLogin (){
+        newAdminUser = txtUserName.getText();
+        newAdminPassword = String.valueOf(txtPassword.getPassword());
+        System.out.println(newAdminPassword);
+        newLoginAndPassword = newAdminUser +":"+ newAdminPassword;
     }
 
-    public void readInLoginFile() throws FileNotFoundException {
-        File file = new File("Login.txt");
-
-        Scanner readIn  = new Scanner(file);
-        loginArray = new ArrayList();
-        while (readIn.hasNextLine()) {
-            loginArray.add(readIn.nextLine());
-        }
+    public String getNewLogin(){
+        return newLoginAndPassword;
     }
 
-    class Login implements ActionListener {
+    public void saveNewUser() throws IOException {
+        adminLoginFile = new PrintWriter(new BufferedWriter(new FileWriter("Login.txt", true)));
+        adminLoginFile.println(newLoginAndPassword);
+        adminLoginFile.flush();
+        adminLoginFile.close();
+        JOptionPane.showMessageDialog(frmAddAdmin, "User Has Been Added. \nRemember, Great power comes with great responsibility.");
+    }
+
+    class AddHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
-            setLoginDetails();
-            getLoginDetails();
+            setNewLogin();
+            getNewLogin();
             try {
-                readInLoginFile();
-            } catch (FileNotFoundException e) {
+                saveNewUser();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            int i;
-            for(i=0; i<loginArray.size(); i++){
-                if(loginArray.get(i).equals(loginAndPassword)){
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successfully! Welcome!");
-                    new SpeedingTicketGUI();
-                    frmDriverLogin.setVisible(false);
-                }
-                else{
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
-                }
-            }
-        }
-    }
 
-    class LoginExitHandler implements ActionListener {
+        }
+            }
+
+    class ExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmDriverLogin.setVisible(false);
+            frmAddAdmin.setVisible(false);
         }
     }
-
 
     public static void main(String[] args){
         new AddAdminUser();

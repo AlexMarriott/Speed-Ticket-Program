@@ -111,10 +111,7 @@ public class SpeedingTicketGUI {
     class AddAdminHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            int exit = JOptionPane.showConfirmDialog(frmMainMenu, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
-            if (exit == 0) {
-                System.exit(0);
-            }
+            new AddAdminUser();
         }
 
     }

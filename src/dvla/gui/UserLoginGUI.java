@@ -15,7 +15,8 @@ import java.util.Scanner;
  */
 public class UserLoginGUI {
     private JLabel lblUserName, lblPassword;
-    private JTextField txtUserName, txtPassword;
+    private JTextField txtUserName;
+    private JPasswordField txtPassword;
     private JButton btnLogin, btnExit;
     private JPanel pnlDriverLogin;
     private JFrame frmDriverLogin;
@@ -70,8 +71,9 @@ public class UserLoginGUI {
         lblPassword.setBounds(20, 50, 100, 20);
         pnlDriverLogin.add(lblPassword);
 
-        txtPassword = new JTextField(null);
+        txtPassword = new JPasswordField(null);
         txtPassword.setBounds(140, 50, 100, 20);
+        txtPassword.setEchoChar('*');
         pnlDriverLogin.add(txtPassword);
 
     }
@@ -91,7 +93,7 @@ public class UserLoginGUI {
 
     public void  setLoginDetails (){
         userLogin = txtUserName.getText();
-        userPassword = txtPassword.getText();
+        userPassword = String.valueOf(txtPassword.getPassword());
         loginAndPassword = userLogin +":"+ userPassword;
     }
     public String getLoginDetails(){
@@ -111,6 +113,7 @@ public class UserLoginGUI {
     class Login implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
+            System.out.println("hello");
             setLoginDetails();
             getLoginDetails();
             try {
@@ -119,16 +122,22 @@ public class UserLoginGUI {
                 e.printStackTrace();
             }
             int i;
+            boolean userCanLogin =true;
             for(i=0; i<loginArray.size(); i++){
+                System.out.println(loginArray.get(i));
+
                 if(loginArray.get(i).equals(loginAndPassword)){
                     JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successfully! Welcome!");
                     new SpeedingTicketGUI();
                     frmDriverLogin.setVisible(false);
                 }
                 else{
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
+                    userCanLogin = false;
                 }
-        }
+            }
+            if (!userCanLogin){
+                JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
+            }
         }
     }
 
@@ -141,6 +150,6 @@ public class UserLoginGUI {
 
 
     public static void main(String[] args){
-        new AddAdminUser();
+        new UserLoginGUI();
     }
 }
