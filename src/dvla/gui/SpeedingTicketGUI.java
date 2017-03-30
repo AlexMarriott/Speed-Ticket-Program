@@ -1,7 +1,5 @@
 package dvla.gui;
 
-import dvla.logic.RemoveDriver;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -11,7 +9,7 @@ import java.io.IOException;
  */
 public class SpeedingTicketGUI {
     private JLabel lblPicture;
-    private JButton btnAddDriver, btnViewDriver, btnExit;
+    private JButton btnAddDriver, btnViewDriver,btnAddAdmin, btnExit;
     private JPanel pnlMainMenu;
     private JFrame frmMainMenu;
 
@@ -20,6 +18,7 @@ public class SpeedingTicketGUI {
         loadImages();
         loadButtons();
         loadMenu();
+
     }
 
     private void loadPanel() {
@@ -30,7 +29,7 @@ public class SpeedingTicketGUI {
     public void loadMenu() {
         frmMainMenu = new JFrame();
         frmMainMenu.setTitle("DVLA CheckDriverSpeed Program");
-        frmMainMenu.setSize(405, 300);
+        frmMainMenu.setSize(410, 365);
         frmMainMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frmMainMenu.setVisible(true);
         frmMainMenu.setLocationRelativeTo(null);
@@ -59,8 +58,13 @@ public class SpeedingTicketGUI {
         btnViewDriver.addActionListener(new ViewDriverHandler());
         pnlMainMenu.add(btnViewDriver);
 
+        btnAddAdmin = new JButton("New Login");
+        btnAddAdmin.setBounds(270, 230, 120, 40);
+        btnAddAdmin.addActionListener(new AddAdminHandler());
+        pnlMainMenu.add(btnAddAdmin);
+
         btnExit = new JButton("Exit");
-        btnExit.setBounds(270, 230, 120, 40);
+        btnExit.setBounds(140, 290, 120, 40);
         btnExit.addActionListener(new ExitSplashHandler());
         pnlMainMenu.add(btnExit);
     }
@@ -92,6 +96,7 @@ public class SpeedingTicketGUI {
         }
     };
 
+
     class ExitSplashHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -103,12 +108,19 @@ public class SpeedingTicketGUI {
 
     }
 
-    public static void main(String[] args) throws IOException {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+    class AddAdminHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            int exit = JOptionPane.showConfirmDialog(frmMainMenu, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
+            if (exit == 0) {
+                System.exit(0);
+            }
         }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+
         new SpeedingTicketGUI();
     }
 }
