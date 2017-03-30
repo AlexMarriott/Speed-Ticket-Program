@@ -130,6 +130,7 @@ public class UserLoginGUI {
                     JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successfully! Welcome!");
                     new SpeedingTicketGUI();
                     frmDriverLogin.setVisible(false);
+                    break;
                 }
                 else{
                     userCanLogin = false;
