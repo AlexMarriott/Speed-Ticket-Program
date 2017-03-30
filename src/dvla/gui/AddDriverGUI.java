@@ -48,7 +48,7 @@ class AddDriverGUI {
     private void frmAddDriver() {
         frmDriverGUI = new JFrame();
         frmDriverGUI.setTitle("Add A Driver");
-        frmDriverGUI.setSize(800, 600);
+        frmDriverGUI.setSize(500, 425);
         frmDriverGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmDriverGUI.setVisible(false);
         frmDriverGUI.setLocationRelativeTo(null);
@@ -117,16 +117,12 @@ class AddDriverGUI {
         lblVehicleYear.setBounds(260, 130, 120, 20);
         pnlDriverGUI.add(lblVehicleYear);
 
-        lblDateReported = new JLabel("Date Driver was Added");
-        lblDateReported.setBounds(260, 160, 120, 20);
-        pnlDriverGUI.add(lblDateReported);
-
         lblRoadType = new JLabel("Road Type");
-        lblRoadType.setBounds(20, 250, 100, 20);
+        lblRoadType.setBounds(20, 260, 100, 20);
         pnlDriverGUI.add(lblRoadType);
 
         lblDriversSpeed = new JLabel("Drivers Speed");
-        lblDriversSpeed.setBounds(20, 280, 100, 20);
+        lblDriversSpeed.setBounds(20, 300, 100, 20);
         pnlDriverGUI.add(lblDriversSpeed);
     }
 
@@ -160,30 +156,30 @@ class AddDriverGUI {
         pnlDriverGUI.add(txtPostCode);
 
         txtVehicleModel = new JTextField("CILO");
-        txtVehicleModel.setBounds(260, 290, 100, 20);
+        txtVehicleModel.setBounds(380, 40, 100, 20);
         pnlDriverGUI.add(txtVehicleModel);
 
         txtVehicleMake = new JTextField("FAST");
-        txtVehicleMake.setBounds(260, 320, 100, 20);
+        txtVehicleMake.setBounds(380, 70, 100, 20);
         pnlDriverGUI.add(txtVehicleMake);
 
         txtVehicleNumPlate = new JTextField("1234");
-        txtVehicleNumPlate.setBounds(260, 350, 100, 20);
+        txtVehicleNumPlate.setBounds(380, 100, 100, 20);
         pnlDriverGUI.add(txtVehicleNumPlate);
 
         txtVehicleYear = new JTextField("29/05/1992");
-        txtVehicleYear.setBounds(260, 380, 100, 20);
+        txtVehicleYear.setBounds(380, 130, 100, 20);
         pnlDriverGUI.add(txtVehicleYear);
 
         txtDriverSpeed = new JTextField("32");
-        txtDriverSpeed.setBounds(140, 430, 100, 20);
+        txtDriverSpeed.setBounds(140, 260, 100, 20);
         pnlDriverGUI.add(txtDriverSpeed);
     }
 
     private void addDriverImage() {
-        ImageIcon smallDVLAImage = new ImageIcon("dvla.jpg");
+        ImageIcon smallDVLAImage = new ImageIcon("dvlasmall.jpg");
         lblPicture = new JLabel(smallDVLAImage);
-        lblPicture.setBounds(580, 5, 200, 100);
+        lblPicture.setBounds(260, 160, 210, 135);
         pnlDriverGUI.add(lblPicture);
     }
 
@@ -191,7 +187,7 @@ class AddDriverGUI {
         roadTypeList = new String[]{"", "School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
         roadList = new JComboBox(roadTypeList);
         roadList.setSelectedIndex(0);
-        roadList.setBounds(140, 470, 120, 20);
+        roadList.setBounds(140, 300, 120, 20);
         roadList.addActionListener(new RoadTypeHandler());
         pnlDriverGUI.add(roadList);
     }
@@ -199,12 +195,12 @@ class AddDriverGUI {
     private void addDriverButtons() {
 
         btnSubmit = new JButton("Submit");
-        btnSubmit.setBounds(22, 520, 100, 20);
+        btnSubmit.setBounds(22, 350, 100, 20);
         btnSubmit.addActionListener(new CheckDriverData());
         pnlDriverGUI.add(btnSubmit);
 
         btnBack = new JButton("Back");
-        btnBack.setBounds(650, 520, 100, 20);
+        btnBack.setBounds(300, 350, 100, 20);
         btnBack.addActionListener(new DriverAddExitHandler());
         pnlDriverGUI.add(btnBack);
     }
@@ -218,6 +214,7 @@ class AddDriverGUI {
         private int[] roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
 
         public void actionPerformed(ActionEvent event) {
+
             comboBox = (JComboBox) event.getSource();
             roadType = String.valueOf(comboBox.getSelectedItem());
             roadSpeed = roadSpeedList[Integer.parseInt(String.valueOf(comboBox.getSelectedIndex()))];
@@ -231,6 +228,7 @@ class AddDriverGUI {
         public void actionPerformed(ActionEvent event) {
             driversSpeed = Integer.parseInt(txtDriverSpeed.getText());
             speedDifference = driversSpeed - roadSpeed ;
+
 
             driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), String.valueOf(roadSpeed), String.valueOf(driversSpeed ), String.valueOf(speedDifference)};
             driverName = driverData[0];
@@ -246,7 +244,6 @@ class AddDriverGUI {
                 submitDriverData.setDriverInfo();
                 submitDriverData.setDriversFine();
                 submitDriverData.setDriverData(driverData);
-
                 JOptionPane.showMessageDialog(frmDriverGUI, submitDriverData.getDriverInfo());
             }
         }

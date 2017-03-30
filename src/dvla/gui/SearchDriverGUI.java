@@ -166,6 +166,8 @@ public class SearchDriverGUI {
             driverTable.setAutoCreateRowSorter(true);
             sorter = new TableRowSorter<>(driverTable.getModel());
             driverTable.setRowSorter(sorter);
+            //?????s
+            //sorter.getStringConverter();
 
             driverTable.getSelectionModel().addListSelectionListener(
                     new ListSelectionListener() {
@@ -178,9 +180,7 @@ public class SearchDriverGUI {
                             } else {
                                 int modelRow = driverTable.convertRowIndexToModel(viewRow);
                                 txtStatus.setText(
-                                        String.format("Selected Row in view: %d. " +
-                                                        "Selected Column in view: %d.",
-                                                viewRow, viewCol));
+                                        String.format("Selected Row in view: %d. " + "Selected Column in view: %d.", viewRow, viewCol));
                             }
                         }
                     }
@@ -201,15 +201,12 @@ public class SearchDriverGUI {
     class DriverSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            driverTable.setRowSelectionInterval(Integer.parseInt(txtDriverID.getText())-1, Integer.parseInt(txtDriverID.getText())-1);
+
+            driverTable.setRowSelectionInterval(Integer.parseInt(txtDriverID.getText())-1,
+                    Integer.parseInt(txtDriverID.getText())-1);
             driverScrollPane.getVerticalScrollBar().setValue(Integer.parseInt(txtDriverID.getText())*16);
-            /* for (int i = 0; i < driverTable.getRowCount(); i++) {
-                for (int j = 0; j < driverTable.getColumnCount(); j++) {
-                    if (driverTable.getModel().getValueAt(i, j).equals("1")) {
-                        System.out.println(driverTable.getModel().getValueAt(1, j));
-                    }
-                }
-            }*/
+            //Throw execption if the ID does not exist.
+
         }
     }
 

@@ -18,7 +18,6 @@ public class CheckDriverSpeed {
 
     public void setDriverInfo() {
         driveInfoPrompt = ticketReturnMessage;
-        System.out.println(driveInfoPrompt);
     }
 
     public String getDriverInfo() {
@@ -35,6 +34,8 @@ public class CheckDriverSpeed {
 
         if (driversSpeed > roadSpeed && driversSpeed < ticketThershold) {
             message = "Driver was over the speed limit but within reason, issue a warning. " + driversSpeed + "MPH";
+            ticketReturnMessage = "Name: " + driverName + "\nSpeed logged: " + driversSpeed+ "MPH" + "\nType of Road: " + roadType + "\nAction Required: " + message;
+
         } else if (driversSpeed >= ticketThershold && driversSpeed < countDateThershold) {
             message = "Issuing speeding fine for the speed of: " + driversSpeed + "MPH";
             drivingFine = 50;

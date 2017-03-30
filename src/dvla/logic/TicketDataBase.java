@@ -17,7 +17,6 @@ public class TicketDataBase {
         driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getDriverID();
         setDriverID();
-        System.out.println(driverJudge);
         formattedDriverData = Arrays.toString(driverData).replace("[", "").replace("]","").replace("{", "").replace("}","");
         driverFile.println(intDriverID);
         int i;
@@ -41,7 +40,6 @@ public class TicketDataBase {
         }
         while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
             intDriverID++;
-            System.out.println(intDriverID);
         }
         return intDriverID;
     }
