@@ -105,7 +105,7 @@ public class SearchDriverGUI {
         btnSearch.addActionListener(new IssueNewLicenseHandler());
         pnlSearchDriver.add(btnSearch);
 
-        btnRemove = new JButton("Issue New License");
+        btnRemove = new JButton("");
         btnRemove.setBounds(500, 335, 140, 30);
         btnRemove.addActionListener(new IssueNewLicenseHandler());
         pnlSearchDriver.add(btnRemove);

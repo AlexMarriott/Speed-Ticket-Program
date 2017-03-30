@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
  * Created by Alex on 24/03/2017.
  */
 class AddDriverGUI {
-    private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear;
-    private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear;
+    private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear, lblDateReported;
+    private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear, txtDateReported;
     private JButton btnSubmit, btnBack;
     private JPanel pnlDriverGUI;
     private Border driverInfoBorder;
@@ -96,33 +96,37 @@ class AddDriverGUI {
 
         driverInfoBorder = BorderFactory.createLoweredBevelBorder();
         lblDriverInformation = new JLabel("Vehicle Information");
-        lblDriverInformation.setBounds(10, 260, 120, 20);
+        lblDriverInformation.setBounds(260, 10, 120, 20);
         lblDriverInformation.setFont(arial);
         pnlDriverGUI.add(lblDriverInformation);
         lblDriverInformation.setBorder(driverInfoBorder);
 
         lblVehicleModel = new JLabel("Vehicle Model");
-        lblVehicleModel.setBounds(20, 290, 100, 20);
+        lblVehicleModel.setBounds(260, 40, 100, 20);
         pnlDriverGUI.add(lblVehicleModel);
 
         lblVehicleMake = new JLabel("Vehicle Make");
-        lblVehicleMake.setBounds(20, 320, 100, 20);
+        lblVehicleMake.setBounds(260, 70, 100, 20);
         pnlDriverGUI.add(lblVehicleMake);
 
         lblVehicleNumPlate = new JLabel("Vehicle number Plate");
-        lblVehicleNumPlate.setBounds(20, 350, 120, 20);
+        lblVehicleNumPlate.setBounds(260, 100, 100, 20);
         pnlDriverGUI.add(lblVehicleNumPlate);
 
         lblVehicleYear = new JLabel("Year Vehicle Was Made");
-        lblVehicleYear.setBounds(20, 380, 120, 20);
+        lblVehicleYear.setBounds(260, 130, 120, 20);
         pnlDriverGUI.add(lblVehicleYear);
 
+        lblDateReported = new JLabel("Date Driver was Added");
+        lblDateReported.setBounds(260, 160, 120, 20);
+        pnlDriverGUI.add(lblDateReported);
+
         lblRoadType = new JLabel("Road Type");
-        lblRoadType.setBounds(20, 470, 100, 20);
+        lblRoadType.setBounds(20, 250, 100, 20);
         pnlDriverGUI.add(lblRoadType);
 
         lblDriversSpeed = new JLabel("Drivers Speed");
-        lblDriversSpeed.setBounds(20, 430, 100, 20);
+        lblDriversSpeed.setBounds(20, 280, 100, 20);
         pnlDriverGUI.add(lblDriversSpeed);
     }
 
@@ -156,19 +160,19 @@ class AddDriverGUI {
         pnlDriverGUI.add(txtPostCode);
 
         txtVehicleModel = new JTextField("CILO");
-        txtVehicleModel.setBounds(140, 290, 100, 20);
+        txtVehicleModel.setBounds(260, 290, 100, 20);
         pnlDriverGUI.add(txtVehicleModel);
 
         txtVehicleMake = new JTextField("FAST");
-        txtVehicleMake.setBounds(140, 320, 100, 20);
+        txtVehicleMake.setBounds(260, 320, 100, 20);
         pnlDriverGUI.add(txtVehicleMake);
 
         txtVehicleNumPlate = new JTextField("1234");
-        txtVehicleNumPlate.setBounds(140, 350, 100, 20);
+        txtVehicleNumPlate.setBounds(260, 350, 100, 20);
         pnlDriverGUI.add(txtVehicleNumPlate);
 
         txtVehicleYear = new JTextField("29/05/1992");
-        txtVehicleYear.setBounds(140, 380, 100, 20);
+        txtVehicleYear.setBounds(260, 380, 100, 20);
         pnlDriverGUI.add(txtVehicleYear);
 
         txtDriverSpeed = new JTextField("32");
@@ -184,7 +188,7 @@ class AddDriverGUI {
     }
 
     private void addDriverJCombobox() {
-        roadTypeList = new String[]{"School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
+        roadTypeList = new String[]{"", "School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
         roadList = new JComboBox(roadTypeList);
         roadList.setSelectedIndex(0);
         roadList.setBounds(140, 470, 120, 20);
@@ -211,7 +215,7 @@ class AddDriverGUI {
 
     private class RoadTypeHandler implements ActionListener {
         private JComboBox comboBox;
-        private int[] roadSpeedList = new int[]{20, 20, 30, 60, 70};
+        private int[] roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
 
         public void actionPerformed(ActionEvent event) {
             comboBox = (JComboBox) event.getSource();

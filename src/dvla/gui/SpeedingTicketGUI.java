@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class SpeedingTicketGUI {
     private JLabel lblPicture;
-    private JButton btnAddDriver, btnViewDriver, btnIssueTicket, btnExit;
+    private JButton btnAddDriver, btnViewDriver, btnExit;
     private JPanel pnlMainMenu;
     private JFrame frmMainMenu;
 
@@ -30,7 +30,7 @@ public class SpeedingTicketGUI {
     public void loadMenu() {
         frmMainMenu = new JFrame();
         frmMainMenu.setTitle("DVLA CheckDriverSpeed Program");
-        frmMainMenu.setSize(420, 350);
+        frmMainMenu.setSize(405, 300);
         frmMainMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frmMainMenu.setVisible(true);
         frmMainMenu.setLocationRelativeTo(null);
@@ -50,22 +50,17 @@ public class SpeedingTicketGUI {
 
     public void loadButtons() {
         btnAddDriver = new JButton("Add Driver");
-        btnAddDriver.setBounds(10, 240, 100, 40);
+        btnAddDriver.setBounds(10, 230, 120, 40);
         btnAddDriver.addActionListener(new AddDriverHandler());
         pnlMainMenu.add(btnAddDriver);
 
         btnViewDriver = new JButton("View Driver");
-        btnViewDriver.setBounds(120, 240, 140, 40);
+        btnViewDriver.setBounds(140, 230, 120, 40);
         btnViewDriver.addActionListener(new ViewDriverHandler());
         pnlMainMenu.add(btnViewDriver);
 
-        btnIssueTicket = new JButton("Remove Driver");
-        btnIssueTicket.setBounds(270, 240, 120, 40);
-        btnIssueTicket.addActionListener(new RemoveDriverHandler());
-        pnlMainMenu.add(btnIssueTicket);
-
         btnExit = new JButton("Exit");
-        btnExit.setBounds(140, 290, 100, 20);
+        btnExit.setBounds(270, 230, 120, 40);
         btnExit.addActionListener(new ExitSplashHandler());
         pnlMainMenu.add(btnExit);
     }
@@ -81,13 +76,6 @@ public class SpeedingTicketGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             new SearchDriverGUI();
-        }
-    }
-
-    class RemoveDriverHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            new RemoveDriver();
         }
     }
 

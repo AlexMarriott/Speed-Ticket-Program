@@ -9,11 +9,11 @@ import java.io.IOException;
 /**
  * Created by Alex on 30/03/2017.
  */
-public class LoginScreen {
+//public class LoginScreen {
     /**
      * Created by alex on 11/02/2017.
      */
-        private JLabel lblPicture;
+     /*   private JLabel lblPicture;
         private JButton btnLogin, btnExit;
         private JPanel pnlLogin;
         private JFrame frmLogin;
@@ -131,4 +131,4 @@ public class LoginScreen {
 //http://stackoverflow.com/questions/3480102/java-jframe-setlocationrelativetonull-not-centering-the-window-on-ubuntu-10-0 - Help with setting the Container to open in the middle of the screen (1).
 
 
-}
+}*/
