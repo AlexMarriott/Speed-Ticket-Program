@@ -131,10 +131,11 @@ public class SearchDriverGUI {
 
     public void saveDriverData()
     {
-        ArrayList<ArrayList<String>> arrSave = new ArrayList<ArrayList<>>();
+        ArrayList<ArrayList<String>> arrSave = new ArrayList<ArrayList<String>>();
         for(int i = 0; i < driverTable.getRowCount(); i++)
         {
-            arrSave.add(driverTable.getValueAt(i, 0).toString());
+            //driverTable.getValueAt(i, 0).toString());
+            arrSave.add()
         }
         System.out.println(Arrays.asList(arrSave));
     }
