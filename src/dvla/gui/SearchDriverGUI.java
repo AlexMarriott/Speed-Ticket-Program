@@ -1,10 +1,8 @@
 package dvla.gui;
 
-import javafx.scene.control.TableRow;
-
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -12,9 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -23,18 +19,20 @@ import java.util.Scanner;
 public class SearchDriverGUI {
     private JLabel lblDriverID, lblStatus;
     private JTextField txtDriverID, txtStatus;
-    private JButton btnSearch, btnRemove, btnExit;
+    private JButton btnSearch, btnRemove, btnTopFiveOccurrences,btnTopFiveFines, btnExit;
     private JPanel pnlSearchDriver;
     private JFrame frmSearchDriver;
     private JTable driverTable;
     private JScrollPane driverScrollPane;
+
     private ArrayList driverData;
     private ArrayList<String> arrList;
+
     private int tableRowAmount;
+
     private String[] columnNames;
     private String[][] rowData;
-    private String searchDriverID;
-    ArrayList columnArray;
+
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
 
     public SearchDriverGUI() {
@@ -100,18 +98,18 @@ public class SearchDriverGUI {
         btnRemove.addActionListener(new DriverRemoveHandler());
         pnlSearchDriver.add(btnRemove);
 
-        btnSearch = new JButton("Edit Driver");
-        btnSearch.setBounds(340, 335, 140, 30);
-        btnSearch.addActionListener(new IssueNewLicenseHandler());
-        pnlSearchDriver.add(btnSearch);
+        btnTopFiveOccurrences = new JButton("Show Top Five Offenders By Occurrences");
+        btnTopFiveOccurrences.setBounds(340, 335, 240, 30);
+        btnTopFiveOccurrences.addActionListener(new TopFiveOccurrenceHandler());
+        pnlSearchDriver.add(btnTopFiveOccurrences);
 
-        btnRemove = new JButton("");
-        btnRemove.setBounds(500, 335, 140, 30);
-        btnRemove.addActionListener(new IssueNewLicenseHandler());
-        pnlSearchDriver.add(btnRemove);
+        btnTopFiveFines = new JButton("Show Top Five Offenders By Fines");
+        btnTopFiveFines.setBounds(600, 335, 200, 30);
+        btnTopFiveFines.addActionListener(new TopFiveFinesHandler());
+        pnlSearchDriver.add(btnTopFiveFines);
 
         btnExit = new JButton("Back");
-        btnExit.setBounds(660, 335, 140, 30);
+        btnExit.setBounds(820, 335, 140, 30);
         btnExit.addActionListener(new DriverSearchExitHandler());
         pnlSearchDriver.add(btnExit);
     }
@@ -137,7 +135,6 @@ public class SearchDriverGUI {
     public void createDriverTable() {
         try {
             String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £"};
-            //need to change the number parts to ints so sorting can work better.
             rowData = new String[tableRowAmount][12];
             int row = 0;
             int column = 0;
@@ -178,6 +175,7 @@ public class SearchDriverGUI {
                             if (viewRow < 0 && viewCol < 0) {
                                 txtStatus.setText("");
                             } else {
+                                //Check to see if this can be used for anything else, if not remove it.
                                 int modelRow = driverTable.convertRowIndexToModel(viewRow);
                                 txtStatus.setText(
                                         String.format("Selected Row in view: %d. " + "Selected Column in view: %d.", viewRow, viewCol));
@@ -218,17 +216,20 @@ public class SearchDriverGUI {
     }
 
 
-    class IssueNewLicenseHandler implements ActionListener {
+    class TopFiveOccurrenceHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmSearchDriver.setVisible(false);
+            ArrayList list = new ArrayList();
+            list.add( new RowSorter.SortKey(2, SortOrder.ASCENDING) );
+            sorter.setSortKeys(list);
+            sorter.sort();
 
 
         }
     }
 
 
-    class RemoveFineHandler implements ActionListener {
+    class TopFiveFinesHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchDriver.setVisible(false);
