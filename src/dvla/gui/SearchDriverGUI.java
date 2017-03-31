@@ -30,7 +30,6 @@ public class SearchDriverGUI {
     private String[][] rowData;
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
     private DefaultTableModel dtm;
-    private String[][] strArrSave;
     public SearchDriverGUI() {
         pnlAddSearchDrive();
         addDriverViewFields();
@@ -98,16 +97,6 @@ public class SearchDriverGUI {
         btnRemove.addActionListener(new DriverRemoveHandler());
         pnlSearchDriver.add(btnRemove);
 
-        btnTopFiveOccurrences = new JButton("Show Top Five Offenders By Occurrences");
-        btnTopFiveOccurrences.setBounds(340, 335, 240, 30);
-        btnTopFiveOccurrences.addActionListener(new TopFiveOccurrenceHandler());
-        pnlSearchDriver.add(btnTopFiveOccurrences);
-
-        btnTopFiveFines = new JButton("Show Top Five Offenders By Fines");
-        btnTopFiveFines.setBounds(600, 335, 200, 30);
-        btnTopFiveFines.addActionListener(new TopFiveFinesHandler());
-        pnlSearchDriver.add(btnTopFiveFines);
-
         btnExit = new JButton("Back");
         btnExit.setBounds(820, 335, 140, 30);
         btnExit.addActionListener(new DriverSearchExitHandler());
@@ -132,24 +121,8 @@ public class SearchDriverGUI {
         }
     }
 
-    public void saveDriverData()
-    {
-        strArrSave = new String[driverTable.getRowCount()][driverTable.getColumnCount()];
-        for(int i = 0; i < driverTable.getRowCount(); i++)
-        {
-            for(int j = 0; j < driverTable.getColumnCount(); j++)
-            {
-                strArrSave[i][j] = driverTable.getValueAt(i, j).toString();
-            }
-        }
-        for(int i = 0; i < driverTable.getRowCount(); i++)
-        {
-            strArrSave[i][0] = Integer.toString(i+1);
-        }
-    }
-
     public void writeToFile()
-            //Stuidy this.
+    //Stuidy this.
     {
         try
         {
@@ -158,7 +131,7 @@ public class SearchDriverGUI {
             {
                 for(int j = 0; j < driverTable.getColumnCount(); j++)
                 {
-                   fW.write(strArrSave[i][j].toString().toUpperCase() + "\n");
+                   fW.write(rowData[i][j].toString().toUpperCase() + "\n");
                 }
             }
             fW.flush();
@@ -227,7 +200,6 @@ public class SearchDriverGUI {
     {
         public void tableChanged(TableModelEvent e)
         {
-            saveDriverData();
             writeToFile();
         }
     }
@@ -241,12 +213,8 @@ public class SearchDriverGUI {
     class DriverSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-
-            //driverTable.setRowSelectionInterval(Integer.parseInt(txtDriverID.getText()) - 1, Integer.parseInt(txtDriverID.getText()) - 1);
-            //driverTable.scrollRectToVisible(new Rectangle(driverTable.getCellRect(Integer.parseInt(txtDriverID.getText()), 0, true)));
-            //driverScrollPane.getVerticalScrollBar().setValue(Integer.parseInt(txtDriverID.getText())*15);
+            sorter.setRowFilter(RowFilter.regexFilter(txtDriverID.getText(), 0));
             //Throw execption if the ID does not exist.
-
         }
     }
 
@@ -254,17 +222,6 @@ public class SearchDriverGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             dtm.removeRow(driverTable.getSelectedRow());
-        }
-    }
-
-
-    class TopFiveOccurrenceHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            ArrayList list = new ArrayList();
-            list.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
-            sorter.setSortKeys(list);
-            sorter.sort();
         }
     }
 
