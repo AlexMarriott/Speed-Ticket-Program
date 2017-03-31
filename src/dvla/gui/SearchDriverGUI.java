@@ -30,6 +30,7 @@ public class SearchDriverGUI {
     private String[][] rowData;
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
     private DefaultTableModel dtm;
+    private String[][] strArrSave;
     public SearchDriverGUI() {
         pnlAddSearchDrive();
         addDriverViewFields();
@@ -131,7 +132,24 @@ public class SearchDriverGUI {
         }
     }
 
+    public void saveDriverData()
+    {
+        strArrSave = new String[driverTable.getRowCount()][driverTable.getColumnCount()];
+        for(int i = 0; i < driverTable.getRowCount(); i++)
+        {
+            for(int j = 0; j < driverTable.getColumnCount(); j++)
+            {
+                strArrSave[i][j] = driverTable.getValueAt(i, j).toString();
+            }
+        }
+        for(int i = 0; i < driverTable.getRowCount(); i++)
+        {
+            strArrSave[i][0] = Integer.toString(i+1);
+        }
+    }
+
     public void writeToFile()
+            //Stuidy this.
     {
         try
         {
@@ -140,7 +158,7 @@ public class SearchDriverGUI {
             {
                 for(int j = 0; j < driverTable.getColumnCount(); j++)
                 {
-                   fW.write(driverTable.getValueAt(i, j).toString().toUpperCase() + "\n");
+                   fW.write(strArrSave[i][j].toString().toUpperCase() + "\n");
                 }
             }
             fW.flush();
@@ -175,7 +193,6 @@ public class SearchDriverGUI {
                     column++;
                 }
             }
-
             //https://docs.oracle.com/javase/tutorial/uiswing/components/table.html#sorting
             dtm = new DefaultTableModel(rowData, columnNames);
             driverTable = new JTable(dtm);
@@ -206,15 +223,12 @@ public class SearchDriverGUI {
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
         }
     }
-
     class tableEdit implements TableModelListener
     {
         public void tableChanged(TableModelEvent e)
         {
-            int counter = 1;
-
-            dtm.setValueAt(1, 1, 1);
-            //writeToFile();
+            saveDriverData();
+            writeToFile();
         }
     }
 
