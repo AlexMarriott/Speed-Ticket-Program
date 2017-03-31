@@ -19,6 +19,12 @@ public class AddAdminUser {
     private String newAdminPassword;
     private String newLoginAndPassword;
     private PrintWriter adminLoginFile;
+    private String[] splitPassword;
+
+    private boolean badPassword;
+    private boolean goodPassword;
+    private char checkLetter;
+
 
     public AddAdminUser(){
 
@@ -103,19 +109,53 @@ public class AddAdminUser {
         JOptionPane.showMessageDialog(frmAddAdmin, "User Has Been Added. \nRemember, Great power comes with great responsibility.");
     }
 
-    class AddHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event ) {
-            setNewLogin();
-            getNewLogin();
-            try {
-                saveNewUser();
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void checkPassword(String loginAndPassword) {
+
+        int i;
+        int count = 0;
+
+        if (loginAndPassword.length() != 8) {
+            badPassword = true;
+        } else {
+            for (i = 0; i < loginAndPassword.length() ; i++) {
+                splitPassword[i] = String.valueOf((loginAndPassword.split("")));
+            }
+            for (i = 0; i < splitPassword.length; i++) {
+                checkLetter = splitPassword[i].charAt(i);
+                if (!Character.isLetter(checkLetter)) {
+                    badPassword = true;
+                    break;
+                } else {
+                    count++;
+                }
+            }
+            if (count < 8) {
+                badPassword = true;
             }
 
         }
+    }
+
+
+    class AddHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            setNewLogin();
+            getNewLogin();
+            checkPassword(newLoginAndPassword);
+            if (badPassword = true) {
+                JOptionPane.showMessageDialog(frmAddAdmin, "The Password length is should be 8 Characters and contain letters only");
+                ;
+            } else {
+                try {
+                    saveNewUser();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
+        }
+    }
 
     class ExitHandler implements ActionListener {
         @Override
@@ -127,4 +167,5 @@ public class AddAdminUser {
     public static void main(String[] args){
         new AddAdminUser();
     }
+
 }

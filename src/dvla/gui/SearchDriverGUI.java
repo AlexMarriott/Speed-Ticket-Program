@@ -129,7 +129,7 @@ public class SearchDriverGUI {
         }
     }
 
-    public void saveDriverData()
+   /*public void saveDriverData()
     {
         ArrayList<ArrayList<String>> arrSave = new ArrayList<ArrayList<String>>();
         for(int i = 0; i < driverTable.getRowCount(); i++)
@@ -138,7 +138,7 @@ public class SearchDriverGUI {
             arrSave.add()
         }
         System.out.println(Arrays.asList(arrSave));
-    }
+    }*/
 
     public void createDriverTable() {
         try {
@@ -188,7 +188,7 @@ public class SearchDriverGUI {
                     }
             );
             driverTable.putClientProperty("terminateEditOnFocusLost", true);
-            saveDriverData();
+            //saveDriverData();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
