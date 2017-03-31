@@ -16,8 +16,6 @@ public class UserLogin {
     private String loginAndPassword;
     private ArrayList loginArray;
 
-
-
     public void  setLoginDetails (String userName, char[] userPassword ){
         userLogin = userName;
         newUserPassword = String.valueOf(userPassword);

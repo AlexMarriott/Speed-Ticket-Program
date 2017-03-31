@@ -29,7 +29,6 @@ class AddDriverGUI {
     private String driverName;
     private static String roadType;
 
-
     protected AddDriverGUI() {
         pnlAddDriver();
         lblDriverButtons();

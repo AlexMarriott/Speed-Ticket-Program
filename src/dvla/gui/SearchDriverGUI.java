@@ -1,14 +1,15 @@
 package dvla.gui;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,19 +20,16 @@ import java.util.Scanner;
 public class SearchDriverGUI {
     private JLabel lblDriverID, lblStatus;
     private JTextField txtDriverID, txtStatus;
-    private JButton btnSearch, btnRemove, btnTotalFinesIssued,  btnExit;
+    private JButton btnSearch, btnRemove, btnTopFiveOccurrences, btnTopFiveFines, btnExit;
     private JPanel pnlSearchDriver;
     private JFrame frmSearchDriver;
     private JTable driverTable;
     private JScrollPane driverScrollPane;
-    private ArrayList driverData;
     private ArrayList<String> arrList;
     private int tableRowAmount;
-    private String[] columnNames;
     private String[][] rowData;
-
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
-
+    private DefaultTableModel dtm;
     public SearchDriverGUI() {
         pnlAddSearchDrive();
         addDriverViewFields();
@@ -40,10 +38,12 @@ public class SearchDriverGUI {
             getDriver();
             getTableRows();
             createDriverTable();
+            driverTable.getModel().addTableModelListener(new tableEdit());
+            driverTable.putClientProperty("terminateEditOnFocusLost", true);
+            setScrollPane();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setScrollPane(driverTable);
         frmAddSearchDriver();
     }
 
@@ -57,6 +57,8 @@ public class SearchDriverGUI {
         frmSearchDriver.setResizable(false);
         frmSearchDriver.add(pnlSearchDriver);
         frmSearchDriver.setVisible(true);
+        frmSearchDriver.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
     }
 
     public void pnlAddSearchDrive() {
@@ -95,13 +97,18 @@ public class SearchDriverGUI {
         btnRemove.addActionListener(new DriverRemoveHandler());
         pnlSearchDriver.add(btnRemove);
 
-        btnTotalFinesIssued = new JButton("Total Amount of Fines Issued");
-        btnTotalFinesIssued.setBounds(340, 335, 240, 30);
-        btnTotalFinesIssued.addActionListener(new btnTotalFinesIssuedHandler());
-        pnlSearchDriver.add(btnTotalFinesIssued);
+        btnTopFiveOccurrences = new JButton("Show Top Five Offenders By Occurrences");
+        btnTopFiveOccurrences.setBounds(340, 335, 240, 30);
+        btnTopFiveOccurrences.addActionListener(new TopFiveOccurrenceHandler());
+        pnlSearchDriver.add(btnTopFiveOccurrences);
+
+        btnTopFiveFines = new JButton("Show Top Five Offenders By Fines");
+        btnTopFiveFines.setBounds(600, 335, 200, 30);
+        btnTopFiveFines.addActionListener(new TopFiveFinesHandler());
+        pnlSearchDriver.add(btnTopFiveFines);
 
         btnExit = new JButton("Back");
-        btnExit.setBounds(600, 335, 140, 30);
+        btnExit.setBounds(820, 335, 140, 30);
         btnExit.addActionListener(new DriverSearchExitHandler());
         pnlSearchDriver.add(btnExit);
     }
@@ -120,19 +127,30 @@ public class SearchDriverGUI {
                 arrList.add(readIn.nextLine());
             }
         } catch (IOException e) {
+
         }
     }
 
-   /*public void saveDriverData()
+    public void writeToFile()
     {
-        ArrayList<ArrayList<String>> arrSave = new ArrayList<ArrayList<String>>();
-        for(int i = 0; i < driverTable.getRowCount(); i++)
+        try
         {
-            //driverTable.getValueAt(i, 0).toString());
-            arrSave.add()
+            FileWriter fW = new FileWriter("Drivers.txt");
+            for(int i = 0; i < driverTable.getRowCount(); i++)
+            {
+                for(int j = 0; j < driverTable.getColumnCount(); j++)
+                {
+                   fW.write(driverTable.getValueAt(i, j).toString().toUpperCase() + "\n");
+                }
+            }
+            fW.flush();
+            fW.close();
         }
-        System.out.println(Arrays.asList(arrSave));
-    }*/
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     public void createDriverTable() {
         try {
@@ -150,7 +168,7 @@ public class SearchDriverGUI {
                 if (column == 0 | column == 8 | column == 9 | column == 10 | column == 11) {
                     String stringToInt = arrList.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
-                    System.out.println("postion " + arrList.get(i) + "is an Int");
+                    //System.out.println("postion " + arrList.get(i) + "is an Int");
                     column++;
                 } else {
                     rowData[row][column] = arrList.get(i);
@@ -159,37 +177,48 @@ public class SearchDriverGUI {
             }
 
             //https://docs.oracle.com/javase/tutorial/uiswing/components/table.html#sorting
-            driverTable = new JTable(rowData, columnNames);
+            dtm = new DefaultTableModel(rowData, columnNames);
+            driverTable = new JTable(dtm);
             driverTable.setAutoCreateRowSorter(true);
             sorter = new TableRowSorter<>(driverTable.getModel());
             driverTable.setRowSorter(sorter);
+			/*
+			driverTable.getSelectionModel().addListSelectionListener(
+					new ListSelectionListener() {
+						@Override
+						public void valueChanged(ListSelectionEvent e) {
+							int viewRow = driverTable.getSelectedRow();
+							int viewCol = driverTable.getSelectedColumn();
+							if (viewRow < 0 && viewCol < 0) {
+								txtStatus.setText("");
+							} else {
+								//Check to see if this can be used for anything else, if not remove it.
+								int modelRow = driverTable.convertRowIndexToModel(viewRow);
+								txtStatus.setText(
+										String.format("Selected Row in view: %d. " + "Selected Column in view: %d.", viewRow, viewCol));
+							}
+						}
+					});
+			*/
 
-            driverTable.getSelectionModel().addListSelectionListener(
-                    new ListSelectionListener() {
-                        @Override
-                        public void valueChanged(ListSelectionEvent e) {
-                            int viewRow = driverTable.getSelectedRow();
-                            int viewCol = driverTable.getSelectedColumn();
-                            if (viewRow < 0 && viewCol < 0) {
-                                txtStatus.setText("");
-                            } else {
-                                //Check to see if this can be used for anything else, if not remove it.
-                                int modelRow = driverTable.convertRowIndexToModel(viewRow);
-                                txtStatus.setText(
-                                        String.format("Selected Row in view: %d. " + "Selected Column in view: %d.", viewRow, viewCol));
-                            }
-                        }
-                    }
-            );
-            driverTable.putClientProperty("terminateEditOnFocusLost", true);
-            //saveDriverData();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
         }
     }
 
-    public void setScrollPane(Component driverTable) {
+    class tableEdit implements TableModelListener
+    {
+        public void tableChanged(TableModelEvent e)
+        {
+            int counter = 1;
+
+            dtm.setValueAt(1, 1, 1);
+            //writeToFile();
+        }
+    }
+
+    public void setScrollPane() {
         driverScrollPane = new JScrollPane(driverTable);
         driverScrollPane.setBounds(0, 0, 1005, 200);
         pnlSearchDriver.add(driverScrollPane);
@@ -199,9 +228,9 @@ public class SearchDriverGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
 
-            driverTable.setRowSelectionInterval(Integer.parseInt(txtDriverID.getText()) - 1,
-                    Integer.parseInt(txtDriverID.getText()) - 1);
-            driverScrollPane.getVerticalScrollBar().setValue(Integer.parseInt(txtDriverID.getText()) * 16);
+            //driverTable.setRowSelectionInterval(Integer.parseInt(txtDriverID.getText()) - 1, Integer.parseInt(txtDriverID.getText()) - 1);
+            //driverTable.scrollRectToVisible(new Rectangle(driverTable.getCellRect(Integer.parseInt(txtDriverID.getText()), 0, true)));
+            //driverScrollPane.getVerticalScrollBar().setValue(Integer.parseInt(txtDriverID.getText())*15);
             //Throw execption if the ID does not exist.
 
         }
@@ -210,7 +239,7 @@ public class SearchDriverGUI {
     class DriverRemoveHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmSearchDriver.setVisible(false);
+            dtm.removeRow(driverTable.getSelectedRow());
         }
     }
 
@@ -225,7 +254,7 @@ public class SearchDriverGUI {
         }
     }
 
-    class btnTotalFinesIssuedHandler implements ActionListener {
+    class TopFiveFinesHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchDriver.setVisible(false);
@@ -243,7 +272,3 @@ public class SearchDriverGUI {
         new SearchDriverGUI();
     }
 }
-
-
-
-
