@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -20,7 +19,7 @@ import java.util.Scanner;
 public class SearchDriverGUI {
     private JLabel lblDriverID, lblStatus;
     private JTextField txtDriverID, txtStatus;
-    private JButton btnSearch, btnRemove, btnTopFiveOccurrences, btnTopFiveFines, btnExit;
+    private JButton btnSearch, btnRemove, btnTotalFinesIssued,  btnExit;
     private JPanel pnlSearchDriver;
     private JFrame frmSearchDriver;
     private JTable driverTable;
@@ -96,18 +95,13 @@ public class SearchDriverGUI {
         btnRemove.addActionListener(new DriverRemoveHandler());
         pnlSearchDriver.add(btnRemove);
 
-        btnTopFiveOccurrences = new JButton("Show Top Five Offenders By Occurrences");
-        btnTopFiveOccurrences.setBounds(340, 335, 240, 30);
-        btnTopFiveOccurrences.addActionListener(new TopFiveOccurrenceHandler());
-        pnlSearchDriver.add(btnTopFiveOccurrences);
-
-        btnTopFiveFines = new JButton("Show Top Five Offenders By Fines");
-        btnTopFiveFines.setBounds(600, 335, 200, 30);
-        btnTopFiveFines.addActionListener(new TopFiveFinesHandler());
-        pnlSearchDriver.add(btnTopFiveFines);
+        btnTotalFinesIssued = new JButton("Total Amount of Fines Issued");
+        btnTotalFinesIssued.setBounds(340, 335, 240, 30);
+        btnTotalFinesIssued.addActionListener(new btnTotalFinesIssuedHandler());
+        pnlSearchDriver.add(btnTotalFinesIssued);
 
         btnExit = new JButton("Back");
-        btnExit.setBounds(820, 335, 140, 30);
+        btnExit.setBounds(600, 335, 140, 30);
         btnExit.addActionListener(new DriverSearchExitHandler());
         pnlSearchDriver.add(btnExit);
     }
@@ -231,7 +225,7 @@ public class SearchDriverGUI {
         }
     }
 
-    class TopFiveFinesHandler implements ActionListener {
+    class btnTotalFinesIssuedHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchDriver.setVisible(false);
