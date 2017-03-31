@@ -111,15 +111,13 @@ public class UserLoginGUI {
         }
     }
 
+
+
     class Login implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
             setLoginDetails();
             getLoginDetails();
-
-            checkingPassword.checkPassword(loginAndPassword);
-
-
 
             try {
                 readInLoginFile();
