@@ -94,34 +94,6 @@ public class AddAccountGUI {
     }
 
 
-    /*public void checkPassword(String loginAndPassword) {
-
-        int i;
-        int count = 0;
-
-        if (newAccountPassword.length() != 8) {
-            badPassword = true;
-        } else {
-            for (i = 0; i < newAccountPassword. ; i++) {
-                splitPassword[i] = String.valueOf((newAccountPassword.split("")));
-            }
-            for (i = 0; i < splitPassword.length; i++) {
-                checkLetter = splitPassword[i].charAt(i);
-                if (!Character.isLetter(checkLetter)) {
-                    badPassword = true;
-                    break;
-                } else {
-                    count++;
-                }
-            }
-            if (count < 8) {
-                badPassword = true;
-            }
-
-        }
-    }*/
-
-
     class AddHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {

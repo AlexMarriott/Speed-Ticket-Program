@@ -1,14 +1,13 @@
 package dvla.gui;
 
 import dvla.logic.PasswordCipher;
+import dvla.logic.UserLogin;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by Alex on 23/02/2017.
@@ -20,10 +19,9 @@ public class UserLoginGUI {
     private JButton btnLogin, btnExit;
     private JPanel pnlDriverLogin;
     private JFrame frmDriverLogin;
-    private String userLogin;
-    private String userPassword;
-    private String loginAndPassword;
+
     private ArrayList loginArray;
+    private UserLogin userlogic;
 
     private PasswordCipher checkingPassword;
 
@@ -91,41 +89,32 @@ public class UserLoginGUI {
     }
 
 
-    public void  setLoginDetails (){
-        userLogin = txtUserName.getText();
-        userPassword = String.valueOf(txtPassword.getPassword());
-        loginAndPassword = userLogin +":"+ userPassword;
-    }
-    public String getLoginDetails(){
-        return loginAndPassword;
-    }
 
-    public void readInLoginFile() throws FileNotFoundException {
-        File file = new File("Login.txt");
-
-        Scanner readIn  = new Scanner(file);
-        loginArray = new ArrayList();
-        while (readIn.hasNextLine()) {
-            loginArray.add(readIn.nextLine());
-        }
-    }
     class Login implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
-            setLoginDetails();
-            getLoginDetails();
+            userlogic = new UserLogin();
+             ArrayList loginArray = new ArrayList();
+
+            userlogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
+            userlogic.getLoginDetails();
 
             try {
-                readInLoginFile();
+
+                loginArray= userlogic.getDataStore();
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
             int i;
             boolean userCanLogin =true;
+
             for(i=0; i<loginArray.size(); i++){
                 System.out.println(loginArray.get(i));
 
-                if(loginArray.get(i).equals(loginAndPassword)){
+
+                if(loginArray.get(i).equals(userlogic.getLoginDetails())){
+
                     JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successfully! Welcome!");
                     new SpeedingTicketGUI();
                     frmDriverLogin.setVisible(false);
