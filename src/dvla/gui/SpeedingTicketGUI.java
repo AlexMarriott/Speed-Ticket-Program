@@ -111,7 +111,7 @@ public class SpeedingTicketGUI {
     class AddAdminHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            new AddAdminUser();
+            new AddAccountGUI();
         }
 
     }

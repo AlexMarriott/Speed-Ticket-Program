@@ -1,7 +1,6 @@
 package dvla.gui;
 
 import dvla.logic.PasswordCipher;
-import dvla.logic.TicketDataBase;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -110,9 +109,6 @@ public class UserLoginGUI {
             loginArray.add(readIn.nextLine());
         }
     }
-
-
-
     class Login implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
