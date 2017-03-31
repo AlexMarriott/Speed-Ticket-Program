@@ -1,5 +1,6 @@
 package dvla.gui;
 
+import dvla.logic.PasswordCipher;
 import dvla.logic.TicketDataBase;
 
 import javax.swing.*;
@@ -25,8 +26,8 @@ public class UserLoginGUI {
     private String loginAndPassword;
     private ArrayList loginArray;
 
+    private PasswordCipher checkingPassword;
 
-    private TicketDataBase writingToFile;
     public UserLoginGUI(){
 
         createLoginPanel();
@@ -113,9 +114,13 @@ public class UserLoginGUI {
     class Login implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event ) {
-            System.out.println("hello");
             setLoginDetails();
             getLoginDetails();
+
+            checkingPassword.checkPassword(loginAndPassword);
+
+
+
             try {
                 readInLoginFile();
             } catch (FileNotFoundException e) {
