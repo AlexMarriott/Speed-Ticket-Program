@@ -18,7 +18,7 @@ class AddDriverGUI {
     private JPanel pnlDriverGUI;
     private Border driverInfoBorder;
     private JFrame frmDriverGUI;
-    private JComboBox roadList;
+    private JComboBox<String> roadList;
     private String[] roadTypeList, driverData;
 
     private static int roadSpeed;
@@ -183,7 +183,7 @@ class AddDriverGUI {
 
     private void addDriverJCombobox() {
         roadTypeList = new String[]{"", "School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
-        roadList = new JComboBox(roadTypeList);
+        roadList = new JComboBox<>(roadTypeList);
         roadList.setSelectedIndex(0);
         roadList.setBounds(140, 300, 120, 20);
         roadList.addActionListener(new RoadTypeHandler());

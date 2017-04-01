@@ -14,7 +14,7 @@ public class TicketDataBase {
     private PrintWriter driverFile;
 
 
-    public void saveDrivers(String[] driverData, String driverJudge, String driverFine) throws IOException {
+    void saveDrivers(String[] driverData, String driverJudge, String driverFine) throws IOException {
         driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
         getNextDriverID();
         setDriverID();
@@ -29,7 +29,7 @@ public class TicketDataBase {
         driverFile.flush();
     }
 
-    public int getNextDriverID() throws FileNotFoundException {
+    private int getNextDriverID() throws FileNotFoundException {
         boolean line;
         File file = new File("DriversID.txt");
         Scanner readIn = new Scanner(file);
@@ -42,7 +42,7 @@ public class TicketDataBase {
         return DriverID;
     }
 
-    public void setDriverID() throws IOException {
+    private void setDriverID() throws IOException {
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
         outfile.println("ID " + DriverID);
         outfile.flush();
