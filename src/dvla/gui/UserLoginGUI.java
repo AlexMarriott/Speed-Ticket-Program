@@ -115,7 +115,7 @@ public class UserLoginGUI {
 
                 if(loginArray.get(i).equals(userlogic.getLoginDetails())){
 
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successfully! Welcome!");
+                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
                     new SpeedingTicketGUI();
                     frmDriverLogin.setVisible(false);
                     break;

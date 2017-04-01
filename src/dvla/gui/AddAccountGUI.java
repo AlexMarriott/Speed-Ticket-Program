@@ -17,7 +17,6 @@ public class AddAccountGUI {
     private JButton btnSubmit, btnconvention, btnExit;
     private JPanel pnlAddAccount;
     private JFrame frmAddAccount;
-    private String newUserName, newPassword;
     private AddAccount addingAccount;
 
 
@@ -46,6 +45,8 @@ public class AddAccountGUI {
         frmAddAccount.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmAddAccount.setVisible(false);
         frmAddAccount.setLocationRelativeTo(null);
+        frmAddAccount.getRootPane().setDefaultButton(btnSubmit);
+
 
         frmAddAccount.add(pnlAddAccount);
         frmAddAccount.setVisible(true);
@@ -112,6 +113,7 @@ public class AddAccountGUI {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    JOptionPane.showMessageDialog(frmAddAccount, "User Added, Remember, with great power comes great responsibility ");
 
                 }
             }

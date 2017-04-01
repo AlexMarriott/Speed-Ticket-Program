@@ -13,40 +13,34 @@ public class AddAccount {
     private String newAccountPassword;
     private String newLoginAndPassword;
     private PrintWriter accountLoginFile;
-    private String[] splitPassword;
     private String stringToPassword;
     private char[] AccountPassword;
 
-    private boolean badPassword;
-    private boolean badUser;
-    private char checkLetter;
-
+    private boolean correctUserPassword;
+    private boolean correctUserName;
     public boolean getPasswordState() {
-        System.out.println(badPassword);
-        return badPassword;
+        return correctUserPassword;
     }
     public boolean getUserState() {
-        System.out.println(badUser);
-        return badUser;
+        return correctUserName;
     }
 
 
     public void  setNewLogin(String newAccountUser, char[] AccountPassword){
         stringToPassword = String.valueOf(AccountPassword);
 
-        if(newAccountUser.length() < 5 | !stringToPassword.matches("^[a-zA-Z]*$")){
+        if(newAccountUser.length() < 5 | !newAccountUser.matches("^[a-zA-Z]*$")){
             System.out.println(newAccountUser);
-            badUser = false;
+            correctUserName = false;
         }
         else
-            badUser = true;
+            correctUserName = true;
 
         if(stringToPassword.length() < 7 | !stringToPassword.matches("^[a-zA-Z0-9]*$")){
-            System.out.println(stringToPassword);
-            badPassword = false;
+            correctUserPassword = false;
         }
         else
-            badPassword = true;
+            correctUserPassword = true;
 
         newAccountPassword = String.valueOf(AccountPassword);
         newLoginAndPassword = newAccountUser +":"+ newAccountPassword;

@@ -8,6 +8,7 @@ import java.util.Scanner;
  * Created by alex on 12/02/2017.
  */
 public class TicketDataBase {
+
     private int intDriverID;
     public String formattedDriverData;
     private PrintWriter driverFile;
@@ -25,8 +26,6 @@ public class TicketDataBase {
         }
         driverFile.println(driverFine);
 
-        //Driver Judge may or may not be included within this.
-        //driverFile.println(intDriverID + ", " + formattedDriverData + ", " + driverJudge);
         driverFile.close();
         driverFile.flush();
     }
