@@ -20,10 +20,6 @@ public class AddAccountGUI {
     private AddAccount addingAccount;
 
 
-
-
-
-
     public AddAccountGUI(){
 
         createLoginPanel();
