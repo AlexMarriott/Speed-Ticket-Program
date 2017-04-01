@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class SearchDriverGUI {
     private JLabel lblDriverID, lblStatus;
     private JTextField txtDriverID, txtStatus;
-    private JButton btnSearch, btnRemove, btnTopFiveOccurrences, btnTopFiveFines, btnExit;
+    private JButton btnSearch, btnRemove, btnExit;
     private JPanel pnlSearchDriver;
     private JFrame frmSearchDriver;
     private JTable driverTable;

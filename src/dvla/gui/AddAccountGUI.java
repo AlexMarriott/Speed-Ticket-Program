@@ -21,10 +21,6 @@ public class AddAccountGUI {
     private AddAccount addingAccount;
 
 
-
-
-
-
     public AddAccountGUI(){
 
         createLoginPanel();
@@ -46,6 +42,8 @@ public class AddAccountGUI {
         frmAddAccount.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmAddAccount.setVisible(false);
         frmAddAccount.setLocationRelativeTo(null);
+        frmAddAccount.getRootPane().setDefaultButton(btnSubmit);
+
 
         frmAddAccount.add(pnlAddAccount);
         frmAddAccount.setVisible(true);

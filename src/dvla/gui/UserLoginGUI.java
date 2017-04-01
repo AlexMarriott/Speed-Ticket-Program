@@ -46,6 +46,7 @@ public class UserLoginGUI {
         frmDriverLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmDriverLogin.setVisible(false);
         frmDriverLogin.setLocationRelativeTo(null);
+        frmDriverLogin.getRootPane().setDefaultButton(btnLogin);
 
         frmDriverLogin.add(pnlDriverLogin);
         frmDriverLogin.setVisible(true);
