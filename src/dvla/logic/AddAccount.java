@@ -18,6 +18,7 @@ public class AddAccount {
 
     private boolean correctUserPassword;
     private boolean correctUserName;
+
     public boolean getPasswordState() {
         return correctUserPassword;
     }
@@ -26,23 +27,23 @@ public class AddAccount {
     }
 
 
-    public void  setNewLogin(String newAccountUser, char[] AccountPassword){
-        stringToPassword = String.valueOf(AccountPassword);
+    public void  setNewLogin(String newAccountUser, char[] accountPassword){
+        stringToPassword = String.valueOf(accountPassword);
 
-        if(newAccountUser.length() < 5 | !newAccountUser.matches("^[a-zA-Z]*$")){
-            System.out.println(newAccountUser);
+        if(correctUserName = newAccountUser.length() < 5 || !stringToPassword.matches("^[a-zA-Z]*$")){
             correctUserName = false;
         }
         else
             correctUserName = true;
 
-        if(stringToPassword.length() < 7 | !stringToPassword.matches("^[a-zA-Z0-9]*$")){
+
+        if (correctUserPassword = (stringToPassword.length() < 7 || !stringToPassword.matches("^[a-zA-Z0-9]*$"))){
             correctUserPassword = false;
         }
         else
             correctUserPassword = true;
 
-        newAccountPassword = String.valueOf(AccountPassword);
+        newAccountPassword = String.valueOf(accountPassword);
         newLoginAndPassword = newAccountUser +":"+ newAccountPassword;
     }
 

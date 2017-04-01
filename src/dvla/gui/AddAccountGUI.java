@@ -14,13 +14,13 @@ public class AddAccountGUI {
     private JLabel lblUserName, lblPassword;
     private JTextField txtUserName;
     private JPasswordField txtPassword;
-    private JButton btnSubmit, btnconvention, btnExit;
+    private JButton btnSubmit, btnConvention, btnExit;
     private JPanel pnlAddAccount;
     private JFrame frmAddAccount;
     private AddAccount addingAccount;
 
 
-    public AddAccountGUI(){
+    public AddAccountGUI() {
 
         createLoginPanel();
         addLoginFields();
@@ -34,25 +34,29 @@ public class AddAccountGUI {
         }
     }
 
-    public void createLoginFrame(){
+    public static void main(String[] args) {
+        new AddAccountGUI();
+    }
+
+
+    public void createLoginFrame() {
         frmAddAccount = new JFrame();
         frmAddAccount.setTitle("Login");
-        frmAddAccount.setSize(400,175);
+        frmAddAccount.setSize(400, 175);
         frmAddAccount.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmAddAccount.setVisible(false);
         frmAddAccount.setLocationRelativeTo(null);
         frmAddAccount.getRootPane().setDefaultButton(btnSubmit);
-
-
         frmAddAccount.add(pnlAddAccount);
         frmAddAccount.setVisible(true);
     }
-    public void createLoginPanel(){
+
+    public void createLoginPanel() {
         pnlAddAccount = new JPanel();
         pnlAddAccount.setLayout(null);
     }
 
-    public void addLoginFields(){
+    public void addLoginFields() {
 
         lblUserName = new JLabel("New UserName");
         lblUserName.setBounds(20, 20, 100, 20);
@@ -73,23 +77,22 @@ public class AddAccountGUI {
 
     }
 
-    public void addLoginButtons(){
+    public void addLoginButtons() {
         btnSubmit = new JButton("Add");
         btnSubmit.setBounds(10, 100, 100, 30);
         btnSubmit.addActionListener(new AddHandler());
         pnlAddAccount.add(btnSubmit);
 
-        btnconvention = new JButton("Naming Convention");
-        btnconvention.setBounds(117, 100, 150, 30);
-        btnconvention.addActionListener(new ConventionHandler());
-        pnlAddAccount.add(btnconvention);
+        btnConvention = new JButton("Naming Convention");
+        btnConvention.setBounds(117, 100, 150, 30);
+        btnConvention.addActionListener(new ConventionHandler());
+        pnlAddAccount.add(btnConvention);
 
         btnExit = new JButton("Exit");
         btnExit.setBounds(275, 100, 100, 30);
         btnExit.addActionListener(new ExitHandler());
         pnlAddAccount.add(btnExit);
     }
-
 
     class AddHandler implements ActionListener {
         @Override
@@ -100,21 +103,20 @@ public class AddAccountGUI {
 
             if (!addingAccount.getUserState()) {
                 JOptionPane.showMessageDialog(frmAddAccount, "The User length should be 5 Characters minimum and contain letters only");
+            } else if (!addingAccount.getPasswordState()) {
+                JOptionPane.showMessageDialog(frmAddAccount, "The Password length should be 8 Characters minimum and contain letters and Numbers only");
             } else {
-                if (!addingAccount.getPasswordState()) {
-                    JOptionPane.showMessageDialog(frmAddAccount, "The Password length should be 8 Characters minimum and contain letters and Numbers only");
-                } else {
-                    try {
-                        addingAccount.saveNewUser();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    JOptionPane.showMessageDialog(frmAddAccount, "User Added, Remember, with great power comes great responsibility ");
-
+                try {
+                    addingAccount.saveNewUser();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                JOptionPane.showMessageDialog(frmAddAccount, "User Added, Remember, with great power comes great responsibility ");
+
             }
         }
     }
+
 
     class ExitHandler implements ActionListener {
         @Override
@@ -129,9 +131,6 @@ public class AddAccountGUI {
             JOptionPane.showMessageDialog(frmAddAccount, "The Username Length should be 5 Characters minimum and contain letters only. \nThe Password length should be 8 Characters minimum  and contain letters and Numbers only.");
         }
     }
-
-    public static void main(String[] args){
-        new AddAccountGUI();
-    }
-
 }
+
+

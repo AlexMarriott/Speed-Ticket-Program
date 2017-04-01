@@ -9,20 +9,19 @@ import java.util.Scanner;
  */
 public class TicketDataBase {
 
-    private int intDriverID;
-    public String formattedDriverData;
+    private int DriverID;
+    private  String formattedDriverData;
     private PrintWriter driverFile;
 
 
     public void saveDrivers(String[] driverData, String driverJudge, String driverFine) throws IOException {
         driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
-        getDriverID();
+        getNextDriverID();
         setDriverID();
         formattedDriverData = Arrays.toString(driverData).replace("[", "").replace("]","").replace("{", "").replace("}","");
-        driverFile.println(intDriverID);
-        int i;
-        for (i=0; i<driverData.length; i++){
-            driverFile.println(driverData[i]);
+        driverFile.println(DriverID);
+        for(String data :driverData){
+            driverFile.println(driverData);
         }
         driverFile.println(driverFine);
 
@@ -30,22 +29,22 @@ public class TicketDataBase {
         driverFile.flush();
     }
 
-    public int getDriverID() throws FileNotFoundException {
+    public int getNextDriverID() throws FileNotFoundException {
         boolean line;
         File file = new File("DriversID.txt");
         Scanner readIn = new Scanner(file);
-        if (intDriverID <= 0) {
-            intDriverID++;
+        if (DriverID <= 0) {
+            DriverID++;
         }
         while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
-            intDriverID++;
+            DriverID++;
         }
-        return intDriverID;
+        return DriverID;
     }
 
     public void setDriverID() throws IOException {
         PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
-        outfile.println("ID " + intDriverID);
+        outfile.println("ID " + DriverID);
         outfile.flush();
         outfile.close();
     }

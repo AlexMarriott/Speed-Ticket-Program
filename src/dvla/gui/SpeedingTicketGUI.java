@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class SpeedingTicketGUI {
     private JLabel lblPicture;
-    private JButton btnAddDriver, btnViewDriver,btnAddAdmin, btnExit;
+    private JButton btnAddDriver, btnViewDriver, btnAddAdmin, btnExit;
     private JPanel pnlMainMenu;
     private JFrame frmMainMenu;
 

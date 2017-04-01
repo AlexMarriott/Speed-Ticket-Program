@@ -1,8 +1,6 @@
 package dvla.gui;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -131,23 +129,17 @@ public class SearchDriverGUI {
         }
     }
 
-    public void writeToFile()
-    {
-        try
-        {
+    public void writeToFile() {
+        try {
             FileWriter writeToDataStore = new FileWriter("Drivers.txt");
-            for(int i = 0; i < driverTable.getRowCount(); i++)
-            {
-                for(int j = 0; j < driverTable.getColumnCount(); j++)
-                {
-                   writeToDataStore.write(rowData[i][j].toString().toUpperCase() + "\n");
+            for (int i = 0; i < driverTable.getRowCount(); i++) {
+                for (int j = 0; j < driverTable.getColumnCount(); j++) {
+                    writeToDataStore.write(rowData[i][j].toString().toUpperCase() + "\n");
                 }
             }
             writeToDataStore.flush();
             writeToDataStore.close();
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -174,40 +166,20 @@ public class SearchDriverGUI {
                     column++;
                 }
             }
-            //https://docs.oracle.com/javase/tutorial/uiswing/components/table.html#sorting
             defaultTableModel = new DefaultTableModel(rowData, columnNames);
             driverTable = new JTable(defaultTableModel);
             driverTable.setAutoCreateRowSorter(true);
             sorter = new TableRowSorter<>(driverTable.getModel());
             driverTable.setRowSorter(sorter);
 
-			driverTable.getSelectionModel().addListSelectionListener(
-					new ListSelectionListener() {
-						@Override
-						public void valueChanged(ListSelectionEvent e) {
-							int viewRow = driverTable.getSelectedRow();
-							int viewCol = driverTable.getSelectedColumn();
-							if (viewRow < 0 && viewCol < 0) {
-								txtStatus.setText("");
-							} else {
-								//Check to see if this can be used for anything else, if not remove it.
-								int modelRow = driverTable.convertRowIndexToModel(viewRow);
-								txtStatus.setText(
-										String.format("Selected Row in view: %d. " + "Selected Column in view: %d.", viewRow, viewCol));
-							}
-						}
-					});
-
-
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
         }
     }
-    class tableEdit implements TableModelListener
-    {
-        public void tableChanged(TableModelEvent e)
-        {
+
+    class tableEdit implements TableModelListener {
+        public void tableChanged(TableModelEvent e) {
             writeToFile();
         }
     }

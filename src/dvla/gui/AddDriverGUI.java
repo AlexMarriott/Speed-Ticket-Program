@@ -19,8 +19,7 @@ class AddDriverGUI {
     private Border driverInfoBorder;
     private JFrame frmDriverGUI;
     private JComboBox roadList;
-    private String[] roadTypeList;
-    private String[] driverData;
+    private String[] roadTypeList, driverData;
 
     private static int roadSpeed;
     private int driversSpeed;
@@ -226,13 +225,13 @@ class AddDriverGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             driversSpeed = Integer.parseInt(txtDriverSpeed.getText());
-            speedDifference = driversSpeed - roadSpeed ;
+            speedDifference = driversSpeed - roadSpeed;
 
 
-            driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), String.valueOf(roadSpeed), String.valueOf(driversSpeed ), String.valueOf(speedDifference)};
+            driverData = new String[]{txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), String.valueOf(roadSpeed), String.valueOf(driversSpeed), String.valueOf(speedDifference)};
             driverName = driverData[0];
 
-            if (driverData[0].isEmpty()) {
+            if (driverName.isEmpty()) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else if (driverData[6].isEmpty()) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Speed", "ERROR", JOptionPane.ERROR_MESSAGE);

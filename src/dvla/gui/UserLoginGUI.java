@@ -1,6 +1,5 @@
 package dvla.gui;
 
-import dvla.logic.PasswordCipher;
 import dvla.logic.UserLogin;
 
 import javax.swing.*;
@@ -20,12 +19,11 @@ public class UserLoginGUI {
     private JPanel pnlDriverLogin;
     private JFrame frmDriverLogin;
 
-    private ArrayList loginArray;
     private UserLogin userlogic;
+    private boolean userCanLogin;
 
-    private PasswordCipher checkingPassword;
 
-    public UserLoginGUI(){
+    public UserLoginGUI() {
 
         createLoginPanel();
         addLoginFields();
@@ -39,10 +37,10 @@ public class UserLoginGUI {
         }
     }
 
-    public void createLoginFrame(){
+    public void createLoginFrame() {
         frmDriverLogin = new JFrame();
         frmDriverLogin.setTitle("Login");
-        frmDriverLogin.setSize(400,175);
+        frmDriverLogin.setSize(400, 175);
         frmDriverLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmDriverLogin.setVisible(false);
         frmDriverLogin.setLocationRelativeTo(null);
@@ -52,12 +50,13 @@ public class UserLoginGUI {
         frmDriverLogin.add(pnlDriverLogin);
         frmDriverLogin.setVisible(true);
     }
-    public void createLoginPanel(){
+
+    public void createLoginPanel() {
         pnlDriverLogin = new JPanel();
         pnlDriverLogin.setLayout(null);
     }
 
-    public void addLoginFields(){
+    public void addLoginFields() {
 
         lblUserName = new JLabel("UserName");
         lblUserName.setBounds(20, 20, 100, 20);
@@ -78,7 +77,7 @@ public class UserLoginGUI {
 
     }
 
-    public void addLoginButtons(){
+    public void addLoginButtons() {
         btnLogin = new JButton("Login");
         btnLogin.setBounds(10, 100, 100, 30);
         btnLogin.addActionListener(new Login());
@@ -91,46 +90,39 @@ public class UserLoginGUI {
     }
 
 
-
     class Login implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent event ) {
+        public void actionPerformed(ActionEvent event) {
             userlogic = new UserLogin();
-             ArrayList loginArray = new ArrayList();
+            ArrayList loginArray = new ArrayList();
 
             userlogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
             userlogic.getLoginDetails();
 
             try {
 
-                loginArray= userlogic.getDataStore();
+                loginArray = userlogic.getDataStore();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            int i;
-            boolean userCanLogin =true;
+            int i = 0;
 
-            for(i=0; i<loginArray.size(); i++){
-                System.out.println(loginArray.get(i));
+            if (loginArray.get(i).equals(userlogic.getLoginDetails())) {
 
-
-                if(loginArray.get(i).equals(userlogic.getLoginDetails())){
-
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
-                    new SpeedingTicketGUI();
-                    frmDriverLogin.setVisible(false);
-                    break;
-                }
-                else{
-                    userCanLogin = false;
-                }
+                JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
+                new SpeedingTicketGUI();
+                frmDriverLogin.setVisible(false);
+            } else {
+                userCanLogin = false;
             }
-            if (!userCanLogin){
+
+            if (!userCanLogin) {
                 JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
             }
         }
     }
+
 
     class LoginExitHandler implements ActionListener {
         @Override
@@ -140,7 +132,8 @@ public class UserLoginGUI {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new UserLoginGUI();
     }
 }
+
