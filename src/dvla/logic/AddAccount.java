@@ -9,12 +9,10 @@ import java.io.PrintWriter;
  * Created by alex on 31/03/2017.
  */
 public class AddAccount {
-    private String newAccountUser;
     private String newAccountPassword;
     private String newLoginAndPassword;
     private PrintWriter accountLoginFile;
     private String stringToPassword;
-    private char[] AccountPassword;
 
     private boolean correctUserPassword;
     private boolean correctUserName;
@@ -22,6 +20,7 @@ public class AddAccount {
     public boolean getPasswordState() {
         return correctUserPassword;
     }
+
     public boolean getUserState() {
         return correctUserName;
     }

@@ -146,18 +146,18 @@ public class SearchDriverGUI {
 
     public void createDriverTable() {
         try {
-            String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £"};
-            rowData = new String[tableRowAmount][12];
+            String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Road Type", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £", "Action Taken"};
+            rowData = new String[tableRowAmount][columnNames.length];
             int row = 0;
             int column = 0;
             int count = 1;
             for (int i = 0; i < arrList.size(); i++) {
-                if (i == (count * 12)) {
+                if (i == (count * 14)) {
                     column = 0;
                     row++;
                     count++;
                 }
-                if (column == 0 | column == 8 | column == 9 | column == 10 | column == 11) {
+                if (column == 0 | column == 9 | column == 10 | column == 11 | column == 12) {
                     String stringToInt = arrList.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     column++;
@@ -201,12 +201,6 @@ public class SearchDriverGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             defaultTableModel.removeRow(driverTable.getSelectedRow());
-        }
-    }
-
-    class TopFiveFinesHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
         }
     }
 

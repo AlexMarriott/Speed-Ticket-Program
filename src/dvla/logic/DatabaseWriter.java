@@ -1,32 +1,28 @@
 package dvla.logic;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * Created by alex on 12/02/2017.
  */
-public class TicketDataBase {
+public class DatabaseWriter {
 
     private int DriverID;
-    private  String formattedDriverData;
-    private PrintWriter driverFile;
-
-
-    void saveDrivers(String[] driverData, String driverJudge, String driverFine) throws IOException {
-        driverFile = new PrintWriter(new BufferedWriter(new FileWriter("Drivers.txt", true)));
+    private BufferedWriter driverFile;
+    public void saveDrivers(String[] driverInfo) throws IOException {
+        driverFile = new BufferedWriter(new FileWriter("Drivers.txt", true));
         getNextDriverID();
         setDriverID();
-        formattedDriverData = Arrays.toString(driverData).replace("[", "").replace("]","").replace("{", "").replace("}","");
-        driverFile.println(DriverID);
-        for(String data :driverData){
-            driverFile.println(driverData);
-        }
-        driverFile.println(driverFine);
+        driverFile.write(Integer.toString(DriverID));
 
-        driverFile.close();
+        for(int i = 0; i <driverInfo.length; i++){
+            driverFile.write("\n" +driverInfo[i]);
+        }
+        driverFile.write("\n");
+
         driverFile.flush();
+        driverFile.close();
     }
 
     private int getNextDriverID() throws FileNotFoundException {
@@ -48,5 +44,4 @@ public class TicketDataBase {
         outfile.flush();
         outfile.close();
     }
-
 }

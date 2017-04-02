@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Alex on 23/02/2017.
@@ -21,6 +22,7 @@ public class UserLoginGUI {
 
     private UserLogin userlogic;
     private boolean userCanLogin;
+    List<String> loginArray;
 
 
     public UserLoginGUI() {
@@ -94,7 +96,7 @@ public class UserLoginGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             userlogic = new UserLogin();
-            ArrayList loginArray = new ArrayList();
+            loginArray = new ArrayList<>();
 
             userlogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
             userlogic.getLoginDetails();
@@ -113,6 +115,7 @@ public class UserLoginGUI {
                 JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
                 new SpeedingTicketGUI();
                 frmDriverLogin.setVisible(false);
+                userCanLogin = true;
             } else {
                 userCanLogin = false;
             }

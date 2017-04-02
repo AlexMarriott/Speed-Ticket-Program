@@ -3,23 +3,23 @@ package dvla.logic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * Created by alex on 31/03/2017.
  */
 public class UserLogin {
-    private String userName;
     private String userLogin;
-    private String userPassword;
     private String newUserPassword;
     private String loginAndPassword;
-    private ArrayList loginArray;
+    private List<String> loginArray;
 
     public UserLogin() {
     }
 
     public void  setLoginDetails (String userName, char[] userPassword ){
+        System.out.println(userName + userPassword);
         userLogin = userName;
         newUserPassword = String.valueOf(userPassword);
 
@@ -29,11 +29,11 @@ public class UserLogin {
         return loginAndPassword;
     }
 
-    public ArrayList getDataStore() throws FileNotFoundException {
+    public List<String> getDataStore() throws FileNotFoundException {
         File file = new File("Login.txt");
 
         Scanner readIn = new Scanner(file);
-        loginArray = new ArrayList();
+        loginArray = new ArrayList<>();
         while (readIn.hasNextLine()) {
             loginArray.add(readIn.nextLine());
         }
