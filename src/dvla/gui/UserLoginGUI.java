@@ -101,42 +101,48 @@ public class UserLoginGUI {
             userlogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
             userlogic.getLoginDetails();
 
-            try {
+                try {
 
-                loginArray = userlogic.getDataStore();
+                    loginArray = userlogic.getDataStore();
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
             int i = 0;
+            for (i = 0; i < loginArray.size(); i++) {
 
-            if (loginArray.get(i).equals(userlogic.getLoginDetails())) {
+                if (loginArray.get(i).equals(userlogic.getLoginDetails())) {
 
-                JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
-                new SpeedingTicketGUI();
+                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
+                    new SpeedingTicketGUI();
+                    frmDriverLogin.setVisible(false);
+                    userCanLogin = true;
+                    break;
+                } else {
+                    userCanLogin = false;
+                }
+            }
+
+                if (!userCanLogin) {
+                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
+                }
+
+        }
+    }
+
+
+        class LoginExitHandler implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent event) {
                 frmDriverLogin.setVisible(false);
-                userCanLogin = true;
-            } else {
-                userCanLogin = false;
-            }
-
-            if (!userCanLogin) {
-                JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
             }
         }
-    }
 
 
-    class LoginExitHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            frmDriverLogin.setVisible(false);
+        public static void main(String[] args) {
+            new UserLoginGUI();
         }
-    }
 
-
-    public static void main(String[] args) {
-        new UserLoginGUI();
-    }
 }
 

@@ -17,14 +17,14 @@ import java.util.Scanner;
 /**
  * Created by Alex on 23/02/2017.
  */
-public class SearchDriverGUI {
-    private JLabel lblDriverID;
-    private JTextField txtDriverID;
-    private JButton btnSearch, btnRemove, btnExit;
-    private JPanel pnlSearchDriver;
-    private JFrame frmSearchDriver;
-    private JTable driverTable;
-    private JScrollPane driverScrollPane;
+public class SearchVehicleGUI {
+    private JLabel lblVehicleID;
+    private JTextField txtVehicleID;
+    private JButton btnSearch, btnExit;
+    private JPanel pnlSearchVehicle;
+    private JFrame frmSearchVehicle;
+    private JTable vehicleTable;
+    private JScrollPane vehicleScrollPane;
 
     private ArrayList<String> arrList;
 
@@ -36,81 +36,76 @@ public class SearchDriverGUI {
     private DefaultTableModel defaultTableModel;
 
 
-    public SearchDriverGUI() {
-        pnlAddSearchDrive();
-        addDriverViewFields();
-        addDriverViewButtons();
+    public SearchVehicleGUI() {
+        pnlAddSearchvehicle();
+        addVehicleViewFields();
+        addVehicleViewButtons();
         try {
-            getDriver();
+            getVehicle();
             getTableRows();
-            createDriverTable();
-            driverTable.getModel().addTableModelListener(new tableEdit());
-            driverTable.putClientProperty("terminateEditOnFocusLost", true);
+            createVehicleTable();
+            vehicleTable.getModel().addTableModelListener(new tableEdit());
+            vehicleTable.putClientProperty("terminateEditOnFocusLost", true);
             setScrollPane();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        frmAddSearchDriver();
+        frmAddSearchVehicle();
     }
 
-    public void frmAddSearchDriver() {
-        frmSearchDriver = new JFrame();
-        frmSearchDriver.setTitle("View Driver");
-        frmSearchDriver.setSize(1250, 400);
-        frmSearchDriver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmSearchDriver.setVisible(false);
-        frmSearchDriver.setLocationRelativeTo(null);
-        frmSearchDriver.setResizable(false);
-        frmSearchDriver.add(pnlSearchDriver);
-        frmSearchDriver.setVisible(true);
+    public void frmAddSearchVehicle() {
+        frmSearchVehicle = new JFrame();
+        frmSearchVehicle.setTitle("View Driver");
+        frmSearchVehicle.setSize(1250, 400);
+        frmSearchVehicle.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frmSearchVehicle.setVisible(false);
+        frmSearchVehicle.setLocationRelativeTo(null);
+        frmSearchVehicle.setResizable(false);
+        frmSearchVehicle.add(pnlSearchVehicle);
+        frmSearchVehicle.setVisible(true);
 
         //This is to stop the user from closing the window. If they close the window then information in the Jtable cannot be saved correctly.
-        frmSearchDriver.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frmSearchVehicle.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
     }
 
-    public void pnlAddSearchDrive() {
-        pnlSearchDriver = new JPanel();
-        pnlSearchDriver.setLayout(null);
+    public void pnlAddSearchvehicle() {
+        pnlSearchVehicle = new JPanel();
+        pnlSearchVehicle.setLayout(null);
     }
 
-    public void addDriverViewFields() {
+    public void addVehicleViewFields() {
 
-        lblDriverID = new JLabel("Driver ID");
-        lblDriverID.setBounds(10, 250, 100, 20);
-        pnlSearchDriver.add(lblDriverID);
+        lblVehicleID = new JLabel("Driver ID");
+        lblVehicleID.setBounds(10, 250, 100, 20);
+        pnlSearchVehicle.add(lblVehicleID);
 
-        txtDriverID = new JTextField(null);
-        txtDriverID.setBounds(100, 250, 100, 20);
-        pnlSearchDriver.add(txtDriverID);
+        txtVehicleID = new JTextField(null);
+        txtVehicleID.setBounds(100, 250, 100, 20);
+        pnlSearchVehicle.add(txtVehicleID);
 
     }
 
-    public void addDriverViewButtons() {
-        btnSearch = new JButton("Search Driver");
+    public void addVehicleViewButtons() {
+        btnSearch = new JButton("Search Vehicle");
         btnSearch.setBounds(20, 335, 140, 30);
         btnSearch.addActionListener(new DriverSearchHandler());
-        pnlSearchDriver.add(btnSearch);
-
-        btnRemove = new JButton("Remove Driver");
-        btnRemove.setBounds(180, 335, 140, 30);
-        btnRemove.addActionListener(new DriverRemoveHandler());
-        pnlSearchDriver.add(btnRemove);
+        pnlSearchVehicle.add(btnSearch);
 
         btnExit = new JButton("Back");
         btnExit.setBounds(820, 335, 140, 30);
         btnExit.addActionListener(new DriverSearchExitHandler());
-        pnlSearchDriver.add(btnExit);
+        pnlSearchVehicle.add(btnExit);
     }
 
     public double getTableRows() {
         return tableRowAmount = arrList.size() / 12;
     }
 
-    public void getDriver() {
+    public void getVehicle() {
         arrList = new ArrayList<>();
 
-        File file = new File("Drivers.txt");
+        File file = new File("Vehicle.txt");
         try {
             Scanner readIn = new Scanner(file);
             while (readIn.hasNext()) {
@@ -123,9 +118,9 @@ public class SearchDriverGUI {
 
     public void writeToFile() {
         try {
-            FileWriter writeToDataStore = new FileWriter("Drivers.txt");
-            for (int i = 0; i < driverTable.getRowCount(); i++) {
-                for (int j = 0; j < driverTable.getColumnCount(); j++) {
+            FileWriter writeToDataStore = new FileWriter("Vehicle.txt");
+            for (int i = 0; i < vehicleTable.getRowCount(); i++) {
+                for (int j = 0; j < vehicleTable.getColumnCount(); j++) {
                     writeToDataStore.write(rowData[i][j].toString().toUpperCase() + "\n");
                 }
             }
@@ -136,9 +131,10 @@ public class SearchDriverGUI {
         }
     }
 
-    public void createDriverTable() {
+    public void createVehicleTable() {
         try {
-            String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Road Type", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £", "Action Taken"};
+
+            String[] columnNames = {" Vehicle ID", "Vehicle Model", "Vehicle Make", "Vehicle Number Plate", "Vehicle Year", "Owner", "Driving Licence Number", "First Line of Address", "Second Line of Address", "Post Code"};
             rowData = new String[tableRowAmount][columnNames.length];
             int row = 0;
             int column = 0;
@@ -159,14 +155,14 @@ public class SearchDriverGUI {
                 }
             }
             defaultTableModel = new DefaultTableModel(rowData, columnNames);
-            driverTable = new JTable(defaultTableModel);
-            driverTable.setAutoCreateRowSorter(true);
-            sorter = new TableRowSorter<>(driverTable.getModel());
-            driverTable.setRowSorter(sorter);
+            vehicleTable = new JTable(defaultTableModel);
+            vehicleTable.setAutoCreateRowSorter(true);
+            sorter = new TableRowSorter<>(vehicleTable.getModel());
+            vehicleTable.setRowSorter(sorter);
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
+            JOptionPane.showMessageDialog(frmSearchVehicle, "Something went wrong, Please check the datastore");
         }
     }
 
@@ -177,29 +173,29 @@ public class SearchDriverGUI {
     }
 
     public void setScrollPane() {
-        driverScrollPane = new JScrollPane(driverTable);
-        driverScrollPane.setBounds(0, 0, 1250, 200);
-        pnlSearchDriver.add(driverScrollPane);
+        vehicleScrollPane = new JScrollPane(vehicleTable);
+        vehicleScrollPane.setBounds(0, 0, 1250, 200);
+        pnlSearchVehicle.add(vehicleScrollPane);
     }
 
     class DriverSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            sorter.setRowFilter(RowFilter.regexFilter(txtDriverID.getText(), 0));
+            sorter.setRowFilter(RowFilter.regexFilter(txtVehicleID.getText(), 0));
         }
     }
 
     class DriverRemoveHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            defaultTableModel.removeRow(driverTable.getSelectedRow());
+            defaultTableModel.removeRow(vehicleTable.getSelectedRow());
         }
     }
 
     class DriverSearchExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmSearchDriver.setVisible(false);
+            frmSearchVehicle.setVisible(false);
         }
     }
 

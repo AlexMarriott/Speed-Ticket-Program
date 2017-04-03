@@ -2,6 +2,7 @@ package dvla.gui;
 
 import dvla.logic.DatabaseWriter;
 import dvla.logic.Driver;
+import dvla.logic.Vehicle;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -29,7 +30,7 @@ public class AddDriverGUI {
     private String driverName;
     private  String roadType;
     private DatabaseWriter saveDriverData = new DatabaseWriter();
-
+    private Vehicle vehicleData;
     private Driver driverData;
 
     public AddDriverGUI() {
@@ -236,11 +237,11 @@ public class AddDriverGUI {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 driverData = new Driver(txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), roadSpeed, roadType, driverSpeed, speedDifference);
-
+                vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(),txtVehicleNumPlate.getText(),txtVehicleYear.getText(),txtFirstName.getText(),txtDrivingLicenceNum.getText(),txtFirstAddressLine.getText(),lblSecondAddressLine.getText(),txtPostCode.getText());
                 driverData.speedCheck(driverSpeed ,roadType);
+                vehicleData.getVehicleInfo();
                 driverData.getTicketResult();
                 driverData.setDriversFine();
-                driverData.setDriverInfo();
                 driverData.getDriverInfo();
 
                 JOptionPane.showMessageDialog(frmDriverGUI, driverData.getTicketResult());

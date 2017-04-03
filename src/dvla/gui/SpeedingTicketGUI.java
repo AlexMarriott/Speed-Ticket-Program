@@ -79,7 +79,7 @@ public class SpeedingTicketGUI {
     class ViewDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            new SearchDriverGUI();
+            new SearchVehicleGUI();
         }
     }
 

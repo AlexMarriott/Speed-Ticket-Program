@@ -23,12 +23,10 @@ public class Driver {
     private int countDateThershold;
     private int drivingFine;
     private int penaltyPoints;
-    private int calMinForTicket = 10 / 100 + 2;
-    private int calMinForProsecution =  46 / 100;
     private String driverFine;
     private DatabaseWriter writingDataToDatabase;
 
-    public Driver(){ };
+
 
     public Driver(String firstName, String lastName, String dateOfBirth, String drivingLicenceNum, String firstAddressLine, String secondAddressLine, String postCode, int roadSpeed,String roadType, int driverSpeed, int speedDifference){
             this.firstName = firstName;
