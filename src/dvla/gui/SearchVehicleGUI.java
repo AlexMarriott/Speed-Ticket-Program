@@ -89,17 +89,17 @@ public class SearchVehicleGUI {
     public void addVehicleViewButtons() {
         btnSearch = new JButton("Search Vehicle");
         btnSearch.setBounds(20, 335, 140, 30);
-        btnSearch.addActionListener(new DriverSearchHandler());
+        btnSearch.addActionListener(new VehicleSearchHandler());
         pnlSearchVehicle.add(btnSearch);
 
         btnExit = new JButton("Back");
         btnExit.setBounds(820, 335, 140, 30);
-        btnExit.addActionListener(new DriverSearchExitHandler());
+        btnExit.addActionListener(new VehicleSearchExitHandler());
         pnlSearchVehicle.add(btnExit);
     }
 
     public double getTableRows() {
-        return tableRowAmount = arrList.size() / 12;
+        return tableRowAmount = arrList.size() / 10;
     }
 
     public void getVehicle() {
@@ -135,17 +135,19 @@ public class SearchVehicleGUI {
         try {
 
             String[] columnNames = {" Vehicle ID", "Vehicle Model", "Vehicle Make", "Vehicle Number Plate", "Vehicle Year", "Owner", "Driving Licence Number", "First Line of Address", "Second Line of Address", "Post Code"};
+            System.out.println(columnNames.length);
             rowData = new String[tableRowAmount][columnNames.length];
             int row = 0;
             int column = 0;
             int count = 1;
             for (int i = 0; i < arrList.size(); i++) {
-                if (i == (count * 14)) {
+                System.out.println(arrList.get(i));
+                if (i == (count * 10)) {
                     column = 0;
                     row++;
                     count++;
                 }
-                if (column == 0 | column == 9 | column == 10 | column == 11 | column == 12) {
+                if (column == 0){
                     String stringToInt = arrList.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     column++;
@@ -178,21 +180,14 @@ public class SearchVehicleGUI {
         pnlSearchVehicle.add(vehicleScrollPane);
     }
 
-    class DriverSearchHandler implements ActionListener {
+    class VehicleSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             sorter.setRowFilter(RowFilter.regexFilter(txtVehicleID.getText(), 0));
         }
     }
 
-    class DriverRemoveHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            defaultTableModel.removeRow(vehicleTable.getSelectedRow());
-        }
-    }
-
-    class DriverSearchExitHandler implements ActionListener {
+    class VehicleSearchExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchVehicle.setVisible(false);

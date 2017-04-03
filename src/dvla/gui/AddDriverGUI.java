@@ -243,6 +243,7 @@ public class AddDriverGUI {
                 driverData.getTicketResult();
                 driverData.setDriversFine();
                 driverData.getDriverInfo();
+                vehicleData.getVehicleInfo();
 
                 JOptionPane.showMessageDialog(frmDriverGUI, driverData.getTicketResult());
 

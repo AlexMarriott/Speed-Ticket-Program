@@ -34,8 +34,9 @@ public class UserLogin {
 
         Scanner readIn = new Scanner(file);
         loginArray = new ArrayList<>();
+        int i =0;
         while (readIn.hasNextLine()) {
-            int i =0;
+
             loginArray.add(readIn.nextLine());
             System.out.println(loginArray.get(i));
             i++;

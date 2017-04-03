@@ -104,7 +104,7 @@ public class SearchDriverGUI {
     }
 
     public double getTableRows() {
-        return tableRowAmount = arrList.size() / 12;
+        return tableRowAmount = arrList.size() / 14;
     }
 
     public void getDriver() {
@@ -204,6 +204,6 @@ public class SearchDriverGUI {
     }
 
     public static void main(String[] args) {
-        new SearchVehicleGUI();
+        new SearchDriverGUI();
     }
 }

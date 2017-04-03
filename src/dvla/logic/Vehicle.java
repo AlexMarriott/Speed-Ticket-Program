@@ -44,7 +44,7 @@ public class Vehicle {
     public void getVehicleInfo() {
         writingDataToDatabase = new DatabaseWriter();
         try {
-            writingDataToDatabase.saveDrivers(setVehicleInfo());
+            writingDataToDatabase.saveVehicle(setVehicleInfo());
         } catch (IOException e) {
             e.printStackTrace();
         }
