@@ -44,7 +44,6 @@ public class UserLoginGUI {
         frmDriverLogin.setTitle("Login");
         frmDriverLogin.setSize(400, 175);
         frmDriverLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmDriverLogin.setVisible(false);
         frmDriverLogin.setLocationRelativeTo(null);
         frmDriverLogin.getRootPane().setDefaultButton(btnLogin);
 
@@ -116,7 +115,7 @@ public class UserLoginGUI {
 
                     JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
                     new SpeedingTicketGUI();
-                    frmDriverLogin.setVisible(false);
+                    frmDriverLogin.dispose();
                     userCanLogin = true;
                     break;
                 } else {
@@ -135,7 +134,8 @@ public class UserLoginGUI {
         class LoginExitHandler implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent event) {
-                frmDriverLogin.setVisible(false);
+
+                frmDriverLogin.dispose();
             }
         }
 

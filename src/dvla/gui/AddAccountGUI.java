@@ -2,24 +2,57 @@ package dvla.gui;
 
 import dvla.logic.AddAccount;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
- * Created by Alex on 23/02/2017.
+ * <h1> AddAccountGUI</h1>
+ * The AddAccount GUI class, implements the AddAccount window, which allows the users to add a new user account to access the DVLA Ticket Program.
+ *
+ * @author Alex Marriott s4816928
+ * @version 1.0
+ * @since 03/04/2017
  */
 public class AddAccountGUI {
+
+    /** The lblUserName and lblPassword are used to create labels on the panel for user and password. */
     private JLabel lblUserName, lblPassword;
+
+    /** txtUserName is used to allow user input into the txtUserName field. */
     private JTextField txtUserName;
+
+    /** JPasswordField is used to allow user input into the txtUserName field. */
     private JPasswordField txtPassword;
+
+    /**
+     * btnSubmit has an actionlistener which submits the newly created user.
+     * btnConvention has an actionlistener which displays text regarding the username and password convention.
+     * btnExit has an actionlistener which disposes of the AddAccount window.
+     * */
     private JButton btnSubmit, btnConvention, btnExit;
+
+    /** pnlAddAccount, creates the panel for the AddAccountGUI. */
     private JPanel pnlAddAccount;
+
+    /** frmAddAccount, creates the frame for the AddAccountGUI. */
     private JFrame frmAddAccount;
+
+    /** Declaring addingAccount variable to later initialise to pass Data to AddAccount class. */
     private AddAccount addingAccount;
 
 
+    /**Initialises the AddAccount Constructor and sets the following methods. */
     public AddAccountGUI() {
 
         createLoginPanel();
@@ -27,6 +60,9 @@ public class AddAccountGUI {
         addLoginButtons();
         createLoginFrame();
 
+        /**
+         * The try catch runs the UIManager to set the look and feel to the users Operating System desktop managers look, The catch will catch and stacktrace exception which interfere with the UIManager.
+         */
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
@@ -34,18 +70,16 @@ public class AddAccountGUI {
         }
     }
 
-    public static void main(String[] args) {
-        new AddAccountGUI();
-    }
-
-
+    /**
+     * This method creates the frame for the login window.
+     */
     public void createLoginFrame() {
         frmAddAccount = new JFrame();
         frmAddAccount.setTitle("Login");
         frmAddAccount.setSize(400, 175);
         frmAddAccount.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmAddAccount.setVisible(false);
         frmAddAccount.setLocationRelativeTo(null);
+
         frmAddAccount.getRootPane().setDefaultButton(btnSubmit);
         frmAddAccount.add(pnlAddAccount);
         frmAddAccount.setVisible(true);

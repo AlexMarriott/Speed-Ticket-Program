@@ -3,17 +3,28 @@ package dvla.gui;
 import dvla.logic.DatabaseWriter;
 import dvla.logic.Driver;
 import dvla.logic.Vehicle;
+import java.awt.Font;
 
-import javax.swing.*;
+
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JComboBox;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+;
 
 /**
  * Created by Alex on 24/03/2017.
  */
-public class AddDriverGUI {
+public class AddDriverGUI  {
     private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear, lblDateReported;
     private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear, txtDateReported;
     private JButton btnSubmit, btnBack;
@@ -27,7 +38,6 @@ public class AddDriverGUI {
     private  int roadSpeed;
     private int speedDifference;
 
-    private String driverName;
     private  String roadType;
     private DatabaseWriter saveDriverData = new DatabaseWriter();
     private Vehicle vehicleData;
@@ -54,7 +64,6 @@ public class AddDriverGUI {
         frmDriverGUI.setTitle("Add A Driver");
         frmDriverGUI.setSize(500, 425);
         frmDriverGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmDriverGUI.setVisible(false);
         frmDriverGUI.setLocationRelativeTo(null);
 
         frmDriverGUI.add(pnlDriverGUI);
@@ -251,11 +260,10 @@ public class AddDriverGUI {
         }
     }
 
-
     private class DriverAddExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmDriverGUI.setVisible(false);
+            frmDriverGUI.dispose();;
         }
     }
 }

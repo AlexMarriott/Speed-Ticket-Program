@@ -58,7 +58,6 @@ public class SearchVehicleGUI {
         frmSearchVehicle.setTitle("View Driver");
         frmSearchVehicle.setSize(1250, 400);
         frmSearchVehicle.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmSearchVehicle.setVisible(false);
         frmSearchVehicle.setLocationRelativeTo(null);
         frmSearchVehicle.setResizable(false);
         frmSearchVehicle.add(pnlSearchVehicle);
@@ -158,6 +157,9 @@ public class SearchVehicleGUI {
             }
             defaultTableModel = new DefaultTableModel(rowData, columnNames);
             vehicleTable = new JTable(defaultTableModel);
+            vehicleTable.setEnabled(false);
+            vehicleTable.getTableHeader().setReorderingAllowed(false);
+            vehicleTable.getTableHeader().setResizingAllowed(false);
             vehicleTable.setAutoCreateRowSorter(true);
             sorter = new TableRowSorter<>(vehicleTable.getModel());
             vehicleTable.setRowSorter(sorter);
@@ -190,7 +192,7 @@ public class SearchVehicleGUI {
     class VehicleSearchExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmSearchVehicle.setVisible(false);
+            frmSearchVehicle.dispose();
         }
     }
 

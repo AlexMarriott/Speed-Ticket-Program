@@ -58,7 +58,6 @@ public class SearchDriverGUI {
         frmSearchDriver.setTitle("View Driver");
         frmSearchDriver.setSize(1250, 400);
         frmSearchDriver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmSearchDriver.setVisible(false);
         frmSearchDriver.setLocationRelativeTo(null);
         frmSearchDriver.setResizable(false);
         frmSearchDriver.add(pnlSearchDriver);
@@ -160,6 +159,9 @@ public class SearchDriverGUI {
             }
             defaultTableModel = new DefaultTableModel(rowData, columnNames);
             driverTable = new JTable(defaultTableModel);
+            driverTable.setEnabled(false);
+            driverTable.getTableHeader().setReorderingAllowed(false);
+            driverTable.getTableHeader().setResizingAllowed(false);
             driverTable.setAutoCreateRowSorter(true);
             sorter = new TableRowSorter<>(driverTable.getModel());
             driverTable.setRowSorter(sorter);
@@ -199,7 +201,7 @@ public class SearchDriverGUI {
     class DriverSearchExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmSearchDriver.setVisible(false);
+            frmSearchDriver.dispose();
         }
     }
 
