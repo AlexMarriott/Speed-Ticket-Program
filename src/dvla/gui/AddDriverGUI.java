@@ -22,24 +22,73 @@ import java.awt.event.ActionListener;
 ;
 
 /**
- * Created by Alex on 24/03/2017.
+ * <h1> AddDriverGUI</h1>
+ * The AddDriverGUI creates the AddDriver Window, which allows users to enter the Drivers information and have it submitted to the database.
+ *
+ * @author Alex Marriott s4816928
+ * @version 1.0
+ * @since 03/04/2017
  */
 public class AddDriverGUI  {
+
+    /**
+     *Declares  the  Jlabels.
+     */
     private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear, lblDateReported;
+    /**
+     * Declares the JTextFields.
+     */
     private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear, txtDateReported;
+    /**
+     * Declares the JButtons.
+     */
     private JButton btnSubmit, btnBack;
-    private JPanel pnlDriverGUI;
+    /**
+     *Declares the JBorder for the heading text in the AddDriverGUI window.
+     */
     private Border driverInfoBorder;
+
+    /**
+     *Declares the Jpanel.
+     */
+    private JPanel pnlDriverGUI;
+
+    /**
+     *Declares the JFrame.
+     */
     private JFrame frmDriverGUI;
+
+    /**
+     *Declares the JComboBox.
+     */
     private JComboBox<String> roadList;
+
+    /**
+     *Declares the String array of roadTypeList, this array contains a list of the different roadTypes.
+     */
     private String[] roadTypeList;
+
+    /**
+     * Declare a int variable of driverSpeed which will be pass through to the Driver Object.
+     */
     private int driverSpeed;
 
+    /**
+     *Declare a int variable of roadspeed which will be pass through to the Driver Object.
+     */
     private  int roadSpeed;
+    /**
+     *Declare a int variable of speedDifference which is used to check if the user has enter a speed and then will be pass through to the Driver Object.
+     */
+
     private int speedDifference;
 
-    private  String roadType;
+    private String roadType;
+    /**
+     *Declare a String variable of roadType which is used in the JComboBox and then will be pass through to the Driver Object.
+     */
     private DatabaseWriter saveDriverData = new DatabaseWriter();
+
     private Vehicle vehicleData;
     private Driver driverData;
 
@@ -263,7 +312,7 @@ public class AddDriverGUI  {
     private class DriverAddExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            frmDriverGUI.dispose();;
+            frmDriverGUI.dispose();
         }
     }
 }

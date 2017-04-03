@@ -52,7 +52,7 @@ public class AddAccountGUI {
     private AddAccount addingAccount;
 
 
-    /**Initialises the AddAccount Constructor and sets the following methods. */
+    /**AddAccountGUI() Initialises the AddAccount Constructor and sets the following methods. */
     public AddAccountGUI() {
 
         createLoginPanel();
@@ -71,7 +71,7 @@ public class AddAccountGUI {
     }
 
     /**
-     * This method creates the frame for the login window.
+     * createLoginFrame() creates the frame for the AddAccount class.
      */
     public void createLoginFrame() {
         frmAddAccount = new JFrame();
@@ -85,11 +85,17 @@ public class AddAccountGUI {
         frmAddAccount.setVisible(true);
     }
 
+    /**
+     * createLoginPanel() creates the Jpanel for the AddAccount class.
+     */
     public void createLoginPanel() {
         pnlAddAccount = new JPanel();
         pnlAddAccount.setLayout(null);
     }
 
+    /**
+     * addLoginFields() creates the JTextField and Jlabels for the panel.
+     */
     public void addLoginFields() {
 
         lblUserName = new JLabel("New UserName");
@@ -111,6 +117,9 @@ public class AddAccountGUI {
 
     }
 
+    /**
+     * addLoginButtons() creates all the Jbuttons for the panel.
+     */
     public void addLoginButtons() {
         btnSubmit = new JButton("Add");
         btnSubmit.setBounds(10, 100, 100, 30);
@@ -128,6 +137,10 @@ public class AddAccountGUI {
         pnlAddAccount.add(btnExit);
     }
 
+    /**
+     * The AddHandler gets the UsersName and Password of the new user account and checks that they follow the naming convention. Once checked, it will pass the account name password to the AddAccount object,
+     * which will add them to the DataStore.
+     */
     class AddHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -151,20 +164,26 @@ public class AddAccountGUI {
         }
     }
 
-
-    class ExitHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            frmAddAccount.setVisible(false);
-        }
-    }
-
+    /**
+     * The ConventionHandler creates a Joptionpane popup which displays the naming convention.
+     */
     class ConventionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             JOptionPane.showMessageDialog(frmAddAccount, "The Username Length should be 5 Characters minimum and contain letters only. \nThe Password length should be 8 Characters minimum  and contain letters and Numbers only.");
         }
     }
+    /**
+     * The ExitHandler will dispose of the frame and return the user back to the menu.
+     */
+    class ExitHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            frmAddAccount.dispose();
+        }
+    }
+
+
 }
 
 

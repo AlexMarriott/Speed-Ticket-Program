@@ -7,13 +7,13 @@ import java.io.IOException;
 /**
  * Created by alex on 11/02/2017.
  */
-public class SpeedingTicketGUI {
+public class SpeedingTicketMenuGUI {
     private JLabel lblPicture;
     private JButton btnAddDriver, btnViewDriver, btnAddLogin,btnViewVehicle, btnExit;
     private JPanel pnlMainMenu;
     private JFrame frmMainMenu;
 
-    public SpeedingTicketGUI() {
+    public SpeedingTicketMenuGUI() {
         loadPanel();
         loadImages();
         loadButtons();
@@ -28,7 +28,7 @@ public class SpeedingTicketGUI {
 
     public void loadMenu() {
         frmMainMenu = new JFrame();
-        frmMainMenu.setTitle("DVLA CheckDriverSpeed Program");
+        frmMainMenu.setTitle("DVLA Ticket Program");
         frmMainMenu.setSize(410, 365);
         frmMainMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frmMainMenu.setVisible(true);
@@ -129,11 +129,4 @@ public class SpeedingTicketGUI {
             }
         }
     };
-
-    public static void main(String[] args) throws IOException {
-
-        new SpeedingTicketGUI();
-    }
 }
-
-//http://stackoverflow.com/questions/3480102/java-jframe-setlocationrelativetonull-not-centering-the-window-on-ubuntu-10-0 - Help with setting the Container to open in the middle of the screen (1).
