@@ -237,7 +237,7 @@ public class AddDriverGUI {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                 driverData = new Driver(txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), roadSpeed, roadType, driverSpeed, speedDifference);
-                vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(),txtVehicleNumPlate.getText(),txtVehicleYear.getText(),txtFirstName.getText(),txtDrivingLicenceNum.getText(),txtFirstAddressLine.getText(),lblSecondAddressLine.getText(),txtPostCode.getText());
+                vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(),txtVehicleNumPlate.getText(),txtVehicleYear.getText(),txtFirstName.getText(),txtDrivingLicenceNum.getText(),txtFirstAddressLine.getText(),txtSecondAddressLine.getText(),txtPostCode.getText());
                 driverData.speedCheck(driverSpeed ,roadType);
                 vehicleData.getVehicleInfo();
                 driverData.getTicketResult();

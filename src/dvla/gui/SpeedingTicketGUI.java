@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class SpeedingTicketGUI {
     private JLabel lblPicture;
-    private JButton btnAddDriver, btnViewDriver, btnAddAdmin, btnExit;
+    private JButton btnAddDriver, btnViewDriver, btnAddLogin,btnViewVehicle, btnExit;
     private JPanel pnlMainMenu;
     private JFrame frmMainMenu;
 
@@ -58,13 +58,18 @@ public class SpeedingTicketGUI {
         btnViewDriver.addActionListener(new ViewDriverHandler());
         pnlMainMenu.add(btnViewDriver);
 
-        btnAddAdmin = new JButton("New Login");
-        btnAddAdmin.setBounds(270, 230, 120, 40);
-        btnAddAdmin.addActionListener(new AddAdminHandler());
-        pnlMainMenu.add(btnAddAdmin);
+        btnAddLogin = new JButton("New Login");
+        btnAddLogin.setBounds(270, 230, 120, 40);
+        btnAddLogin.addActionListener(new AddLoginHandler());
+        pnlMainMenu.add(btnAddLogin);
+
+        btnViewVehicle = new JButton("View Vehicle");
+        btnViewVehicle.setBounds(10, 290, 120, 40);
+        btnViewVehicle.addActionListener(new ViewVehicleHandler());
+        pnlMainMenu.add(btnViewVehicle);
 
         btnExit = new JButton("Exit");
-        btnExit.setBounds(140, 290, 120, 40);
+        btnExit.setBounds(270, 290, 120, 40);
         btnExit.addActionListener(new ExitSplashHandler());
         pnlMainMenu.add(btnExit);
     }
@@ -83,18 +88,7 @@ public class SpeedingTicketGUI {
         }
     }
 
-    private WindowListener exitListener = new WindowAdapter() {
 
-        @Override
-        public void windowClosing(WindowEvent event) {
-            int confirm = JOptionPane.showOptionDialog(
-                    null, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE, null, null, null);
-            if (confirm == 0) {
-                System.exit(0);
-            }
-        }
-    };
 
 
     class ExitSplashHandler implements ActionListener {
@@ -108,13 +102,33 @@ public class SpeedingTicketGUI {
 
     }
 
-    class AddAdminHandler implements ActionListener {
+    class AddLoginHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             new AddAccountGUI();
         }
 
     }
+
+    class ViewVehicleHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            new SearchVehicleGUI();
+        }
+
+    }
+    private WindowListener exitListener = new WindowAdapter() {
+
+        @Override
+        public void windowClosing(WindowEvent event) {
+            int confirm = JOptionPane.showOptionDialog(
+                    null, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (confirm == 0) {
+                System.exit(0);
+            }
+        }
+    };
 
     public static void main(String[] args) throws IOException {
 
