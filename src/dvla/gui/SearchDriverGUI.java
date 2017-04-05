@@ -67,6 +67,7 @@ public class SearchDriverGUI {
             createDriverTable();
             //Adding a Table Listener and passing it through to tableEdit()
             driverTable.getModel().addTableModelListener(new tableEdit());
+            driverTable.getModel().addTableModelListener(new tableEdit());
             //.putClientProperty ("terminateEditOnFocusLost" ends the editing of the cells and clears any selected rows
             driverTable.putClientProperty("terminateEditOnFocusLost", true);
             setScrollPane();
@@ -212,7 +213,6 @@ public class SearchDriverGUI {
             driverTable.getTableHeader().setReorderingAllowed(false);
             driverTable.getTableHeader().setResizingAllowed(false);
             driverTable.setAutoCreateRowSorter(true);
-            driverTable.getAutoResizeMode();
 
             //Set a table sorter to organise the Jtable data.
             sorter = new TableRowSorter<>(driverTable.getModel());
@@ -229,6 +229,9 @@ public class SearchDriverGUI {
         public void tableChanged(TableModelEvent tableEvent) {
 
             writeToFile();
+        }
+        public void actioncolumSelected(TableModelEvent selectionEvent){
+
         }
     }
 
