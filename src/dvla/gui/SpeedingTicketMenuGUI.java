@@ -84,6 +84,7 @@ public class SpeedingTicketMenuGUI {
     class ViewDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
+            //if file is empty or does not exist, tell user to add driver first.
             new SearchDriverGUI();
         }
     }
@@ -113,6 +114,7 @@ public class SpeedingTicketMenuGUI {
     class ViewVehicleHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
+            //if file is empty or does not exist, tell user to add driver first.
             new SearchVehicleGUI();
         }
 

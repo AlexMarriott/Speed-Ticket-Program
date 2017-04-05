@@ -19,7 +19,6 @@ public class UserLogin {
     }
 
     public void  setLoginDetails (String userName, char[] userPassword ){
-        System.out.println(userName + userPassword);
         userLogin = userName;
         newUserPassword = String.valueOf(userPassword);
 
@@ -34,12 +33,9 @@ public class UserLogin {
 
         Scanner readIn = new Scanner(file);
         loginArray = new ArrayList<>();
-        int i =0;
         while (readIn.hasNextLine()) {
 
             loginArray.add(readIn.nextLine());
-            System.out.println(loginArray.get(i));
-            i++;
         }
         return loginArray;
     }

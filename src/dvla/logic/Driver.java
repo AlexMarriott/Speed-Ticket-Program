@@ -57,7 +57,7 @@ public class Driver {
             ticketReturnMessage = ticketReturnMessage + message + "\nDriver Must pay: "+ "£"+drivingFine;
 
         } else if (driverSpeed >= countDateThershold) {
-            message = "Driver exceeded the Speed limit by: " + (driverSpeed - roadSpeed)+ "MPH" + " \nDriver will be issued a ticket and count date.";
+            message = "Driver exceeded the Speed limit by: " + (driverSpeed - roadSpeed)+ "MPH" + " Driver will be issued a ticket and count date.";
             drivingFine = 100;
             penaltyPoints = 3;
             ticketReturnMessage = ticketReturnMessage + message + "\nDriver Must pay: " + "£"+drivingFine + "\nDriver Will receive " + penaltyPoints + " points on their license.";

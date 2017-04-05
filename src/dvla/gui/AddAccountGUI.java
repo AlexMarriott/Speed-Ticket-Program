@@ -18,7 +18,9 @@ import java.io.IOException;
 
 /**
  * <h1> AddAccountGUI</h1>
- * The AddAccount GUI class, implements the AddAccount window, which allows the users to add a new user account to access the DVLA Ticket Program.
+ * Creates a GUI to allow users to create new users to use the program.
+ * The AddAccount GUI class, implements the AddAccount window, which allows the users to add a new user
+ * account to access the DVLA Ticket Program.
  *
  * @author Alex Marriott s4816928
  * @version 1.0
@@ -52,7 +54,7 @@ public class AddAccountGUI {
     private AddAccount addingAccount;
 
 
-    /**AddAccountGUI() Initialises the AddAccount Constructor and sets the following methods. */
+    /**Initialises the AddAccount Constructor and sets the following methods to create the GUI. */
     public AddAccountGUI() {
 
         createLoginPanel();
@@ -61,7 +63,8 @@ public class AddAccountGUI {
         createLoginFrame();
 
         /**
-         * The try catch runs the UIManager to set the look and feel to the users Operating System desktop managers look, The catch will catch and stacktrace exception which interfere with the UIManager.
+         * The try catch runs the UIManager to set the look and feel to the users Operating System desktop managers look,
+         * The catch will catch and stacktrace exception which interfere with the UIManager.
          */
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -71,7 +74,7 @@ public class AddAccountGUI {
     }
 
     /**
-     * createLoginFrame() creates the frame for the AddAccount class.
+     * creates the frame for the AddAccount GUI.
      */
     public void createLoginFrame() {
         frmAddAccount = new JFrame();
@@ -86,7 +89,7 @@ public class AddAccountGUI {
     }
 
     /**
-     * createLoginPanel() creates the Jpanel for the AddAccount class.
+     * creates the Jpanel for the AddAccount GUI.
      */
     public void createLoginPanel() {
         pnlAddAccount = new JPanel();
@@ -94,7 +97,7 @@ public class AddAccountGUI {
     }
 
     /**
-     * addLoginFields() creates the JTextField and Jlabels for the panel.
+     * creates the JTextField and Jlabels for the AddAccountGUI panel.
      */
     public void addLoginFields() {
 
@@ -118,7 +121,7 @@ public class AddAccountGUI {
     }
 
     /**
-     * addLoginButtons() creates all the Jbuttons for the panel.
+     * creates all the Jbuttons for the AddAccountGUI panel.
      */
     public void addLoginButtons() {
         btnSubmit = new JButton("Add");
@@ -138,6 +141,7 @@ public class AddAccountGUI {
     }
 
     /**
+     * AddHandler create a new user based on the username and password provided
      * The AddHandler gets the UsersName and Password of the new user account and checks that they follow the naming convention. Once checked, it will pass the account name password to the AddAccount object,
      * which will add them to the DataStore.
      */

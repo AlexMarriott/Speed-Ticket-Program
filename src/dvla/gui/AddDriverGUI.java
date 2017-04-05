@@ -82,16 +82,24 @@ public class AddDriverGUI  {
      */
 
     private int speedDifference;
-
-    private String roadType;
     /**
      *Declare a String variable of roadType which is used in the JComboBox and then will be pass through to the Driver Object.
      */
-    private DatabaseWriter saveDriverData = new DatabaseWriter();
 
+    private JComboBox comboBox;
+
+    /** */
+    private int[] roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
+
+
+    private String roadType;
+    /**Declaring a new Vehicle Object*/
     private Vehicle vehicleData;
+
+    /**Declaring a new Driver Object*/
     private Driver driverData;
 
+    /** Constructor runs the methods to create the GUI*/
     public AddDriverGUI() {
         pnlAddDriver();
         lblDriverButtons();
@@ -102,11 +110,18 @@ public class AddDriverGUI  {
         frmAddDriver();
     }
 
+    /**
+     * Creates the Jpanel
+     */
+
     private void pnlAddDriver() {
         pnlDriverGUI = new JPanel();
         pnlDriverGUI.setLayout(null);
     }
 
+    /**
+     * Creates the Jframe.
+     */
     private void frmAddDriver() {
         frmDriverGUI = new JFrame();
 
@@ -118,7 +133,9 @@ public class AddDriverGUI  {
         frmDriverGUI.add(pnlDriverGUI);
         frmDriverGUI.setVisible(true);
     }
-
+    /**
+     * creates the Jlabels adds it to the AddDriverGUI panel
+     */
     private void lblDriverButtons() {
         Font arial = new Font("Arial", Font.BOLD + Font.ITALIC, 10);
         driverInfoBorder = BorderFactory.createLoweredBevelBorder();
@@ -188,6 +205,9 @@ public class AddDriverGUI  {
         pnlDriverGUI.add(lblDriversSpeed);
     }
 
+    /**
+     * Creates the Jtextfields adds it to the AddDriverGUI panel
+     */
     private void txtDriverButtons() {
         txtFirstName = new JTextField("ALEX");
         txtFirstName.setBounds(140, 40, 100, 20);
@@ -238,6 +258,9 @@ public class AddDriverGUI  {
         pnlDriverGUI.add(txtDriverSpeed);
     }
 
+    /**
+     * creates the DVLA image for the AddDriverGUi and adds it to the AddDriverGUI panel
+     */
     private void addDriverImage() {
         ImageIcon smallDVLAImage = new ImageIcon("dvlasmall.jpg");
         lblPicture = new JLabel(smallDVLAImage);
@@ -245,6 +268,9 @@ public class AddDriverGUI  {
         pnlDriverGUI.add(lblPicture);
     }
 
+    /**
+     * creates and adds a Jcombobox with the road types to the panel.
+     */
     private void addDriverJCombobox() {
         roadTypeList = new String[]{"", "School Zone", "Residential Road", "Main Road", "Single Carriageway", "Dual Carriageway"};
         roadList = new JComboBox<>(roadTypeList);
@@ -254,6 +280,9 @@ public class AddDriverGUI  {
         pnlDriverGUI.add(roadList);
     }
 
+    /**
+     * creates and adds radio buttons to the AddDriverGUI panel
+     */
     private void addDriverButtons() {
 
         btnSubmit = new JButton("Submit");
@@ -267,10 +296,12 @@ public class AddDriverGUI  {
         pnlDriverGUI.add(btnBack);
     }
 
-
+    /**
+     * The RoadTypeHandler gets the users selection from the ComboBox and assigns the variable roadspeed with the array location of the speed
+     * to use when getting the road Speed.
+     */
     private class RoadTypeHandler implements ActionListener {
-        private JComboBox comboBox;
-        private int[] roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
+
 
         public void actionPerformed(ActionEvent event) {
             comboBox = (JComboBox) event.getSource();
@@ -279,10 +310,16 @@ public class AddDriverGUI  {
         }
     }
 
+
     public class CheckDriverData implements ActionListener {
-        private Driver driverData;
 
-
+        /**
+         * Check that the inputs are correct and passes the data to Driver to assign and do a speed check of the driver.
+         * The actionPerformed action Handler listens to the sumbit button and then once clicked it checks
+         * to see if the txtboxes of txtFirstname,driverspeed and the  roadspeed variable to see if they
+         * are empty it then grabs all the inputted data on the driver form and passes the data to the
+         * Driver & Vehicle and display a popup to the user.
+         */
         @Override
         public void actionPerformed(ActionEvent event) {
             driverSpeed = Integer.parseInt(txtDriverSpeed.getText());
@@ -309,6 +346,9 @@ public class AddDriverGUI  {
         }
     }
 
+    /**
+     * The DriverAddExitHandler listens to the exit button and once clicked it will disposed of the AddDriverGUI
+     */
     private class DriverAddExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
