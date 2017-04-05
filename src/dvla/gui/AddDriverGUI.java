@@ -33,68 +33,49 @@ import java.awt.event.ActionListener;
  */
 public class AddDriverGUI  {
 
-    /**
-     *Declares  the  Jlabels.
-     */
+    /**Declares  the  Jlabels.*/
     private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear, lblDateReported;
-    /**
-     * Declares the JTextFields.
-     */
+
+    /**Declares the JTextFields.*/
     private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear, txtDateReported;
-    /**
-     * Declares the JButtons.
-     */
+
+    /**Declares the JButtons.*/
     private JButton btnSubmit, btnBack;
-    /**
-     *Declares the JBorder for the heading text in the AddDriverGUI window.
-     */
+
+    /**Declares the JBorder for the heading text in the AddDriverGUI window.*/
     private Border driverInfoBorder;
 
-    /**
-     *Declares the Jpanel.
-     */
+    /**Declares the Jpanel.*/
     private JPanel pnlDriverGUI;
 
-    /**
-     *Declares the JFrame.
-     */
+    /**Declares the JFrame.*/
     private JFrame frmDriverGUI;
 
-    /**
-     *Declares the JComboBox.
-     */
+    /**Declares the JComboBox.*/
     private JComboBox<String> roadList;
 
-    /**
-     *Declares the String array of roadTypeList, this array contains a list of the different roadTypes.
-     */
-    private String[] roadTypeList;
-
-    /**
-     * Declare a int variable of driverSpeed which will be pass through to the Driver Object.
-     */
-    private int driverSpeed;
-
-    /**
-     *Declare a int variable of roadspeed which will be pass through to the Driver Object.
-     */
-    private  int roadSpeed;
-    /**
-     *Declare a int variable of speedDifference which is used to check if the user has enter a speed and then will be pass through to the Driver Object.
-     */
-
-    private int speedDifference;
-    /**
-     *Declare a String variable of roadType which is used in the JComboBox and then will be pass through to the Driver Object.
-     */
-
+    /**Declare a String variable of roadType which is used in the JComboBox and then will be pass through to the Driver Object.*/
     private JComboBox comboBox;
 
-    /** */
-    private int[] roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
 
+    /**Declare a int variable of driverSpeed which will be pass through to the Driver Object.*/
+    private int driverSpeed;
 
+    /**Declare a int variable of roadspeed which will be pass through to the Driver Object.*/
+    private  int roadSpeed;
+
+    /**Declare a int variable of speedDifference which is used to check if the user has enter a speed and then will be pass through to the Driver Object.*/
+    private int speedDifference;
+
+    /** Declare a  int[] array of roadSpeedList which is used to select the roadspeed for the different roadstypes.*/
+    private int[] roadSpeedList;
+
+    /**Declares the String array of roadTypeList, this array contains a list of the different roadTypes.*/
+    private String[] roadTypeList;
+
+    /**Declaring a new String called roadType, which  is assigned the roadType from the JComboBox.*/
     private String roadType;
+
     /**Declaring a new Vehicle Object*/
     private Vehicle vehicleData;
 
@@ -288,13 +269,14 @@ public class AddDriverGUI  {
     /** The RoadTypeHandler gets the users selection from the ComboBox and assigns the variable roadspeed with the array location of the speed to use when getting the road Speed.*/
     private class RoadTypeHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
             comboBox = (JComboBox) event.getSource();
             roadType = String.valueOf(comboBox.getSelectedItem());
             roadSpeed = roadSpeedList[Integer.parseInt(String.valueOf(comboBox.getSelectedIndex()))];
         }
     }
 
-    public class CheckDriverData implements ActionListener {
+    private class CheckDriverData implements ActionListener {
         /**
          * Check that the inputs are correct and passes the data to Driver to assign and do a speed check of the driver.
          * The actionPerformed action Handler listens to the sumbit button and then once clicked it checks
@@ -306,6 +288,7 @@ public class AddDriverGUI  {
         public void actionPerformed(ActionEvent event) {
             driverSpeed = Integer.parseInt(txtDriverSpeed.getText());
             speedDifference = driverSpeed - roadSpeed;
+
             if (txtFirstName.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else if (driverSpeed == 0) {
@@ -316,7 +299,7 @@ public class AddDriverGUI  {
 
                 //Here we are instantiating  the Driver Object and the Vehicle Object and passing through the driver information and the vehicle data to these objects.
                 driverData = new Driver(txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), roadSpeed, roadType, driverSpeed, speedDifference);
-                vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(),txtVehicleNumPlate.getText(),txtVehicleYear.getText(),txtFirstName.getText(),txtDrivingLicenceNum.getText(),txtFirstAddressLine.getText(),txtSecondAddressLine.getText(),txtPostCode.getText());
+                vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(),txtVehicleNumPlate.getText(),txtVehicleYear.getText(),txtFirstName.getText() + " "+ txtLastName.getText(),txtDrivingLicenceNum.getText(),txtFirstAddressLine.getText(),txtSecondAddressLine.getText(),txtPostCode.getText());
 
                 //Passing through driverSpeed and roadtype to the driver object to check the speed of the driver.
                 driverData.speedCheck(driverSpeed ,roadType);

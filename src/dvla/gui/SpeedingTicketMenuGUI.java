@@ -7,9 +7,7 @@ import java.io.IOException;
 
 /**
  * <h1> SpeedingTicketMenuGUI</h1>
- * The SpeedingTicketMenuGUI creates the SearchDriverGUI Window, which allows users to see all the Drivers records which have been logged into the system.
- * SpeedingTicketMenuGUI also allows the user to remove drivers and search for specific drivers.
- *
+ * The SpeedingTicketMenuGUI creates the GUI for the SPeedingTicketMenu. This menu allows the user to open up different parts of the program such as the Addriver screen.
  * @author Alex Marriott s4816928
  * @version 1.0
  * @since 03/04/2017
@@ -27,6 +25,7 @@ public class SpeedingTicketMenuGUI {
     /**Declares a JFrame named frmMainMenu.*/
     private JFrame frmMainMenu;
 
+    /**Declares two Files named fileDriverID,fileDriverID.*/
     private File fileDriverID, fileVehicleID;
 
 
@@ -77,7 +76,7 @@ public class SpeedingTicketMenuGUI {
         btnViewDriver.addActionListener(new ViewDriverHandler());
         pnlMainMenu.add(btnViewDriver);
 
-        btnAddLogin = new JButton("New LoginHandler");
+        btnAddLogin = new JButton("New Login");
         btnAddLogin.setBounds(270, 230, 120, 40);
         btnAddLogin.addActionListener(new AddLoginHandler());
         pnlMainMenu.add(btnAddLogin);
@@ -108,7 +107,7 @@ public class SpeedingTicketMenuGUI {
             fileDriverID = new File("Drivers.txt");
             fileVehicleID  = new File("Vehicle.txt");
             //if file is empty or does not exist, tell user to add driver first.
-            if (!fileDriverID.exists() || !fileVehicleID.exists() ){
+            if (!fileDriverID.exists() ){
 
                 JOptionPane.showMessageDialog(frmMainMenu, "DataStore doesn't not exist, Please add a driver to view the datastore.");
             }
@@ -119,7 +118,7 @@ public class SpeedingTicketMenuGUI {
     }
 
     /** AddLoginHandler instantiates a new AddAccountGUI().*/
-    class AddLoginHandler implements ActionListener {
+    private class AddLoginHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             new AddAccountGUI();
@@ -131,9 +130,9 @@ public class SpeedingTicketMenuGUI {
     private class ViewVehicleHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
+            fileVehicleID  = new File("Vehicle.txt");
             //if file is empty or does not exist, tell user to add driver first.
-            if (!fileDriverID.exists() || !fileVehicleID.exists() ){
-
+            if (!fileVehicleID.exists() ){
                 JOptionPane.showMessageDialog(frmMainMenu, "DataStore doesn't not exist, Please add a driver to view the datastore.");
             }
             else {

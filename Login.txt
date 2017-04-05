@@ -1,7 +1,1 @@
-killhead:password1
-Admin:Password1
-Alex:Password123
-samme:manning
-rhyss:passwordalexm:theman12
-JackL:Movingonup2016
-alexa:test123
+alexm:password123

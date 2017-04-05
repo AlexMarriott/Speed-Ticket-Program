@@ -28,13 +28,13 @@ import java.io.IOException;
  */
 public class AddAccountGUI {
 
-    /** The lblUserName and lblPassword are used to create labels on the panel for user and password. */
+    /** Declares a Jlabels named lblUserName,lblPassword, they are used to create labels on the panel for user and password. */
     private JLabel lblUserName, lblPassword;
 
-    /** txtUserName is used to allow user input into the txtUserName field. */
+    /** Declares a JTextField named txtUserName*/
     private JTextField txtUserName;
 
-    /** JPasswordField is used to allow user input into the txtUserName field. */
+    /** Declares a JPasswordField named txtPassword*/
     private JPasswordField txtPassword;
 
     /**
@@ -44,10 +44,10 @@ public class AddAccountGUI {
      * */
     private JButton btnSubmit, btnConvention, btnExit;
 
-    /** pnlAddAccount, creates the panel for the AddAccountGUI. */
+    /** Declares a JPanel named pnlAddAccount*/
     private JPanel pnlAddAccount;
 
-    /** frmAddAccount, creates the frame for the AddAccountGUI. */
+    /** Declares a JFrame named frmAddAccount*/
     private JFrame frmAddAccount;
 
     /**Declaring a new AddAccount Object. AddAccount is the logic part to the AddAccountGUI*/
@@ -73,9 +73,7 @@ public class AddAccountGUI {
         }
     }
 
-    /**
-     * creates the frame for the AddAccount GUI.
-     */
+    /**creates the frame for the AddAccount GUI.*/
     private void createLoginFrame() {
         frmAddAccount = new JFrame();
         frmAddAccount.setTitle("LoginHandler");
@@ -88,17 +86,13 @@ public class AddAccountGUI {
         frmAddAccount.setVisible(true);
     }
 
-    /**
-     * creates the Jpanel for the AddAccount GUI.
-     */
+    /**creates the Jpanel for the AddAccount GUI.*/
     private void createLoginPanel() {
         pnlAddAccount = new JPanel();
         pnlAddAccount.setLayout(null);
     }
 
-    /**
-     * creates the JTextField and Jlabels for the AddAccountGUI panel.
-     */
+    /**creates the JTextField and Jlabels for the AddAccountGUI panel.*/
     private void addLoginFields() {
 
         lblUserName = new JLabel("New UserName");
@@ -120,9 +114,7 @@ public class AddAccountGUI {
 
     }
 
-    /**
-     * creates all the Jbuttons for the AddAccountGUI panel.
-     */
+    /** creates all the Jbuttons for the AddAccountGUI panel. */
     private void addLoginButtons() {
         btnSubmit = new JButton("Add");
         btnSubmit.setBounds(10, 100, 100, 30);
@@ -145,12 +137,11 @@ public class AddAccountGUI {
      * The AddHandler gets the UsersName and Password of the new user account and checks that they follow the naming convention. Once checked, it will pass the account name password to the AddAccount object,
      * which will add them to the DataStore.
      */
-    class AddHandler implements ActionListener {
+    private class AddHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             addingAccount = new AddAccount();
             addingAccount.setNewLogin(txtUserName.getText(), txtPassword.getPassword());
-            addingAccount.getNewLogin();
 
             if (!addingAccount.getUserState()) {
                 JOptionPane.showMessageDialog(frmAddAccount, "The User length should be 5 Characters minimum and contain letters only");
@@ -158,7 +149,7 @@ public class AddAccountGUI {
                 JOptionPane.showMessageDialog(frmAddAccount, "The Password length should be 8 Characters minimum and contain letters and Numbers only");
             } else {
                 try {
-                    addingAccount.saveNewUser();
+                    addingAccount.saveNewUser(addingAccount.getNewLogin());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -168,11 +159,8 @@ public class AddAccountGUI {
         }
     }
 
-    /**
-     * The ConventionHandler creates a Joptionpane popup which displays the naming convention.
-     */
-
-    class ConventionHandler implements ActionListener {
+    /**The ConventionHandler creates a Joptionpane popup which displays the naming convention.*/
+    private class ConventionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             JOptionPane.showMessageDialog(frmAddAccount, "The Username Length should be 5 Characters minimum and contain letters only. \nThe Password length should be 8 Characters minimum  and contain letters and Numbers only.");
@@ -181,7 +169,7 @@ public class AddAccountGUI {
     /**
      * The ExitHandler will dispose of the frame and return the user back to the menu.
      */
-    class ExitHandler implements ActionListener {
+    private class ExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmAddAccount.dispose();

@@ -86,7 +86,7 @@ public class SearchVehicleGUI {
     /** Creates the frame and stops the user from closing the frame from the top right exit button.
      *  This is to allow the data to be saved when changes are made.
      */
-    public void frmAddSearchVehicle() {
+    private void frmAddSearchVehicle() {
         frmSearchVehicle = new JFrame();
         frmSearchVehicle.setTitle("View Driver");
         frmSearchVehicle.setSize(1250, 400);
@@ -102,13 +102,13 @@ public class SearchVehicleGUI {
     }
 
     /** Creates the panel for the SearchVehicleGUI*/
-    public void pnlAddSearchvehicle() {
+    private void pnlAddSearchvehicle() {
         pnlSearchVehicle = new JPanel();
         pnlSearchVehicle.setLayout(null);
     }
 
     /** Create the Jlabel and Jtextfields for the user input in the SearchVehicleGUI.*/
-    public void addVehicleViewFields() {
+    private void addVehicleViewFields() {
 
         lblVehicleID = new JLabel("Driver ID");
         lblVehicleID.setBounds(10, 250, 100, 20);
@@ -120,7 +120,7 @@ public class SearchVehicleGUI {
 
     }
     /** Adds Jbuttons to the SearchVehicleGUI*/
-    public void addVehicleViewButtons() {
+    private void addVehicleViewButtons() {
         btnSearch = new JButton("Search Vehicle");
         btnSearch.setBounds(20, 335, 140, 30);
         btnSearch.addActionListener(new VehicleSearchHandler());
@@ -136,13 +136,13 @@ public class SearchVehicleGUI {
      * countRowsAndColumns is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
      * to work out how many rows there should be.
      **/
-    public double getTableRows() {
+    private double getTableRows() {
         columnHeaderAmount = 10;
         return tableRowAmount = countRowsAndColumns.size() / columnHeaderAmount;
     }
 
     /**Sets countRowsAndColumns as an Arraylist and reads in all the String data from the Drivers.txt file.*/
-    public void getVehicle() {
+    private void getVehicle() {
         countRowsAndColumns = new ArrayList<>();
 
         File file = new File("Vehicle.txt");
@@ -151,7 +151,8 @@ public class SearchVehicleGUI {
             while (readIn.hasNext()) {
                 countRowsAndColumns.add(readIn.nextLine());
             }
-        } catch (IOException e) {
+        } catch (IOException exception ) {
+            exception.printStackTrace();;
 
         }
     }
@@ -159,7 +160,7 @@ public class SearchVehicleGUI {
     /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
      * writeToFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
      * such as the removal of a Driver.*/
-    public void writeToFile() {
+    private void writeToFile() {
         try {
             FileWriter writeToDataStore = new FileWriter("Vehicle.txt");
             for (int i = 0; i < vehicleTable.getRowCount(); i++) {
@@ -176,7 +177,7 @@ public class SearchVehicleGUI {
     /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
      *createDriverTable creates a two dimensional array om tableRowAmount and the column length.
      *With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
-    public void createVehicleTable() {
+    private void createVehicleTable() {
         try {
             // ColumnName Default size is 9 but 10 to allow us to increment the column by one , if anymore headers are added, change the columnHeaderAmount in the getTableRows method.
             String[] columnNames = {" Vehicle ID", "Vehicle Model", "Vehicle Make", "Vehicle Number Plate", "Vehicle Year", "Owner", "Driving Licence Number", "First Line of Address", "Second Line of Address", "Post Code"};
@@ -222,21 +223,21 @@ public class SearchVehicleGUI {
     }
     /** This TableModelListener get any changes which happens to the Jtable and writes them to the Drivers.txt
      * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt*/
-    class tableEdit implements TableModelListener {
+    private class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent event) {
             writeToFile();
         }
     }
 
     /** Set driverTable(Jtable) to a scrollPane so user can scroll up and down.*/
-    public void setScrollPane() {
+    private void setScrollPane() {
         vehicleScrollPane = new JScrollPane(vehicleTable);
         vehicleScrollPane.setBounds(0, 0, 1250, 200);
         pnlSearchVehicle.add(vehicleScrollPane);
     }
 
     /** DriverSearchHandler Filters the rows using regexfilter to find the DriverID and returns it on the Jtable*/
-    class VehicleSearchHandler implements ActionListener {
+    private class VehicleSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             sorter.setRowFilter(RowFilter.regexFilter(txtVehicleID.getText(), 0));
@@ -244,7 +245,7 @@ public class SearchVehicleGUI {
     }
 
     /** DriverSearchExitHandler disposes of the SearchDriver frame once the use clicks the Exit button.*/
-    class VehicleSearchExitHandler implements ActionListener {
+    private class VehicleSearchExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchVehicle.dispose();
