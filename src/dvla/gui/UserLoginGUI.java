@@ -10,21 +10,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Alex on 23/02/2017.
+ * <h1> UserLoginGUI</h1>
+ * The UserLoginGUI creates the UserLoginGUI Window, which allows users to see all the Drivers records which have been logged into the system.
+ * UserLoginGUI also allows the user to remove drivers and search for specific drivers.
+ *
+ * @author Alex Marriott s4816928
+ * @version 1.0
+ * @since 03/04/2017
  */
 public class UserLoginGUI {
+
+    /**Declares a Jlabel named lblUserName,lblUserName.*/
     private JLabel lblUserName, lblPassword;
+
+    /**Declares a JTextField named lblDriverID.*/
     private JTextField txtUserName;
+
+    /**Declares a JPasswordField named lblDriverID.*/
     private JPasswordField txtPassword;
+
+    /**Declares a JButton named btnLogin,btnExit .*/
     private JButton btnLogin, btnExit;
+
+    /**Declares a JPanel named pnlDriverLogin.*/
     private JPanel pnlDriverLogin;
+
+    /**Declares a JFrame named frmDriverLogin.*/
     private JFrame frmDriverLogin;
 
+    /**Declaring a new UserLogin Object. UserLogin is the logic part to the UserLoginGUI*/
     private UserLogin userlogic;
+
+    /**Declares a boolean named userCanLogin. usercanLogin dictates via a true or false if the user is able to login to the program.*/
     private boolean userCanLogin;
-    List<String> loginArray;
+
+    /**Declares a List<String> named loginArray. loginArray reads in the values from the login.txt file and is then compared with the users inputs.*/
+    private List<String> loginArray;
 
 
+    /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
     public UserLoginGUI() {
 
         createLoginPanel();
@@ -39,9 +63,10 @@ public class UserLoginGUI {
         }
     }
 
+    /** Creates the frame for the UserLoginGUI*/
     public void createLoginFrame() {
         frmDriverLogin = new JFrame();
-        frmDriverLogin.setTitle("Login");
+        frmDriverLogin.setTitle("LoginHandler");
         frmDriverLogin.setSize(400, 175);
         frmDriverLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmDriverLogin.setLocationRelativeTo(null);
@@ -52,11 +77,13 @@ public class UserLoginGUI {
         frmDriverLogin.setVisible(true);
     }
 
+    /** Creates the panel for the UserLoginGUI*/
     public void createLoginPanel() {
         pnlDriverLogin = new JPanel();
         pnlDriverLogin.setLayout(null);
     }
 
+    /** Adds JTextField and JLabels to the UserLoginGUI*/
     public void addLoginFields() {
 
         lblUserName = new JLabel("UserName");
@@ -78,10 +105,11 @@ public class UserLoginGUI {
 
     }
 
+    /** Adds Jbuttons to the UserLoginGUI*/
     public void addLoginButtons() {
-        btnLogin = new JButton("Login");
+        btnLogin = new JButton("LoginHandler");
         btnLogin.setBounds(10, 100, 100, 30);
-        btnLogin.addActionListener(new Login());
+        btnLogin.addActionListener(new LoginHandler());
         pnlDriverLogin.add(btnLogin);
 
         btnExit = new JButton("Exit");
@@ -90,8 +118,12 @@ public class UserLoginGUI {
         pnlDriverLogin.add(btnExit);
     }
 
-
-    class Login implements ActionListener {
+    /**
+     * The LoginHandler takes the user inputted username and password and checks to see if they are valid.
+     * The LoginHandler gets the UsersName and Password of the new user account and checks that they follow the naming convention. Once checked, it will pass the account name password to the AddAccount object,
+     * which will add them to the DataStore.
+     */
+    class LoginHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             userlogic = new UserLogin();
@@ -113,7 +145,7 @@ public class UserLoginGUI {
 
                 if (loginArray.get(i).equals(userlogic.getLoginDetails())) {
 
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
+                    JOptionPane.showMessageDialog(frmDriverLogin, "LoginHandler in Successful! Welcome!");
                     new SpeedingTicketMenuGUI();
                     frmDriverLogin.dispose();
                     userCanLogin = true;
@@ -124,7 +156,7 @@ public class UserLoginGUI {
             }
 
                 if (!userCanLogin) {
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
+                    JOptionPane.showMessageDialog(frmDriverLogin, "LoginHandler in Unsuccessfully.... Check your username and password!");
                 }
 
         }

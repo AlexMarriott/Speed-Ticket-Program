@@ -91,7 +91,7 @@ public class SearchDriverGUI {
     public void frmAddSearchDriver() {
         frmSearchDriver = new JFrame();
         frmSearchDriver.setTitle("View Driver");
-        frmSearchDriver.setSize(1550, 400);
+        frmSearchDriver.setSize(1250, 400);
         frmSearchDriver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmSearchDriver.setLocationRelativeTo(null);
         frmSearchDriver.setResizable(false);
@@ -122,7 +122,7 @@ public class SearchDriverGUI {
 
     }
 
-    /** adds Jbuttons to the SearchDriverGUI*/
+    /** Adds Jbuttons to the SearchDriverGUI*/
     public void addDriverViewButtons() {
         btnSearch = new JButton("Search Driver");
         btnSearch.setBounds(20, 335, 140, 30);
@@ -235,7 +235,7 @@ public class SearchDriverGUI {
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
         }
     }
-    /** This TableModealListener get any changes which happens to the Jtable and writes them to the Drivers.txt
+    /** This TableModelListener get any changes which happens to the Jtable and writes them to the Drivers.txt
      * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt*/
     class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent tableEvent) {
@@ -249,7 +249,7 @@ public class SearchDriverGUI {
     /** Set driverTable(Jtable) to a scrollPane so user can scroll up and down.*/
     public void setScrollPane() {
         driverScrollPane = new JScrollPane(driverTable);
-        driverScrollPane.setBounds(0, 0, 1550, 200);
+        driverScrollPane.setBounds(0, 0, 1250, 200);
         pnlSearchDriver.add(driverScrollPane);
     }
 
@@ -260,7 +260,7 @@ public class SearchDriverGUI {
             sorter.setRowFilter(RowFilter.regexFilter(txtDriverID.getText(), 0));
         }
     }
-    /** DriverRemoveHandler using the defaultTableModel to remove the row which is selected in the drivertable.*/
+    /** DriverRemoveHandler using the defaultTableModel to remove the row which is selected in the driverTable.*/
     class DriverRemoveHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {

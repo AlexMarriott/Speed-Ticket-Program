@@ -50,7 +50,7 @@ public class AddAccountGUI {
     /** frmAddAccount, creates the frame for the AddAccountGUI. */
     private JFrame frmAddAccount;
 
-    /** Declaring addingAccount variable to later initialise to pass Data to AddAccount class. */
+    /**Declaring a new AddAccount Object. AddAccount is the logic part to the AddAccountGUI*/
     private AddAccount addingAccount;
 
 
@@ -78,7 +78,7 @@ public class AddAccountGUI {
      */
     private void createLoginFrame() {
         frmAddAccount = new JFrame();
-        frmAddAccount.setTitle("Login");
+        frmAddAccount.setTitle("LoginHandler");
         frmAddAccount.setSize(400, 175);
         frmAddAccount.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmAddAccount.setLocationRelativeTo(null);
@@ -171,6 +171,7 @@ public class AddAccountGUI {
     /**
      * The ConventionHandler creates a Joptionpane popup which displays the naming convention.
      */
+
     class ConventionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {

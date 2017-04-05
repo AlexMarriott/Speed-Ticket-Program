@@ -1,18 +1,36 @@
 package dvla.gui;
 
+import java.io.File;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
 
 /**
- * Created by alex on 11/02/2017.
+ * <h1> SpeedingTicketMenuGUI</h1>
+ * The SpeedingTicketMenuGUI creates the SearchDriverGUI Window, which allows users to see all the Drivers records which have been logged into the system.
+ * SpeedingTicketMenuGUI also allows the user to remove drivers and search for specific drivers.
+ *
+ * @author Alex Marriott s4816928
+ * @version 1.0
+ * @since 03/04/2017
  */
 public class SpeedingTicketMenuGUI {
+    /**Declares a Jlabel named lblPicture.*/
     private JLabel lblPicture;
+
+    /**Declares JButton named btnAddDriver, btnViewDriver, btnAddLogin, btnViewVehicle, btnExit.*/
     private JButton btnAddDriver, btnViewDriver, btnAddLogin,btnViewVehicle, btnExit;
+
+    /**Declares JPanel named pnlMainMenu. */
     private JPanel pnlMainMenu;
+
+    /**Declares a JFrame named frmMainMenu.*/
     private JFrame frmMainMenu;
 
+    private File fileDriverID, fileVehicleID;
+
+
+    /** Constructor runs the methods to create the GUI*/
     public SpeedingTicketMenuGUI() {
         loadPanel();
         loadImages();
@@ -21,33 +39,34 @@ public class SpeedingTicketMenuGUI {
 
     }
 
-    private void loadPanel() {
-        pnlMainMenu = new JPanel();
-        pnlMainMenu.setLayout(null);
-    }
 
-    public void loadMenu() {
+    /** Creates the frame for the SpeedingTicketMenuGUI*/
+    private void loadMenu() {
         frmMainMenu = new JFrame();
         frmMainMenu.setTitle("DVLA Ticket Program");
         frmMainMenu.setSize(410, 365);
-        frmMainMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frmMainMenu.setVisible(true);
+        frmMainMenu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmMainMenu.setLocationRelativeTo(null);
         frmMainMenu.addWindowListener(exitListener);
         frmMainMenu.setResizable(false);
         frmMainMenu.add(pnlMainMenu);
         frmMainMenu.setVisible(true);
     }
-
-    public void loadImages() {
-
+    /** Creates the panel for the SpeedingTicketMenuGUI*/
+    private void loadPanel() {
+        pnlMainMenu = new JPanel();
+        pnlMainMenu.setLayout(null);
+    }
+    /**Creates a ImageIcon and assigns a DVLA image to it. */
+    private void loadImages() {
         ImageIcon largeDVLAImage = new ImageIcon("DVLA.jpg");
         lblPicture = new JLabel(largeDVLAImage);
         lblPicture.setBounds(0, 0, 400, 200);
         pnlMainMenu.add(lblPicture);
     }
 
-    public void loadButtons() {
+    /** Adds Jbuttons to the SpeedingTicketMenuGUI*/
+    private void loadButtons() {
         btnAddDriver = new JButton("Add Driver");
         btnAddDriver.setBounds(10, 230, 120, 40);
         btnAddDriver.addActionListener(new AddDriverHandler());
@@ -58,7 +77,7 @@ public class SpeedingTicketMenuGUI {
         btnViewDriver.addActionListener(new ViewDriverHandler());
         pnlMainMenu.add(btnViewDriver);
 
-        btnAddLogin = new JButton("New Login");
+        btnAddLogin = new JButton("New LoginHandler");
         btnAddLogin.setBounds(270, 230, 120, 40);
         btnAddLogin.addActionListener(new AddLoginHandler());
         pnlMainMenu.add(btnAddLogin);
@@ -74,35 +93,32 @@ public class SpeedingTicketMenuGUI {
         pnlMainMenu.add(btnExit);
     }
 
-    class AddDriverHandler implements ActionListener {
+    /** AddDriverHandler instantiates a new AddDriverGUI.*/
+    private class AddDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             new AddDriverGUI();
         }
     }
 
-    class ViewDriverHandler implements ActionListener {
+    /** ViewDriverHandler instantiates a new SearchDriverGUI().*/
+   private class ViewDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
+            fileDriverID = new File("Drivers.txt");
+            fileVehicleID  = new File("Vehicle.txt");
             //if file is empty or does not exist, tell user to add driver first.
-            new SearchDriverGUI();
-        }
-    }
+            if (!fileDriverID.exists() || !fileVehicleID.exists() ){
 
-
-
-
-    class ExitSplashHandler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            int exit = JOptionPane.showConfirmDialog(frmMainMenu, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
-            if (exit == 0) {
-                System.exit(0);
+                JOptionPane.showMessageDialog(frmMainMenu, "DataStore doesn't not exist, Please add a driver to view the datastore.");
+            }
+            else {
+                new SearchDriverGUI();
             }
         }
-
     }
 
+    /** AddLoginHandler instantiates a new AddAccountGUI().*/
     class AddLoginHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -111,16 +127,24 @@ public class SpeedingTicketMenuGUI {
 
     }
 
-    class ViewVehicleHandler implements ActionListener {
+    /** ViewVehicleHandler instantiates a new SearchVehicleGUI().*/
+    private class ViewVehicleHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             //if file is empty or does not exist, tell user to add driver first.
-            new SearchVehicleGUI();
+            if (!fileDriverID.exists() || !fileVehicleID.exists() ){
+
+                JOptionPane.showMessageDialog(frmMainMenu, "DataStore doesn't not exist, Please add a driver to view the datastore.");
+            }
+            else {
+
+                new SearchVehicleGUI();
+            }
         }
 
     }
+    /** exitListener listens to the window waiting for input and when the user either clicks the top right X or the exit button then a prompt will appear asking the user if theya re sure theu wanna quit.*/
     private WindowListener exitListener = new WindowAdapter() {
-
         @Override
         public void windowClosing(WindowEvent event) {
             int confirm = JOptionPane.showOptionDialog(
@@ -131,4 +155,18 @@ public class SpeedingTicketMenuGUI {
             }
         }
     };
+
+    /** ExitSplashHandler prompts the user if they are sure they want to close the program.*/
+    private class ExitSplashHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            int exit = JOptionPane.showConfirmDialog(frmMainMenu, "Are You Sure You Want To Exit?", "Are You Sure", JOptionPane.YES_NO_OPTION);
+            if (exit == 0) {
+                System.exit(0);
+            }
+        }
+
+    }
+
+
 }
