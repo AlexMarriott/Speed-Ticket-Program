@@ -20,35 +20,55 @@ import java.util.List;
  */
 public class UserLoginGUI {
 
-    /**Declares a Jlabel named lblUserName,lblUserName.*/
+    /**
+     * Declares a Jlabel named lblUserName,lblUserName.
+     */
     private JLabel lblUserName, lblPassword;
 
-    /**Declares a JTextField named lblDriverID.*/
+    /**
+     * Declares a JTextField named lblDriverID.
+     */
     private JTextField txtUserName;
 
-    /**Declares a JPasswordField named lblDriverID.*/
+    /**
+     * Declares a JPasswordField named lblDriverID.
+     */
     private JPasswordField txtPassword;
 
-    /**Declares a JButton named btnLogin,btnExit .*/
+    /**
+     * Declares a JButton named btnLogin,btnExit .
+     */
     private JButton btnLogin, btnExit;
 
-    /**Declares a JPanel named pnlDriverLogin.*/
+    /**
+     * Declares a JPanel named pnlDriverLogin.
+     */
     private JPanel pnlDriverLogin;
 
-    /**Declares a JFrame named frmDriverLogin.*/
+    /**
+     * Declares a JFrame named frmDriverLogin.
+     */
     private JFrame frmDriverLogin;
 
-    /**Declaring a new UserLogin Object. UserLogin is the logic part to the UserLoginGUI*/
+    /**
+     * Declaring a new UserLogin Object. UserLogin is the logic part to the UserLoginGUI
+     */
     private UserLogin userlogic;
 
-    /**Declares a boolean named userCanLogin. usercanLogin dictates via a true or false if the user is able to login to the program.*/
+    /**
+     * Declares a boolean named userCanLogin. usercanLogin dictates via a true or false if the user is able to login to the program.
+     */
     private boolean userCanLogin;
 
-    /**Declares a List<String> named loginArray. loginArray reads in the values from the login.txt file and is then compared with the users inputs.*/
+    /**
+     * Declares a List<String> named loginArray. loginArray reads in the values from the login.txt file and is then compared with the users inputs.
+     */
     private List<String> loginArray;
 
 
-    /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
+    /**
+     * Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable
+     */
     public UserLoginGUI() {
 
         createLoginPanel();
@@ -63,7 +83,9 @@ public class UserLoginGUI {
         }
     }
 
-    /** Creates the frame for the UserLoginGUI*/
+    /**
+     * Creates the frame for the UserLoginGUI
+     */
     public void createLoginFrame() {
         frmDriverLogin = new JFrame();
         frmDriverLogin.setTitle("LoginHandler");
@@ -77,13 +99,17 @@ public class UserLoginGUI {
         frmDriverLogin.setVisible(true);
     }
 
-    /** Creates the panel for the UserLoginGUI*/
+    /**
+     * Creates the panel for the UserLoginGUI
+     */
     public void createLoginPanel() {
         pnlDriverLogin = new JPanel();
         pnlDriverLogin.setLayout(null);
     }
 
-    /** Adds JTextField and JLabels to the UserLoginGUI*/
+    /**
+     * Adds JTextField and JLabels to the UserLoginGUI
+     */
     public void addLoginFields() {
 
         lblUserName = new JLabel("UserName");
@@ -105,7 +131,9 @@ public class UserLoginGUI {
 
     }
 
-    /** Adds Jbuttons to the UserLoginGUI*/
+    /**
+     * Adds Jbuttons to the UserLoginGUI
+     */
     public void addLoginButtons() {
         btnLogin = new JButton("LoginHandler");
         btnLogin.setBounds(10, 100, 100, 30);
@@ -120,27 +148,30 @@ public class UserLoginGUI {
 
     /**
      * The LoginHandler takes the user inputted username and password and checks to see if they are valid.
-     * The LoginHandler gets the UsersName and Password of the new user account and checks that they follow the naming convention. Once checked, it will pass the account name password to the AddAccount object,
-     * which will add them to the DataStore.
+     * The LoginHandler using the UserLogin logic takes the username and passwors, converts the password from a char array to a String and then set all the usernames and passwords from the login.txt to the login array.
+     * The loginArray then goes through a for loops, checking if the user inputted username and password is equal to anything in the file.
+     * If there is a match then the user is allowed to login in. If there is no match, the user receive a prompt telling them to try again.
      */
     class LoginHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             userlogic = new UserLogin();
             loginArray = new ArrayList<>();
-
+            //Passing the username and password to Userlogin logic
             userlogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
             userlogic.getLoginDetails();
 
-                try {
+            try {
 
-                    loginArray = userlogic.getDataStore();
+                loginArray = userlogic.getDataStore();
 
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+            } catch (FileNotFoundException exception) {
+                JOptionPane.showMessageDialog(frmDriverLogin, "Login file cannot be found, please report this to your administrator!");
+                exception.printStackTrace();
+            }
 
-            int i = 0;
+            int i;
+            //Checking to see if any of the entries in the txt file match the usersname and password.
             for (i = 0; i < loginArray.size(); i++) {
 
                 if (loginArray.get(i).equals(userlogic.getLoginDetails())) {
@@ -155,26 +186,26 @@ public class UserLoginGUI {
                 }
             }
 
-                if (!userCanLogin) {
-                    JOptionPane.showMessageDialog(frmDriverLogin, "LoginHandler in Unsuccessfully.... Check your username and password!");
-                }
+            if (!userCanLogin) {
+                JOptionPane.showMessageDialog(frmDriverLogin, "LoginHandler in Unsuccessfully.... Check your username and password!");
+            }
 
         }
     }
 
+    /**LoginExitHandler listens for the exit button to be click and then will close and dispose of the frame. */
+    class LoginExitHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
 
-        class LoginExitHandler implements ActionListener {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-
-                frmDriverLogin.dispose();
-            }
+            frmDriverLogin.dispose();
         }
+    }
 
-
-        public static void main(String[] args) {
-            new UserLoginGUI();
-        }
+    /**The Main will create the instance of UserLoginGUI to begin the program. */
+    public static void main(String[] args) {
+        new UserLoginGUI();
+    }
 
 }
 
