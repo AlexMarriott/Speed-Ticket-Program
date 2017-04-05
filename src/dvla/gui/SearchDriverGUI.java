@@ -65,7 +65,9 @@ public class SearchDriverGUI {
             getDriver();
             getTableRows();
             createDriverTable();
+            //Adding a Table Listener and passing it through to tableEdit()
             driverTable.getModel().addTableModelListener(new tableEdit());
+            //.putClientProperty ("terminateEditOnFocusLost" ends the editing of the cells and clears any selected rows
             driverTable.putClientProperty("terminateEditOnFocusLost", true);
             setScrollPane();
         } catch (Exception e) {
@@ -80,7 +82,7 @@ public class SearchDriverGUI {
     public void frmAddSearchDriver() {
         frmSearchDriver = new JFrame();
         frmSearchDriver.setTitle("View Driver");
-        frmSearchDriver.setSize(1250, 400);
+        frmSearchDriver.setSize(1550, 400);
         frmSearchDriver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmSearchDriver.setLocationRelativeTo(null);
         frmSearchDriver.setResizable(false);
@@ -173,8 +175,9 @@ public class SearchDriverGUI {
         }
     }
 
-    /**Cretes the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
-     *  */
+    /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
+     *createDriverTable creates a two dimensional array om tableRowAmount and the column length.
+     * With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
     public void createDriverTable() {
         try {
             // ColumnName Default size is 13, if anymore headers are added, change the columHeaderAmount in the getTableRows method.
@@ -183,12 +186,14 @@ public class SearchDriverGUI {
             int row = 0;
             int column = 0;
             int count = 1;
+            //For loops goes through the countRowsAndColumns ArrayList and when it completes the first line will increment to the next line.
             for (int i = 0; i < countRowsAndColumns.size(); i++) {
                 if (i == (count * columHeaderAmount)) {
                     column = 0;
                     row++;
                     count++;
                 }
+                //If the Column Name is of type int then the it gets passed to a String.valueOf, In future this could be used to calculate reports etc
                 if (column == 0 | column == 9 | column == 10 | column == 11 | column == 12) {
                     String stringToInt = countRowsAndColumns.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
@@ -198,11 +203,18 @@ public class SearchDriverGUI {
                     column++;
                 }
             }
+            //Creates a new DefaultTableModel and then sets it in the Jtable
             defaultTableModel = new DefaultTableModel(rowData, columnNames);
             driverTable = new JTable(defaultTableModel);
+
+            //Stops users from resizing or ordering the Jtable.
+            //driverTable.setEnabled(false);
             driverTable.getTableHeader().setReorderingAllowed(false);
             driverTable.getTableHeader().setResizingAllowed(false);
             driverTable.setAutoCreateRowSorter(true);
+            driverTable.getAutoResizeMode();
+
+            //Set a table sorter to organise the Jtable data.
             sorter = new TableRowSorter<>(driverTable.getModel());
             driverTable.setRowSorter(sorter);
 
@@ -211,16 +223,18 @@ public class SearchDriverGUI {
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
         }
     }
-
+    /** This TableModealListener get any changes which happens to the Jtable and writes them to the Drivers.txt
+     * This method has a TableModelListener which*/
     class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent tableEvent) {
+
             writeToFile();
         }
     }
 
     public void setScrollPane() {
         driverScrollPane = new JScrollPane(driverTable);
-        driverScrollPane.setBounds(0, 0, 1250, 200);
+        driverScrollPane.setBounds(0, 0, 1550, 200);
         pnlSearchDriver.add(driverScrollPane);
     }
 
@@ -244,5 +258,7 @@ public class SearchDriverGUI {
             frmSearchDriver.dispose();
         }
     }
+
+
 
 }

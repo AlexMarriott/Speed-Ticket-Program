@@ -12,6 +12,9 @@ public class DatabaseWriter {
     private int vehicleID;
     private BufferedWriter vehicleFile;
     private BufferedWriter driverFile;
+    PrintWriter pwDriverID, pwvehicleID;
+    File fileDriverID, fileVehicleID;
+
 
     public void saveDrivers(String[] driverInfo) throws IOException {
         driverFile = new BufferedWriter(new FileWriter("Drivers.txt", true));
@@ -45,8 +48,8 @@ public class DatabaseWriter {
 
     private int getNextVehicleID() throws FileNotFoundException {
         boolean line;
-        File file = new File("VehicleID.txt");
-        Scanner readIn = new Scanner(file);
+        fileVehicleID = new File("VehicleID.txt");
+        Scanner readIn = new Scanner(fileVehicleID);
         if (vehicleID <= 0) {
             vehicleID++;
         }
@@ -57,29 +60,33 @@ public class DatabaseWriter {
     }
 
     private void setVehicleID() throws IOException {
-        PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("VehicleID.txt", true)));
-        outfile.println("ID " + vehicleID);
-        outfile.flush();
-        outfile.close();
+        pwvehicleID = new PrintWriter(new BufferedWriter(new FileWriter("VehicleID.txt", true)));
+        pwvehicleID.println("ID " + vehicleID);
+        pwvehicleID.flush();
+        pwvehicleID.close();
     }
 
     private int getNextDriverID() throws FileNotFoundException {
         boolean line;
-        File file = new File("DriversID.txt");
-        Scanner readIn = new Scanner(file);
+       fileDriverID = new File("DriversID.txt");
+        Scanner readIn = new Scanner(fileDriverID);
         if (driverID <= 0) {
             driverID++;
         }
-        while (readIn.hasNextLine() && (line = readIn.nextLine() != null)) {
+        while (readIn.hasNextLine() && (readIn.nextLine() != null)) {
             driverID++;
         }
         return driverID;
     }
 
-    private void setDriverID() throws IOException {
-        PrintWriter outfile = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
-        outfile.println("ID " + driverID);
-        outfile.flush();
-        outfile.close();
+    private void setDriverID(){
+        try {
+            pwDriverID = new PrintWriter(new BufferedWriter(new FileWriter("DriversID.txt", true)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pwDriverID.println("ID " + driverID);
+        pwDriverID.flush();
+        pwDriverID.close();
     }
 }

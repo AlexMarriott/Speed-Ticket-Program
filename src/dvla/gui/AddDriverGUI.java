@@ -331,15 +331,20 @@ public class AddDriverGUI  {
             } else if (roadSpeed == 0) {
                 JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
+                //Here we are instantiateing the Driver Object and the Vehicle Object and passing through the driver informatio and the vehicle data to these objects.
                 driverData = new Driver(txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), roadSpeed, roadType, driverSpeed, speedDifference);
                 vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(),txtVehicleNumPlate.getText(),txtVehicleYear.getText(),txtFirstName.getText(),txtDrivingLicenceNum.getText(),txtFirstAddressLine.getText(),txtSecondAddressLine.getText(),txtPostCode.getText());
+                //Passing through driverSpeed and roadtype to the driver object to check the speed of the driver.
                 driverData.speedCheck(driverSpeed ,roadType);
+
+                // the following metods grab the nesscary data from the driver and vehicle objects and write them to the Driver and vehicle text files.
                 vehicleData.getVehicleInfo();
                 driverData.getTicketResult();
                 driverData.setDriversFine();
                 driverData.getDriverInfo();
                 vehicleData.getVehicleInfo();
 
+                //This is a popup display for the user once they have written the driver to the database.
                 JOptionPane.showMessageDialog(frmDriverGUI, driverData.getTicketResult());
 
             }
