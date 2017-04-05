@@ -76,7 +76,7 @@ public class AddAccountGUI {
     /**
      * creates the frame for the AddAccount GUI.
      */
-    public void createLoginFrame() {
+    private void createLoginFrame() {
         frmAddAccount = new JFrame();
         frmAddAccount.setTitle("Login");
         frmAddAccount.setSize(400, 175);
@@ -91,7 +91,7 @@ public class AddAccountGUI {
     /**
      * creates the Jpanel for the AddAccount GUI.
      */
-    public void createLoginPanel() {
+    private void createLoginPanel() {
         pnlAddAccount = new JPanel();
         pnlAddAccount.setLayout(null);
     }
@@ -99,7 +99,7 @@ public class AddAccountGUI {
     /**
      * creates the JTextField and Jlabels for the AddAccountGUI panel.
      */
-    public void addLoginFields() {
+    private void addLoginFields() {
 
         lblUserName = new JLabel("New UserName");
         lblUserName.setBounds(20, 20, 100, 20);
@@ -123,7 +123,7 @@ public class AddAccountGUI {
     /**
      * creates all the Jbuttons for the AddAccountGUI panel.
      */
-    public void addLoginButtons() {
+    private void addLoginButtons() {
         btnSubmit = new JButton("Add");
         btnSubmit.setBounds(10, 100, 100, 30);
         btnSubmit.addActionListener(new AddHandler());

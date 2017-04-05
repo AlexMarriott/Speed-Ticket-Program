@@ -19,8 +19,8 @@ public class Driver {
     private int speedDifference;
     private String message;
     private String ticketReturnMessage;
-    private int ticketThershold;
-    private int countDateThershold;
+    private int ticketThreshold;
+    private int countDateThreshold;
     private int drivingFine;
     private int penaltyPoints;
     private String driverFine;
@@ -43,27 +43,27 @@ public class Driver {
     }
 
     public void speedCheck(int driverSpeed, String roadType) {
-        ticketThershold = roadSpeed + (roadSpeed * 10 / 100 + 2);
-        countDateThershold = ticketThershold + (ticketThershold * 46 / 100);
+        ticketThreshold = roadSpeed + (roadSpeed * 10 / 100 + 2);
+        countDateThreshold = ticketThreshold + (ticketThreshold * 46 / 100);
         ticketReturnMessage = "Name:" + firstName + "\nSpeed logged: " + driverSpeed+ "MPH" + "\nType of Road: " + roadType + "\nAction Required: ";
 
-        if (driverSpeed > roadSpeed && driverSpeed < ticketThershold) {
-            message = "Driver was over the speed limit but within reason, issue a warning. " + driverSpeed + "MPH";
+        if (driverSpeed > roadSpeed && driverSpeed < ticketThreshold) {
+            message = "Driver was over the speed limit but within reason, issue a warning. ";
             ticketReturnMessage = ticketReturnMessage + message;
 
-        } else if (driverSpeed >= ticketThershold && driverSpeed < countDateThershold) {
+        } else if (driverSpeed >= ticketThreshold && driverSpeed < countDateThreshold) {
             message = "Issuing speeding fine for the speed of: " + driverSpeed + "MPH";
             drivingFine = 50;
             ticketReturnMessage = ticketReturnMessage + message + "\nDriver Must pay: "+ "£"+drivingFine;
 
-        } else if (driverSpeed >= countDateThershold) {
+        } else if (driverSpeed >= countDateThreshold) {
             message = "Driver exceeded the Speed limit by: " + (driverSpeed - roadSpeed)+ "MPH" + " Driver will be issued a ticket and count date.";
             drivingFine = 100;
             penaltyPoints = 3;
             ticketReturnMessage = ticketReturnMessage + message + "\nDriver Must pay: " + "£"+drivingFine + "\nDriver Will receive " + penaltyPoints + " points on their license.";
 
         } else {
-            message = "Driver is under the Speed limit. \nNo action will be taken.";
+            message = "Driver is under the Speed limit. No action will be taken.";
             ticketReturnMessage = ticketReturnMessage + message;
         }
     }
@@ -75,10 +75,6 @@ public class Driver {
     public void setDriversFine() {
         driverFine = String.valueOf(drivingFine);
     }
-    public  String getDriversFine() {
-        return driverFine;
-    }
-
 
     public  String[] setDriverInfo(){
         System.out.println(driverSpeed);

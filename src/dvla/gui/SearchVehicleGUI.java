@@ -15,27 +15,56 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Created by Alex on 23/02/2017.
+ * <h1> SearchVehicleGUI</h1>
+ * The SearchVehicleGUI creates the SearchVehicleGUI Window, which allows users to see all the Vehicles records which have been logged into the system.
+ * SearchVehicleGUI allows the users to search for specific drivers.
+ *
+ * @author Alex Marriott s4816928
+ * @version 1.0
+ * @since 03/04/2017
  */
 public class SearchVehicleGUI {
+    /**Declares a Jlabel named lblVehicleID.*/
     private JLabel lblVehicleID;
+    
+    /**Declares a JTextbox named txtVehicleID.*/
     private JTextField txtVehicleID;
+   
+    /**Declares a JButton named btnSearch and btnExit.*/
     private JButton btnSearch, btnExit;
+   
+    /**Declares a JPanel named pnlSearchVehicle.*/
     private JPanel pnlSearchVehicle;
+   
+    /**Declares a JFrame named frmSearchVehicle.*/
     private JFrame frmSearchVehicle;
+    
+    /**Declares a JTable named vehicleTable.*/
     private JTable vehicleTable;
+   
+    /**Declares a JScrollPane named vehicleScrollPane.*/
     private JScrollPane vehicleScrollPane;
+   
+    /**Declares a ArrayList<String> named lblDriverID.*/
+    private ArrayList<String> countRowsAndColumns;
 
-    private ArrayList<String> arrList;
-
+    /**Declares an int named tableRowAmount.*/
     private int tableRowAmount;
 
+    /**Declares an String[][] named rowData.*/
     private String[][] rowData;
 
+    /**Declares a TableRowSorterr<TableModel> named sorter.*/
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
+
+    /**Declares an DefaultTableModel named defaultTableModel.*/
     private DefaultTableModel defaultTableModel;
 
+    /** Declares a int named columnHeaderAmount*/
+    private int columnHeaderAmount;
 
+
+    /**Declares a Jlabel named lblDriverID.*/
     public SearchVehicleGUI() {
         pnlAddSearchvehicle();
         addVehicleViewFields();
@@ -98,17 +127,17 @@ public class SearchVehicleGUI {
     }
 
     public double getTableRows() {
-        return tableRowAmount = arrList.size() / 10;
+        return tableRowAmount = countRowsAndColumns.size() / 10;
     }
 
     public void getVehicle() {
-        arrList = new ArrayList<>();
+        countRowsAndColumns = new ArrayList<>();
 
         File file = new File("Vehicle.txt");
         try {
             Scanner readIn = new Scanner(file);
             while (readIn.hasNext()) {
-                arrList.add(readIn.nextLine());
+                countRowsAndColumns.add(readIn.nextLine());
             }
         } catch (IOException e) {
 
@@ -134,24 +163,22 @@ public class SearchVehicleGUI {
         try {
 
             String[] columnNames = {" Vehicle ID", "Vehicle Model", "Vehicle Make", "Vehicle Number Plate", "Vehicle Year", "Owner", "Driving Licence Number", "First Line of Address", "Second Line of Address", "Post Code"};
-            System.out.println(columnNames.length);
             rowData = new String[tableRowAmount][columnNames.length];
             int row = 0;
             int column = 0;
             int count = 1;
-            for (int i = 0; i < arrList.size(); i++) {
-                System.out.println(arrList.get(i));
+            for (int i = 0; i < countRowsAndColumns.size(); i++) {
                 if (i == (count * 10)) {
                     column = 0;
                     row++;
                     count++;
                 }
                 if (column == 0){
-                    String stringToInt = arrList.get(i);
+                    String stringToInt = countRowsAndColumns.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     column++;
                 } else {
-                    rowData[row][column] = arrList.get(i);
+                    rowData[row][column] = countRowsAndColumns.get(i);
                     column++;
                 }
             }
