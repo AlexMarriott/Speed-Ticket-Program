@@ -46,7 +46,7 @@ public class SearchVehicleGUI {
     private JScrollPane vehicleScrollPane;
    
     /**Declares a ArrayList<String> named lblDriverID.*/
-    private ArrayList<String> countRowsAndColumns;
+    private ArrayList<String> rowAndColumnData;
 
     /**Declares an int named tableRowAmount.*/
     private int tableRowAmount;
@@ -127,29 +127,29 @@ public class SearchVehicleGUI {
         pnlSearchVehicle.add(btnSearch);
 
         btnExit = new JButton("Back");
-        btnExit.setBounds(820, 335, 140, 30);
+        btnExit.setBounds(1100, 335, 140, 30);
         btnExit.addActionListener(new VehicleSearchExitHandler());
         pnlSearchVehicle.add(btnExit);
     }
 
-    /** Sets the amount of columns headers there are and divides it by the size of countRowsAndColumns.
-     * countRowsAndColumns is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
+    /** Sets the amount of columns headers there are and divides it by the size of rowAndColumnData.
+     * rowAndColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
      * to work out how many rows there should be.
      **/
     private double getTableRows() {
         columnHeaderAmount = 10;
-        return tableRowAmount = countRowsAndColumns.size() / columnHeaderAmount;
+        return tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
     }
 
-    /**Sets countRowsAndColumns as an Arraylist and reads in all the String data from the Drivers.txt file.*/
+    /**Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
     private void getVehicle() {
-        countRowsAndColumns = new ArrayList<>();
+        rowAndColumnData = new ArrayList<>();
 
         File file = new File("Vehicle.txt");
         try {
             Scanner readIn = new Scanner(file);
             while (readIn.hasNext()) {
-                countRowsAndColumns.add(readIn.nextLine());
+                rowAndColumnData.add(readIn.nextLine());
             }
         } catch (IOException exception ) {
             exception.printStackTrace();;
@@ -185,8 +185,8 @@ public class SearchVehicleGUI {
             int row = 0;
             int column = 0;
             int count = 1;
-            //For loops goes through the countRowsAndColumns ArrayList and when it completes the first line will increment to the next line.
-            for (int i = 0; i < countRowsAndColumns.size(); i++) {
+            //For loops goes through the rowAndColumnData ArrayList and when it completes the first line will increment to the next line.
+            for (int i = 0; i < rowAndColumnData.size(); i++) {
                 if (i == (count * columnHeaderAmount)) {
                     column = 0;
                     row++;
@@ -194,11 +194,11 @@ public class SearchVehicleGUI {
                 }
                 // The 0 postition in the array is the Driver ID, this if statement makes sure the int is put into a String.
                 if (column == 0){
-                    String stringToInt = countRowsAndColumns.get(i);
+                    String stringToInt = rowAndColumnData.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     column++;
                 } else {
-                    rowData[row][column] = countRowsAndColumns.get(i);
+                    rowData[row][column] = rowAndColumnData.get(i);
                     column++;
                 }
             }

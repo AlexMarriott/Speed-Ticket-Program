@@ -46,8 +46,8 @@ public class SearchDriverGUI {
     /**Declares a JScrollPane named driverScrollPane.*/
     private JScrollPane driverScrollPane;
 
-    /**Declares an ArrayList<String> named countRowsAndColumns.*/
-    private ArrayList<String> countRowsAndColumns;
+    /**Declares an ArrayList<String> named rowandColumnData.*/
+    private ArrayList<String> rowandColumnData;
 
     /**Declares an int named tableRowAmount.*/
     private int tableRowAmount;
@@ -136,29 +136,29 @@ public class SearchDriverGUI {
         pnlSearchDriver.add(btnRemove);
 
         btnExit = new JButton("Back");
-        btnExit.setBounds(820, 335, 140, 30);
+        btnExit.setBounds(1100, 335, 140, 30);
         btnExit.addActionListener(new DriverSearchExitHandler());
         pnlSearchDriver.add(btnExit);
     }
 
-    /** Sets the amount of columns headers there are and divides it by the size of countRowsAndColumns.
-     * countRowsAndColumns is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers 
+    /** Sets the amount of columns headers there are and divides it by the size of rowandColumnData.
+     * rowandColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
      * to work out how many rows there should be. 
      **/
     private double getTableRows() {
         columnHeaderAmount = 14;
-        return tableRowAmount = countRowsAndColumns.size() / columnHeaderAmount;
+        return tableRowAmount = rowandColumnData.size() / columnHeaderAmount;
     }
     
-    /**Sets countRowsAndColumns as an Arraylist and reads in all the String data from the Drivers.txt file.*/
+    /**Sets rowandColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
     private void getDriver() {
-        countRowsAndColumns = new ArrayList<>();
+        rowandColumnData = new ArrayList<>();
 
         File file = new File("Drivers.txt");
         try {
             Scanner readIn = new Scanner(file);
             while (readIn.hasNext()) {
-                countRowsAndColumns.add(readIn.nextLine());
+                rowandColumnData.add(readIn.nextLine());
             }
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -196,8 +196,8 @@ public class SearchDriverGUI {
             int row = 0;
             int column = 0;
             int count = 1;
-            //For loops goes through the countRowsAndColumns ArrayList and when it completes the first line will increment to the next line.
-            for (int i = 0; i < countRowsAndColumns.size(); i++) {
+            //For loops goes through the rowandColumnData ArrayList and when it completes the first line will increment to the next line.
+            for (int i = 0; i < rowandColumnData.size(); i++) {
                 if (i == (count * columnHeaderAmount)) {
                     column = 0;
                     row++;
@@ -205,11 +205,11 @@ public class SearchDriverGUI {
                 }
                 //If the Column Name is of one of the int value columns then  it will get passed to a String.valueOf, this is so in future we can maybe use those columnms in reports.
                 if (column == 0 | column == 9 | column == 10 | column == 11 | column == 12) {
-                    String stringToInt = countRowsAndColumns.get(i);
+                    String stringToInt = rowandColumnData.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     column++;
                 } else {
-                    rowData[row][column] = countRowsAndColumns.get(i);
+                    rowData[row][column] = rowandColumnData.get(i);
                     column++;
                 }
             }
