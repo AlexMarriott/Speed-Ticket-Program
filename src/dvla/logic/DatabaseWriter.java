@@ -39,24 +39,24 @@ public class DatabaseWriter {
     /**
      * Declares two PrintWriters called pwDriverID and pwVehicleID which will be the DriverID.txt and Vehicle.txt .
      */
-    PrintWriter pwDriverID, pwVehicleID;
+    private PrintWriter pwDriverID, pwVehicleID;
 
     /**
      * Declares two Files called driverIDFile and vehicleIDFile which will be the DriverID.txt and Vehicle.txt but for reading in counted lines
      * to work out which ID is to be used next.
      */
-    File driverIDFile, vehicleIDFile;
+    private File driverIDFile, vehicleIDFile;
 
     /**
      * Declares two Files called checkDriverFile, checkVehicleFile
      * This are used to check that the river and venicle file exsit.
      */
-    File checkDriverFile, checkVehicleFile;
+    private File checkDriverFile, checkVehicleFile;
 
     /**
      * Declares a Scanner called readInData for reading in the information from the txt files.
      */
-    Scanner readInData;
+    private Scanner readInData;
 
     /**
      * Declares two booleans driverFileExists and vehicleFileExists called  for checking if the driver and  vehicle text files are empty and if they exist.
@@ -66,7 +66,7 @@ public class DatabaseWriter {
 
     /**
      * saveDrivers takes the driverInfo array which is passed to it along with the driverID. These are then written to the Drivers.txt file.
-     * The saveDrivers method get passed the driverInfo String Array from the Driver Object, calls the getNextDriverID and setDriverID methods
+     * The saveDrivers method get passed the driverInfo String Array from the Driver Object, calls the setNextDriverID and setDriverID methods
      * and writes the driverInfo to the Drivers.txt file.
      *
      * @param driverInfo all of the combined drivers information.
@@ -74,7 +74,7 @@ public class DatabaseWriter {
     public void saveDrivers(String[] driverInfo) throws IOException {
         driverFile = new BufferedWriter(new FileWriter("Drivers.txt", true));
         //Get the next driver ID and writes it to the file.
-        getNextDriverID();
+        setNextDriverID();
         setDriverID();
         driverFile.write(Integer.toString(driverID));
 
@@ -89,7 +89,7 @@ public class DatabaseWriter {
 
     /**
      * saveVehicle takes the vehicleInfo array which is passed to it along with the VehicleID. These are then written to the Vehicle.txt file.
-     * The saveVehicle method get passed the vehicleInfo String Array from the Vehicle Object, calls the getNextVehicleID and setVehicleID methods
+     * The saveVehicle method get passed the vehicleInfo String Array from the Vehicle Object, calls the setNextVehicleID and setVehicleID methods
      * and writes the vehicleInfo to the Vehicle.txt file.
      *
      * @param vehicleInfo all of the combined vehicles information.
@@ -97,7 +97,7 @@ public class DatabaseWriter {
     public void saveVehicle(String[] vehicleInfo) throws IOException {
         vehicleFile = new BufferedWriter(new FileWriter("Vehicle.txt", true));
         //Get the next vehicle ID and writes it to the file.
-        getNextVehicleID();
+        setNextVehicleID();
         setVehicleID();
         vehicleFile.write(Integer.toString(vehicleID));
 
@@ -113,10 +113,10 @@ public class DatabaseWriter {
 
     /**
      * Gets the next vehicle ID by scanning in the data from the VehicleID.txt and counting each line to give us the next ID
-     * The getNextVehicleID method scans in the VehicleID.txt, and starts a while loop to incremental through each line until there are no more lines in the file.
+     * The setNextVehicleID method scans in the VehicleID.txt, and starts a while loop to incremental through each line until there are no more lines in the file.
      * if the Vehicle Id is 0 then it is incremented by one.
      */
-    private int getNextVehicleID() throws FileNotFoundException {
+    private void setNextVehicleID() throws FileNotFoundException {
         vehicleIDFile = new File("VehicleID.txt");
         readInData = new Scanner(vehicleIDFile);
         if (vehicleID <= 0) {
@@ -125,7 +125,6 @@ public class DatabaseWriter {
         while (readInData.hasNextLine() && (readInData.nextLine() != null)) {
             vehicleID++;
         }
-        return vehicleID;
     }
 
     /**
@@ -140,10 +139,10 @@ public class DatabaseWriter {
 
     /**
      * Gets the next Driver ID by scanning in the data from the DriversID.txt and counting each line to give us the next ID
-     * The getNextDriverID method scans in the DriversID.txt, and starts a while loop to incremental through each line until there are no more lines in the file.
+     * The setNextDriverID method scans in the DriversID.txt, and starts a while loop to incremental through each line until there are no more lines in the file.
      * if the Driver Id is 0 then it is incremented by one.
      */
-    private int getNextDriverID() throws FileNotFoundException {
+    private void setNextDriverID() throws FileNotFoundException {
         driverIDFile = new File("DriversID.txt");
         readInData = new Scanner(driverIDFile);
         if (driverID <= 0) {
@@ -152,7 +151,6 @@ public class DatabaseWriter {
         while (readInData.hasNextLine() && (readInData.nextLine() != null)) {
             driverID++;
         }
-        return driverID;
     }
 
     /**
@@ -187,7 +185,7 @@ public class DatabaseWriter {
     }
 
 
-    public boolean checkDriverTxt() throws FileNotFoundException {
+    public void checkDriverTxt() throws FileNotFoundException {
         checkDriverFile = new File("Drivers.txt");
         readInData = new Scanner(checkDriverFile);
         if (!checkDriverFile.exists() || !readInData.hasNextLine()) {
@@ -198,7 +196,6 @@ public class DatabaseWriter {
             System.out.println("Something has gone wrong with the dataStore, Please check the DatabaseWriter and the Texts file to see whats happened");
             driverFileExists = false;
         }
-        return driverFileExists;
     }
 
     public boolean getCheckDriverTxt() throws FileNotFoundException {

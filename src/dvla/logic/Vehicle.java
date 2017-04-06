@@ -71,7 +71,7 @@ public class Vehicle {
     }
 
     /**This method sets the VehicleInfo array with all the vehicles information and returns it ready to be passed through to Database writer.*/
-    public String[] setVehicleInfo() {
+    private String[] setVehicleInfo() {
         String[] vehicleInfo = {vehicleModel, vehicleMake,
                 vehicleNumPlate, vehicleYear,
                 carOwner, drivingLicenceNum,

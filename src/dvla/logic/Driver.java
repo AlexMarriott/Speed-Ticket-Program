@@ -143,7 +143,7 @@ public class Driver {
     }
 
     /**This method sets the driverInfo array with all the drivers information and returns it ready to be passed through to Database writer.*/
-    public  String[] setDriverInfo(){
+    private  String[] setDriverInfo(){
         String[] driverInfo = {firstName,lastName,
                 dateOfBirth,drivingLicenceNum,
                 firstAddressLine,secondAddressLine,

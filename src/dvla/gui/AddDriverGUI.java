@@ -309,6 +309,7 @@ public class AddDriverGUI   {
                 vehicleData.getVehicleInfo();
 
                 // Sets the returnTicketMessage which will display
+                driverData.getTicketResult();
                 driverData.setDriversFine();
                 driverData.getDriverInfo();
 
