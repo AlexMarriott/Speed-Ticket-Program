@@ -42,7 +42,7 @@ public class SearchDriverGUI {
     private JFrame frmSearchDriver;
 
     /**Declares a JTable named driverTable, which displays all the drivers information.*/
-    private JTable driverTable;
+    public JTable driverTable;
 
     /**Declares a JScrollPane named driverScrollPane, which allows the user to scoll down the JTable.*/
     private JScrollPane driverScrollPane;
@@ -177,8 +177,9 @@ public class SearchDriverGUI {
     }
 
     /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
-     * writeToFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
-     * such as the removal of a Driver.*/
+     * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
+     * such as the removal of a Driver.
+     * This method has to stay in the SearchDriverGUI to grab the */
     private void writeToFile() {
         try {
             FileWriter writeToDataStore = new FileWriter("Drivers.txt");
@@ -193,6 +194,8 @@ public class SearchDriverGUI {
             exception.printStackTrace();
         }
     }
+
+
 
     /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
      *createDriverTable creates a two dimensional array om tableRowAmount and the column length.

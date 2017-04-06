@@ -70,19 +70,10 @@ public class AddAccount {
         newLoginAndPassword = newAccountUser +":"+ newAccountPassword;
     }
 
-    /** getNewLogin gets the newLoginAndPassword ready to be passed to the saveNewUser method from AddAccountGUI */
+    /** getNewLogin gets the newLoginAndPassword ready to be passed to the saveNewUser method in the  AddAccountGUI */
     public String getNewLogin(){
         return newLoginAndPassword;
     }
 
-    /** saveNewUser is passed the newlogin from the AddAccountGUI and write the new login to the login.txt.
-     * @param newLogin new user account with password is passed through to be written*/
-    public void saveNewUser(String newLogin) throws IOException {
 
-        accountLoginFile = new PrintWriter(new BufferedWriter(new FileWriter("Login.txt", true)));
-        accountLoginFile.println(newLogin);
-        accountLoginFile.flush();
-        accountLoginFile.close();
-
-    }
 }

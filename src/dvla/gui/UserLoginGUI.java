@@ -1,8 +1,10 @@
 package dvla.gui;
 
+import dvla.logic.DatabaseWriter;
 import dvla.logic.UserLogin;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -57,6 +59,11 @@ public class UserLoginGUI {
      * Declaring a new UserLogin Object. UserLogin is the logic part to the UserLoginGUI
      */
     private UserLogin userLogic;
+
+    /**
+     * Declaring a new DatabaseWriter Object. data
+     */
+    private DatabaseWriter setLoginData;
 
     /**
      * Declares a boolean named userCanLogin. usercanLogin dictates via a true or false if the user is able to login to the program.
@@ -168,12 +175,14 @@ public class UserLoginGUI {
         public void actionPerformed(ActionEvent event) {
             userLogic = new UserLogin();
             loginArray = new ArrayList<>();
+            setLoginData = new DatabaseWriter();
+
             //Passing the username and password to Userlogin logic
             userLogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
 
             try {
 
-                loginArray = userLogic.getLoginData();
+                loginArray = setLoginData.getLoginData();
 
             } catch (FileNotFoundException exception) {
                 JOptionPane.showMessageDialog(frmDriverLogin, "Login file cannot be found, please report this to your administrator!");

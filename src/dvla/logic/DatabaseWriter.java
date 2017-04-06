@@ -1,6 +1,11 @@
 package dvla.logic;
 
+import dvla.gui.SearchDriverGUI;
+import dvla.gui.SearchVehicleGUI;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -62,6 +67,15 @@ public class DatabaseWriter {
      * Declares two booleans driverFileExists and vehicleFileExists called  for checking if the driver and  vehicle text files are empty and if they exist.
      */
     private boolean driverFileExists, vehicleFileExists;
+
+    /**
+     * Declares two booleans driverFileExists and vehicleFileExists called  for checking if the driver and  vehicle text files are empty and if they exist.
+     */
+    private PrintWriter accountLoginFile;
+
+    /**Declares a List<String> named loginArray.
+     * All the data in the text file is read into the loginArray and then used to compare with the users inputted login.*/
+    private List<String> loginArray;
 
 
     /**
@@ -201,4 +215,32 @@ public class DatabaseWriter {
     public boolean getCheckDriverTxt() throws FileNotFoundException {
         return driverFileExists;
     }
+
+    /** saveNewUser is a method which gets passed the newAccount details from AddAccountGUI and write the new login to the login.txt.
+     * @param newLogin new user account with password is passed through to be written*/
+    public void saveNewUser(String newLogin) throws IOException {
+
+        accountLoginFile = new PrintWriter(new BufferedWriter(new FileWriter("Login.txt", true)));
+        accountLoginFile.println(newLogin);
+        accountLoginFile.flush();
+        accountLoginFile.close();
+
+    }
+
+    /**getLoginData creates an array from reading in data from the Login.txt file.
+     * This sets the loginArray and returns it so the UserLoginGUI can use it to compares the login details.*/
+    public List<String> getLoginData() throws FileNotFoundException {
+        File file = new File("Login.txt");
+
+        Scanner readIn = new Scanner(file);
+        loginArray = new ArrayList<>();
+        while (readIn.hasNextLine()) {
+
+            loginArray.add(readIn.nextLine());
+        }
+        return loginArray;
+    }
+
+
+
 }

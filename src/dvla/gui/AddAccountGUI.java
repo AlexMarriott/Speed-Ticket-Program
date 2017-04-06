@@ -1,6 +1,7 @@
 package dvla.gui;
 
 import dvla.logic.AddAccount;
+import dvla.logic.DatabaseWriter;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -52,6 +53,9 @@ public class AddAccountGUI {
 
     /**Declaring a new AddAccount Object. AddAccount is the logic part to the AddAccountGUI*/
     private AddAccount addingAccount;
+
+    /**Declaring a new DataBaseWriter Object, this will be used to pass the new useraccount to the saveNewUser method.*/
+    private DatabaseWriter addNewAccount;
 
 
     /**Initialises the AddAccount Constructor and sets the following methods to create the GUI. */
@@ -141,6 +145,7 @@ public class AddAccountGUI {
         @Override
         public void actionPerformed(ActionEvent event) {
             addingAccount = new AddAccount();
+            addNewAccount = new DatabaseWriter();
             addingAccount.setNewLogin(txtUserName.getText(), txtPassword.getPassword());
 
             if (!addingAccount.getUserState()) {
@@ -149,7 +154,7 @@ public class AddAccountGUI {
                 JOptionPane.showMessageDialog(frmAddAccount, "The Password length should be 8 Characters minimum and contain letters and Numbers only");
             } else {
                 try {
-                    addingAccount.saveNewUser(addingAccount.getNewLogin());
+                    addNewAccount.saveNewUser(addingAccount.getNewLogin());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

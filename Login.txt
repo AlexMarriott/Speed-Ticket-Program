@@ -2,5 +2,7 @@ alexm:password123
 user1:password1
 alexp:alexping
 guccimane:rockingout
-
 alice1:password1
+newkid:ontehblock
+swagging:movingonup
+helloworld:swagging

@@ -26,9 +26,7 @@ public class UserLogin {
     /**Declares a String named loginAndPassword, this is compared with the login detils in the login.txt.*/
     private String loginAndPassword;
 
-    /**Declares a List<String> named loginArray.
-     * All the data in the text file is read into the loginArray and then used to compare with the users inputted login.*/
-    private List<String> loginArray;
+
 
     /**blank constructor.*/
     public UserLogin() {
@@ -48,17 +46,5 @@ public class UserLogin {
         return loginAndPassword;
     }
 
-    /**getLoginData creates an array from read in data from the Login.txt file.
-     * This sets the loginArray and returns it so the UserLoginGUI can use it to compares the login details.*/
-    public List<String> getLoginData() throws FileNotFoundException {
-        File file = new File("Login.txt");
 
-        Scanner readIn = new Scanner(file);
-        loginArray = new ArrayList<>();
-        while (readIn.hasNextLine()) {
-
-            loginArray.add(readIn.nextLine());
-        }
-        return loginArray;
-    }
 }

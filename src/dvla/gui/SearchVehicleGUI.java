@@ -1,5 +1,7 @@
 package dvla.gui;
 
+import dvla.logic.DatabaseWriter;
+
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -41,7 +43,7 @@ public class SearchVehicleGUI {
     private JFrame frmSearchVehicle;
 
     /**Declares a JTable named vehicleTable, which displays all the vehicles information.*/
-    private JTable vehicleTable;
+    public JTable vehicleTable;
    
     /**Declares a JScrollPane named vehicleScrollPane, which allows the user to scoll down the JTable.*/
     private JScrollPane vehicleScrollPane;
@@ -55,7 +57,7 @@ public class SearchVehicleGUI {
 
     /**Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
      * amount of rows and columns.*/
-    private String[][] rowData;
+    public String[][] rowData;
 
     /**Declares a TableRowSorterr<TableModel> named sorter.
      * This allows users to sort the table how they like and lets the search vehicles filter the table when searching for an ID.*/
@@ -71,6 +73,8 @@ public class SearchVehicleGUI {
      * The number assigned to columnHeaderAmount should changes also as, the columnHeaderAmount is used to divide the amount of columns in
      * one row.*/
     private int columnHeaderAmount;
+
+    private DatabaseWriter writeVehicleTable = new DatabaseWriter();
 
 
     /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
@@ -167,13 +171,13 @@ public class SearchVehicleGUI {
     }
 
     /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
-     * writeToFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
+     * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
      * such as the removal of a Vehicle.*/
-    private void writeToFile() {
+    public void writeToVehicleFile() {
         try {
             FileWriter writeToDataStore = new FileWriter("Vehicle.txt");
             for (int i = 0; i < vehicleTable.getRowCount(); i++) {
-                for (int j = 0; j < vehicleTable.getColumnCount(); j++) {
+                for (int j = 0; j <vehicleTable.getColumnCount(); j++) {
                     writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
                 }
             }
@@ -183,6 +187,8 @@ public class SearchVehicleGUI {
             e.printStackTrace();
         }
     }
+
+
     /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
      *createDriverTable creates a two dimensional array om tableRowAmount and the column length.
      *With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
@@ -234,7 +240,7 @@ public class SearchVehicleGUI {
      * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt*/
     private class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent event) {
-            writeToFile();
+            writeToVehicleFile();
         }
     }
 
