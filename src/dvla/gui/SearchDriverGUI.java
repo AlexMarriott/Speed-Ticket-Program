@@ -16,8 +16,8 @@ import java.util.Scanner;
 
 /**
  * <h1> SearchDriverGUI</h1>
- * The SearchDriverGUI creates the SearchDriverGUI Window, which allows users to see all the Drivers records which have been logged into the system.
- * SearchDriverGUI also allows the user to remove drivers and search for specific drivers.
+ * The SearchDriverGUI creates the SearchDriverGUI Window, which allows users to see all the Drivers records which have been
+ * logged into the system. SearchDriverGUI also allows the user to remove drivers and search for specific drivers.
  *
  * @author Alex Marriott s4816928
  * @version 1.0
@@ -25,43 +25,52 @@ import java.util.Scanner;
  */
 public class SearchDriverGUI {
 
-    /**Declares a Jlabel named lblDriverID.*/
+    /**Declares a Jlabel named lblDriverID, which labels the search DriverId textbox*/
     private JLabel lblDriverID;
 
-    /**Declares a JTextField named txtDriverID.*/
+    /**Declares a JTextField named txtDriverID, which provides a JTextboxes*/
     private JTextField txtDriverID;
 
-    /**Declares JButton named btnSearch,btnRemove,btnExit.*/
+    /**Declares JButton named btnSearch,btnRemove,btnExit.
+     *These are used for searching/ removing drivers and exiting the window.*/
     private JButton btnSearch, btnRemove, btnExit;
 
-    /**Declares JPanel named pnlSearchDriver. */
+    /**Declares JPanel named pnlSearchDriver, for use with the SearchDriverGUI. */
     private JPanel pnlSearchDriver;
 
-    /**Declares a JFrame named frmSearchDriver.*/
+    /**Declares a JFrame named frmSearchDriver, for use with the SearchDriverGUI.*/
     private JFrame frmSearchDriver;
 
-    /**Declares a JTable named driverTable.*/
+    /**Declares a JTable named driverTable, which displays all the drivers information.*/
     private JTable driverTable;
 
-    /**Declares a JScrollPane named driverScrollPane.*/
+    /**Declares a JScrollPane named driverScrollPane, which allows the user to scoll down the JTable.*/
     private JScrollPane driverScrollPane;
 
-    /**Declares an ArrayList<String> named rowandColumnData.*/
-    private ArrayList<String> rowandColumnData;
+    /**Declares an ArrayList<String> named rowAndColumnData.
+     * This reads in all the drivers information to add to the JTable.*/
+    private ArrayList<String> rowAndColumnData;
 
-    /**Declares an int named tableRowAmount.*/
+    /**Declares an int named tableRowAmount, this is used to calculate the amount of rows needed.*/
     private int tableRowAmount;
 
-    /**Declares an String[][] named rowData.*/
+    /**Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
+     * amount of rows and columns. */
     private String[][] rowData;
 
-    /**Declares a TableRowSorterr<TableModel> named sorter.*/
-    TableRowSorter<TableModel> sorter = new TableRowSorter<>();
+    /**Declares a TableRowSorter<TableModel> named sorter.
+     * This allows users to sort the table how they like and lets the search driver filter the table when searching for an ID.*/
+    private TableRowSorter<TableModel> sorter = new TableRowSorter<>();
 
-    /**Declares an DefaultTableModel named defaultTableModel.*/
+    /**Declares an DefaultTableModel named defaultTableModel.
+     * Once we pass the default model to the drivertable, we are able to interface with it better.
+     * This means I am able to get the headers and row selection etc.*/
     private DefaultTableModel defaultTableModel;
 
-    /** Declares a int named columnHeaderAmount*/
+    /** Declares a int named columnHeaderAmount
+     * If any changes are made to the columnHeader String array (new fields or remove fields)
+     * The number assigned to columnHeaderAmount should changes also as, the columnHeaderAmount is used to divide the amount of columns in
+     * one row.*/
     private int columnHeaderAmount;
 
     /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
@@ -141,24 +150,24 @@ public class SearchDriverGUI {
         pnlSearchDriver.add(btnExit);
     }
 
-    /** Sets the amount of columns headers there are and divides it by the size of rowandColumnData.
-     * rowandColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
+    /** Sets the amount of columns headers there are and divides it by the size of rowAndColumnData.
+     * rowAndColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
      * to work out how many rows there should be. 
      **/
     private double getTableRows() {
         columnHeaderAmount = 14;
-        return tableRowAmount = rowandColumnData.size() / columnHeaderAmount;
+        return tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
     }
     
-    /**Sets rowandColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
+    /**Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
     private void getDriver() {
-        rowandColumnData = new ArrayList<>();
+        rowAndColumnData = new ArrayList<>();
 
         File file = new File("Drivers.txt");
         try {
             Scanner readIn = new Scanner(file);
             while (readIn.hasNext()) {
-                rowandColumnData.add(readIn.nextLine());
+                rowAndColumnData.add(readIn.nextLine());
             }
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -175,7 +184,7 @@ public class SearchDriverGUI {
             FileWriter writeToDataStore = new FileWriter("Drivers.txt");
             for (int i = 0; i < driverTable.getRowCount(); i++) {
                 for (int j = 0; j < driverTable.getColumnCount(); j++) {
-                    writeToDataStore.write(rowData[i][j].toString().toUpperCase() + "\n");
+                    writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
                 }
             }
             writeToDataStore.flush();
@@ -196,8 +205,8 @@ public class SearchDriverGUI {
             int row = 0;
             int column = 0;
             int count = 1;
-            //For loops goes through the rowandColumnData ArrayList and when it completes the first line will increment to the next line.
-            for (int i = 0; i < rowandColumnData.size(); i++) {
+            //For loops goes through the rowAndColumnData ArrayList and when it completes the first line will increment to the next line.
+            for (int i = 0; i < rowAndColumnData.size(); i++) {
                 if (i == (count * columnHeaderAmount)) {
                     column = 0;
                     row++;
@@ -205,11 +214,11 @@ public class SearchDriverGUI {
                 }
                 //If the Column Name is of one of the int value columns then  it will get passed to a String.valueOf, this is so in future we can maybe use those columnms in reports.
                 if (column == 0 | column == 9 | column == 10 | column == 11 | column == 12) {
-                    String stringToInt = rowandColumnData.get(i);
+                    String stringToInt = rowAndColumnData.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     column++;
                 } else {
-                    rowData[row][column] = rowandColumnData.get(i);
+                    rowData[row][column] = rowAndColumnData.get(i);
                     column++;
                 }
             }

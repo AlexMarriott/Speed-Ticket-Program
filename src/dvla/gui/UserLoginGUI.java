@@ -11,7 +11,8 @@ import java.util.List;
 
 /**
  * <h1> UserLoginGUI</h1>
- * The UserLoginGUI creates the UserLoginGUI Window, which allows Users to login into the program so long as they have the correct authorised to.
+ * The UserLoginGUI creates the UserLoginGUI Window, which allows Users to login into the program so long
+ * as they have the correct authorised to.
  * The UserLoginGUI uses the UserLogin class for its logic.
  *
  * @author Alex Marriott s4816928
@@ -21,32 +22,34 @@ import java.util.List;
 public class UserLoginGUI {
 
     /**
-     * Declares a Jlabel named lblUserName,lblUserName.
+     * Declares a Jlabel named lblUserName,lblUserName, they are used to create labels on the panel for user and password..
      */
     private JLabel lblUserName, lblPassword;
 
     /**
-     * Declares a JTextField named lblDriverID.
+     * Declares a JTextField named lblDriverID, which is used for the user account name..
      */
     private JTextField txtUserName;
 
     /**
-     * Declares a JPasswordField named lblDriverID.
+     * Declares a JPasswordField named lblDriverID, which is used for the new user account password..
      */
     private JPasswordField txtPassword;
 
     /**
-     * Declares a JButton named btnLogin,btnExit .
+     * Declares a JButton named btnLogin,btnExit.
+     * btnLogin allows the user to login into the program, loginbutton will pass through the details of the user to the Userlogin Logic
+     * btnExit will dipose of the frame and return the user to the main menu.
      */
     private JButton btnLogin, btnExit;
 
     /**
-     * Declares a JPanel named pnlDriverLogin.
+     * Declares a JPanel named pnlDriverLogin, this is the panel for UserloginGUI.
      */
     private JPanel pnlDriverLogin;
 
     /**
-     * Declares a JFrame named frmDriverLogin.
+     * Declares a JFrame named frmDriverLogin, this is the panel for UserloginGUI.
      */
     private JFrame frmDriverLogin;
 
@@ -156,7 +159,7 @@ public class UserLoginGUI {
 
     /**
      * The LoginHandler takes the user inputted username and password and checks to see if they are valid.
-     * The LoginHandler using the UserLogin logic takes the username and passwors, converts the password from a char array to a String and then set all the usernames and passwords from the login.txt to the login array.
+     * The LoginHandler using the UserLogin logic takes the username and passwords, converts the password from a char array to a String and then set all the usernames and passwords from the login.txt to the login array.
      * The loginArray then goes through a for loops, checking if the user inputted username and password is equal to anything in the file.
      * If there is a match then the user is allowed to login in. If there is no match, the user receive a prompt telling them to try again.
      */
@@ -167,7 +170,6 @@ public class UserLoginGUI {
             loginArray = new ArrayList<>();
             //Passing the username and password to Userlogin logic
             userLogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
-            userLogic.getLoginDetails();
 
             try {
 
@@ -179,7 +181,7 @@ public class UserLoginGUI {
             }
 
             int i;
-            //Checking to see if any of the entries in the txt file match the usersname and password.
+            //Checking to see if any of the entries in the txt file match the usersnames and password.
             for (i = 0; i < loginArray.size(); i++) {
 
                 if (loginArray.get(i).equals(userLogic.getLoginDetails())) {

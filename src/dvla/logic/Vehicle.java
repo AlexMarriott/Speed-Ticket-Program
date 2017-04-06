@@ -3,7 +3,13 @@ package dvla.logic;
 import java.io.IOException;
 
 /**
- * Created by alex on 02/04/2017.
+ * <h1> Vehicle</h1>
+ * The Vehicle Objects lets AddDriver class to pass through the Vehicle information along with their speed and the road type.
+ * All Vehicle information is passed to the Database Writer class to be written to the Vehicle.txt file.
+ *
+ * @author Alex Marriott s4816928
+ * @version 1.0
+ * @since 03/04/2017
  */
 public class Vehicle {
 

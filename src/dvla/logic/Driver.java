@@ -14,58 +14,58 @@ import java.io.IOException;
  */
 public class Driver {
 
-    /**Declares a String named firstName.*/
+    /**Declares a String named firstName, this is the drivers First Name.*/
     private String firstName;
 
-    /**Declares a String named lastName.*/
+    /**Declares a String named lastName, This is the drivers LastName.*/
     private String lastName;
 
-    /**Declares a String named dateOfBirth.*/
+    /**Declares a String named dateOfBirth, this is the Drivers date of birth.*/
     private String dateOfBirth;
 
-    /**Declares a String named drivingLicenceNum.*/
+    /**Declares a String named drivingLicenceNum, this is the drivers Driving Licence number.*/
     private String drivingLicenceNum;
 
-    /**Declares a String named firstAddressLine.*/
+    /**Declares a String named firstAddressLine, this is the Drivers First Line of Address.*/
     private String firstAddressLine;
 
-    /**Declares a String named secondAddressLine.*/
+    /**Declares a String named secondAddressList, this is the Drivers second Line of Address.*/
     private String secondAddressLine;
 
-    /**Declares a String named postCode.*/
+    /**Declares a String named postCode, this is the drivers PostCode*/
     private String postCode;
 
-    /**Declares a Jlabel named roadType.*/
+    /**Declares a Jlabel named roadType, this is used to define the roadtype.*/
     private String roadType;
 
-    /**Declares a String named message.*/
+    /**Declares a String named message, this is passed through to the Database writer.*/
     private String message;
 
-    /**Declares a String named ticketReturnMessage.*/
+    /**Declares a String named ticketReturnMessage, this is show to the user via a prompt once they add the new driver.*/
     private String ticketReturnMessage;
 
-    /**Declares a String named driverFine.*/
+    /**Declares a String named driverFine, this is passed through to the Database writer.*/
     private String driverFine;
 
-    /**Declares a int named roadSpeed.*/
+    /**Declares a int named roadSpeed, this is passed through to the Database writer and used to check if the driver is issued a ticket.*/
     private int roadSpeed;
 
-    /**Declares a int named driverSpeed.*/
+    /**Declares a int named driverSpeed, this is passed through to the Database writer and used to check if the driver is issued a ticket.*/
     private int driverSpeed;
 
-    /**Declares a int named speedDifference.*/
+    /**Declares a int named speedDifference, this is used to check what the difference in speed was.*/
     private int speedDifference;
 
-    /**Declares a int named ticketThreshold.*/
+    /**Declares a int named ticketThreshold, This is used when checking the users speed.*/
     private int ticketThreshold;
 
-    /**Declares a int named countDateThreshold.*/
+    /**Declares a int named countDateThreshold. This is used to check if the driver is issued a ticket.*/
     private int countDateThreshold;
 
-    /**Declares a int named drivingFine.*/
+    /**Declares a int named drivingFine, This is the fine which will be issued to the driver if nthey have gone over the speed limit.*/
     private int drivingFine;
 
-    /**Declares a int named penaltyPoints.*/
+    /**Declares a int named penaltyPoints, these are the points which will be issued to the driver if they have gone over the speed limit.*/
     private int penaltyPoints;
 
     /**Declaring a new DatabaseWriter Object called writingDataToDatabase*/

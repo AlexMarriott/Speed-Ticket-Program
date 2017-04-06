@@ -10,7 +10,8 @@ import java.io.IOException;
 
 /**
  * <h1> SpeedingTicketMenuGUI</h1>
- * The SpeedingTicketMenuGUI creates the GUI for the SPeedingTicketMenu. This menu allows the user to open up different parts of the program such as the Addriver screen.
+ * The SpeedingTicketMenuGUI creates the GUI for the SpeedingTicketMenu.
+ * This menu allows the user to open up different parts of the program such as the Addriver screen.
  *
  * @author Alex Marriott s4816928
  * @version 1.0
@@ -18,30 +19,28 @@ import java.io.IOException;
  */
 public class SpeedingTicketMenuGUI {
     /**
-     * Declares a Jlabel named lblPicture.
+     * Declares a Jlabel named lblPicture to be used for assigning the big DVLA image..
      */
     private JLabel lblPicture;
 
     /**
      * Declares JButton named btnAddDriver, btnViewDriver, btnAddLogin, btnViewVehicle, btnExit.
+     * These buttons are to be used for creating the AddDriverGUI, SearchDriverGUI, AddloginGUI, SearchVehicleGUI
+     * and to dispose of the frame when the user has finished with the program.
      */
     private JButton btnAddDriver, btnViewDriver, btnAddLogin, btnViewVehicle, btnExit;
 
     /**
-     * Declares JPanel named pnlMainMenu.
+     * Declares JPanel named pnlMainMenu for use with the SpeedingticketMenuGUI.
      */
     private JPanel pnlMainMenu;
 
     /**
-     * Declares a JFrame named frmMainMenu.
+     * Declares a JFrame named frmMainMenu for use with the SpeedingTicketMenuGUI.
      */
     private JFrame frmMainMenu;
-
-    /**
-     * Declares two Files named fileDriverID,fileDriverID.
-     */
-    private File fileDriverID, fileVehicleID;
-
+    /**Declares a Object of DatabaseWriter and names it checkfilesExist
+     * This is used to get a boolean value back from DatabaseWriter.*/
     private DatabaseWriter checkFilesExist;
 
 
@@ -132,8 +131,9 @@ public class SpeedingTicketMenuGUI {
 
     /**
      * ViewDriverHandler instantiates a new SearchDriverGUI()
-     * The ViewDriverHandler checks to see if the Drivers.txt exists or if it has any entrees. If this is the case then the SpeedingTicketMenuGUI
-     * will return a prompt informing the user they need to add a driver first. If the file exists and there is data then the SearchDriverGUI is ran.
+     * This instantiates the checkFileExist object and checks to see if the driver.txt file exists and have data in it.
+     * If false she returned, the users is given a prompt which tells them to add a driver first.
+     * If true, then the user is allowed to open the SearchDriverGUI.
      */
     private class ViewDriverHandler implements ActionListener {
         @Override
@@ -141,6 +141,7 @@ public class SpeedingTicketMenuGUI {
             checkFilesExist = new DatabaseWriter();
             try {
                 checkFilesExist.checkDriverTxt();
+                //if the file is false then display a prompt to the user.
                 if (!checkFilesExist.getCheckDriverTxt()) {
                     JOptionPane.showMessageDialog(frmMainMenu, "No drivers or dataStore exist, Please add a driver to view the datastore.");
                 } else {
@@ -165,8 +166,9 @@ public class SpeedingTicketMenuGUI {
 
     /**
      * ViewVehicleHandler instantiates a new SearchVehicleGUI()
-     * The ViewVehicleHandler checks to see if the vehicle.txt exists or if it has any entres. If this is the case then the SpeedingTicketMenugui
-     * will return a prompt informing the user they need to add a driver first. If the file exists and there is data then the SearchVehicleGUI is ran.
+     * This instantiates the checkFileExist object and checks to see if the vehicle.txt file exists and have data in it.
+     * If false she returned, the users is given a prompt which tells them to add a driver first.
+     * If true, then the user is allowed to open the SearchVehicleGUI.
      */
     private class ViewVehicleHandler implements ActionListener {
         @Override
@@ -174,6 +176,7 @@ public class SpeedingTicketMenuGUI {
             checkFilesExist = new DatabaseWriter();
             try {
                 checkFilesExist.checkVehicleTxt();
+                //if the file is false then display a prompt to the user.
                 if (!checkFilesExist.getCheckVehicleTxt()) {
                     JOptionPane.showMessageDialog(frmMainMenu, "No vehicle or dataStore exist, please add a driver to view the datastore.");
                 } else {
@@ -187,7 +190,8 @@ public class SpeedingTicketMenuGUI {
     }
 
     /**
-     * exitListener listens to the window waiting for input and when the user either clicks the top right X or the exit button then a prompt will appear asking the user if theya re sure theu wanna quit.
+     * exitListener listens to the window waiting for input and when the user either clicks
+     * the top right X or the exit button then a prompt will appear asking the user if they are sure they wanna quit.
      */
     private WindowListener exitListener = new WindowAdapter() {
         @Override

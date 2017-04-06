@@ -17,16 +17,17 @@ import java.util.Scanner;
  * @since 03/04/2017
  */
 public class UserLogin {
-    /**Declares a String named userLogin.*/
+    /**Declares a String named userLogin, this is used as the users login name.*/
     private String userLogin;
 
-    /**Declares a String named stringUserPassword.*/
+    /**Declares a String named stringUserPassword, this is used as the users login password.*/
     private String stringUserPassword;
 
-    /**Declares a String named loginAndPassword.*/
+    /**Declares a String named loginAndPassword, this is compared with the login detils in the login.txt.*/
     private String loginAndPassword;
 
-    /**Declares a List<String> named loginArray.*/
+    /**Declares a List<String> named loginArray.
+     * All the data in the text file is read into the loginArray and then used to compare with the users inputted login.*/
     private List<String> loginArray;
 
     /**blank constructor.*/
@@ -47,7 +48,8 @@ public class UserLogin {
         return loginAndPassword;
     }
 
-    /**getLoginData creates an array from read in data from the Login.txt file. This sets the loginArray and returns it so the UserLoginGUI can use it to compares the login details..*/
+    /**getLoginData creates an array from read in data from the Login.txt file.
+     * This sets the loginArray and returns it so the UserLoginGUI can use it to compares the login details.*/
     public List<String> getLoginData() throws FileNotFoundException {
         File file = new File("Login.txt");
 

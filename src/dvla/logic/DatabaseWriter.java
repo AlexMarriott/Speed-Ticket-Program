@@ -15,12 +15,14 @@ import java.util.Scanner;
 public class DatabaseWriter {
 
     /**
-     * Declares an driverID variable as a int primitive .
+     * Declares an driverID variable as a int primitive
+     * The DriverId is used to Identity the driver and is used when writing to file .
      */
     private int driverID;
 
     /**
      * Declares an vehicleID variable as a int primitive .
+     * The vehicleID is used to Identity the vehicle and is used when writing to file .
      */
     private int vehicleID;
 
@@ -40,12 +42,14 @@ public class DatabaseWriter {
     PrintWriter pwDriverID, pwVehicleID;
 
     /**
-     * Declares two Files called driverIDFile and vehicleIDFile which will be the DriverID.txt and Vehicle.txt but for reading in counted lines. .
+     * Declares two Files called driverIDFile and vehicleIDFile which will be the DriverID.txt and Vehicle.txt but for reading in counted lines
+     * to work out which ID is to be used next.
      */
     File driverIDFile, vehicleIDFile;
 
     /**
-     * Declares two Files called checkDriverFile, checkVehicleFile.
+     * Declares two Files called checkDriverFile, checkVehicleFile
+     * This are used to check that the river and venicle file exsit.
      */
     File checkDriverFile, checkVehicleFile;
 

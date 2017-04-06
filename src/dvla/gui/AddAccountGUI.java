@@ -31,10 +31,10 @@ public class AddAccountGUI {
     /** Declares a Jlabels named lblUserName,lblPassword, they are used to create labels on the panel for user and password. */
     private JLabel lblUserName, lblPassword;
 
-    /** Declares a JTextField named txtUserName*/
+    /** Declares a JTextField named txtUserName, which is used for the new user account name.*/
     private JTextField txtUserName;
 
-    /** Declares a JPasswordField named txtPassword*/
+    /** Declares a JPasswordField named txtPassword, which is used for the new user account password.*/
     private JPasswordField txtPassword;
 
     /**
@@ -44,10 +44,10 @@ public class AddAccountGUI {
      * */
     private JButton btnSubmit, btnConvention, btnExit;
 
-    /** Declares a JPanel named pnlAddAccount*/
+    /** Declares a JPanel named pnlAddAccount, this is the panel for AddAccount*/
     private JPanel pnlAddAccount;
 
-    /** Declares a JFrame named frmAddAccount*/
+    /** Declares a JFrame named frmAddAccount,this is the frame for AddAccount*/
     private JFrame frmAddAccount;
 
     /**Declaring a new AddAccount Object. AddAccount is the logic part to the AddAccountGUI*/

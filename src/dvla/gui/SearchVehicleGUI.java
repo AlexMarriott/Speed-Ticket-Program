@@ -16,51 +16,60 @@ import java.util.Scanner;
 
 /**
  * <h1> SearchVehicleGUI</h1>
- * The SearchVehicleGUI creates the SearchVehicleGUI Window, which allows users to see all the Vehicles records which have been logged into the system.
- * SearchVehicleGUI allows the users to search for specific drivers.
+ * The SearchVehicleGUI creates the SearchDriverGUI Window, which allows users to see all the Drivers records which have been
+ * logged into the system. SearchDriverGUI also allows the user to search for specific vehicle.
  *
  * @author Alex Marriott s4816928
  * @version 1.0
  * @since 03/04/2017
  */
 public class SearchVehicleGUI {
-    /**Declares a Jlabel named lblVehicleID.*/
+    /**Declares a Jlabel named lblVehicleID, which labels the search VehicleID textbox*/
     private JLabel lblVehicleID;
-    
-    /**Declares a JTextbox named txtVehicleID.*/
+
+    /**Declares a JTextField named txtVehicleID, which provides a JTextboxes*/
     private JTextField txtVehicleID;
    
-    /**Declares a JButton named btnSearch and btnExit.*/
+    /**Declares a JButton named btnSearch and btnExit.
+     * These are used for searching/ removing Vehicles and exiting the window.*/
     private JButton btnSearch, btnExit;
    
-    /**Declares a JPanel named pnlSearchVehicle.*/
+    /**Declares a JPanel named pnlSearchVehicle for use with the SearchVehicleGUI.*/
     private JPanel pnlSearchVehicle;
-   
-    /**Declares a JFrame named frmSearchVehicle.*/
+
+    /**Declares a JFrame named frmSearchVehicle, for use with the SearchVehicleGUI.*/
     private JFrame frmSearchVehicle;
-    
-    /**Declares a JTable named vehicleTable.*/
+
+    /**Declares a JTable named vehicleTable, which displays all the vehicles information.*/
     private JTable vehicleTable;
    
-    /**Declares a JScrollPane named vehicleScrollPane.*/
+    /**Declares a JScrollPane named vehicleScrollPane, which allows the user to scoll down the JTable.*/
     private JScrollPane vehicleScrollPane;
    
-    /**Declares a ArrayList<String> named lblDriverID.*/
+    /**Declares a ArrayList<String> named lblDriverID.
+     * This reads in all the vehicles information to add to the JTable.*/
     private ArrayList<String> rowAndColumnData;
 
-    /**Declares an int named tableRowAmount.*/
+    /**Declares an int named tableRowAmount, this is used to calculate the amount of rows needed..*/
     private int tableRowAmount;
 
-    /**Declares an String[][] named rowData.*/
+    /**Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
+     * amount of rows and columns.*/
     private String[][] rowData;
 
-    /**Declares a TableRowSorterr<TableModel> named sorter.*/
+    /**Declares a TableRowSorterr<TableModel> named sorter.
+     * This allows users to sort the table how they like and lets the search vehicles filter the table when searching for an ID.*/
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
 
-    /**Declares an DefaultTableModel named defaultTableModel.*/
+    /**Declares an DefaultTableModel named defaultTableModel.
+     * Once we pass the default model to the vehicleTable, we are able to interface with it better.
+     * This means I am able to get the headers and row selection etc.*/
     private DefaultTableModel defaultTableModel;
 
-    /** Declares a int named columnHeaderAmount*/
+    /** Declares a int named columnHeaderAmount
+     * If any changes are made to the columnHeader String array (new fields or remove fields)
+     * The number assigned to columnHeaderAmount should changes also as, the columnHeaderAmount is used to divide the amount of columns in
+     * one row.*/
     private int columnHeaderAmount;
 
 
@@ -159,13 +168,13 @@ public class SearchVehicleGUI {
 
     /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
      * writeToFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
-     * such as the removal of a Driver.*/
+     * such as the removal of a Vehicle.*/
     private void writeToFile() {
         try {
             FileWriter writeToDataStore = new FileWriter("Vehicle.txt");
             for (int i = 0; i < vehicleTable.getRowCount(); i++) {
                 for (int j = 0; j < vehicleTable.getColumnCount(); j++) {
-                    writeToDataStore.write(rowData[i][j].toString().toUpperCase() + "\n");
+                    writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
                 }
             }
             writeToDataStore.flush();

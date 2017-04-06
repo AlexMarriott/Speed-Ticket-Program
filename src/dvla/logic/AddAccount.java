@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 
 /**
  * <h1> AddAccount</h1>
- * The AddAccount is the logic for the AddAccountGUI class. It allows the user to create a new accout which can login to the program. The logic part checks that the username and password are following
+ * The AddAccount is the logic for the AddAccountGUI class. It allows the user to create a new account which can login to the program. The logic part checks that the username and password are following
  * the correct naming convention and it write the new user account to the login.txt
  * @author Alex Marriott s4816928
  * @version 1.0

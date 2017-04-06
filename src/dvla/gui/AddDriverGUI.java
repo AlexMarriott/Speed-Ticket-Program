@@ -24,8 +24,9 @@ import java.awt.event.ActionListener;
 /**
  * <h1> AddDriverGUI</h1>
  * The AddDriverGUI creates the AddDriver Window, which allows users to enter the Drivers information and have it submitted to the database.
- * The AddDriverGUI creates a driver form for the user to fill in regarding the driver who committed the offence. Once the user has it takes the information of the driver, there speed and the vehicle
- * they were driving and passes it to the respected objects (driver and vehicle).
+ * The AddDriverGUI creates a driver form for the user to fill in regarding the driver who committed the offence.
+ * Once the user complete the form it takes the information of the driver, there speed and the vehicle they were driving and passes it to the
+ * respected objects (driver and vehicle).
  *
  * @author Alex Marriott s4816928
  * @version 1.0
@@ -33,25 +34,25 @@ import java.awt.event.ActionListener;
  */
 public class AddDriverGUI   {
 
-    /**Declares  the  Jlabels.*/
+    /**Declares  the  Jlabels, which labels the form textboxes*/
     private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear, lblDateReported;
 
-    /**Declares the JTextFields.*/
+    /**Declares the JTextFields, which allow the users to enter the nesscary driver data.*/
     private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear, txtDateReported;
 
-    /**Declares the JButtons.*/
+    /**Declares the JButtons, allows the user to sumbit the data or exit the program.*/
     private JButton btnSubmit, btnBack;
 
     /**Declares the JBorder for the heading text in the AddDriverGUI window.*/
     private Border driverInfoBorder;
 
-    /**Declares the Jpanel.*/
+    /**Declares the Jpanel, the panel is for the AddDriverGUI.*/
     private JPanel pnlDriverGUI;
 
-    /**Declares the JFrame.*/
+    /**Declares the JFrame, the frame is for the AddDriverGUI.*/
     private JFrame frmDriverGUI;
 
-    /**Declares the JComboBox.*/
+    /**Declares the JComboBox, The combobox lists the roadtypes*/
     private JComboBox<String> roadList;
 
     /**Declare a String variable of roadType which is used in the JComboBox and then will be pass through to the Driver Object.*/
@@ -266,7 +267,8 @@ public class AddDriverGUI   {
         pnlDriverGUI.add(btnBack);
     }
 
-    /** The RoadTypeHandler gets the users selection from the ComboBox and assigns the variable roadspeed with the array location of the speed to use when getting the road Speed.*/
+    /** The RoadTypeHandler gets the users selection from the ComboBox and assigns the variable roadspeed with
+     * the array location of the speed to use when getting the road Speed.*/
     private class RoadTypeHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
@@ -279,10 +281,9 @@ public class AddDriverGUI   {
     private class CheckDriverData implements ActionListener {
         /**
          * Check that the inputs are correct and passes the data to Driver to assign and do a speed check of the driver.
-         * The actionPerformed action Handler listens to the sumbit button and then once clicked it checks
-         * to see if the txtboxes of txtFirstname,driverspeed and the  roadspeed variable to see if they
-         * are empty it then grabs all the inputted data on the driver form and passes the data to the
-         * Driver & Vehicle and display a popup to the user.
+         * The actionPerformed action Handler listens to the submit button and then once clicked, it checks
+         * to see if the txtboxes of txtFirstname, driverspeed and the roadspeed variable are empty it then grabs all the
+         * inputted data on the driver form and passes the data to the Driver & Vehicle and display a popup to the user.
          */
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -307,8 +308,7 @@ public class AddDriverGUI   {
                 // Pass's the vehicle information to the DatabaseWriter class to write  them to file.
                 vehicleData.getVehicleInfo();
 
-                // Sets the returnTicketMessage which will disapy
-                driverData.getTicketResult();
+                // Sets the returnTicketMessage which will display
                 driverData.setDriversFine();
                 driverData.getDriverInfo();
 
