@@ -74,6 +74,16 @@ public class SearchVehicleGUI {
      * one row.*/
     private int columnHeaderAmount;
 
+    /** Declares an int named vehicleTableRowCount, this vehicleTableRowCount is assigned the Rowcount from the vehicletable and then passed
+     * through to the DatabaseWriter class. */
+    private int vehicleTableRowCount;
+    /** Declares an int named vehicleTableColumnCount, this vehicleTableColumnCount is assigned the ColumnCount from the vehicletable and then passed
+     * through to the DatabaseWriter class. */
+    private int vehicleTableColumnCount;
+
+    /** Declares an object of DatabaseWriter and names it vehicleTableWriteToFile  */
+    private DatabaseWriter vehicleTableWriteToFile;
+
     /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
     public SearchVehicleGUI() {
         pnlAddSearchvehicle();
@@ -167,23 +177,7 @@ public class SearchVehicleGUI {
         }
     }
 
-    /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
-     * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
-     * such as the removal of a Vehicle.*/
-    public void writeToVehicleFile() {
-        try {
-            FileWriter writeToDataStore = new FileWriter("Vehicle.txt");
-            for (int i = 0; i < vehicleTable.getRowCount(); i++) {
-                for (int j = 0; j <vehicleTable.getColumnCount(); j++) {
-                    writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
-                }
-            }
-            writeToDataStore.flush();
-            writeToDataStore.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
     /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
@@ -237,7 +231,10 @@ public class SearchVehicleGUI {
      * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt*/
     private class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent event) {
-            writeToVehicleFile();
+            vehicleTableWriteToFile = new DatabaseWriter();
+            vehicleTableRowCount = vehicleTable.getRowCount() ;
+            vehicleTableColumnCount = vehicleTable.getColumnCount();
+            vehicleTableWriteToFile.writeToVehicleFile(vehicleTableRowCount,vehicleTableColumnCount, rowData );
         }
     }
 

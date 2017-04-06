@@ -1,5 +1,7 @@
 package dvla.gui;
 
+import dvla.logic.DatabaseWriter;
+
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -72,6 +74,17 @@ public class SearchDriverGUI {
      * The number assigned to columnHeaderAmount should changes also as, the columnHeaderAmount is used to divide the amount of columns in
      * one row.*/
     private int columnHeaderAmount;
+
+    /** Declares an int named driverTableRowCount, this driverTableRowCount is assigned the Rowcount from the drivertable and then passed
+     * through to the DatabaseWriter class. */
+    private int driverTableRowCount;
+
+    /** Declares an int named driverTableColumnCount, this driverTableColumnCount is assigned the columnCount from the drivertable and then passed
+     * through to the DatabaseWriter class. */
+    private int driverTableColumnCount;
+
+    /** Declares an object of DatabaseWriter and names it driverTableWriteToFile  */
+    private DatabaseWriter driverTableWriteToFile;
 
 
     /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
@@ -176,28 +189,6 @@ public class SearchDriverGUI {
     }
     
 
-
-    /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
-     * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
-     * such as the removal of a Driver.
-     * This method has to stay in the SearchDriverGUI to grab the */
-    private void writeToFile() {
-        try {
-            FileWriter writeToDataStore = new FileWriter("Drivers.txt");
-            for (int i = 0; i < driverTable.getRowCount(); i++) {
-                for (int j = 0; j < driverTable.getColumnCount(); j++) {
-                    writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
-                }
-            }
-            writeToDataStore.flush();
-            writeToDataStore.close();
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-    }
-
-
-
     /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
      *createDriverTable creates a two dimensional array om tableRowAmount and the column length.
      *With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
@@ -253,10 +244,13 @@ public class SearchDriverGUI {
      * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt*/
     private class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent tableEvent) {
-           if(driverTable.isEditing()){
+            driverTableWriteToFile = new DatabaseWriter();
+            if(driverTable.isEditing()){
                 JOptionPane.showMessageDialog(frmSearchDriver, "Please do not edit the cells, remove and recreate the Driver." +"\n" +" Any changes won't be saved.");
             }
-            writeToFile();
+            driverTableRowCount = driverTable.getRowCount() ;
+           driverTableColumnCount = driverTable.getColumnCount();
+            driverTableWriteToFile.writeToFile(driverTableRowCount,driverTableColumnCount,rowData );
         }
     }
 
@@ -274,10 +268,14 @@ public class SearchDriverGUI {
             sorter.setRowFilter(RowFilter.regexFilter(txtDriverID.getText(), 0));
         }
     }
-    /** DriverRemoveHandler using the defaultTableModel to remove the row which is selected in the driverTable.*/
+    /** DriverRemoveHandler using the defaultTableModel to remove the row which is selected in the driverTable.
+     * If a row is not selected then a prompt will appear telling the user to select a row. */
     private class DriverRemoveHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
+            if(driverTable.getSelectedRow() <= 0){
+                JOptionPane.showMessageDialog(frmSearchDriver, "Please select a row to remove.");
+            }else
             defaultTableModel.removeRow(driverTable.getSelectedRow());
         }
     }

@@ -240,4 +240,47 @@ public class DatabaseWriter {
         return loginArray;
     }
 
+    /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
+     * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
+     * such as the removal of a Driver.
+     * This method has to stay in the SearchDriverGUI to grab the
+     * @param driverTableRowCount
+     * @param driverTableColumnCount
+     * @param rowData*/
+    public void writeToFile(int driverTableRowCount, int driverTableColumnCount,String[][] rowData) {
+        try {
+            FileWriter writeToDataStore = new FileWriter("Drivers.txt");
+            for (int i = 0; i < driverTableRowCount; i++) {
+                for (int j = 0; j < driverTableColumnCount; j++) {
+                    writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
+                }
+            }
+            writeToDataStore.flush();
+            writeToDataStore.close();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
+     * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
+     * such as the removal of a Vehicle.
+     * @param vehicleTableRowCount
+     * @param vehicleTableColumnCount
+     * @param rowData*/
+    public void writeToVehicleFile(int vehicleTableRowCount, int vehicleTableColumnCount, String[][] rowData) {
+        try {
+            FileWriter writeToDataStore = new FileWriter("Vehicle.txt");
+            for (int i = 0; i < vehicleTableRowCount; i++) {
+                for (int j = 0; j <vehicleTableColumnCount; j++) {
+                    writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
+                }
+            }
+            writeToDataStore.flush();
+            writeToDataStore.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
