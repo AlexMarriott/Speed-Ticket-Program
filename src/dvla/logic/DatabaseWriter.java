@@ -170,7 +170,7 @@ public class DatabaseWriter {
         readInData = new Scanner(checkVehicleFile);
         if (!checkVehicleFile.exists() || !readInData.hasNextLine()) {
             vehicleFileExists = false;
-        } else if (checkDriverFile.exists() && readInData.hasNextLine()) {
+        } else if (checkVehicleFile.exists() && readInData.hasNextLine()) {
             vehicleFileExists = true;
         } else {
             System.out.println("Something has gone wrong with the dataStore, Please check the DatabaseWriter and the Texts file to see whats happened");
