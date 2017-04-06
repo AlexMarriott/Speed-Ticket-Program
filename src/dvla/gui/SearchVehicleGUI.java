@@ -88,7 +88,7 @@ public class SearchVehicleGUI {
      */
     private void frmAddSearchVehicle() {
         frmSearchVehicle = new JFrame();
-        frmSearchVehicle.setTitle("View Driver");
+        frmSearchVehicle.setTitle("View Vehicle");
         frmSearchVehicle.setSize(1250, 400);
         frmSearchVehicle.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmSearchVehicle.setLocationRelativeTo(null);
@@ -110,7 +110,7 @@ public class SearchVehicleGUI {
     /** Create the Jlabel and Jtextfields for the user input in the SearchVehicleGUI.*/
     private void addVehicleViewFields() {
 
-        lblVehicleID = new JLabel("Driver ID");
+        lblVehicleID = new JLabel("Vehicle ID");
         lblVehicleID.setBounds(10, 250, 100, 20);
         pnlSearchVehicle.add(lblVehicleID);
 

@@ -120,6 +120,14 @@ public class UserLoginGUI {
         txtUserName.setBounds(140, 20, 100, 20);
         pnlDriverLogin.add(txtUserName);
 
+        lblUserName = new JLabel("user1");
+        lblUserName.setBounds(260, 20, 100, 20);
+        pnlDriverLogin.add(lblUserName);
+
+        lblUserName = new JLabel("password1");
+        lblUserName.setBounds(260, 50, 100, 20);
+        pnlDriverLogin.add(lblUserName);
+
         lblPassword = new JLabel("Password");
         lblPassword.setBounds(20, 50, 100, 20);
         pnlDriverLogin.add(lblPassword);

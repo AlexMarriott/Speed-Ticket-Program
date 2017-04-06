@@ -52,7 +52,7 @@ public class AddAccount {
     public void  setNewLogin(String newAccountUser, char[] accountPassword){
         stringToPassword = String.valueOf(accountPassword);
 
-        if(correctUserName = newAccountUser.length() < 5 || !newAccountUser.matches("^[a-zA-Z]*$")){
+        if(correctUserName = newAccountUser.length() < 5 || !newAccountUser.matches("^[a-zA-Z0-9]*$")){
             correctUserName = false;
         }
         else

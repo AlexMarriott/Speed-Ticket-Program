@@ -76,7 +76,7 @@ public class AddAccountGUI {
     /**creates the frame for the AddAccount GUI.*/
     private void createLoginFrame() {
         frmAddAccount = new JFrame();
-        frmAddAccount.setTitle("LoginHandler");
+        frmAddAccount.setTitle("Add New User");
         frmAddAccount.setSize(400, 175);
         frmAddAccount.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmAddAccount.setLocationRelativeTo(null);
@@ -144,7 +144,7 @@ public class AddAccountGUI {
             addingAccount.setNewLogin(txtUserName.getText(), txtPassword.getPassword());
 
             if (!addingAccount.getUserState()) {
-                JOptionPane.showMessageDialog(frmAddAccount, "The User length should be 5 Characters minimum and contain letters only");
+                JOptionPane.showMessageDialog(frmAddAccount, "The User length should be 5 Characters minimum and must contain letters and can contain numbers only");
             } else if (!addingAccount.getPasswordState()) {
                 JOptionPane.showMessageDialog(frmAddAccount, "The Password length should be 8 Characters minimum and contain letters and Numbers only");
             } else {
@@ -163,7 +163,7 @@ public class AddAccountGUI {
     private class ConventionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            JOptionPane.showMessageDialog(frmAddAccount, "The Username Length should be 5 Characters minimum and contain letters only. \nThe Password length should be 8 Characters minimum  and contain letters and Numbers only.");
+            JOptionPane.showMessageDialog(frmAddAccount, "The User length should be 5 Characters minimum and must contain letters and can contain numbers only. \nThe Password length should be 8 Characters minimum  and contain letters and Numbers only.");
         }
     }
     /**
