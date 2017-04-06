@@ -71,7 +71,7 @@ public class UserLoginGUI {
     private boolean userCanLogin;
 
     /**
-     * Declares a List<String> named loginArray. loginArray reads in the values from the login.txt file and is then compared with the users inputs.
+     * Declares a List named loginArray. loginArray reads in the values from the login.txt file and is then compared with the users inputs.
      */
     private List<String> loginArray;
 
@@ -221,7 +221,8 @@ public class UserLoginGUI {
         }
     }
 
-    /**The Main will create the instance of UserLoginGUI to begin the program. */
+    /**The Main will create the instance of UserLoginGUI to begin the program.
+     * @param args default argument for the main  */
     public static void main(String[] args) {
         new UserLoginGUI();
     }

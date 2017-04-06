@@ -41,7 +41,8 @@ public class UserLogin {
 
         loginAndPassword = userLogin +":"+ stringUserPassword;
     }
-    /**This method returns the loginAndPassword which was set in the above method*/
+    /**This method returns the loginAndPassword which was set in the above method
+     * @return loginAndPassword*/
     public String getLoginDetails(){
         return loginAndPassword;
     }

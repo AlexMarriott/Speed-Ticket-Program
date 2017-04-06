@@ -32,12 +32,14 @@ public class AddAccount {
     /** Declares correctUserName as a boolean variable which if the Username passes the convention rules then, pass's back a true value to the AddAccountGUI  */
     private boolean correctUserName;
 
-    /** getPasswordState Method returns the correctUserPassword and is called from the AddAccountGUI */
+    /** getPasswordState Method returns the correctUserPassword and is called from the AddAccountGUI
+     * @return correctUserPassword */
     public boolean getPasswordState() {
         return correctUserPassword;
     }
 
-    /** getUserState Method returns the correctUserName and is called from the AddAccountGUI */
+    /** getUserState Method returns the correctUserName and is called from the AddAccountGUI
+     * @return correctUserName */
     public boolean getUserState() {
         return correctUserName;
     }
@@ -70,7 +72,8 @@ public class AddAccount {
         newLoginAndPassword = newAccountUser +":"+ newAccountPassword;
     }
 
-    /** getNewLogin gets the newLoginAndPassword ready to be passed to the saveNewUser method in the  AddAccountGUI */
+    /** getNewLogin gets the newLoginAndPassword ready to be passed to the saveNewUser method in the  AddAccountGUI
+     * @return newLoginAndPassword */
     public String getNewLogin(){
         return newLoginAndPassword;
     }

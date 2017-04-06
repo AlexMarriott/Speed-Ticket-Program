@@ -11,7 +11,6 @@ import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -44,14 +43,14 @@ public class SearchDriverGUI {
     private JFrame frmSearchDriver;
 
     /**Declares a JTable named driverTable, which displays all the drivers information.*/
-    public JTable driverTable;
+    private JTable driverTable;
 
     /**Declares a JScrollPane named driverScrollPane, which allows the user to scoll down the JTable.*/
     private JScrollPane driverScrollPane;
 
-    /**Declares an ArrayList<String> named rowAndColumnData.
+    /**Declares an ArrayList named rowAndColumnData.
      * This reads in all the drivers information to add to the JTable.*/
-    public ArrayList<String> rowAndColumnData;
+    private ArrayList<String> rowAndColumnData;
 
     /**Declares an int named tableRowAmount, this is used to calculate the amount of rows needed.*/
     private int tableRowAmount;
@@ -60,7 +59,7 @@ public class SearchDriverGUI {
      * amount of rows and columns. */
     private String[][] rowData;
 
-    /**Declares a TableRowSorter<TableModel> named sorter.
+    /**Declares a TableRowSorter named sorter.
      * This allows users to sort the table how they like and lets the search driver filter the table when searching for an ID.*/
     private TableRowSorter<TableModel> sorter = new TableRowSorter<>();
 
@@ -94,7 +93,7 @@ public class SearchDriverGUI {
         addDriverViewButtons();
         try {
             getDriver();
-            getTableRows();
+            setTableRows();
             createDriverTable();
 
             //Adding a Table Listener and passing it through to tableEdit(), this listener is used to write any new data to the driver.txt
@@ -168,13 +167,13 @@ public class SearchDriverGUI {
      * rowAndColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
      * to work out how many rows there should be. 
      **/
-    private double getTableRows() {
+    private void setTableRows() {
         columnHeaderAmount = 14;
-        return tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
+        tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
     }
 
     /**Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
-    public void getDriver() {
+    private void getDriver() {
         rowAndColumnData = new ArrayList<>();
 
         File file = new File("Drivers.txt");
@@ -194,7 +193,7 @@ public class SearchDriverGUI {
      *With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
     private void createDriverTable() {
         try {
-            // ColumnName Default size is 13, if anymore headers are added, change the columnHeaderAmount in the getTableRows method.
+            // ColumnName Default size is 13, if anymore headers are added, change the columnHeaderAmount in the setTableRows method.
             String[] columnNames = {"Driver ID", "First Name", "Last Name", "Date of Birth", "Driving Licence", "First Address", "Second Address", "Post Code", "Road Type", "Speed of Zone MPH", "Driver Speed MPH", "Difference MPH", "Fine Amount £", "Action Taken"};
             rowData = new String[tableRowAmount][columnNames.length];
             int row = 0;

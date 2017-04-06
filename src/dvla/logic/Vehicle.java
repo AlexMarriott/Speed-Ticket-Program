@@ -70,7 +70,8 @@ public class Vehicle {
         this.postCode = postCode;
     }
 
-    /**This method sets the VehicleInfo array with all the vehicles information and returns it ready to be passed through to Database writer.*/
+    /**This method sets the VehicleInfo array with all the vehicles information and returns it ready to be passed through to Database writer.
+     * @return vehicleInfo */
     private String[] setVehicleInfo() {
         String[] vehicleInfo = {vehicleModel, vehicleMake,
                 vehicleNumPlate, vehicleYear,

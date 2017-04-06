@@ -11,7 +11,6 @@ import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -43,12 +42,12 @@ public class SearchVehicleGUI {
     private JFrame frmSearchVehicle;
 
     /**Declares a JTable named vehicleTable, which displays all the vehicles information.*/
-    public JTable vehicleTable;
+    private JTable vehicleTable;
    
     /**Declares a JScrollPane named vehicleScrollPane, which allows the user to scoll down the JTable.*/
     private JScrollPane vehicleScrollPane;
    
-    /**Declares a ArrayList<String> named lblDriverID.
+    /**Declares a ArrayList named lblDriverID.
      * This reads in all the vehicles information to add to the JTable.*/
     private ArrayList<String> rowAndColumnData;
 
@@ -57,9 +56,9 @@ public class SearchVehicleGUI {
 
     /**Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
      * amount of rows and columns.*/
-    public String[][] rowData;
+    private String[][] rowData;
 
-    /**Declares a TableRowSorterr<TableModel> named sorter.
+    /**Declares a TableRowSorter named sorter.
      * This allows users to sort the table how they like and lets the search vehicles filter the table when searching for an ID.*/
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
 
@@ -91,7 +90,7 @@ public class SearchVehicleGUI {
         addVehicleViewButtons();
         try {
             getVehicle();
-            getTableRows();
+            setTableRows();
             createVehicleTable();
             //Adding a Table Listener and passing it through to tableEdit(), this listener is used to write any new data to the driver.txt
             vehicleTable.getModel().addTableModelListener(new tableEdit());
@@ -156,9 +155,9 @@ public class SearchVehicleGUI {
      * rowAndColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
      * to work out how many rows there should be.
      **/
-    private double getTableRows() {
+    private void setTableRows() {
         columnHeaderAmount = 10;
-        return tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
+        tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
     }
 
     /**Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
@@ -185,7 +184,7 @@ public class SearchVehicleGUI {
      *With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
     private void createVehicleTable() {
         try {
-            // ColumnName Default size is 9 but 10 to allow us to increment the column by one , if anymore headers are added, change the columnHeaderAmount in the getTableRows method.
+            // ColumnName Default size is 9 but 10 to allow us to increment the column by one , if anymore headers are added, change the columnHeaderAmount in the setTableRows method.
             String[] columnNames = {" Vehicle ID", "Vehicle Model", "Vehicle Make", "Vehicle Number Plate", "Vehicle Year", "Owner", "Driving Licence Number", "First Line of Address", "Second Line of Address", "Post Code"};
             rowData = new String[tableRowAmount][columnNames.length];
             int row = 0;

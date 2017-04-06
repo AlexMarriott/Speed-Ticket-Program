@@ -132,7 +132,8 @@ public class Driver {
         }
     }
 
-    /**This method gets the ticketReturnMessage which will be displayed to the user via a prompt on the AddDriverGUI.*/
+    /**This method gets the ticketReturnMessage which will be displayed to the user via a prompt on the AddDriverGUI.
+     * @return ticketReturnMessage */
     public String getTicketResult() {
         return ticketReturnMessage;
     }
@@ -142,7 +143,8 @@ public class Driver {
         driverFine = String.valueOf(drivingFine);
     }
 
-    /**This method sets the driverInfo array with all the drivers information and returns it ready to be passed through to Database writer.*/
+    /**This method sets the driverInfo array with all the drivers information and returns it ready to be passed through to Database writer.
+     * @return driverInfo*/
     private  String[] setDriverInfo(){
         String[] driverInfo = {firstName,lastName,
                 dateOfBirth,drivingLicenceNum,

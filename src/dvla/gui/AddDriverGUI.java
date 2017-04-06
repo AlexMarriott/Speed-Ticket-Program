@@ -283,7 +283,7 @@ public class AddDriverGUI   {
          * Check that the inputs are correct and passes the data to Driver to assign and do a speed check of the driver.
          * The actionPerformed action Handler listens to the submit button and then once clicked, it checks
          * to see if the txtboxes of txtFirstname, driverspeed and the roadspeed variable are empty it then grabs all the
-         * inputted data on the driver form and passes the data to the Driver & Vehicle and display a popup to the user.
+         * inputted data on the driver form and passes the data to the Driver and Vehicle and display a popup to the user.
          */
         @Override
         public void actionPerformed(ActionEvent event) {
