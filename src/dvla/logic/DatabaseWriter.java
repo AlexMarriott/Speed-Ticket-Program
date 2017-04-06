@@ -77,7 +77,6 @@ public class DatabaseWriter {
      * All the data in the text file is read into the loginArray and then used to compare with the users inputted login.*/
     private List<String> loginArray;
 
-
     /**
      * saveDrivers takes the driverInfo array which is passed to it along with the driverID. These are then written to the Drivers.txt file.
      * The saveDrivers method get passed the driverInfo String Array from the Driver Object, calls the setNextDriverID and setDriverID methods
@@ -240,7 +239,5 @@ public class DatabaseWriter {
         }
         return loginArray;
     }
-
-
 
 }

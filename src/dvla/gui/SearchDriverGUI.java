@@ -49,7 +49,7 @@ public class SearchDriverGUI {
 
     /**Declares an ArrayList<String> named rowAndColumnData.
      * This reads in all the drivers information to add to the JTable.*/
-    private ArrayList<String> rowAndColumnData;
+    public ArrayList<String> rowAndColumnData;
 
     /**Declares an int named tableRowAmount, this is used to calculate the amount of rows needed.*/
     private int tableRowAmount;
@@ -72,6 +72,7 @@ public class SearchDriverGUI {
      * The number assigned to columnHeaderAmount should changes also as, the columnHeaderAmount is used to divide the amount of columns in
      * one row.*/
     private int columnHeaderAmount;
+
 
     /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
     public SearchDriverGUI() {
@@ -158,9 +159,9 @@ public class SearchDriverGUI {
         columnHeaderAmount = 14;
         return tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
     }
-    
+
     /**Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
-    private void getDriver() {
+    public void getDriver() {
         rowAndColumnData = new ArrayList<>();
 
         File file = new File("Drivers.txt");
@@ -175,6 +176,8 @@ public class SearchDriverGUI {
 
         }
     }
+    
+
 
     /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
      * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
