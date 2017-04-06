@@ -1,35 +1,53 @@
 package dvla.gui;
 
+import dvla.logic.DatabaseWriter;
+
 import java.io.File;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
  * <h1> SpeedingTicketMenuGUI</h1>
  * The SpeedingTicketMenuGUI creates the GUI for the SPeedingTicketMenu. This menu allows the user to open up different parts of the program such as the Addriver screen.
+ *
  * @author Alex Marriott s4816928
  * @version 1.0
  * @since 03/04/2017
  */
 public class SpeedingTicketMenuGUI {
-    /**Declares a Jlabel named lblPicture.*/
+    /**
+     * Declares a Jlabel named lblPicture.
+     */
     private JLabel lblPicture;
 
-    /**Declares JButton named btnAddDriver, btnViewDriver, btnAddLogin, btnViewVehicle, btnExit.*/
-    private JButton btnAddDriver, btnViewDriver, btnAddLogin,btnViewVehicle, btnExit;
+    /**
+     * Declares JButton named btnAddDriver, btnViewDriver, btnAddLogin, btnViewVehicle, btnExit.
+     */
+    private JButton btnAddDriver, btnViewDriver, btnAddLogin, btnViewVehicle, btnExit;
 
-    /**Declares JPanel named pnlMainMenu. */
+    /**
+     * Declares JPanel named pnlMainMenu.
+     */
     private JPanel pnlMainMenu;
 
-    /**Declares a JFrame named frmMainMenu.*/
+    /**
+     * Declares a JFrame named frmMainMenu.
+     */
     private JFrame frmMainMenu;
 
-    /**Declares two Files named fileDriverID,fileDriverID.*/
+    /**
+     * Declares two Files named fileDriverID,fileDriverID.
+     */
     private File fileDriverID, fileVehicleID;
 
+    private DatabaseWriter checkFilesExist;
 
-    /** Constructor runs the methods to create the GUI*/
+
+    /**
+     * Constructor runs the methods to create the GUI
+     */
     public SpeedingTicketMenuGUI() {
         loadPanel();
         loadImages();
@@ -39,7 +57,9 @@ public class SpeedingTicketMenuGUI {
     }
 
 
-    /** Creates the frame for the SpeedingTicketMenuGUI*/
+    /**
+     * Creates the frame for the SpeedingTicketMenuGUI
+     */
     private void loadMenu() {
         frmMainMenu = new JFrame();
         frmMainMenu.setTitle("DVLA Ticket Program");
@@ -51,12 +71,18 @@ public class SpeedingTicketMenuGUI {
         frmMainMenu.add(pnlMainMenu);
         frmMainMenu.setVisible(true);
     }
-    /** Creates the panel for the SpeedingTicketMenuGUI*/
+
+    /**
+     * Creates the panel for the SpeedingTicketMenuGUI
+     */
     private void loadPanel() {
         pnlMainMenu = new JPanel();
         pnlMainMenu.setLayout(null);
     }
-    /**Creates a ImageIcon and assigns a DVLA image to it. */
+
+    /**
+     * Creates a ImageIcon and assigns a DVLA image to it.
+     */
     private void loadImages() {
         ImageIcon largeDVLAImage = new ImageIcon("DVLA.jpg");
         lblPicture = new JLabel(largeDVLAImage);
@@ -64,7 +90,9 @@ public class SpeedingTicketMenuGUI {
         pnlMainMenu.add(lblPicture);
     }
 
-    /** Adds Jbuttons to the SpeedingTicketMenuGUI*/
+    /**
+     * Adds Jbuttons to the SpeedingTicketMenuGUI
+     */
     private void loadButtons() {
         btnAddDriver = new JButton("Add Driver");
         btnAddDriver.setBounds(10, 230, 120, 40);
@@ -92,7 +120,9 @@ public class SpeedingTicketMenuGUI {
         pnlMainMenu.add(btnExit);
     }
 
-    /** AddDriverHandler instantiates a new AddDriverGUI.*/
+    /**
+     * AddDriverHandler instantiates a new AddDriverGUI.
+     */
     private class AddDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -100,24 +130,31 @@ public class SpeedingTicketMenuGUI {
         }
     }
 
-    /** ViewDriverHandler instantiates a new SearchDriverGUI().*/
-   private class ViewDriverHandler implements ActionListener {
+    /**
+     * ViewDriverHandler instantiates a new SearchDriverGUI()
+     * The ViewDriverHandler checks to see if the Drivers.txt exists or if it has any entrees. If this is the case then the SpeedingTicketMenuGUI
+     * will return a prompt informing the user they need to add a driver first. If the file exists and there is data then the SearchDriverGUI is ran.
+     */
+    private class ViewDriverHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            fileDriverID = new File("Drivers.txt");
-            fileVehicleID  = new File("Vehicle.txt");
-            //if file is empty or does not exist, tell user to add driver first.
-            if (!fileDriverID.exists() ){
-
-                JOptionPane.showMessageDialog(frmMainMenu, "DataStore doesn't not exist, Please add a driver to view the datastore.");
-            }
-            else {
-                new SearchDriverGUI();
+            checkFilesExist = new DatabaseWriter();
+            try {
+                checkFilesExist.checkDriverTxt();
+                if (!checkFilesExist.getCheckDriverTxt()) {
+                    JOptionPane.showMessageDialog(frmMainMenu, "No drivers or dataStore exist, Please add a driver to view the datastore.");
+                } else {
+                    new SearchDriverGUI();
+                }
+            } catch (FileNotFoundException execption) {
+                execption.printStackTrace();
             }
         }
     }
 
-    /** AddLoginHandler instantiates a new AddAccountGUI().*/
+    /**
+     * AddLoginHandler instantiates a new AddAccountGUI().
+     */
     private class AddLoginHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -126,23 +163,32 @@ public class SpeedingTicketMenuGUI {
 
     }
 
-    /** ViewVehicleHandler instantiates a new SearchVehicleGUI().*/
+    /**
+     * ViewVehicleHandler instantiates a new SearchVehicleGUI()
+     * The ViewVehicleHandler checks to see if the vehicle.txt exists or if it has any entres. If this is the case then the SpeedingTicketMenugui
+     * will return a prompt informing the user they need to add a driver first. If the file exists and there is data then the SearchVehicleGUI is ran.
+     */
     private class ViewVehicleHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            fileVehicleID  = new File("Vehicle.txt");
-            //if file is empty or does not exist, tell user to add driver first.
-            if (!fileVehicleID.exists() ){
-                JOptionPane.showMessageDialog(frmMainMenu, "DataStore doesn't not exist, Please add a driver to view the datastore.");
-            }
-            else {
-
-                new SearchVehicleGUI();
+            checkFilesExist = new DatabaseWriter();
+            try {
+                checkFilesExist.checkVehicleTxt();
+                if (!checkFilesExist.getCheckVehicleTxt()) {
+                    JOptionPane.showMessageDialog(frmMainMenu, "No vehicle or dataStore exist, please add a driver to view the datastore.");
+                } else {
+                    new SearchVehicleGUI();
+                }
+            } catch (FileNotFoundException execption) {
+                execption.printStackTrace();
             }
         }
 
     }
-    /** exitListener listens to the window waiting for input and when the user either clicks the top right X or the exit button then a prompt will appear asking the user if theya re sure theu wanna quit.*/
+
+    /**
+     * exitListener listens to the window waiting for input and when the user either clicks the top right X or the exit button then a prompt will appear asking the user if theya re sure theu wanna quit.
+     */
     private WindowListener exitListener = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent event) {
@@ -155,7 +201,9 @@ public class SpeedingTicketMenuGUI {
         }
     };
 
-    /** ExitSplashHandler prompts the user if they are sure they want to close the program.*/
+    /**
+     * ExitSplashHandler prompts the user if they are sure they want to close the program.
+     */
     private class ExitSplashHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
