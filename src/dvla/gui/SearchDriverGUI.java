@@ -273,7 +273,7 @@ public class SearchDriverGUI {
     private class DriverRemoveHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            if(driverTable.getSelectedRow() <= 0){
+            if(driverTable.getSelectedRow() <= -1){
                 JOptionPane.showMessageDialog(frmSearchDriver, "Please select a row to remove.");
             }else
             defaultTableModel.removeRow(driverTable.getSelectedRow());
