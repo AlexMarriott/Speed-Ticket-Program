@@ -74,9 +74,6 @@ public class SearchVehicleGUI {
      * one row.*/
     private int columnHeaderAmount;
 
-    private DatabaseWriter writeVehicleTable = new DatabaseWriter();
-
-
     /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
     public SearchVehicleGUI() {
         pnlAddSearchvehicle();
