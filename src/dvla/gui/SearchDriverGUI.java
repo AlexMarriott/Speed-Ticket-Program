@@ -172,8 +172,6 @@ public class SearchDriverGUI {
             }
         } catch (IOException exception) {
             exception.printStackTrace();
-
-
         }
     }
     
