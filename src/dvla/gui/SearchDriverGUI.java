@@ -79,10 +79,11 @@ public class SearchDriverGUI {
             //.putClientProperty ("terminateEditOnFocusLost" ends the editing of the cells and clears any selected rows
             driverTable.putClientProperty("terminateEditOnFocusLost", true);
             setScrollPane();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         frmAddSearchDriver();
+
     }
 
     /** Creates the frame and stops the user from closing the frame from the top right exit button.

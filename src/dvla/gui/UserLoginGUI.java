@@ -195,7 +195,7 @@ public class UserLoginGUI {
             }
 
             if (!userCanLogin) {
-                JOptionPane.showMessageDialog(frmDriverLogin, "Loginr in Unsuccessfully.... Check your username and password!");
+                JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
             }
 
         }

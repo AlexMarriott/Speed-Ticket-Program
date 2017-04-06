@@ -31,7 +31,7 @@ import java.awt.event.ActionListener;
  * @version 1.0
  * @since 03/04/2017
  */
-public class AddDriverGUI  {
+public class AddDriverGUI   {
 
     /**Declares  the  Jlabels.*/
     private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear, lblDateReported;
