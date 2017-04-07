@@ -224,51 +224,51 @@ public class AddDriverGUI {
      * Create the  Jtextfields for the user input in the AddDriverGUI.
      */
     private void txtDriverButtons() {
-        txtFirstName = new JTextField("ALEX");
+        txtFirstName = new JTextField();
         txtFirstName.setBounds(140, 40, 100, 20);
         pnlDriverGUI.add(txtFirstName);
 
-        txtLastName = new JTextField("MARRIOTT");
+        txtLastName = new JTextField();
         txtLastName.setBounds(140, 70, 100, 20);
         pnlDriverGUI.add(txtLastName);
 
-        txtDateOBirth = new JTextField("29/05/1992");
+        txtDateOBirth = new JTextField();
         txtDateOBirth.setBounds(140, 100, 100, 20);
         pnlDriverGUI.add(txtDateOBirth);
 
-        txtDrivingLicenceNum = new JTextField("IRCAR");
+        txtDrivingLicenceNum = new JTextField();
         txtDrivingLicenceNum.setBounds(140, 130, 100, 20);
         pnlDriverGUI.add(txtDrivingLicenceNum);
 
-        txtFirstAddressLine = new JTextField("ROAD1");
+        txtFirstAddressLine = new JTextField();
         txtFirstAddressLine.setBounds(140, 160, 100, 20);
         pnlDriverGUI.add(txtFirstAddressLine);
 
-        txtSecondAddressLine = new JTextField("ROAD 2");
+        txtSecondAddressLine = new JTextField();
         txtSecondAddressLine.setBounds(140, 190, 100, 20);
         pnlDriverGUI.add(txtSecondAddressLine);
 
-        txtPostCode = new JTextField("EN2 ROAD");
+        txtPostCode = new JTextField();
         txtPostCode.setBounds(140, 220, 100, 20);
         pnlDriverGUI.add(txtPostCode);
 
-        txtVehicleModel = new JTextField("CILO");
+        txtVehicleModel = new JTextField();
         txtVehicleModel.setBounds(380, 40, 100, 20);
         pnlDriverGUI.add(txtVehicleModel);
 
-        txtVehicleMake = new JTextField("FAST");
+        txtVehicleMake = new JTextField();
         txtVehicleMake.setBounds(380, 70, 100, 20);
         pnlDriverGUI.add(txtVehicleMake);
 
-        txtVehicleNumPlate = new JTextField("1234");
+        txtVehicleNumPlate = new JTextField();
         txtVehicleNumPlate.setBounds(380, 100, 100, 20);
         pnlDriverGUI.add(txtVehicleNumPlate);
 
-        txtVehicleYear = new JTextField("29/05/1992");
+        txtVehicleYear = new JTextField();
         txtVehicleYear.setBounds(380, 130, 100, 20);
         pnlDriverGUI.add(txtVehicleYear);
 
-        txtDriverSpeed = new JTextField("32");
+        txtDriverSpeed = new JTextField();
         txtDriverSpeed.setBounds(140, 260, 100, 20);
         pnlDriverGUI.add(txtDriverSpeed);
     }
