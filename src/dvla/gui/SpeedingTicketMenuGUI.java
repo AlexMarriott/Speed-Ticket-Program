@@ -141,7 +141,7 @@ public class SpeedingTicketMenuGUI {
                 checkFilesExist.checkDriverTxt();
                 //if the file is false then display a prompt to the user.
                 if (!checkFilesExist.getCheckDriverTxt()) {
-                    JOptionPane.showMessageDialog(frmMainMenu, "No drivers or dataStore exist, Please add a driver to view the datastore.");
+                    JOptionPane.showMessageDialog(frmMainMenu, "No drivers or Database exists, Please add a driver to view the datastore.");
                 } else {
                     new SearchDriverGUI();
                 }
