@@ -1,7 +1,6 @@
 package dvla.gui;
 
 import dvla.logic.DatabaseWriter;
-import dvla.logic.UserLogin;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
@@ -15,7 +14,6 @@ import java.util.List;
  * <h1> UserLoginGUI</h1>
  * The UserLoginGUI creates the UserLoginGUI Window, which allows Users to login into the program so long
  * as they have the correct authorised to.
- * The UserLoginGUI uses the UserLogin class for its logic.
  *
  * @author Alex Marriott s4816928
  * @version 1.0
@@ -169,7 +167,7 @@ public class UserLoginGUI {
 
     /**
      * The LoginHandler takes the user inputted username and password and checks to see if they are valid.
-     * The LoginHandler using the UserLogin logic takes the username and passwords, converts the password from a char array to a String and then set all the usernames and passwords from the login.txt to the login array.
+     * The LoginHandler  takes the username and passwords, converts the password from a char array to a String and then set all the usernames and passwords from the login.txt to the login array.
      * The loginArray then goes through a for loops, checking if the user inputted username and password is equal to anything in the file.
      * If there is a match then the user is allowed to login in. If there is no match, the user receive a prompt telling them to try again.
      */
