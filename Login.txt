@@ -6,3 +6,4 @@ alice1:password1
 newkid:ontehblock
 swagging:movingonup
 helloworld:swagging
+alexm:password123

@@ -195,7 +195,7 @@ public class UserLoginGUI {
 
                 if (loginArray.get(i).equals(userLogic.getLoginDetails())) {
 
-                    JOptionPane.showMessageDialog(frmDriverLogin, "Login in Successful! Welcome!");
+                    JOptionPane.showMessageDialog(frmDriverLogin, "LoginSuccessful!");
                     new SpeedingTicketMenuGUI();
                     frmDriverLogin.dispose();
                     userCanLogin = true;
@@ -206,7 +206,7 @@ public class UserLoginGUI {
             }
 
             if (!userCanLogin) {
-                JOptionPane.showMessageDialog(frmDriverLogin, "Login in Unsuccessfully.... Check your username and password!");
+                JOptionPane.showMessageDialog(frmDriverLogin, "Login Unsuccessful.... Check your username and password!");
             }
 
         }

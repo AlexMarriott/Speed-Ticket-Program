@@ -76,13 +76,13 @@ public class Driver {
     /**The DriverMethod allows basic information about the driver be passed to it, so its can set all the above variables with the most current drivers information.
      * @param firstName         First name of the Driver
      * @param lastName          Last Name of the Driver
-     * @param dateOfBirth       Date of brith of the Driver
+     * @param dateOfBirth       Date of Birth of the Driver
      * @param drivingLicenceNum Driving Licence Number of the Driver
      * @param firstAddressLine  First line of Address of the Driver
      * @param secondAddressLine Second line of Address for the Driver
      * @param postCode          Postcode of the Driver
      * @param roadSpeed         RoadSpeed of the Road the driver was caught on
-     * @param roadType          Type of Road the ddriver was caught on
+     * @param roadType          Type of Road the driver was caught on
      * @param driverSpeed       DriverSpeed of the road they were caught on
      * @param speedDifference   The speed difference between drivers Speed and the Road Speed
      * */

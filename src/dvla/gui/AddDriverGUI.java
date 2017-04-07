@@ -58,7 +58,6 @@ public class AddDriverGUI   {
     /**Declare a String variable of roadType which is used in the JComboBox and then will be pass through to the Driver Object.*/
     private JComboBox comboBox;
 
-
     /**Declare a int variable of driverSpeed which will be pass through to the Driver Object.*/
     private int driverSpeed;
 
@@ -328,5 +327,6 @@ public class AddDriverGUI   {
             frmDriverGUI.dispose();
         }
     }
+
 }
 
