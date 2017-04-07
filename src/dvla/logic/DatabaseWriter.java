@@ -184,6 +184,7 @@ public class DatabaseWriter {
         pwDriverID.flush();
         pwDriverID.close();
     }
+
     /** checkVehicleTxt is a method which reads in the data from the Vehicle.txt file and checks to see if its exists and has any data inside.
      * @throws FileNotFoundException if file doesn't exist then a false value will be  returned via vehicleFileExists */
     public void checkVehicleTxt() throws FileNotFoundException {

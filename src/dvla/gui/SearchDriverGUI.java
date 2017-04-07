@@ -118,6 +118,7 @@ public class SearchDriverGUI {
         frmSearchDriver.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmSearchDriver.setLocationRelativeTo(null);
         frmSearchDriver.setResizable(false);
+        frmSearchDriver.getRootPane().setDefaultButton(btnSearch);
         frmSearchDriver.add(pnlSearchDriver);
         frmSearchDriver.setVisible(true);
 

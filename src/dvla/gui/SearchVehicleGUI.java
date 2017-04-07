@@ -112,6 +112,7 @@ public class SearchVehicleGUI {
         frmSearchVehicle.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmSearchVehicle.setLocationRelativeTo(null);
         frmSearchVehicle.setResizable(false);
+        frmSearchVehicle.getRootPane().setDefaultButton(btnSearch);
         frmSearchVehicle.add(pnlSearchVehicle);
         frmSearchVehicle.setVisible(true);
 

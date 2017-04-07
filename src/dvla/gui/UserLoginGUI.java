@@ -54,12 +54,6 @@ public class UserLoginGUI {
      * Declares a JFrame named frmDriverLogin, this is the panel for UserloginGUI.
      */
     private JFrame frmDriverLogin;
-
-    /**
-     * Declaring a new UserLogin Object. UserLogin is the logic part to the UserLoginGUI
-     */
-    private UserLogin userLogic;
-
     /**
      * Declaring a new DatabaseWriter Object. data
      */
@@ -74,6 +68,15 @@ public class UserLoginGUI {
      * Declares a List named loginArray. loginArray reads in the values from the login.txt file and is then compared with the users inputs.
      */
     private List<String> loginArray;
+
+    /**Declares a String named userLogin, this is used as the users login name.*/
+    private String userLogin;
+
+    /**Declares a String named stringUserPassword, this is used as the users login password.*/
+    private String stringUserPassword;
+
+    /**Declares a String named loginAndPassword, this is compared with the login detils in the login.txt.*/
+    private String loginAndPassword;
 
 
     /**
@@ -173,12 +176,11 @@ public class UserLoginGUI {
     private class LoginHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            userLogic = new UserLogin();
             loginArray = new ArrayList<>();
             setLoginData = new DatabaseWriter();
 
             //Passing the username and password to Userlogin logic
-            userLogic.setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
+            setLoginDetails(txtUserName.getText(), txtPassword.getPassword());
 
             try {
 
@@ -193,7 +195,7 @@ public class UserLoginGUI {
             //Checking to see if any of the entries in the txt file match the usersnames and password.
             for (i = 0; i < loginArray.size(); i++) {
 
-                if (loginArray.get(i).equals(userLogic.getLoginDetails())) {
+                if (loginArray.get(i).equals(getLoginDetails())) {
 
                     JOptionPane.showMessageDialog(frmDriverLogin, "LoginSuccessful!");
                     new SpeedingTicketMenuGUI();
@@ -219,6 +221,23 @@ public class UserLoginGUI {
 
             frmDriverLogin.dispose();
         }
+    }
+
+
+    /**This method sets the take the userName and userPassword which is passed through to it and constructs it into the correct format for the Login.txt file.
+     * @param userName The new userName that the user inputted
+     * @param  userPassword The password that the user inputted */
+    private void  setLoginDetails(String userName, char[] userPassword){
+        userLogin = userName;
+        stringUserPassword = String.valueOf(userPassword);
+
+        loginAndPassword = userLogin +":"+ stringUserPassword;
+    }
+    /**
+     * This method returns the loginAndPassword which was set in the above method
+     * @return loginAndPassword*/
+    private String getLoginDetails(){
+        return loginAndPassword;
     }
 
     /**The Main will create the instance of UserLoginGUI to begin the program.

@@ -130,7 +130,7 @@ public class AddAccountGUI {
         btnConvention.addActionListener(new ConventionHandler());
         pnlAddAccount.add(btnConvention);
 
-        btnExit = new JButton("Exit");
+        btnExit = new JButton("Back");
         btnExit.setBounds(275, 100, 100, 30);
         btnExit.addActionListener(new ExitHandler());
         pnlAddAccount.add(btnExit);
