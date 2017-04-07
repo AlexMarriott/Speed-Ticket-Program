@@ -2,11 +2,9 @@ package dvla.gui;
 
 import dvla.logic.DatabaseWriter;
 
-import java.io.File;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * <h1> SpeedingTicketMenuGUI</h1>
@@ -39,10 +37,11 @@ public class SpeedingTicketMenuGUI {
      * Declares a JFrame named frmMainMenu for use with the SpeedingTicketMenuGUI.
      */
     private JFrame frmMainMenu;
-    /**Declares a Object of DatabaseWriter and names it checkfilesExist
-     * This is used to get a boolean value back from DatabaseWriter.*/
+    /**
+     * Declares a Object of DatabaseWriter and names it checkfilesExist
+     * This is used to get a boolean value back from DatabaseWriter.
+     */
     private DatabaseWriter checkFilesExist;
-
 
     /**
      * Constructor runs the methods to create the GUI
@@ -54,7 +53,6 @@ public class SpeedingTicketMenuGUI {
         loadMenu();
 
     }
-
 
     /**
      * Creates the frame for the SpeedingTicketMenuGUI

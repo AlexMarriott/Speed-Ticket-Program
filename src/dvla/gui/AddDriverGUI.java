@@ -1,8 +1,8 @@
 package dvla.gui;
 
-import dvla.logic.DatabaseWriter;
 import dvla.logic.Driver;
 import dvla.logic.Vehicle;
+
 import java.awt.Font;
 
 
@@ -18,8 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-;
 
 /**
  * <h1> AddDriverGUI</h1>
@@ -37,15 +35,15 @@ public class AddDriverGUI {
     /**
      * Declares  the  Jlabels, which labels the form textboxes
      */
-    private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear, lblDateReported;
+    private JLabel lblDriversSpeed, lblRoadType, lblPicture, lblFirstName, lblLastName, lblDateOBirth, lblDrivingLicenceNum, lblFirstAddressLine, lblSecondAddressLine, lblPostCode, lblDriverInformation, lblVehicleModel, lblVehicleMake, lblVehicleNumPlate, lblVehicleYear;
 
     /**
-     * Declares the JTextFields, which allow the users to enter the nesscary driver data.
+     * Declares the JTextFields, which allow the users to enter the necessary driver data.
      */
-    private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear, txtDateReported;
+    private JTextField txtDriverSpeed, txtFirstName, txtLastName, txtDateOBirth, txtDrivingLicenceNum, txtFirstAddressLine, txtSecondAddressLine, txtPostCode, txtVehicleModel, txtVehicleMake, txtVehicleNumPlate, txtVehicleYear;
 
     /**
-     * Declares the JButtons, allows the user to sumbit the data or exit the program.
+     * Declares the JButtons, allows the user to submit the data or exit the program.
      */
     private JButton btnSubmit, btnBack;
 
@@ -72,7 +70,7 @@ public class AddDriverGUI {
     /**
      * Declare a String variable of roadType which is used in the JComboBox and then will be pass through to the Driver Object.
      */
-    private JComboBox comboBox;
+    private JComboBox<String> comboBox;
 
     /**
      * Declare a int variable of driverSpeed which will be pass through to the Driver Object.
@@ -90,7 +88,7 @@ public class AddDriverGUI {
     private int speedDifference;
 
     /**
-     * Declare a  int[] array of roadSpeedList which is used to select the roadspeed for the different roadstypes.
+     * Declare a  int[] array of roadSpeedList which is used to select the roadspeed for the different roadtypes.
      */
     private int[] roadSpeedList;
 
@@ -126,7 +124,6 @@ public class AddDriverGUI {
         addDriverButtons();
         frmAddDriver();
     }
-
 
     /**
      * Creates the panel for the AddDriverGUI
@@ -319,9 +316,12 @@ public class AddDriverGUI {
      * the array location of the speed to use when getting the road Speed.
      */
     private class RoadTypeHandler implements ActionListener {
+        //I didn't have a enough time to deal with this, can you please explain why I have to suppress this warning in the feedback, Thank you.
+        @SuppressWarnings("unchecked")
         public void actionPerformed(ActionEvent event) {
+            comboBox = new JComboBox<String>();
             roadSpeedList = new int[]{0, 20, 20, 30, 60, 70};
-            comboBox = (JComboBox) event.getSource();
+            comboBox = (JComboBox<String>) event.getSource();
             roadType = String.valueOf(comboBox.getSelectedItem());
             roadSpeed = roadSpeedList[Integer.parseInt(String.valueOf(comboBox.getSelectedIndex()))];
         }
@@ -344,48 +344,48 @@ public class AddDriverGUI {
             }
 
 
-                speedDifference = driverSpeed - roadSpeed;
+            speedDifference = driverSpeed - roadSpeed;
 
-                if (txtFirstName.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
-                } else if (driverSpeed == 0) {
-                    JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Speed, Drivers speed cannot be 0", "ERROR", JOptionPane.ERROR_MESSAGE);
-                } else if (roadSpeed == 0) {
-                    JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
-                } else {
+            if (txtFirstName.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Name", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (driverSpeed == 0) {
+                JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter the Drivers Speed, Drivers speed cannot be 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (roadSpeed == 0) {
+                JOptionPane.showMessageDialog(frmDriverGUI, "Please Enter select the road type", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
 
-                    //Here we are instantiating  the Driver Object and the Vehicle Object and passing through the driver information and the vehicle data to these objects.
-                    driverData = new Driver(txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), roadSpeed, roadType, driverSpeed, speedDifference);
-                    vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(), txtVehicleNumPlate.getText(), txtVehicleYear.getText(), txtFirstName.getText() + " " + txtLastName.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText());
+                //Here we are instantiating  the Driver Object and the Vehicle Object and passing through the driver information and the vehicle data to these objects.
+                driverData = new Driver(txtFirstName.getText(), txtLastName.getText(), txtDateOBirth.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText(), roadSpeed, roadType, driverSpeed, speedDifference);
+                vehicleData = new Vehicle(txtVehicleModel.getText(), txtVehicleMake.getText(), txtVehicleNumPlate.getText(), txtVehicleYear.getText(), txtFirstName.getText() + " " + txtLastName.getText(), txtDrivingLicenceNum.getText(), txtFirstAddressLine.getText(), txtSecondAddressLine.getText(), txtPostCode.getText());
 
-                    //Passing through driverSpeed and roadtype to the driver object to check the speed of the driver.
-                    driverData.speedCheck(driverSpeed, roadType);
+                //Passing through driverSpeed and roadtype to the driver object to check the speed of the driver.
+                driverData.speedCheck(driverSpeed, roadType);
 
-                    // Pass's the vehicle information to the DatabaseWriter class to write  them to file.
-                    vehicleData.getVehicleInfo();
+                // Pass's the vehicle information to the DatabaseWriter class to write  them to file.
+                vehicleData.getVehicleInfo();
 
-                    // Sets the returnTicketMessage which will display
-                    driverData.getTicketResult();
-                    driverData.setDriversFine();
-                    driverData.getDriverInfo();
+                // Sets the returnTicketMessage which will display
+                driverData.getTicketResult();
+                driverData.setDriversFine();
+                driverData.getDriverInfo();
 
 
-                    //This is a popup display for the user once they have written the driver to the database.
-                    JOptionPane.showMessageDialog(frmDriverGUI, driverData.getTicketResult());
+                //This is a popup display for the user once they have written the driver to the database.
+                JOptionPane.showMessageDialog(frmDriverGUI, driverData.getTicketResult());
 
-                }
             }
         }
-
-        /**
-         * The DriverAddExitHandler listens to the exit button and once clicked it will disposed of the AddDriverGUI
-         */
-        private class DriverAddExitHandler implements ActionListener {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                frmDriverGUI.dispose();
-            }
-        }
-
     }
+
+    /**
+     * The DriverAddExitHandler listens to the exit button and once clicked it will disposed of the AddDriverGUI
+     */
+    private class DriverAddExitHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            frmDriverGUI.dispose();
+        }
+    }
+
+}
 

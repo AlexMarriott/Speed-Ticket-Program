@@ -26,67 +26,101 @@ import java.util.Scanner;
  */
 public class SearchDriverGUI {
 
-    /**Declares a Jlabel named lblDriverID, which labels the search DriverId textbox*/
+    /**
+     * Declares a Jlabel named lblDriverID, which labels the search DriverId textbox
+     */
     private JLabel lblDriverID;
 
-    /**Declares a JTextField named txtDriverID, which provides a JTextboxes*/
+    /**
+     * Declares a JTextField named txtDriverID, which provides a JTextboxes
+     */
     private JTextField txtDriverID;
 
-    /**Declares JButton named btnSearch,btnRemove,btnExit.
-     *These are used for searching/ removing drivers and exiting the window.*/
+    /**
+     * Declares JButton named btnSearch,btnRemove,btnExit.
+     * These are used for searching/ removing drivers and exiting the window.
+     */
     private JButton btnSearch, btnRemove, btnExit;
 
-    /**Declares JPanel named pnlSearchDriver, for use with the SearchDriverGUI. */
+    /**
+     * Declares JPanel named pnlSearchDriver, for use with the SearchDriverGUI.
+     */
     private JPanel pnlSearchDriver;
 
-    /**Declares a JFrame named frmSearchDriver, for use with the SearchDriverGUI.*/
+    /**
+     * Declares a JFrame named frmSearchDriver, for use with the SearchDriverGUI.
+     */
     private JFrame frmSearchDriver;
 
-    /**Declares a JTable named driverTable, which displays all the drivers information.*/
+    /**
+     * Declares a JTable named driverTable, which displays all the drivers information.
+     */
     private JTable driverTable;
 
-    /**Declares a JScrollPane named driverScrollPane, which allows the user to scoll down the JTable.*/
+    /**
+     * Declares a JScrollPane named driverScrollPane, which allows the user to scoll down the JTable.
+     */
     private JScrollPane driverScrollPane;
 
-    /**Declares an ArrayList named rowAndColumnData.
-     * This reads in all the drivers information to add to the JTable.*/
+    /**
+     * Declares an ArrayList named rowAndColumnData.
+     * This reads in all the drivers information to add to the JTable.
+     */
     private ArrayList<String> rowAndColumnData;
 
-    /**Declares an int named tableRowAmount, this is used to calculate the amount of rows needed.*/
+    /**
+     * Declares an int named tableRowAmount, this is used to calculate the amount of rows needed.
+     */
     private int tableRowAmount;
 
-    /**Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
-     * amount of rows and columns. */
+    /**
+     * Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
+     * amount of rows and columns.
+     */
     private String[][] rowData;
 
-    /**Declares a TableRowSorter named sorter.
-     * This allows users to sort the table how they like and lets the search driver filter the table when searching for an ID.*/
+    /**
+     * Declares a TableRowSorter named sorter.
+     * This allows users to sort the table how they like and lets the search driver filter the table when searching for an ID.
+     */
     private TableRowSorter<TableModel> sorter = new TableRowSorter<>();
 
-    /**Declares an DefaultTableModel named defaultTableModel.
+    /**
+     * Declares an DefaultTableModel named defaultTableModel.
      * Once we pass the default model to the drivertable, we are able to interface with it better.
-     * This means I am able to get the headers and row selection etc.*/
+     * This means I am able to get the headers and row selection etc.
+     */
     private DefaultTableModel defaultTableModel;
 
-    /** Declares a int named columnHeaderAmount
+    /**
+     * Declares a int named columnHeaderAmount
      * If any changes are made to the columnHeader String array (new fields or remove fields)
      * The number assigned to columnHeaderAmount should changes also as, the columnHeaderAmount is used to divide the amount of columns in
-     * one row.*/
+     * one row.
+     */
     private int columnHeaderAmount;
 
-    /** Declares an int named driverTableRowCount, this driverTableRowCount is assigned the Rowcount from the drivertable and then passed
-     * through to the DatabaseWriter class. */
+    /**
+     * Declares an int named driverTableRowCount, this driverTableRowCount is assigned the Rowcount from the drivertable and then passed
+     * through to the DatabaseWriter class.
+     */
     private int driverTableRowCount;
 
-    /** Declares an int named driverTableColumnCount, this driverTableColumnCount is assigned the columnCount from the drivertable and then passed
-     * through to the DatabaseWriter class. */
+    /**
+     * Declares an int named driverTableColumnCount, this driverTableColumnCount is assigned the columnCount from the drivertable and then passed
+     * through to the DatabaseWriter class.
+     */
     private int driverTableColumnCount;
 
-    /** Declares an object of DatabaseWriter and names it driverTableWriteToFile  */
+    /**
+     * Declares an object of DatabaseWriter and names it driverTableWriteToFile
+     */
     private DatabaseWriter driverTableWriteToFile;
 
 
-    /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
+    /**
+     * Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable
+     */
     public SearchDriverGUI() {
         pnlAddSearchDriver();
         addDriverViewFields();
@@ -108,8 +142,9 @@ public class SearchDriverGUI {
 
     }
 
-    /** Creates the frame and stops the user from closing the frame from the top right exit button.
-     *  This is to allow the data to be saved when changes are made.
+    /**
+     * Creates the frame and stops the user from closing the frame from the top right exit button.
+     * This is to allow the data to be saved when changes are made.
      */
     private void frmAddSearchDriver() {
         frmSearchDriver = new JFrame();
@@ -127,13 +162,17 @@ public class SearchDriverGUI {
 
     }
 
-    /** Creates the panel for the SearchDriverGUI*/
+    /**
+     * Creates the panel for the SearchDriverGUI
+     */
     private void pnlAddSearchDriver() {
         pnlSearchDriver = new JPanel();
         pnlSearchDriver.setLayout(null);
     }
 
-    /** Create the Jlabel and Jtextfields for the user input in the SearchDriverGUI.*/
+    /**
+     * Create the Jlabel and Jtextfields for the user input in the SearchDriverGUI.
+     */
     private void addDriverViewFields() {
 
         lblDriverID = new JLabel("Driver ID");
@@ -146,7 +185,9 @@ public class SearchDriverGUI {
 
     }
 
-    /** Adds Jbuttons to the SearchDriverGUI*/
+    /**
+     * Adds Jbuttons to the SearchDriverGUI
+     */
     private void addDriverViewButtons() {
         btnSearch = new JButton("Search Driver");
         btnSearch.setBounds(20, 335, 140, 30);
@@ -164,16 +205,19 @@ public class SearchDriverGUI {
         pnlSearchDriver.add(btnExit);
     }
 
-    /** Sets the amount of columns headers there are and divides it by the size of rowAndColumnData.
+    /**
+     * Sets the amount of columns headers there are and divides it by the size of rowAndColumnData.
      * rowAndColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
-     * to work out how many rows there should be. 
+     * to work out how many rows there should be.
      **/
     private void setTableRows() {
         columnHeaderAmount = 14;
         tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
     }
 
-    /**Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
+    /**
+     * Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.
+     */
     private void getDriver() {
         rowAndColumnData = new ArrayList<>();
 
@@ -183,15 +227,18 @@ public class SearchDriverGUI {
             while (readIn.hasNext()) {
                 rowAndColumnData.add(readIn.nextLine());
             }
+            readIn.close();
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
-    
 
-    /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
-     *createDriverTable creates a two dimensional array om tableRowAmount and the column length.
-     *With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
+
+    /**
+     * Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
+     * createDriverTable creates a two dimensional array om tableRowAmount and the column length.
+     * With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled.
+     */
     private void createDriverTable() {
         try {
             // ColumnName Default size is 13, if anymore headers are added, change the columnHeaderAmount in the setTableRows method.
@@ -240,54 +287,65 @@ public class SearchDriverGUI {
             JOptionPane.showMessageDialog(frmSearchDriver, "Something went wrong, Please check the datastore");
         }
     }
-    /** This TableModelListener get any changes which happens to the Jtable and writes them to the Drivers.txt
-     * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt*/
+
+    /**
+     * This TableModelListener get any changes which happens to the Jtable and writes them to the Drivers.txt
+     * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt
+     */
     private class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent tableEvent) {
             driverTableWriteToFile = new DatabaseWriter();
-            if(driverTable.isEditing()){
-                JOptionPane.showMessageDialog(frmSearchDriver, "Please do not edit the cells, remove and recreate the Driver." +"\n" +" Any changes won't be saved.");
+            if (driverTable.isEditing()) {
+                JOptionPane.showMessageDialog(frmSearchDriver, "Please do not edit the cells, remove and recreate the Driver." + "\n" + " Any changes won't be saved.");
             }
-            driverTableRowCount = driverTable.getRowCount() ;
-           driverTableColumnCount = driverTable.getColumnCount();
-            driverTableWriteToFile.writeToFile(driverTableRowCount,driverTableColumnCount,rowData );
+            driverTableRowCount = driverTable.getRowCount();
+            driverTableColumnCount = driverTable.getColumnCount();
+            driverTableWriteToFile.writeToFile(driverTableRowCount, driverTableColumnCount, rowData);
         }
     }
 
-    /** Set driverTable(Jtable) to a scrollPane so user can scroll up and down.*/
+    /**
+     * Set driverTable(Jtable) to a scrollPane so user can scroll up and down.
+     */
     private void setScrollPane() {
         driverScrollPane = new JScrollPane(driverTable);
         driverScrollPane.setBounds(0, 0, 1250, 200);
         pnlSearchDriver.add(driverScrollPane);
     }
 
-    /** DriverSearchHandler Filters the rows using regexfilter to find the DriverID and returns it on the Jtable*/
+    /**
+     * DriverSearchHandler Filters the rows using regexfilter to find the DriverID and returns it on the Jtable
+     */
     private class DriverSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             sorter.setRowFilter(RowFilter.regexFilter(txtDriverID.getText(), 0));
         }
     }
-    /** DriverRemoveHandler using the defaultTableModel to remove the row which is selected in the driverTable.
-     * If a row is not selected then a prompt will appear telling the user to select a row. */
+
+    /**
+     * DriverRemoveHandler using the defaultTableModel to remove the row which is selected in the driverTable.
+     * If a row is not selected then a prompt will appear telling the user to select a row.
+     */
     private class DriverRemoveHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            if(driverTable.getSelectedRow() <= -1){
+            if (driverTable.getSelectedRow() <= -1) {
                 JOptionPane.showMessageDialog(frmSearchDriver, "Please select a row to remove.");
-            }else
-            defaultTableModel.removeRow(driverTable.getSelectedRow());
+            } else
+                defaultTableModel.removeRow(driverTable.getSelectedRow());
         }
     }
 
-    /** DriverSearchExitHandler disposes of the SearchDriver frame once the use clicks the Exit button.*/
+    /**
+     * DriverSearchExitHandler disposes of the SearchDriver frame once the use clicks the Exit button.
+     */
     private class DriverSearchExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             frmSearchDriver.dispose();
         }
     }
-
 
 
 }

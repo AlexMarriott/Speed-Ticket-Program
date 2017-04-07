@@ -1,8 +1,5 @@
 package dvla.logic;
 
-import dvla.gui.SearchDriverGUI;
-import dvla.gui.SearchVehicleGUI;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +51,7 @@ public class DatabaseWriter {
 
     /**
      * Declares two Files called checkDriverFile, checkVehicleFile
-     * This are used to check that the river and venicle file exsit.
+     * This are used to check that the river and vehicle file exist.
      */
     private File checkDriverFile, checkVehicleFile;
 
@@ -73,8 +70,10 @@ public class DatabaseWriter {
      */
     private PrintWriter accountLoginFile;
 
-    /**Declares a List named loginArray.
-     * All the data in the text file is read into the loginArray and then used to compare with the users inputted login.*/
+    /**
+     * Declares a List named loginArray.
+     * All the data in the text file is read into the loginArray and then used to compare with the users inputed login.
+     */
     private List<String> loginArray;
 
     /**
@@ -130,6 +129,7 @@ public class DatabaseWriter {
      * Gets the next vehicle ID by scanning in the data from the VehicleID.txt and counting each line to give us the next ID
      * The setNextVehicleID method scans in the VehicleID.txt, and starts a while loop to incremental through each line until there are no more lines in the file.
      * if the Vehicle Id is 0 then it is incremented by one.
+     *
      * @throws FileNotFoundException VehicleID.txt will is created if it doesn't exist via this method.
      */
     private void setNextVehicleID() throws FileNotFoundException {
@@ -145,6 +145,7 @@ public class DatabaseWriter {
 
     /**
      * setVehicleID creates the VehicleID.txt file if it doesn't already exist and writes the new vehicle ID to it.
+     *
      * @throws IOException VehicleID.txt will is created if it doesn't exist via this method.
      */
     private void setVehicleID() throws IOException {
@@ -158,6 +159,7 @@ public class DatabaseWriter {
      * Gets the next Driver ID by scanning in the data from the DriversID.txt and counting each line to give us the next ID
      * The setNextDriverID method scans in the DriversID.txt, and starts a while loop to incremental through each line until there are no more lines in the file.
      * if the Driver Id is 0 then it is incremented by one.
+     *
      * @throws FileNotFoundException DriversID.txt will is created if it doesn't exist via this method.
      */
     private void setNextDriverID() throws FileNotFoundException {
@@ -185,8 +187,11 @@ public class DatabaseWriter {
         pwDriverID.close();
     }
 
-    /** checkVehicleTxt is a method which reads in the data from the Vehicle.txt file and checks to see if its exists and has any data inside.
-     * @throws FileNotFoundException if file doesn't exist then a false value will be  returned via vehicleFileExists */
+    /**
+     * checkVehicleTxt is a method which reads in the data from the Vehicle.txt file and checks to see if its exists and has any data inside.
+     *
+     * @throws FileNotFoundException if file doesn't exist then a false value will be  returned via vehicleFileExists
+     */
     public void checkVehicleTxt() throws FileNotFoundException {
         checkVehicleFile = new File("Vehicle.txt");
         readInData = new Scanner(checkVehicleFile);
@@ -200,15 +205,21 @@ public class DatabaseWriter {
         }
     }
 
-    /** getCheckVehicleTxt returns the vehicleFileExist.
-     * @return vehicleFileExists*/
-    public boolean getCheckVehicleTxt(){
+    /**
+     * getCheckVehicleTxt returns the vehicleFileExist.
+     *
+     * @return vehicleFileExists
+     */
+    public boolean getCheckVehicleTxt() {
         return vehicleFileExists;
     }
 
 
-    /** checkDriverTxt is a method which reads in the data from the Drivers.txt file and checks to see if its exists and has any data inside.
-     * @throws FileNotFoundException if file doesn't exist then a false value will be  returned via driverFileExists */
+    /**
+     * checkDriverTxt is a method which reads in the data from the Drivers.txt file and checks to see if its exists and has any data inside.
+     *
+     * @throws FileNotFoundException if file doesn't exist then a false value will be  returned via driverFileExists
+     */
     public void checkDriverTxt() throws FileNotFoundException {
         checkDriverFile = new File("Drivers.txt");
         readInData = new Scanner(checkDriverFile);
@@ -222,15 +233,21 @@ public class DatabaseWriter {
         }
     }
 
-    /** getCheckDriverTxt returns the driverFileExists.
-     * @return driverFileExists */
-    public boolean getCheckDriverTxt(){
+    /**
+     * getCheckDriverTxt returns the driverFileExists.
+     *
+     * @return driverFileExists
+     */
+    public boolean getCheckDriverTxt() {
         return driverFileExists;
     }
 
-    /** saveNewUser is a method which gets passed the newAccount details from AddAccountGUI and write the new login to the login.txt.
+    /**
+     * saveNewUser is a method which gets passed the newAccount details from AddAccountGUI and write the new login to the login.txt.
+     *
      * @param newLogin new user account with password is passed through to be written
-     * @throws IOException If the login.txt does not exist then it will be created. */
+     * @throws IOException If the login.txt does not exist then it will be created.
+     */
     public void saveNewUser(String newLogin) throws IOException {
 
         accountLoginFile = new PrintWriter(new BufferedWriter(new FileWriter("Login.txt", true)));
@@ -240,30 +257,36 @@ public class DatabaseWriter {
 
     }
 
-    /**getLoginData creates an array from reading in data from the Login.txt file.
+    /**
+     * getLoginData creates an array from reading in data from the Login.txt file.
      * This sets the loginArray and returns it so the UserLoginGUI can use it to compares the login details.
+     *
+     * @return loginArray
      * @throws FileNotFoundException The File will be created.
-     * @return loginArray*/
+     */
     public List<String> getLoginData() throws FileNotFoundException {
         File file = new File("Login.txt");
 
         Scanner readIn = new Scanner(file);
         loginArray = new ArrayList<>();
         while (readIn.hasNextLine()) {
-
             loginArray.add(readIn.nextLine());
         }
+        readIn.close();
         return loginArray;
     }
 
-    /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
+    /**
+     * This method counts the rows and columns from the Jtable and writes each line back into the text file.
      * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
      * such as the removal of a Driver.
      * This method has to stay in the SearchDriverGUI to grab the
-     * @param driverTableRowCount driverTableRowCount is the count for all the rows in the driver table
+     *
+     * @param driverTableRowCount    driverTableRowCount is the count for all the rows in the driver table
      * @param driverTableColumnCount driverTableColumnCount is the count for all the columns in the driver table
-     * @param rowData rowData is all the data from the driver table ready to be written to file*/
-    public void writeToFile(int driverTableRowCount, int driverTableColumnCount,String[][] rowData) {
+     * @param rowData                rowData is all the data from the driver table ready to be written to file
+     */
+    public void writeToFile(int driverTableRowCount, int driverTableColumnCount, String[][] rowData) {
         try {
             FileWriter writeToDataStore = new FileWriter("Drivers.txt");
             for (int i = 0; i < driverTableRowCount; i++) {
@@ -278,17 +301,20 @@ public class DatabaseWriter {
         }
     }
 
-    /** This method counts the rows and columns from the Jtable and writes each line back into the text file.
+    /**
+     * This method counts the rows and columns from the Jtable and writes each line back into the text file.
      * writeToVehicleFile has two for loops which iterate through the Jtable and write each cell from the Jtable back into the text file when changes are made in the table.
      * such as the removal of a Vehicle.
-     * @param vehicleTableRowCount vehicleTableRowCount is the count for all the rows in the vehicle table
+     *
+     * @param vehicleTableRowCount    vehicleTableRowCount is the count for all the rows in the vehicle table
      * @param vehicleTableColumnCount vehicleTableColumnCount is the count for all the columns in the vehicle table
-     * @param rowData rowData rowData is all the data from the vehicle table ready to be written to file*/
+     * @param rowData                 rowData rowData is all the data from the vehicle table ready to be written to file
+     */
     public void writeToVehicleFile(int vehicleTableRowCount, int vehicleTableColumnCount, String[][] rowData) {
         try {
             FileWriter writeToDataStore = new FileWriter("Vehicle.txt");
             for (int i = 0; i < vehicleTableRowCount; i++) {
-                for (int j = 0; j <vehicleTableColumnCount; j++) {
+                for (int j = 0; j < vehicleTableColumnCount; j++) {
                     writeToDataStore.write(rowData[i][j].toUpperCase() + "\n");
                 }
             }

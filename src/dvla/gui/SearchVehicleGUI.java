@@ -25,65 +25,99 @@ import java.util.Scanner;
  * @since 03/04/2017
  */
 public class SearchVehicleGUI {
-    /**Declares a Jlabel named lblVehicleID, which labels the search VehicleID textbox*/
+    /**
+     * Declares a Jlabel named lblVehicleID, which labels the search VehicleID textbox
+     */
     private JLabel lblVehicleID;
 
-    /**Declares a JTextField named txtVehicleID, which provides a JTextboxes*/
+    /**
+     * Declares a JTextField named txtVehicleID, which provides a JTextboxes
+     */
     private JTextField txtVehicleID;
-   
-    /**Declares a JButton named btnSearch and btnExit.
-     * These are used for searching/ removing Vehicles and exiting the window.*/
+
+    /**
+     * Declares a JButton named btnSearch and btnExit.
+     * These are used for searching/ removing Vehicles and exiting the window.
+     */
     private JButton btnSearch, btnExit;
-   
-    /**Declares a JPanel named pnlSearchVehicle for use with the SearchVehicleGUI.*/
+
+    /**
+     * Declares a JPanel named pnlSearchVehicle for use with the SearchVehicleGUI.
+     */
     private JPanel pnlSearchVehicle;
 
-    /**Declares a JFrame named frmSearchVehicle, for use with the SearchVehicleGUI.*/
+    /**
+     * Declares a JFrame named frmSearchVehicle, for use with the SearchVehicleGUI.
+     */
     private JFrame frmSearchVehicle;
 
-    /**Declares a JTable named vehicleTable, which displays all the vehicles information.*/
+    /**
+     * Declares a JTable named vehicleTable, which displays all the vehicles information.
+     */
     private JTable vehicleTable;
-   
-    /**Declares a JScrollPane named vehicleScrollPane, which allows the user to scoll down the JTable.*/
+
+    /**
+     * Declares a JScrollPane named vehicleScrollPane, which allows the user to scroll down the JTable.
+     */
     private JScrollPane vehicleScrollPane;
-   
-    /**Declares a ArrayList named lblDriverID.
-     * This reads in all the vehicles information to add to the JTable.*/
+
+    /**
+     * Declares a ArrayList named lblDriverID.
+     * This reads in all the vehicles information to add to the JTable.
+     */
     private ArrayList<String> rowAndColumnData;
 
-    /**Declares an int named tableRowAmount, this is used to calculate the amount of rows needed..*/
+    /**
+     * Declares an int named tableRowAmount, this is used to calculate the amount of rows needed..
+     */
     private int tableRowAmount;
 
-    /**Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
-     * amount of rows and columns.*/
+    /**
+     * Declares an String[][] named rowData, this takes in the tableRowAmount variable and the colum.length to help set the correct
+     * amount of rows and columns.
+     */
     private String[][] rowData;
 
-    /**Declares a TableRowSorter named sorter.
-     * This allows users to sort the table how they like and lets the search vehicles filter the table when searching for an ID.*/
+    /**
+     * Declares a TableRowSorter named sorter.
+     * This allows users to sort the table how they like and lets the search vehicles filter the table when searching for an ID.
+     */
     TableRowSorter<TableModel> sorter = new TableRowSorter<>();
 
-    /**Declares an DefaultTableModel named defaultTableModel.
+    /**
+     * Declares an DefaultTableModel named defaultTableModel.
      * Once we pass the default model to the vehicleTable, we are able to interface with it better.
-     * This means I am able to get the headers and row selection etc.*/
+     * This means I am able to get the headers and row selection etc.
+     */
     private DefaultTableModel defaultTableModel;
 
-    /** Declares a int named columnHeaderAmount
+    /**
+     * Declares a int named columnHeaderAmount
      * If any changes are made to the columnHeader String array (new fields or remove fields)
      * The number assigned to columnHeaderAmount should changes also as, the columnHeaderAmount is used to divide the amount of columns in
-     * one row.*/
+     * one row.
+     */
     private int columnHeaderAmount;
 
-    /** Declares an int named vehicleTableRowCount, this vehicleTableRowCount is assigned the Rowcount from the vehicletable and then passed
-     * through to the DatabaseWriter class. */
+    /**
+     * Declares an int named vehicleTableRowCount, this vehicleTableRowCount is assigned the Rowcount from the vehicletable and then passed
+     * through to the DatabaseWriter class.
+     */
     private int vehicleTableRowCount;
-    /** Declares an int named vehicleTableColumnCount, this vehicleTableColumnCount is assigned the ColumnCount from the vehicletable and then passed
-     * through to the DatabaseWriter class. */
+    /**
+     * Declares an int named vehicleTableColumnCount, this vehicleTableColumnCount is assigned the ColumnCount from the vehicletable and then passed
+     * through to the DatabaseWriter class.
+     */
     private int vehicleTableColumnCount;
 
-    /** Declares an object of DatabaseWriter and names it vehicleTableWriteToFile  */
+    /**
+     * Declares an object of DatabaseWriter and names it vehicleTableWriteToFile
+     */
     private DatabaseWriter vehicleTableWriteToFile;
 
-    /** Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable*/
+    /**
+     * Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable
+     */
     public SearchVehicleGUI() {
         pnlAddSearchvehicle();
         addVehicleViewFields();
@@ -102,8 +136,10 @@ public class SearchVehicleGUI {
         }
         frmAddSearchVehicle();
     }
-    /** Creates the frame and stops the user from closing the frame from the top right exit button.
-     *  This is to allow the data to be saved when changes are made.
+
+    /**
+     * Creates the frame and stops the user from closing the frame from the top right exit button.
+     * This is to allow the data to be saved when changes are made.
      */
     private void frmAddSearchVehicle() {
         frmSearchVehicle = new JFrame();
@@ -118,16 +154,19 @@ public class SearchVehicleGUI {
 
         //This is to stop the user from closing the window. If they close the window then information in the Jtable cannot be saved correctly.
         frmSearchVehicle.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
     }
 
-    /** Creates the panel for the SearchVehicleGUI*/
+    /**
+     * Creates the panel for the SearchVehicleGUI
+     */
     private void pnlAddSearchvehicle() {
         pnlSearchVehicle = new JPanel();
         pnlSearchVehicle.setLayout(null);
     }
 
-    /** Create the Jlabel and Jtextfields for the user input in the SearchVehicleGUI.*/
+    /**
+     * Create the Jlabel and Jtextfields for the user input in the SearchVehicleGUI.
+     */
     private void addVehicleViewFields() {
 
         lblVehicleID = new JLabel("Vehicle ID");
@@ -139,7 +178,10 @@ public class SearchVehicleGUI {
         pnlSearchVehicle.add(txtVehicleID);
 
     }
-    /** Adds Jbuttons to the SearchVehicleGUI*/
+
+    /**
+     * Adds Jbuttons to the SearchVehicleGUI
+     */
     private void addVehicleViewButtons() {
         btnSearch = new JButton("Search Vehicle");
         btnSearch.setBounds(20, 335, 140, 30);
@@ -152,7 +194,8 @@ public class SearchVehicleGUI {
         pnlSearchVehicle.add(btnExit);
     }
 
-    /** Sets the amount of columns headers there are and divides it by the size of rowAndColumnData.
+    /**
+     * Sets the amount of columns headers there are and divides it by the size of rowAndColumnData.
      * rowAndColumnData is an Arraylist type String which reads in all the lines from the drivers.txt and then is divided by the amount of column Headers
      * to work out how many rows there should be.
      **/
@@ -161,7 +204,9 @@ public class SearchVehicleGUI {
         tableRowAmount = rowAndColumnData.size() / columnHeaderAmount;
     }
 
-    /**Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.*/
+    /**
+     * Sets rowAndColumnData as an Arraylist and reads in all the String data from the Drivers.txt file.
+     */
     private void getVehicle() {
         rowAndColumnData = new ArrayList<>();
 
@@ -171,18 +216,19 @@ public class SearchVehicleGUI {
             while (readIn.hasNext()) {
                 rowAndColumnData.add(readIn.nextLine());
             }
-        } catch (IOException exception ) {
-            exception.printStackTrace();;
+            readIn.close();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+            ;
 
         }
     }
 
-
-
-
-    /**Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
-     *createDriverTable creates a two dimensional array om tableRowAmount and the column length.
-     *With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled. */
+    /**
+     * Creates the Driver Jtable which display all the driver information, allowing the user to search the table and remove the driver is they wish.
+     * createDriverTable creates a two dimensional array of tableRowAmount and the column length.
+     * With this, it goes into a for loops to set all the data to each cell going via column an starting a new row once the column headers had been filled.
+     */
     private void createVehicleTable() {
         try {
             // ColumnName Default size is 9 but 10 to allow us to increment the column by one , if anymore headers are added, change the columnHeaderAmount in the setTableRows method.
@@ -198,8 +244,8 @@ public class SearchVehicleGUI {
                     row++;
                     count++;
                 }
-                // The 0 postition in the array is the Driver ID, this if statement makes sure the int is put into a String.
-                if (column == 0){
+                // The 0 position in the array is the Driver ID, this if statement makes sure the int is put into a String.
+                if (column == 0) {
                     String stringToInt = rowAndColumnData.get(i);
                     rowData[row][column] = String.valueOf(Integer.parseInt(stringToInt));
                     column++;
@@ -227,25 +273,32 @@ public class SearchVehicleGUI {
             JOptionPane.showMessageDialog(frmSearchVehicle, "Something went wrong, Please check the datastore");
         }
     }
-    /** This TableModelListener get any changes which happens to the Jtable and writes them to the Drivers.txt
-     * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt*/
+
+    /**
+     * This TableModelListener get any changes which happens to the Jtable and writes them to the Drivers.txt
+     * This method has a TableModelListener which, if the user removes a driver, the writeTOFile method will be ran which rewrites the data to the drivers.txt
+     */
     private class tableEdit implements TableModelListener {
         public void tableChanged(TableModelEvent event) {
             vehicleTableWriteToFile = new DatabaseWriter();
-            vehicleTableRowCount = vehicleTable.getRowCount() ;
+            vehicleTableRowCount = vehicleTable.getRowCount();
             vehicleTableColumnCount = vehicleTable.getColumnCount();
-            vehicleTableWriteToFile.writeToVehicleFile(vehicleTableRowCount,vehicleTableColumnCount, rowData );
+            vehicleTableWriteToFile.writeToVehicleFile(vehicleTableRowCount, vehicleTableColumnCount, rowData);
         }
     }
 
-    /** Set driverTable(Jtable) to a scrollPane so user can scroll up and down.*/
+    /**
+     * Set driverTable(Jtable) to a scrollPane so user can scroll up and down.
+     */
     private void setScrollPane() {
         vehicleScrollPane = new JScrollPane(vehicleTable);
         vehicleScrollPane.setBounds(0, 0, 1250, 200);
         pnlSearchVehicle.add(vehicleScrollPane);
     }
 
-    /** DriverSearchHandler Filters the rows using regexfilter to find the DriverID and returns it on the Jtable*/
+    /**
+     * DriverSearchHandler Filters the rows using regex filter to find the DriverID and returns it on the Jtable
+     */
     private class VehicleSearchHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -253,7 +306,9 @@ public class SearchVehicleGUI {
         }
     }
 
-    /** DriverSearchExitHandler disposes of the SearchDriver frame once the use clicks the Exit button.*/
+    /**
+     * DriverSearchExitHandler disposes of the SearchDriver frame once the use clicks the Exit button.
+     */
     private class VehicleSearchExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {

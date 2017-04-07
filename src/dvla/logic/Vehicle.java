@@ -13,51 +13,77 @@ import java.io.IOException;
  */
 public class Vehicle {
 
-    /**Declares a String named vehicleModel.*/
+    /**
+     * Declares a String named vehicleModel.
+     */
     private String vehicleModel;
 
-    /**Declares a String named vehicleMake.*/
+    /**
+     * Declares a String named vehicleMake.
+     */
     private String vehicleMake;
 
-    /**Declares a String named vehicleNumPlate.*/
+    /**
+     * Declares a String named vehicleNumPlate.
+     */
     private String vehicleNumPlate;
 
-    /**Declares a String named vehicleYear.*/
+    /**
+     * Declares a String named vehicleYear.
+     */
     private String vehicleYear;
 
-    /**Declares a String named carOwner.*/
+    /**
+     * Declares a String named carOwner.
+     */
     private String carOwner;
 
-    /**Declares a String named drivingLicenceNum.*/
+    /**
+     * Declares a String named drivingLicenceNum.
+     */
     private String drivingLicenceNum;
 
-    /**Declares a String named firstAddressLine.*/
+    /**
+     * Declares a String named firstAddressLine.
+     */
     private String firstAddressLine;
 
-    /**Declares a String named secondAddressLine.*/
+    /**
+     * Declares a String named secondAddressLine.
+     */
     private String secondAddressLine;
 
-    /**Declares a String named postCode.*/
+    /**
+     * Declares a String named postCode.
+     */
     private String postCode;
 
-    /**Declares an Object of DatabaseWriter and  names it  writingDataToDatabase.*/
+    /**
+     * Declares an Object of DatabaseWriter and  names it  writingDataToDatabase.
+     */
     private DatabaseWriter writingDataToDatabase;
 
-    /**Declares a String[] named vehicleInfo.*/
+    /**
+     * Declares a String[] named vehicleInfo. The VehicleInfo variable is passed through to DatabaseWriter.
+     * though its being flagged up as not used, it really is. Suppressing the warning.
+     */
+    @SuppressWarnings("unused")
     private String[] vehicleInfo;
 
 
-    /**The DriverMethod allows basic information about the driver be passed to it, so its can set all the above variables with the most current drivers information.
-     * @param vehicleModel The Model of the Car
-     * @param vehicleMake  The Make of the Car
-     * @param vehicleNumPlate  The Number Plate of the Car
-     * @param vehicleYear The Year the car was made
-     * @param carOwner  The Owner of the Car
-     * @param drivingLicenceNum  Driving Licence Number of the Driver
-     * @param firstAddressLine   First line of Address of the Driver
-     * @param secondAddressLine  Second line of Address for the Driver
-     * @param postCode           Postcode of the Driver
-     * */
+    /**
+     * The DriverMethod allows basic information about the driver be passed to it, so its can set all the above variables with the most current drivers information.
+     *
+     * @param vehicleModel      The Model of the Car
+     * @param vehicleMake       The Make of the Car
+     * @param vehicleNumPlate   The Number Plate of the Car
+     * @param vehicleYear       The Year the car was made
+     * @param carOwner          The Owner of the Car
+     * @param drivingLicenceNum Driving Licence Number of the Driver
+     * @param firstAddressLine  First line of Address of the Driver
+     * @param secondAddressLine Second line of Address for the Driver
+     * @param postCode          Postcode of the Driver
+     */
     public Vehicle(String vehicleModel, String vehicleMake, String vehicleNumPlate, String vehicleYear, String carOwner, String drivingLicenceNum, String firstAddressLine, String secondAddressLine, String postCode) {
         this.vehicleModel = vehicleModel;
         this.vehicleMake = vehicleMake;
@@ -70,8 +96,11 @@ public class Vehicle {
         this.postCode = postCode;
     }
 
-    /**This method sets the VehicleInfo array with all the vehicles information and returns it ready to be passed through to Database writer.
-     * @return vehicleInfo */
+    /**
+     * This method sets the VehicleInfo array with all the vehicles information and returns it ready to be passed through to Database writer.
+     *
+     * @return vehicleInfo
+     */
     private String[] setVehicleInfo() {
         String[] vehicleInfo = {vehicleModel, vehicleMake,
                 vehicleNumPlate, vehicleYear,
@@ -81,7 +110,9 @@ public class Vehicle {
         return vehicleInfo;
     }
 
-    /**This method initialises the writingDataToDatabase object and passes through the vehicleInfo array to the saveDrives method in DatabaseWriter.   */
+    /**
+     * This method initialises the writingDataToDatabase object and passes through the vehicleInfo array to the saveDrives method in DatabaseWriter.
+     */
     public void getVehicleInfo() {
         writingDataToDatabase = new DatabaseWriter();
         try {

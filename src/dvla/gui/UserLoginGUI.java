@@ -3,7 +3,6 @@ package dvla.gui;
 import dvla.logic.DatabaseWriter;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -38,8 +37,8 @@ public class UserLoginGUI {
 
     /**
      * Declares a JButton named btnLogin,btnExit.
-     * btnLogin allows the user to login into the program, loginbutton will pass through the details of the user to the Userlogin Logic
-     * btnExit will dipose of the frame and return the user to the main menu.
+     * btnLogin allows the user to login into the program, login button will pass through the details of the user to the Userlogin Logic
+     * btnExit will dispose of the frame and return the user to the main menu.
      */
     private JButton btnLogin, btnExit;
 
@@ -67,15 +66,20 @@ public class UserLoginGUI {
      */
     private List<String> loginArray;
 
-    /**Declares a String named userLogin, this is used as the users login name.*/
+    /**
+     * Declares a String named userLogin, this is used as the users login name.
+     */
     private String userLogin;
 
-    /**Declares a String named stringUserPassword, this is used as the users login password.*/
+    /**
+     * Declares a String named stringUserPassword, this is used as the users login password.
+     */
     private String stringUserPassword;
 
-    /**Declares a String named loginAndPassword, this is compared with the login detils in the login.txt.*/
+    /**
+     * Declares a String named loginAndPassword, this is compared with the login details in the login.txt.
+     */
     private String loginAndPassword;
-
 
     /**
      * Constructor runs the methods to create the GUI and Table then auto fills the data in the JTable
@@ -168,7 +172,7 @@ public class UserLoginGUI {
     /**
      * The LoginHandler takes the user inputted username and password and checks to see if they are valid.
      * The LoginHandler  takes the username and passwords, converts the password from a char array to a String and then set all the usernames and passwords from the login.txt to the login array.
-     * The loginArray then goes through a for loops, checking if the user inputted username and password is equal to anything in the file.
+     * The loginArray then goes through a for loops, checking if the user inputed username and password is equal to anything in the file.
      * If there is a match then the user is allowed to login in. If there is no match, the user receive a prompt telling them to try again.
      */
     private class LoginHandler implements ActionListener {
@@ -212,7 +216,9 @@ public class UserLoginGUI {
         }
     }
 
-    /**LoginExitHandler listens for the exit button to be click and then will close and dispose of the frame. */
+    /**
+     * LoginExitHandler listens for the exit button to be click and then will close and dispose of the frame.
+     */
     private class LoginExitHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -222,24 +228,33 @@ public class UserLoginGUI {
     }
 
 
-    /**This method sets the take the userName and userPassword which is passed through to it and constructs it into the correct format for the Login.txt file.
-     * @param userName The new userName that the user inputted
-     * @param  userPassword The password that the user inputted */
-    private void  setLoginDetails(String userName, char[] userPassword){
+    /**
+     * This method sets the take the userName and userPassword which is passed through to it and constructs it into the correct format for the Login.txt file.
+     *
+     * @param userName     The new userName that the user inputed
+     * @param userPassword The password that the user inputed
+     */
+    private void setLoginDetails(String userName, char[] userPassword) {
         userLogin = userName;
         stringUserPassword = String.valueOf(userPassword);
 
-        loginAndPassword = userLogin +":"+ stringUserPassword;
+        loginAndPassword = userLogin + ":" + stringUserPassword;
     }
+
     /**
      * This method returns the loginAndPassword which was set in the above method
-     * @return loginAndPassword*/
-    private String getLoginDetails(){
+     *
+     * @return loginAndPassword
+     */
+    private String getLoginDetails() {
         return loginAndPassword;
     }
 
-    /**The Main will create the instance of UserLoginGUI to begin the program.
-     * @param args default argument for the main  */
+    /**
+     * The Main will create the instance of UserLoginGUI to begin the program.
+     *
+     * @param args default argument for the main
+     */
     public static void main(String[] args) {
         new UserLoginGUI();
     }

@@ -29,36 +29,52 @@ import java.io.IOException;
  */
 public class AddAccountGUI {
 
-    /** Declares a Jlabels named lblUserName,lblPassword, they are used to create labels on the panel for user and password. */
+    /**
+     * Declares a Jlabels named lblUserName,lblPassword, they are used to create labels on the panel for user and password.
+     */
     private JLabel lblUserName, lblPassword;
 
-    /** Declares a JTextField named txtUserName, which is used for the new user account name.*/
+    /**
+     * Declares a JTextField named txtUserName, which is used for the new user account name.
+     */
     private JTextField txtUserName;
 
-    /** Declares a JPasswordField named txtPassword, which is used for the new user account password.*/
+    /**
+     * Declares a JPasswordField named txtPassword, which is used for the new user account password.
+     */
     private JPasswordField txtPassword;
 
     /**
      * btnSubmit has an actionlistener which submits the newly created user.
      * btnConvention has an actionlistener which displays text regarding the username and password convention.
      * btnExit has an actionlistener which disposes of the AddAccount window.
-     * */
+     */
     private JButton btnSubmit, btnConvention, btnExit;
 
-    /** Declares a JPanel named pnlAddAccount, this is the panel for AddAccount*/
+    /**
+     * Declares a JPanel named pnlAddAccount, this is the panel for AddAccount
+     */
     private JPanel pnlAddAccount;
 
-    /** Declares a JFrame named frmAddAccount,this is the frame for AddAccount*/
+    /**
+     * Declares a JFrame named frmAddAccount,this is the frame for AddAccount
+     */
     private JFrame frmAddAccount;
 
-    /**Declaring a new AddAccount Object. AddAccount is the logic part to the AddAccountGUI*/
+    /**
+     * Declaring a new AddAccount Object. AddAccount is the logic part to the AddAccountGUI
+     */
     private AddAccount addingAccount;
 
-    /**Declaring a new DataBaseWriter Object, this will be used to pass the new useraccount to the saveNewUser method.*/
+    /**
+     * Declaring a new DataBaseWriter Object, this will be used to pass the new useraccount to the saveNewUser method.
+     */
     private DatabaseWriter addNewAccount;
 
 
-    /**Initialises the AddAccount Constructor and sets the following methods to create the GUI. */
+    /**
+     * Initialises the AddAccount Constructor and sets the following methods to create the GUI.
+     */
     public AddAccountGUI() {
 
         createLoginPanel();
@@ -68,7 +84,7 @@ public class AddAccountGUI {
 
         /**
          * The try catch runs the UIManager to set the look and feel to the users Operating System desktop managers look,
-         * The catch will catch and stacktrace exception which interfere with the UIManager.
+         * The catch will catch and stack trace exception which interfere with the UIManager.
          */
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -77,7 +93,9 @@ public class AddAccountGUI {
         }
     }
 
-    /**creates the frame for the AddAccount GUI.*/
+    /**
+     * creates the frame for the AddAccount GUI.
+     */
     private void createLoginFrame() {
         frmAddAccount = new JFrame();
         frmAddAccount.setTitle("Add New User");
@@ -90,13 +108,17 @@ public class AddAccountGUI {
         frmAddAccount.setVisible(true);
     }
 
-    /**creates the Jpanel for the AddAccount GUI.*/
+    /**
+     * creates the Jpanel for the AddAccount GUI.
+     */
     private void createLoginPanel() {
         pnlAddAccount = new JPanel();
         pnlAddAccount.setLayout(null);
     }
 
-    /**creates the JTextField and Jlabels for the AddAccountGUI panel.*/
+    /**
+     * creates the JTextField and Jlabels for the AddAccountGUI panel.
+     */
     private void addLoginFields() {
 
         lblUserName = new JLabel("New UserName");
@@ -118,7 +140,9 @@ public class AddAccountGUI {
 
     }
 
-    /** creates all the Jbuttons for the AddAccountGUI panel. */
+    /**
+     * creates all the Jbuttons for the AddAccountGUI panel.
+     */
     private void addLoginButtons() {
         btnSubmit = new JButton("Add");
         btnSubmit.setBounds(10, 100, 100, 30);
@@ -164,13 +188,16 @@ public class AddAccountGUI {
         }
     }
 
-    /**The ConventionHandler creates a Joptionpane popup which displays the naming convention.*/
+    /**
+     * The ConventionHandler creates a Joptionpane popup which displays the naming convention.
+     */
     private class ConventionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             JOptionPane.showMessageDialog(frmAddAccount, "The User length should be 5 Characters minimum and must contain letters and can contain numbers only. \nThe Password length should be 8 Characters minimum  and contain letters and Numbers only.");
         }
     }
+
     /**
      * The ExitHandler will dispose of the frame and return the user back to the menu.
      */
